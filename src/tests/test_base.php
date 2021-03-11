@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Base class for formulas unit tests.
+ * Base class for numericalrecit unit tests.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2012 Jean-Michel Védrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,25 +29,25 @@ require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
 
 
 /**
- * Base class for formulas unit tests.
+ * Base class for numericalrecit unit tests.
  *
  * @copyright  2012 Jean-Michel Védrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class qtype_formulas_testcase extends advanced_testcase {
+abstract class qtype_numericalrecit_testcase extends advanced_testcase {
 
 }
 
 
 /**
- * Base class for formulas walkthrough tests.
+ * Base class for numericalrecit walkthrough tests.
  *
  * Provides some additional asserts.
  *
  * @copyright 2012 Jean-Michel Védrine
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class qtype_formulas_walkthrough_test_base extends qbehaviour_walkthrough_test_base {
+abstract class qtype_numericalrecit_walkthrough_test_base extends qbehaviour_walkthrough_test_base {
     protected $currentoutput = null;
 
     protected function render() {
@@ -85,18 +85,18 @@ abstract class qtype_formulas_walkthrough_test_base extends qbehaviour_walkthrou
     }
 
     protected function check_output_contains_part_feedback($name = null) {
-        $class = 'formulaspartfeedback';
+        $class = 'numericalrecitpartfeedback';
         if ($name) {
-            $class .= ' formulaspartfeedback-' . $name;
+            $class .= ' numericalrecitpartfeedback-' . $name;
         }
         $this->assertTag(array('tag' => 'div', 'attributes' => array('class' => $class)), $this->currentoutput,
                 'part feedback for ' . $name . ' not found in ' . $this->currentoutput);
     }
 
     protected function check_output_does_not_contain_part_feedback($name = null) {
-        $class = 'formulaspartfeedback';
+        $class = 'numericalrecitpartfeedback';
         if ($name) {
-            $class .= ' formulaspartfeedback-' . $name;
+            $class .= ' numericalrecitpartfeedback-' . $name;
         }
         $this->assertNotTag(array('tag' => 'div', 'attributes' => array('class' => $class)), $this->currentoutput,
                 'part feedback for ' . $name . ' should not be present in ' . $this->currentoutput);

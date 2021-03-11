@@ -1,7 +1,7 @@
-@qtype @qtype_formulas
-Feature: Preview a Formulas question
+@qtype @qtype_numericalrecit
+Feature: Preview a numericalrecit question
   As a teacher
-  In order to check my Formulas questions will work for students
+  In order to check my numericalrecit questions will work for students
   I need to preview them
 
   Background:
@@ -19,14 +19,14 @@ Feature: Preview a Formulas question
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype      | name         | template  |
-      | Test questions   | formulas   | formulas-001 | test2     |
+      | Test questions   | numericalrecit   | numericalrecit-001 | test2     |
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" in current page administration
 
   @javascript @_switch_window
-  Scenario: Preview a formulas question with correct answer
-    When I click on "Preview" "link" in the "formulas-001" "table_row"
+  Scenario: Preview a numericalrecit question with correct answer
+    When I click on "Preview" "link" in the "numericalrecit-001" "table_row"
     And I switch to "questionpreview" window
     Then I should see "This question shows different display methods of the answer and unit box."
     And I should see "If a car travel 120 m in 3 s, what is the speed of the car"
@@ -45,8 +45,8 @@ Feature: Preview a Formulas question
     And I should see "One possible correct answer is: 40 m/s"
 
   @javascript @_switch_window
-  Scenario: Preview an formulas question with incorrect answer
-    When I click on "Preview" "link" in the "formulas-001" "table_row"
+  Scenario: Preview an numericalrecit question with incorrect answer
+    When I click on "Preview" "link" in the "numericalrecit-001" "table_row"
     And I switch to "questionpreview" window
     Then I should see "This question shows different display methods of the answer and unit box."
     And I should see "If a car travel 120 m in 3 s, what is the speed of the car"

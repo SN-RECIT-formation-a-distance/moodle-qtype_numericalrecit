@@ -1,8 +1,8 @@
-@qtype @qtype_formulas
-Feature: Test creating a Formulas question
+@qtype @qtype_numericalrecit
+Feature: Test creating a numericalrecit question
   As a teacher
   In order to test my students
-  I need to be able to create a Formulas question
+  I need to be able to create a numericalrecit question
 
   Background:
     Given the following "users" exist:
@@ -18,11 +18,11 @@ Feature: Test creating a Formulas question
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" in current page administration
 
-  Scenario: Create a Formulas question
-    When I add a "Formulas" question filling the form with:
-      | Question name        | formulas-001                              |
+  Scenario: Create a numericalrecit question
+    When I add a "numericalrecit" question filling the form with:
+      | Question name        | numericalrecit-001                              |
       | Question text        | Minimal formula question                  |
       | General feedback     | The correct answer is 1                   |
       | id_answer_0          | 1                                         |
       | id_answermark_0      | 1                                         |
-    Then I should see "formulas-001"
+    Then I should see "numericalrecit-001"

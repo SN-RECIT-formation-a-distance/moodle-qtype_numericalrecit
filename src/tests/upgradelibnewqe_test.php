@@ -18,7 +18,7 @@
  * Tests of the upgrade to the new Moodle question engine for attempts at
  * truefalse questions.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,13 +31,13 @@ require_once($CFG->dirroot . '/question/engine/upgrade/tests/helper.php');
 
 
 /**
- * Testing the upgrade of formulas question attempts.
+ * Testing the upgrade of numericalrecit question attempts.
  *
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_attempt_upgrader_test extends question_attempt_upgrader_test_base {
-    public function test_formulas_deferredfeedback_qsession2() {
+class qtype_numericalrecit_attempt_upgrader_test extends question_attempt_upgrader_test_base {
+    public function test_numericalrecit_deferredfeedback_qsession2() {
         $quiz = (object) array(
             'id' => '1',
             'course' => '2',
@@ -97,7 +97,7 @@ class qtype_formulas_attempt_upgrader_test extends question_attempt_upgrader_tes
             'generalfeedback' => '',
             'generalfeedbackformat' => '0',
             'penalty' => '0.1000000',
-            'qtype' => 'formulas',
+            'qtype' => 'numericalrecit',
             'length' => '1',
             'stamp' => 'localhost+130105161625+q6E1Qu',
             'version' => 'localhost+130105161625+04tX0w',

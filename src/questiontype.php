@@ -15,39 +15,39 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle formulas question type class.
+ * Moodle numericalrecit question type class.
  *
  * @copyright &copy; 2010-2011 Hon Wai, Lau
  * @author Hon Wai, Lau <lau65536@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License version 3
- * @package qtype_formulas
+ * @package qtype_numericalrecit
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/questionlib.php');
 require_once($CFG->dirroot . '/question/engine/lib.php');
-require_once("$CFG->dirroot/question/type/formulas/variables.php");
-require_once("$CFG->dirroot/question/type/formulas/answer_unit.php");
-require_once("$CFG->dirroot/question/type/formulas/conversion_rules.php");
-require_once($CFG->dirroot . '/question/type/formulas/question.php');
+require_once("$CFG->dirroot/question/type/numericalrecit/variables.php");
+require_once("$CFG->dirroot/question/type/numericalrecit/answer_unit.php");
+require_once("$CFG->dirroot/question/type/numericalrecit/conversion_rules.php");
+require_once($CFG->dirroot . '/question/type/numericalrecit/question.php');
 
 /**
- * The formulas question class
+ * The numericalrecit question class
  *
  * TODO give an overview of how the class works here.
  */
-class qtype_formulas extends question_type {
+class qtype_numericalrecit extends question_type {
     private $qv;
 
 
     public function __construct() {
-        $this->qv = new qtype_formulas_variables();
+        $this->qv = new qtype_numericalrecit_variables();
     }
 
     /**
-     * column names of qtype_formulas_answers table (apart from id and questionid)
-     * WARNING qtype_formulas_answers is NOT an extension of answers table
+     * column names of qtype_numericalrecit_answers table (apart from id and questionid)
+     * WARNING qtype_numericalrecit_answers is NOT an extension of answers table
      * so we can't use extra_answer_fields here.
      * subqtext, subqtextformat, feedback and feedbackformat and all part's combined
      * feedback fields are not included as their handling is special
@@ -75,7 +75,7 @@ class qtype_formulas extends question_type {
      * @return mixed array as above, or null to tell the base class to do nothing.
      */
     public function extra_question_fields() {
-        return array('qtype_formulas_options', 'varsrandom', 'varsglobal', 'answernumbering');
+        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark');
     }
 
     /**
@@ -89,15 +89,15 @@ class qtype_formulas extends question_type {
 
         parent::move_files($questionid, $oldcontextid, $newcontextid);
         $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_formulas', 'answersubqtext', $questionid);
+            $newcontextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_formulas', 'answerfeedback', $questionid);
+            $newcontextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_formulas', 'partcorrectfb', $questionid);
+            $newcontextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_formulas', 'partpartiallycorrectfb', $questionid);
+            $newcontextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_formulas', 'partincorrectfb', $questionid);
+            $newcontextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
         $this->move_files_in_combined_feedback($questionid, $oldcontextid, $newcontextid);
         $this->move_files_in_hints($questionid, $oldcontextid, $newcontextid);
     }
@@ -116,11 +116,11 @@ class qtype_formulas extends question_type {
         $fs->delete_area_files($contextid, 'question', 'correctfeedback', $questionid);
         $fs->delete_area_files($contextid, 'question', 'partiallycorrectfeedback', $questionid);
         $fs->delete_area_files($contextid, 'question', 'incorrectfeedback', $questionid);
-        $fs->delete_area_files($contextid, 'qtype_formulas', 'answersubqtext', $questionid);
-        $fs->delete_area_files($contextid, 'qtype_formulas', 'answerfeedback', $questionid);
-        $fs->delete_area_files($contextid, 'qtype_formulas', 'partcorrectfb', $questionid);
-        $fs->delete_area_files($contextid, 'qtype_formulas', 'partpartiallycorrectfb', $questionid);
-        $fs->delete_area_files($contextid, 'qtype_formulas', 'partincorrectfb', $questionid);
+        $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
+        $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
+        $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
+        $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $questionid);
+        $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
     }
 
     /**
@@ -138,18 +138,18 @@ class qtype_formulas extends question_type {
     public function get_question_options($question) {
         global $DB;
 
-        $question->options = $DB->get_record('qtype_formulas_options', ['questionid' => $question->id]);
+        $question->options = $DB->get_record('qtype_numericalrecit_options', ['questionid' => $question->id]);
 
         if ($question->options === false) {
             // If this has happened, then we have a problem.
             // For the user to be able to edit or delete this question, we need options.
-            debugging("Formulas question ID {$question->id} was missing an options record. Using default.", DEBUG_DEVELOPER);
+            debugging("numericalrecit question ID {$question->id} was missing an options record. Using default.", DEBUG_DEVELOPER);
 
             $question->options = $this->create_default_options($question);
         }
 
         parent::get_question_options($question);
-        $question->options->answers = $DB->get_records('qtype_formulas_answers', array('questionid' => $question->id), 'partindex ASC');
+        $question->options->answers = $DB->get_records('qtype_numericalrecit_answers', array('questionid' => $question->id), 'partindex ASC');
         $question->options->numpart = count($question->options->answers);
         $question->options->answers = array_values($question->options->answers);
         return true;
@@ -177,6 +177,7 @@ class qtype_formulas extends question_type {
         $options->incorrectfeedbackformat = FORMAT_HTML;
 
         $options->answernumbering = 'none';
+        $options->stepmark = 0;
         $options->shownumcorrect = 0;
 
         return $options;
@@ -196,11 +197,11 @@ class qtype_formulas extends question_type {
         $context = $question->context;
         $result = new stdClass();
 
-        $oldanswers = $DB->get_records('qtype_formulas_answers', array('questionid' => $question->id), 'partindex ASC');
+        $oldanswers = $DB->get_records('qtype_numericalrecit_answers', array('questionid' => $question->id), 'partindex ASC');
         try {
             $filtered = $this->validate($question); // Data from the web input interface should be validated.
             if (count($filtered->errors) > 0) {  // There may be errors from import or restore.
-                throw new Exception('Format error! Probably imported/restored formulas questions have been damaged.');
+                throw new Exception('Format error! Probably imported/restored numericalrecit questions have been damaged.');
             }
             $answersorder = $this->reorder_answers($question->questiontext, $filtered->answers);
             // Reorder the answers, so that answer's order is the same as the placeholder's order in questiontext.
@@ -228,6 +229,7 @@ class qtype_formulas extends question_type {
                 $incorrectfbarr = $ans->partincorrectfb;
                 $ans->partincorrectfb = $incorrectfbarr['text'];
                 $ans->partincorrectfbformat = $incorrectfbarr['format'];
+                
                 // Update an existing answer if possible.
                 $answer = array_shift($oldanswers);
                 if (!$answer) {
@@ -248,33 +250,33 @@ class qtype_formulas extends question_type {
                     $answer->partincorrectfb = '';
                     $answer->partincorrectfbformat = 0;
 
-                    $ans->id = $DB->insert_record('qtype_formulas_answers', $answer);
+                    $ans->id = $DB->insert_record('qtype_numericalrecit_answers', $answer);
                 } else {
                     $ans->id = $answer->id;
                 }
-                $ans->subqtext = $this->import_or_save_files($subqtextarr, $context, 'qtype_formulas', 'answersubqtext', $ans->id);
-                $ans->feedback = $this->import_or_save_files($feedbackarr, $context, 'qtype_formulas', 'answerfeedback', $ans->id);
-                $ans->partcorrectfb = $this->import_or_save_files($correctfbarr, $context, 'qtype_formulas', 'partcorrectfb', $ans->id);
-                $ans->partpartiallycorrectfb = $this->import_or_save_files($partiallycorrectfbarr, $context, 'qtype_formulas', 'partpartiallycorrectfb', $ans->id);
-                $ans->partincorrectfb = $this->import_or_save_files($incorrectfbarr, $context, 'qtype_formulas', 'partincorrectfb', $ans->id);
-                $DB->update_record('qtype_formulas_answers', $ans);
+                $ans->subqtext = $this->import_or_save_files($subqtextarr, $context, 'qtype_numericalrecit', 'answersubqtext', $ans->id);
+                $ans->feedback = $this->import_or_save_files($feedbackarr, $context, 'qtype_numericalrecit', 'answerfeedback', $ans->id);
+                $ans->partcorrectfb = $this->import_or_save_files($correctfbarr, $context, 'qtype_numericalrecit', 'partcorrectfb', $ans->id);
+                $ans->partpartiallycorrectfb = $this->import_or_save_files($partiallycorrectfbarr, $context, 'qtype_numericalrecit', 'partpartiallycorrectfb', $ans->id);
+                $ans->partincorrectfb = $this->import_or_save_files($incorrectfbarr, $context, 'qtype_numericalrecit', 'partincorrectfb', $ans->id);
+                $DB->update_record('qtype_numericalrecit_answers', $ans);
             }
 
             // Delete any left over old answer records.
             $fs = get_file_storage();
             foreach ($oldanswers as $oldanswer) {
-                $fs->delete_area_files($context->id, 'qtype_formulas', 'answersubqtext', $oldanswer->id);
-                $fs->delete_area_files($context->id, 'qtype_formulas', 'answerfeedback', $oldanswer->id);
-                $fs->delete_area_files($context->id, 'qtype_formulas', 'partcorrectfb', $oldanswer->id);
-                $fs->delete_area_files($context->id, 'qtype_formulas', 'partpartiallycorrectfb', $oldanswer->id);
-                $fs->delete_area_files($context->id, 'qtype_formulas', 'partincorrectfb', $oldanswer->id);
-                $DB->delete_records('qtype_formulas_answers', array('id' => $oldanswer->id));
+                $fs->delete_area_files($context->id, 'qtype_numericalrecit', 'answersubqtext', $oldanswer->id);
+                $fs->delete_area_files($context->id, 'qtype_numericalrecit', 'answerfeedback', $oldanswer->id);
+                $fs->delete_area_files($context->id, 'qtype_numericalrecit', 'partcorrectfb', $oldanswer->id);
+                $fs->delete_area_files($context->id, 'qtype_numericalrecit', 'partpartiallycorrectfb', $oldanswer->id);
+                $fs->delete_area_files($context->id, 'qtype_numericalrecit', 'partincorrectfb', $oldanswer->id);
+                $DB->delete_records('qtype_numericalrecit_answers', array('id' => $oldanswer->id));
             }
         } catch (Exception $e) {
             return (object)array('error' => $e->getMessage());
         }
         // Save the question options.
-        $options = $DB->get_record('qtype_formulas_options', array('questionid' => $question->id));
+        $options = $DB->get_record('qtype_numericalrecit_options', array('questionid' => $question->id));
         if (!$options) {
             $options = new stdClass();
             $options->questionid = $question->id;
@@ -282,7 +284,8 @@ class qtype_formulas extends question_type {
             $options->partiallycorrectfeedback = '';
             $options->incorrectfeedback = '';
             $options->answernumbering = 'none';
-            $options->id = $DB->insert_record('qtype_formulas_options', $options);
+            $options->stepmark = 0;
+            $options->id = $DB->insert_record('qtype_numericalrecit_options', $options);
         }
         $extraquestionfields = $this->extra_question_fields();
         array_shift($extraquestionfields);
@@ -294,7 +297,7 @@ class qtype_formulas extends question_type {
 
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
 
-        $DB->update_record('qtype_formulas_options', $options);
+        $DB->update_record('qtype_numericalrecit_options', $options);
 
         $this->save_hints($question, true);
         return true;
@@ -311,6 +314,7 @@ class qtype_formulas extends question_type {
             // Question's default mark is the total of all non empty parts's marks.
             $form->defaultmark += $form->answermark[$key];
         }
+        $form->defaultmark += $form->stepmark;
         $question = parent::save_question($question, $form);
         return $question;
     }
@@ -322,9 +326,9 @@ class qtype_formulas extends question_type {
     // Delete question from the question-type specific tables with $questionid.
     public function delete_question($questionid, $contextid) {
         global $DB;
-        // The qtype_formulas records are deleted in parent as extra_question_fields records.
-        // But we need to take care of qtype_formulas_answers as they are not real answers.
-        $DB->delete_records('qtype_formulas_answers', array('questionid' => $questionid));
+        // The qtype_numericalrecit records are deleted in parent as extra_question_fields records.
+        // But we need to take care of qtype_numericalrecit_answers as they are not real answers.
+        $DB->delete_records('qtype_numericalrecit_answers', array('questionid' => $questionid));
         parent::delete_question($questionid, $contextid);
     }
 
@@ -371,7 +375,7 @@ class qtype_formulas extends question_type {
         $question->parts = array();
         if (!empty($questiondata->options->answers)) {
             foreach ($questiondata->options->answers as $ans) {
-                $part = new qtype_formulas_part();
+                $part = new qtype_numericalrecit_part();
                 foreach ($ans as $key => $value) {
                     $part->{$key} = $value;
                 }
@@ -381,7 +385,8 @@ class qtype_formulas extends question_type {
         $question->varsrandom = $questiondata->options->varsrandom;
         $question->varsglobal = $questiondata->options->varsglobal;
         $question->answernumbering = $questiondata->options->answernumbering;
-        $question->qv = new qtype_formulas_variables();
+        $question->stepmark = $questiondata->options->stepmark;
+        $question->qv = new qtype_numericalrecit_variables();
         $question->numpart = $questiondata->options->numpart;
         if ($question->numpart != 0) {
             $question->fractions = array_fill(0, $question->numpart, 0);
@@ -466,7 +471,7 @@ class qtype_formulas extends question_type {
 
         // Import the common question headers and set the corresponding field,
         // Unfortunately we can't use the parent method because it will try to import answers,
-        // and fails as formulas "answers" are not real answers but formulas question parts !!
+        // and fails as numericalrecit "answers" are not real answers but numericalrecit question parts !!
         $fromform = $format->import_headers($xml);
         $fromform->qtype = $this->name();
         $format->import_combined_feedback($fromform, $xml, true);
@@ -475,6 +480,7 @@ class qtype_formulas extends question_type {
         $fromform->varsrandom = $format->getpath($xml, array('#', 'varsrandom', 0, '#', 'text', 0, '#'), '', true);
         $fromform->varsglobal = $format->getpath($xml, array('#', 'varsglobal', 0, '#', 'text', 0, '#'), '', true);
         $fromform->answernumbering = $format->getpath($xml, array('#', 'answernumbering', 0, '#', 'text', 0, '#'), 'none', true);
+        $fromform->stepmark = $format->getpath($xml, array('#', 'stepmark', 0, '#', 'text', 0, '#'), 'none', true);
 
         // Loop over each answer block found in the XML.
         $tags = $this->part_tags();
@@ -542,33 +548,33 @@ class qtype_formulas extends question_type {
                 $expout .= " <$tag>\n  ".$format->writetext($answer->$tag)." </$tag>\n";
             }
 
-            $subqfiles = $fs->get_area_files($contextid, 'qtype_formulas', 'answersubqtext', $answer->id);
+            $subqfiles = $fs->get_area_files($contextid, 'qtype_numericalrecit', 'answersubqtext', $answer->id);
             $subqtextformat = $format->get_format($answer->subqtextformat);
             $expout .= " <subqtext format=\"$subqtextformat\">\n";
             $expout .= $format->writetext($answer->subqtext);
             $expout .= $format->write_files($subqfiles);
             $expout .= " </subqtext>\n";
 
-            $fbfiles = $fs->get_area_files($contextid, 'qtype_formulas', 'answerfeedback', $answer->id);
+            $fbfiles = $fs->get_area_files($contextid, 'qtype_numericalrecit', 'answerfeedback', $answer->id);
             $feedbackformat = $format->get_format($answer->feedbackformat);
             $expout .= " <feedback format=\"$feedbackformat\">\n";
             $expout .= $format->writetext($answer->feedback);
             $expout .= $format->write_files($fbfiles);
             $expout .= " </feedback>\n";
 
-            $fbfiles = $fs->get_area_files($contextid, 'qtype_formulas', 'partcorrectfb', $answer->id);
+            $fbfiles = $fs->get_area_files($contextid, 'qtype_numericalrecit', 'partcorrectfb', $answer->id);
             $feedbackformat = $format->get_format($answer->partcorrectfbformat);
             $expout .= " <correctfeedback format=\"$feedbackformat\">\n";
             $expout .= $format->writetext($answer->partcorrectfb);
             $expout .= $format->write_files($fbfiles);
             $expout .= " </correctfeedback>\n";
-            $fbfiles = $fs->get_area_files($contextid, 'qtype_formulas', 'partpartiallycorrectfb', $answer->id);
+            $fbfiles = $fs->get_area_files($contextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $answer->id);
             $feedbackformat = $format->get_format($answer->partpartiallycorrectfbformat);
             $expout .= " <partiallycorrectfeedback format=\"$feedbackformat\">\n";
             $expout .= $format->writetext($answer->partpartiallycorrectfb);
             $expout .= $format->write_files($fbfiles);
             $expout .= " </partiallycorrectfeedback>\n";
-            $fbfiles = $fs->get_area_files($contextid, 'qtype_formulas', 'partincorrectfb', $answer->id);
+            $fbfiles = $fs->get_area_files($contextid, 'qtype_numericalrecit', 'partincorrectfb', $answer->id);
             $feedbackformat = $format->get_format($answer->partincorrectfbformat);
             $expout .= " <incorrectfeedback format=\"$feedbackformat\">\n";
             $expout .= $format->writetext($answer->partincorrectfb);
@@ -596,21 +602,21 @@ class qtype_formulas extends question_type {
             }
             $errstr = array();
             if ( strlen($answer->placeholder) >= 40 ) {
-                $errstr[] = get_string('error_placeholder_too_long', 'qtype_formulas');
+                $errstr[] = get_string('error_placeholder_too_long', 'qtype_numericalrecit');
             }
             if ( !preg_match('/^'.$placeholderformat.'$/', $answer->placeholder) ) {
-                $errstr[] = get_string('error_placeholder_format', 'qtype_formulas');
+                $errstr[] = get_string('error_placeholder_format', 'qtype_numericalrecit');
             }
             if ( array_key_exists($answer->placeholder, $placeholders) ) {
-                $errstr[] = get_string('error_placeholder_sub_duplicate', 'qtype_formulas');
+                $errstr[] = get_string('error_placeholder_sub_duplicate', 'qtype_numericalrecit');
             }
             $placeholders[$answer->placeholder] = true;
             $count = substr_count($questiontext, '{'.$answer->placeholder.'}');
             if ($count < 1) {
-                $errstr[] = get_string('error_placeholder_missing', 'qtype_formulas');
+                $errstr[] = get_string('error_placeholder_missing', 'qtype_numericalrecit');
             }
             if ($count > 1) {
-                $errstr[] = get_string('error_placeholder_main_duplicate', 'qtype_formulas');
+                $errstr[] = get_string('error_placeholder_main_duplicate', 'qtype_numericalrecit');
             }
             if (!empty($errstr)) {
                 $errors["placeholder[$idx]"] = implode(' ', $errstr);
@@ -635,18 +641,18 @@ class qtype_formulas extends question_type {
                     || strlen(trim($form->vars1[$i])) != 0
                     )
                 ) {
-                $res->errors["answer[$i]"] = get_string('error_answer_missing', 'qtype_formulas');
+                $res->errors["answer[$i]"] = get_string('error_answer_missing', 'qtype_numericalrecit');
                 $skip = true;
             }
             if (strlen(trim($form->answermark[$i])) == 0 || strlen(trim($form->answer[$i])) == 0) {
                 continue;   // If no mark or no answer, then skip this answer.
             }
             if (floatval($form->answermark[$i]) <= 0) {
-                $res->errors["answermark[$i]"] = get_string('error_mark', 'qtype_formulas');
+                $res->errors["answermark[$i]"] = get_string('error_mark', 'qtype_numericalrecit');
             }
             $skip = false;
             if (strlen(trim($form->correctness[$i])) == 0) {
-                $res->errors["correctness[$i]"] = get_string('error_criterion', 'qtype_formulas');
+                $res->errors["correctness[$i]"] = get_string('error_criterion', 'qtype_numericalrecit');
                 $skip = true;
             }
             if ($skip) {
@@ -699,7 +705,7 @@ class qtype_formulas extends question_type {
             $res->answers[$i]->partincorrectfb = $fb;
         }
         if (count($res->answers) == 0) {
-            $res->errors["answermark[0]"] = get_string('error_no_answer', 'qtype_formulas');
+            $res->errors["answermark[0]"] = get_string('error_no_answer', 'qtype_numericalrecit');
         }
 
         return $res;
@@ -715,7 +721,7 @@ class qtype_formulas extends question_type {
         $validanswers = $answerschecked->answers;
         foreach ($validanswers as $idx => $part) {
             if ($part->unitpenalty < 0 || $part->unitpenalty > 1) {
-                $errors["unitpenalty[$idx]"] = get_string('error_unitpenalty', 'qtype_formulas');
+                $errors["unitpenalty[$idx]"] = get_string('error_unitpenalty', 'qtype_numericalrecit');
             }
             try {
                 $pattern = '\{(_[0-9u][0-9]*)(:[^{}]+)?\}';
@@ -723,7 +729,7 @@ class qtype_formulas extends question_type {
                 $boxes = array();
                 foreach ($matches[1] as $j => $match) {
                     if (array_key_exists($match, $boxes)) {
-                        throw new Exception(get_string('error_answerbox_duplicate', 'qtype_formulas'));
+                        throw new Exception(get_string('error_answerbox_duplicate', 'qtype_numericalrecit'));
                     } else {
                         $boxes[$match] = 1;
                     }
@@ -750,8 +756,8 @@ class qtype_formulas extends question_type {
 
         $errors = array();
 
-        // Create a formulas question so we can use its methods for validation.
-        $qo = new qtype_formulas_question;
+        // Create a numericalrecit question so we can use its methods for validation.
+        $qo = new qtype_numericalrecit_question;
         foreach ($form as $key => $value) {
             $qo->$key = $value;
         }
@@ -796,14 +802,14 @@ class qtype_formulas extends question_type {
                 $ans->partincorrectfbformat = $ans->partincorrectfb['format'];
                 $ans->partincorrectfb = $ans->partincorrectfb['text'];
 
-                $qo->parts[$i] = new qtype_formulas_part();
+                $qo->parts[$i] = new qtype_numericalrecit_part();
                 foreach ($ans as $key => $value) {
                     $qo->parts[$i]->$key = $value;
                     // TODO verify if part id is set (but do we actually need it here?).
                 }
             }
         }
-        $qo->qv = new qtype_formulas_variables();
+        $qo->qv = new qtype_numericalrecit_variables();
         $qo->options->numpart = count($qo->options->answers);
         $qo->numpart = $qo->options->numpart;
         $qo->fractions = array_fill(0, $qo->numpart, 0);
@@ -821,7 +827,7 @@ class qtype_formulas extends question_type {
         try {
             $qo->globalvars = $qo->qv->evaluate_assignments($qo->randomsvars, $qo->varsglobal);
         } catch (Exception $e) {
-            $errors["varsglobal"] = get_string('error_validation_eval', 'qtype_formulas') . $e->getMessage();
+            $errors["varsglobal"] = get_string('error_validation_eval', 'qtype_numericalrecit') . $e->getMessage();
             return $errors;
         }
 
@@ -833,21 +839,21 @@ class qtype_formulas extends question_type {
             try {
                 $unitcheck->parse_targets($ans->postunit);
             } catch (Exception $e) {
-                $errors["postunit[$idx]"] = get_string('error_unit', 'qtype_formulas') . $e->getMessage();
+                $errors["postunit[$idx]"] = get_string('error_unit', 'qtype_numericalrecit') . $e->getMessage();
             }
 
             try {
                 $unitcheck->assign_additional_rules($ans->otherrule);
                 $unitcheck->reparse_all_rules();
             } catch (Exception $e) {
-                $errors["otherrule[$idx]"] = get_string('error_rule', 'qtype_formulas') . $e->getMessage();
+                $errors["otherrule[$idx]"] = get_string('error_rule', 'qtype_numericalrecit') . $e->getMessage();
             }
 
             try {
                 $conversionrules = new unit_conversion_rules;
                 $entry = $conversionrules->entry($ans->ruleid);
                 if ($entry === null || $entry[1] === null) {
-                    throw new Exception(get_string('error_ruleid', 'qtype_formulas'));
+                    throw new Exception(get_string('error_ruleid', 'qtype_numericalrecit'));
                 }
                 $unitcheck->assign_default_rules($ans->ruleid, $entry[1]);
                 $unitcheck->reparse_all_rules();
@@ -858,7 +864,7 @@ class qtype_formulas extends question_type {
             try {
                 $vars = $qo->qv->evaluate_assignments($qo->globalvars, $ans->vars1);
             } catch (Exception $e) {
-                $errors["vars1[$idx]"] = get_string('error_validation_eval', 'qtype_formulas') . $e->getMessage();
+                $errors["vars1[$idx]"] = get_string('error_validation_eval', 'qtype_numericalrecit') . $e->getMessage();
                 continue;
             }
 
@@ -879,7 +885,7 @@ class qtype_formulas extends question_type {
                     throw new Exception();
                 }
             } catch (Exception $e) {
-                $errors["answer[$idx]"] = get_string('error_validation_eval', 'qtype_formulas') . $e->getMessage();
+                $errors["answer[$idx]"] = get_string('error_validation_eval', 'qtype_numericalrecit') . $e->getMessage();
                 continue;
             }
 
@@ -887,7 +893,7 @@ class qtype_formulas extends question_type {
                 $qo->add_special_correctness_variables($vars, $modelanswers, $cloneanswers, $dres->diff, $dres->is_number);
                 $qo->qv->evaluate_assignments($vars, $ans->vars2);
             } catch (Exception $e) {
-                $errors["vars2[$idx]"] = get_string('error_validation_eval', 'qtype_formulas') . $e->getMessage();
+                $errors["vars2[$idx]"] = get_string('error_validation_eval', 'qtype_numericalrecit') . $e->getMessage();
                 continue;
             }
 
@@ -895,7 +901,7 @@ class qtype_formulas extends question_type {
                 $responses = $qo->get_correct_responses_individually($ans);
                 $correctness = $qo->grade_responses_individually($ans, $responses, $unitcheck);
             } catch (Exception $e) {
-                $errors["correctness[$idx]"] = get_string('error_validation_eval', 'qtype_formulas') . $e->getMessage();
+                $errors["correctness[$idx]"] = get_string('error_validation_eval', 'qtype_numericalrecit') . $e->getMessage();
                 continue;
             }
 

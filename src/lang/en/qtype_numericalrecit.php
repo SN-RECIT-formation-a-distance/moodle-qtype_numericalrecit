@@ -16,7 +16,7 @@
 
 /**
  *
- * @package    qtype_formulas
+ * @package    qtype_recit
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,9 +39,11 @@ $string['pleaseputananswer'] = 'Please put an answer in each input field.';
 
 $string['modelanswer'] = 'Model answer';
 
+$string['stepmark'] = 'Step Mark';
+
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';
-$string['pluginname'] = 'Formulas';
+$string['pluginname'] = 'Numerical RÉCIT';
 $string['pluginnameadding'] = 'Adding a formulas question';
 $string['pluginnameediting'] = 'Editing a formulas question';
 $string['pluginname_help'] = 'To start using this question, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>.

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -24,12 +24,12 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * restore plugin class that provides the necessary information
- * needed to restore one formulas qtype plugin
+ * needed to restore one numericalrecit qtype plugin
  *
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_qtype_formulas_plugin extends restore_qtype_plugin {
+class restore_qtype_numericalrecit_plugin extends restore_qtype_plugin {
 
     /**
      * Returns the paths to be handled by the plugin at question level
@@ -38,23 +38,23 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
 
         $paths = array();
 
-        // This qtype uses don't question_answers, qtype_formulas_answers are differents.
+        // This qtype uses don't question_answers, qtype_numericalrecit_answers are differents.
 
         // Add own qtype stuff.
-        $elename = 'formulas_answer';
-        $elepath = $this->get_pathfor('/formulas_answers/formulas_answer'); // We used get_recommended_name() so this works.
+        $elename = 'numericalrecit_answer';
+        $elepath = $this->get_pathfor('/numericalrecit_answers/numericalrecit_answer'); // We used get_recommended_name() so this works.
         $paths[] = new restore_path_element($elename, $elepath);
-        $elename = 'formulas';
-        $elepath = $this->get_pathfor('/formulas'); // We used get_recommended_name() so this works.
+        $elename = 'numericalrecit';
+        $elepath = $this->get_pathfor('/numericalrecit'); // We used get_recommended_name() so this works.
         $paths[] = new restore_path_element($elename, $elepath);
 
         return $paths; // And we return the interesting paths.
     }
 
     /**
-     * Process the qtype/formulas element
+     * Process the qtype/numericalrecit element
      */
-    public function process_formulas($data) {
+    public function process_numericalrecit($data) {
         global $DB;
 
         $data = (object)$data;
@@ -64,7 +64,7 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
         $newquestionid   = $this->get_new_parentid('question');
         $questioncreated = $this->get_mappingid('question_created', $oldquestionid) ? true : false;
 
-        // If the question has been created by restore, we need to create its qtype_formulas_options too.
+        // If the question has been created by restore, we need to create its qtype_numericalrecit_options too.
         if ($questioncreated) {
             // Some 2.0 backups are missing the combined feedback.
             if (!isset($data->correctfeedback)) {
@@ -88,16 +88,16 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
             // Adjust some columns.
             $data->questionid = $newquestionid;
             // Insert record.
-            $newitemid = $DB->insert_record('qtype_formulas_options', $data);
+            $newitemid = $DB->insert_record('qtype_numericalrecit_options', $data);
             // Create mapping (needed for decoding links).
-            $this->set_mapping('qtype_formulas_options', $oldid, $newitemid);
+            $this->set_mapping('qtype_numericalrecit_options', $oldid, $newitemid);
         }
     }
 
     /**
-     * Process the qtype/formulasanswer element
+     * Process the qtype/numericalrecitanswer element
      */
-    public function process_formulas_answer($data) {
+    public function process_numericalrecit_answer($data) {
         global $DB;
 
         $data = (object)$data;
@@ -108,7 +108,7 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
         $newquestionid   = $this->get_new_parentid('question');
         $questioncreated = $this->get_mappingid('question_created', $oldquestionid) ? true : false;
 
-        // If the question has been created by restore, we need to create its qtype_formulas_answers too.
+        // If the question has been created by restore, we need to create its qtype_numericalrecit_answers too.
         if ($questioncreated) {
             // Adjust some columns.
             $data->questionid = $newquestionid;
@@ -118,7 +118,7 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
             }
             // All 2.0 backups are missing the part's index.
             if (!isset($data->partindex)) {
-                $data->partindex = (int)$DB->get_field('qtype_formulas_answers',
+                $data->partindex = (int)$DB->get_field('qtype_numericalrecit_answers',
                         'MAX(partindex) +1', array('questionid' => $newquestionid));
             }
             // Old backups are missing the part's combined feedback.
@@ -136,9 +136,9 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
             }
 
             // Insert record.
-            $newitemid = $DB->insert_record('qtype_formulas_answers', $data);
+            $newitemid = $DB->insert_record('qtype_numericalrecit_answers', $data);
             // Create mapping.
-            $this->set_mapping('qtype_formulas_answers', $oldid, $newitemid);
+            $this->set_mapping('qtype_numericalrecit_answers', $oldid, $newitemid);
         }
     }
 
@@ -147,12 +147,12 @@ class restore_qtype_formulas_plugin extends restore_qtype_plugin {
      */
     public static function define_decode_contents() {
         return array(
-            new restore_decode_content('qtype_formulas_options',
+            new restore_decode_content('qtype_numericalrecit_options',
                     array('correctfeedback', 'partiallycorrectfeedback', 'incorrectfeedback'),
-                    'qtype_formulas'),
-            new restore_decode_content('qtype_formulas_answers', array('subqtext', 'feedback',
+                    'qtype_numericalrecit'),
+            new restore_decode_content('qtype_numericalrecit_answers', array('subqtext', 'feedback',
                     'partcorrectfb', 'partpartiallycorrectfb', 'partincorrectfb'),
-                    'qtype_formulas_answers'),
+                    'qtype_numericalrecit_answers'),
         );
     }
 

@@ -30,7 +30,7 @@
 
 
         <testsuites>
-            <testsuite name="question_type_formulas_testsuite">
+            <testsuite name="question_type_numericalrecit_testsuite">
                 <directory suffix="_test.php">.</directory>
             </testsuite>
         </testsuites>

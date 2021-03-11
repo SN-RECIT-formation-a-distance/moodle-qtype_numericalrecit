@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Check whether the format of input numbers, formulas and units are incorrect
+ * Check whether the format of input numbers, numericalrecit and units are incorrect
  *
  * @copyright &copy; 2010-2011 Hon Wai, Lau
  * @author Hon Wai, Lau <lau65536@gmail.com>
@@ -22,7 +22,7 @@
  */
 
 // This function will be called to initialize the format check for input boxes, after the page is fully loaded.
-function formulas_format_check() {
+function numericalrecit_format_check() {
     var use_format_check = true;    // If it is set to false, no format check will be used and initialized.
     var show_hinting_type = null;   // Show the type hinting under the input box, such as 'Number', 'Unit'. null means use the individual setting in variable types below.
     var show_interpretation = null;   // Show the interpretation of the formula under the input box. null means use the individual setting in variable types below.
@@ -103,10 +103,10 @@ function formulas_format_check() {
             if (self.correct) {
                 self.interpretation.innerHTML = info;
                 self.interpretation.style.display = (self.show_interpretation && self.cur_value != info) ? 'block' : 'none';
-                self.interpretation.className = 'formulas_input_info_interpretation';
+                self.interpretation.className = 'numericalrecit_input_info_interpretation';
             }
             else  // Dim the text color and keep the background text unchanged, until the next correct.
-                self.interpretation.className = 'formulas_input_info_interpretation_incorrect';
+                self.interpretation.className = 'numericalrecit_input_info_interpretation_incorrect';
         },
 
         check_unit : function(fn, value) {
@@ -583,8 +583,8 @@ function formulas_format_check() {
             // With the Boost theme the element class is on a div element, not on the input element
             // So we re-add it so that classify function works on it.
             if (input.name.indexOf('postunit') == 0) {
-                input.classList.add('formulas_editing_unit');
-                input.title = M.util.get_string('unit', 'qtype_formulas');
+                input.classList.add('numericalrecit_editing_unit');
+                input.title = M.util.get_string('unit', 'qtype_numericalrecit');
             }
             var type = classify(input.className, types);
 
@@ -606,31 +606,31 @@ function formulas_format_check() {
             input.title = '';       // Remove the title.
 
             var warning_inner = document.createElement('img');
-            warning_inner.src = M.util.image_url('warning', 'qtype_formulas');
-            warning_inner.className = 'formulas_input_warning';
+            warning_inner.src = M.util.image_url('warning', 'qtype_numericalrecit');
+            warning_inner.className = 'numericalrecit_input_warning';
             warning_inner.style.display = 'none';
             var warning = document.createElement('span');
-            warning.className = 'formulas_input_warning_outer';
+            warning.className = 'numericalrecit_input_warning_outer';
             warning.appendChild(warning_inner);
             input.parentNode.insertBefore(warning, input.nextSibling);
 
             var info_inner = document.createElement('div');
-            info_inner.className = 'formulas_input_info';
+            info_inner.className = 'numericalrecit_input_info';
             info_inner.style.display = 'none';
             info_inner.style.width = Math.max(100, input.clientWidth + input.clientLeft) + 'px';
             var info = document.createElement('div');
-            info.className = 'formulas_input_info_outer';
+            info.className = 'numericalrecit_input_info_outer';
             info.appendChild(info_inner);
             input.parentNode.insertBefore(info, input);
 
             if (self.show_type) {
                 var info_inner_title = document.createElement('div');
-                info_inner_title.className = 'formulas_input_info_title';
+                info_inner_title.className = 'numericalrecit_input_info_title';
                 info_inner_title.innerHTML = self.title;
                 info_inner.appendChild(info_inner_title);
             }
             var info_inner_interpretation = document.createElement('div');
-            info_inner_interpretation.className = 'formulas_input_info_interpretation';
+            info_inner_interpretation.className = 'numericalrecit_input_info_interpretation';
             info_inner.appendChild(info_inner_interpretation);
 
             self.warning = warning_inner;
@@ -640,18 +640,18 @@ function formulas_format_check() {
             count++;
 
             // attach the data and events to the input field for later use
-            input.formulas = {};
-            input.formulas.common = common;
-            input.formulas.self = self;
+            input.numericalrecit = {};
+            input.numericalrecit.common = common;
+            input.numericalrecit.self = self;
 
             input.onblur = function() {
-                this.formulas.common.fn.stop(this.formulas.common, this.formulas.self);
+                this.numericalrecit.common.fn.stop(this.numericalrecit.common, this.numericalrecit.self);
             };
             input.onfocus = function() {
-                this.formulas.common.fn.monitor(this.formulas.common, this.formulas.self);
+                this.numericalrecit.common.fn.monitor(this.numericalrecit.common, this.numericalrecit.self);
             };
             input.onkeyup = function() {
-                this.formulas.common.fn.update(this.formulas.common, this.formulas.self);
+                this.numericalrecit.common.fn.update(this.numericalrecit.common, this.numericalrecit.self);
             };
         }
         return others;
@@ -662,7 +662,7 @@ function formulas_format_check() {
         var classes = className.split(' ');
         for (var i=0; i<classes.length; i++)
             for (var j=0; j<types.length; j++)
-                if (classes[i] == 'formulas_'+types[j][0])
+                if (classes[i] == 'numericalrecit_'+types[j][0])
                     return {func: 'check_'+types[j][0], show_type: types[j][1],
                         show_interpretation: types[j][2], show_sign: types[j][3]};
         return null;
@@ -904,7 +904,7 @@ function formulas_format_check() {
         var warning = document.createElement('span');
         warning.innerHTML = '<div style="position:fixed; bottom:20px; right:5px;">'
             +(unittest_fail_show_details ? common.testresult.failcases.join('<br>') : '')
-            +'<img src="'+M.util.image_url('warning', 'qtype_formulas')+'" title="Format check initialization fail ('+(common.testresult.numcase-common.testresult.numcorrect) +'/'+ common.testresult.numcase+')"></img>'
+            +'<img src="'+M.util.image_url('warning', 'qtype_numericalrecit')+'" title="Format check initialization fail ('+(common.testresult.numcase-common.testresult.numcorrect) +'/'+ common.testresult.numcase+')"></img>'
             +'</div>';
         document.body.insertBefore(warning, null);
     }
@@ -939,4 +939,4 @@ window.onload = (function(oldfunc, newfunc) {
         return function() { oldfunc(); newfunc(); }
     else
         return newfunc;
-})(window.onload, function() { formulas_format_check(); });
+})(window.onload, function() { numericalrecit_format_check(); });

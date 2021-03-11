@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade library code for the formulas question type.
+ * Upgrade library code for the numericalrecit question type.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class for converting attempt data for formulas questions when upgrading
+ * Class for converting attempt data for numericalrecit questions when upgrading
  * attempts to the new question engine.
  *
  * This class is used by the code in question/engine/upgrade/upgradelib.php.
@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_qe2_attempt_updater extends question_qtype_attempt_updater {
+class qtype_numericalrecit_qe2_attempt_updater extends question_qtype_attempt_updater {
     public function right_answer() {
         return '';
     }

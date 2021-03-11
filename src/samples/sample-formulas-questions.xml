@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz>
 <!-- question: 410  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>1.1: Minimal question</text>
     </name>
@@ -78,7 +78,7 @@
   </question>
 
 <!-- question: 411  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>1.2: Generate random data</text>
     </name>
@@ -156,7 +156,7 @@ Upon quiz generation, one deterministic value will be chosen. For example, <i>a<
   </question>
 
 <!-- question: 412  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>1.3: Multiple subquestions</text>
     </name>
@@ -332,7 +332,7 @@ Upon quiz generation, one deterministic value will be chosen. For example, <i>a<
   </question>
 
 <!-- question: 413  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>1.4: Placeholder of answer and unit</text>
     </name>
@@ -552,7 +552,7 @@ dt = {2:6};</text>
   </question>
 
 <!-- question: 414  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>2.1: Answer type - number</text>
     </name>
@@ -630,7 +630,7 @@ dt = {2:6};</text>
   </question>
 
 <!-- question: 415  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>2.2: Answer type - Numeric</text>
     </name>
@@ -709,7 +709,7 @@ dt = {2:6};</text>
   </question>
 
 <!-- question: 416  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>2.3: Answer type - Numerical formula</text>
     </name>
@@ -789,7 +789,7 @@ t0 = {2,3,4};</text>
   </question>
 
 <!-- question: 417  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>2.4: Answer type - Algebraic formula</text>
     </name>
@@ -876,7 +876,7 @@ x = {_1}]]></text>
   </question>
 
 <!-- question: 418  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>3.1: Grading - multiple correct answer</text>
     </name>
@@ -954,7 +954,7 @@ x = {_1}]]></text>
   </question>
 
 <!-- question: 419  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>3.2: Grading - multiple criteria</text>
     </name>
@@ -1036,7 +1036,7 @@ criterion2 = a < _0 && _0 < b;]]></text>
   </question>
 
 <!-- question: 420  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>3.3: Grading - Mark for different accuracy</text>
     </name>
@@ -1114,7 +1114,7 @@ case2 = _err < 0.05;]]></text>
   </question>
 
 <!-- question: 421  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>3.4: Grading - arbitrary relation</text>
     </name>
@@ -1197,7 +1197,7 @@ y = {_1}<br>]]></text>
   </question>
 
 <!-- question: 422  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>3.5: Grading - multiple answer for algebraic formula</text>
     </name>
@@ -1281,7 +1281,7 @@ correct = sum(map("<",d,1e-10));   # the map will compute d[i] < 1e-10 elementwi
   </question>
 
 <!-- question: 423  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>4.1: Unit - basic conversion rule</text>
     </name>
@@ -1451,7 +1451,7 @@ correct = sum(map("<",d,1e-10));   # the map will compute d[i] < 1e-10 elementwi
   </question>
 
 <!-- question: 424  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>4.2: Unit - composite unit</text>
     </name>
@@ -1529,7 +1529,7 @@ Note: No basic conversion rule used here.<br />
   </question>
 
 <!-- question: 425  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>4.3: Unit - other conversion rule</text>
     </name>
@@ -1607,7 +1607,7 @@ Note: No basic conversion rule used here.<br />
   </question>
 
 <!-- question: 426  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>5.1: Possible question type - fraction</text>
     </name>
@@ -1738,7 +1738,7 @@ denominator = {2,3,4};</text>
   </question>
 
 <!-- question: 427  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>5.2: Possible question type - vector</text>
     </name>
@@ -1819,7 +1819,7 @@ y2 = {5:9};</text>
   </question>
 
 <!-- question: 428  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>5.3: Possible question type - matrix</text>
     </name>
@@ -1900,7 +1900,7 @@ y2 = {5:9};</text>
   </question>
 
 <!-- question: 429  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>5.4: Possible question type - polynomial</text>
     </name>
@@ -1980,7 +1980,7 @@ c = {1:3};</text>
   </question>
 
 <!-- question: 430  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>5.5: Possible question type - quadratic equation</text>
     </name>
@@ -2060,7 +2060,7 @@ symbol = {"t","w","x","z"};]]></text>
   </question>
 
 <!-- question: 431  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>5.6: Possible question type - simple differentiation</text>
     </name>
@@ -2143,7 +2143,7 @@ expo = b-1;]]></text>
   </question>
 
 <!-- question: 432  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>6.1: Other 1</text>
     </name>
@@ -2326,7 +2326,7 @@ corr2 = (_0 > 0) && (_1>0);]]></text>
   </question>
 
 <!-- question: 433  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>6.2: Other 2</text>
     </name>
@@ -2460,7 +2460,7 @@ rho = {6:9:0.5};</text>
   </question>
 
 <!-- question: 434  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>6.3: Other 3</text>
     </name>
@@ -2599,7 +2599,7 @@ y2 = y1 + vy*ta;</text>
   </question>
 
 <!-- question: 435  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
       <text>6.4: Other 4</text>
     </name>

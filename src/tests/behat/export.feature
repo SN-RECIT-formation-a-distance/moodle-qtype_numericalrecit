@@ -1,7 +1,7 @@
-@qtype @qtype_formulas
-Feature: Test exporting Formulas questions
+@qtype @qtype_numericalrecit
+Feature: Test exporting numericalrecit questions
   As a teacher
-  In order to be able to reuse my Formulas questions
+  In order to be able to reuse my numericalrecit questions
   I need to export them
 
   Background:
@@ -19,12 +19,12 @@ Feature: Test exporting Formulas questions
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype       | name           | template   |
-      | Test questions   | formulas    | formulas-001   | test2      |
+      | Test questions   | numericalrecit    | numericalrecit-001   | test2      |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
 
   @javascript @_file_upload
-  Scenario: Export a Formulas question
+  Scenario: Export a numericalrecit question
     When I navigate to "Question bank > Export" in current page administration
     And I set the field "id_format_xml" to "1"
     And I press "Export questions to file"

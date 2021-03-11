@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="question/type/formulas/db" VERSION="20130130" COMMENT="XMLDB file for Moodle question/type/formulas"
+<XMLDB PATH="question/type/numericalrecit/db" VERSION="20130130" COMMENT="XMLDB file for Moodle question/type/numericalrecit"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="qtype_formulas_options" COMMENT="Options for formulas question type">
+    <TABLE NAME="qtype_numericalrecit_options" COMMENT="Options for numericalrecit question type">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -24,7 +24,7 @@
         <KEY NAME="questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="question" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="qtype_formulas_answers" COMMENT="Answers for formulas question type">
+    <TABLE NAME="qtype_numericalrecit_answers" COMMENT="Answers for numericalrecit question type">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -43,6 +43,7 @@
         <FIELD NAME="otherrule" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="subqtext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="subqtextformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="stepmark" TYPE="float" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="feedback" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="feedbackformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="partcorrectfb" TYPE="text" NOTNULL="false" SEQUENCE="false"/>

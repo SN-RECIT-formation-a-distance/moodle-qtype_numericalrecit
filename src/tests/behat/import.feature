@@ -1,7 +1,7 @@
-@qtype @qtype_formulas
-Feature: Test importing Formulas questions
+@qtype @qtype_numericalrecit
+Feature: Test importing numericalrecit questions
   As a teacher
-  In order to reuse my Formulas questions
+  In order to reuse my numericalrecit questions
   I need to import them
 
   Background:
@@ -18,13 +18,13 @@ Feature: Test importing Formulas questions
     And I am on "Course 1" course homepage
 
   @javascript @_file_upload
-  Scenario: import formulas question.
+  Scenario: import numericalrecit question.
     When I navigate to "Question bank > Import" in current page administration
     And I set the field "id_format_xml" to "1"
-    And I upload "question/type/formulas/tests/fixtures/qtype_sample_formulas.xml" file to "Import" filemanager
+    And I upload "question/type/numericalrecit/tests/fixtures/qtype_sample_numericalrecit.xml" file to "Import" filemanager
     And I press "id_submitbutton"
     Then I should see "Parsing questions from import file."
     And I should see "Importing 1 questions from file"
     And I should see "1. For a minimal question, you must define a subquestion with"
     And I press "Continue"
-    And I should see "Formulas question 001"
+    And I should see "numericalrecit question 001"

@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Javascript function for the editing interface of formulas question type
+ * Javascript function for the editing interface of numericalrecit question type
  *
  * @copyright &copy; 2010-2011 Hon Wai, Lau
  * @author Hon Wai, Lau <lau65536@gmail.com>
@@ -24,8 +24,8 @@
 /**
  * Update the correctness simple elements from the expert one.
  */
-function formulas_form_correctness(id, checked) {
-    var err_names = new Array(M.util.get_string('relerror', 'qtype_formulas'), M.util.get_string('abserror', 'qtype_formulas'));
+function numericalrecit_form_correctness(id, checked) {
+    var err_names = new Array(M.util.get_string('relerror', 'qtype_numericalrecit'), M.util.get_string('abserror', 'qtype_numericalrecit'));
         var nid = 'correctness[' + id + ']';
         var n = document.getElementsByName(nid)[0];
         if (n == null) {
@@ -50,13 +50,13 @@ function formulas_form_correctness(id, checked) {
             if (res == null) {
                 use_raw_input = true;
             } else {
-                var s = '<select id="' + bid + '_type" class="mform form-inline form-control" onchange="formulas_form_merge(' + id + ')">';
+                var s = '<select id="' + bid + '_type" class="mform form-inline form-control" onchange="numericalrecit_form_merge(' + id + ')">';
                 s += '<option value="_relerr"' + (res[1] == '_relerr' ? ' selected="selected"' : '') + '>' + err_names[0] + '</option>';
                 s += '<option value="_err"' + (res[1] == '_err' ? ' selected="selected"' : '') + '>' + err_names[1] + '</option>';
-                s += '</select><select id="' + bid + '_op" class="mform form-inline form-control" onchange="formulas_form_merge(' + id + ')">';
+                s += '</select><select id="' + bid + '_op" class="mform form-inline form-control" onchange="numericalrecit_form_merge(' + id + ')">';
                 s += '<option value="<"' + (res[2] == '<' ? ' selected="selected"' : '') + '>&lt</option>';
                 s += '<option value="=="' + (res[2] == '==' ? ' selected="selected"' : '') + '>==</option>';
-                s += '</select><input id="' + bid + '_tol" type="text" class="mform form-inline form-control" value="' + res[3] + '" onchange="formulas_form_merge(' + id + ')">';
+                s += '</select><input id="' + bid + '_tol" type="text" class="mform form-inline form-control" value="' + res[3] + '" onchange="numericalrecit_form_merge(' + id + ')">';
                 b.innerHTML = s;
             }
         }
@@ -67,7 +67,7 @@ function formulas_form_correctness(id, checked) {
 /**
  * Update the correctness expert element from the simple ones.
  */
-function formulas_form_merge(id) {
+function numericalrecit_form_merge(id) {
     var nid = 'correctness[' + id + ']';
     var n = document.getElementsByName(nid)[0];
     var bid = 'id_correctness_' + id + '_buttons';
@@ -78,7 +78,7 @@ function formulas_form_merge(id) {
     n.value = error_type + ' ' + error_op + ' ' + error_val;
 }
 
-function formulas_form_init_global_options_update(name) {
+function numericalrecit_form_init_global_options_update(name) {
     var n_global = document.getElementsByName('global' + name)[0];
     var i = 0;
     while (true) {
@@ -93,7 +93,7 @@ function formulas_form_init_global_options_update(name) {
 }
 
 // It contains all methods to modify the editing form, aiming to provide a better interface.
-var formulasform = {
+var numericalrecitform = {
     // The initialization  function that should be called just after the form is constructed.
     init : function() {
         // Get all the values that will be usable for the methods in this object.
@@ -140,9 +140,9 @@ var formulasform = {
         var n = document.getElementsByName(name + '[0]')[0];    // Pick the first value as global.
         n_global.value = n.value;
         n_global.onchange = function() {
-            formulas_form_init_global_options_update(name);
+            numericalrecit_form_init_global_options_update(name);
         };
-        formulas_form_init_global_options_update(name);
+        numericalrecit_form_init_global_options_update(name);
     },
 
     // Allow a more user friend way to select the commonly used criteria.
@@ -158,17 +158,17 @@ var formulasform = {
         if (b == null) {
             var tmp = document.createElement('div');
             tmp.id = showid;
-            tmp.classList.add('formulas_correctness_show');
+            tmp.classList.add('numericalrecit_correctness_show');
             b = loc.insertBefore(tmp, loc.firstChild);
         }
 
         initial_checked = false;    // Always unchecked by default.
 
-        formulas_form_correctness(i, initial_checked);
+        numericalrecit_form_correctness(i, initial_checked);
 
         var ctext = initial_checked ? ' checked="checked" ' : '';
-        var s = '<input type="checkbox" onclick="formulas_form_correctness(' + i + ',this.checked)" ' + ctext + ' id="' + showid + '" value="Expert">';
-        var t = '<span onclick="var t=document.getElementById(\'' + showid + '\'); t.checked = !t.checked; formulas_form_correctness(' + i + ',t.checked);">' + b.innerHTML + '</span>';
+        var s = '<input type="checkbox" onclick="numericalrecit_form_correctness(' + i + ',this.checked)" ' + ctext + ' id="' + showid + '" value="Expert">';
+        var t = '<span onclick="var t=document.getElementById(\'' + showid + '\'); t.checked = !t.checked; numericalrecit_form_correctness(' + i + ',t.checked);">' + b.innerHTML + '</span>';
         b.innerHTML = s + t;
     },
 
@@ -180,7 +180,7 @@ var formulasform = {
             s += '<option value="' + i + '" ' + (i == 5 ? ' selected="selected"' : '') + '>' + a[i] + '</option>';
         }
         s = '<select name="numdataset" id="numdataset">' + s + '</select><input type="button" value="' +
-                M.util.get_string('instantiate', 'qtype_formulas') + '" onclick="formulasform.instantiate_dataset()"><div id="xxx"></div>';
+                M.util.get_string('instantiate', 'qtype_numericalrecit') + '" onclick="numericalrecitform.instantiate_dataset()"><div id="xxx"></div>';
         var loc = document.getElementById('numdataset_option');
         loc.innerHTML = s;
     },
@@ -204,7 +204,7 @@ var formulasform = {
         }
         params = p.join('&').replace(/ /g,'+');
 
-        var url = M.cfg.wwwroot + '/question/type/formulas/instantiate.php';
+        var url = M.cfg.wwwroot + '/question/type/numericalrecit/instantiate.php';
 
         var http_request = new XMLHttpRequest();
         http_request.open( "POST", url, true );
@@ -216,17 +216,17 @@ var formulasform = {
         http_request.onreadystatechange = function () {
             if (http_request.readyState == 4 && http_request.status == 200) {
                 //document.getElementById('xxx').innerHTML = http_request.responseText;
-                formulasform.vars = JSON.parse( http_request.responseText );
-                formulasform.show_dataset_and_preview('block');
-                //alert("message=" +JSON.stringify(formulasform.vars));
+                numericalrecitform.vars = JSON.parse( http_request.responseText );
+                numericalrecitform.show_dataset_and_preview('block');
+                //alert("message=" +JSON.stringify(numericalrecitform.vars));
                 // Add the controls for the display of dataset and preview.
-                try { formulasform.update_dataset(); } catch (e) { alert(e); }
-                try { formulasform.update_statistics(); } catch (e) {}
-                try { formulasform.init_preview_controls(); } catch (e) {}
+                try { numericalrecitform.update_dataset(); } catch (e) { alert(e); }
+                try { numericalrecitform.update_statistics(); } catch (e) {}
+                try { numericalrecitform.init_preview_controls(); } catch (e) {}
             }
         };
         http_request.send(params);
-        formulasform.show_dataset_and_preview('hidden');
+        numericalrecitform.show_dataset_and_preview('hidden');
     },
 
     // Show or hide the dataset and preview region.
@@ -427,8 +427,8 @@ var formulasform = {
         for (var i = 0; i < this.vars.lists.length; i++) {
             block0 += '<option value="' + i + '">' + i + '</option>';
         }
-        block0 = (this.vars.lists.length == 0) ? '' : '<select id="id_formulas_idataset" onchange="formulasform.update_preview()">' + block0 + '</select>';
-        var block1 = '<input type="button" onclick="formulasform.update_preview()" value="' + M.util.get_string('renew', 'qtype_formulas') + '">';
+        block0 = (this.vars.lists.length == 0) ? '' : '<select id="id_numericalrecit_idataset" onchange="numericalrecitform.update_preview()">' + block0 + '</select>';
+        var block1 = '<input type="button" onclick="numericalrecitform.update_preview()" value="' + M.util.get_string('renew', 'qtype_numericalrecit') + '">';
         var loc = document.getElementById('qtextpreview_controls');
         loc.innerHTML = block0 + block1;
 
@@ -442,7 +442,7 @@ var formulasform = {
         } catch(e) {
             var globaltext = document.getElementById('id_questiontext').value;
         }
-        var idataset = document.getElementById('id_formulas_idataset').value;
+        var idataset = document.getElementById('id_numericalrecit_idataset').value;
         var res = this.substitute_variables_in_text(globaltext, this.get_variables_mapping(idataset, ['random','global']));
 
         for (var i = 0; i < this.numsubq; i++) {
@@ -534,4 +534,4 @@ window.onload = (function(oldfunc, newfunc) {
     } else {
         return newfunc;
     }
-})(window.onload, function() { formulasform.init(); });
+})(window.onload, function() { numericalrecitform.init(); });

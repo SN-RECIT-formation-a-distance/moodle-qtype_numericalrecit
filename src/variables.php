@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The qtype_formulas_variables class is used to parse and evaluate variables.
+ * The qtype_numericalrecit_variables class is used to parse and evaluate variables.
  *
  * @copyright &copy; 2010-2011 Hon Wai, Lau
  * @author Hon Wai, Lau <lau65536@gmail.com>
@@ -132,7 +132,7 @@ function sigfig($number, $precision) {
  * - evaluate assignments, general expression and numerical expression.
  * - evaluate algebraic formula
  */
-class qtype_formulas_variables {
+class qtype_numericalrecit_variables {
     private static $maxdataset = 2e9;      // It is the upper limit for the exhaustive enumeration.
     private static $listmaxsize = 1000;
 
@@ -222,25 +222,25 @@ class qtype_formulas_variables {
         if ($index === null) {
             if ($type[0] == 'l') {  // Error check for list.
                 if (!is_array($value))  throw new Exception('Unknown error. vstack_update_variable()');
-                if (mycount($value) < 1 || mycount($value) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_formulas'));
-                if (!is_numeric($value[0]) && !is_string($value[0]))  throw new Exception(get_string('error_vars_array_type', 'qtype_formulas'));
+                if (mycount($value) < 1 || mycount($value) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
+                if (!is_numeric($value[0]) && !is_string($value[0]))  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
                 if ($type[1] == 'n') {
                     for ($i = 0; $i < mycount($value); $i++) {
-                        if (!is_numeric($value[$i]))  throw new Exception(get_string('error_vars_array_type', 'qtype_formulas'));
+                        if (!is_numeric($value[$i]))  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
                         $value[$i] = floatval($value[$i]);
                     }
                 } else {
                     for ($i = 0; $i < mycount($value); $i++)
-                        if (!is_string($value[$i]))  throw new Exception(get_string('error_vars_array_type', 'qtype_formulas'));
+                        if (!is_string($value[$i]))  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
                 }
             }
             $vstack->all[$name] = (object)array('type' => $type, 'value' => $value);
         } else {
             $list = &$vstack->all[$name];
-            if ($list->type[0] != 'l')  throw new Exception(get_string('error_vars_array_unsubscriptable', 'qtype_formulas'));
+            if ($list->type[0] != 'l')  throw new Exception(get_string('error_vars_array_unsubscriptable', 'qtype_numericalrecit'));
             $index = intval($index);
-            if ($index < 0 || $index >= mycount($list->value))  throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_formulas'));
-            if ($list->type[1] != $type)  throw new Exception(get_string('error_vars_array_type', 'qtype_formulas'));
+            if ($index < 0 || $index >= mycount($list->value))  throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
+            if ($list->type[1] != $type)  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
             $list->value[$index] = $type == 'n' ? floatval($value) : $value;
         }
     }
@@ -312,7 +312,7 @@ class qtype_formulas_variables {
             $data = $this->vstack_get_variable($vstack, $splitted[$i]);
             if ($data->type == 'v') {
                 $tmp = $this->vstack_get_variable($vstack, $data->value);
-                if ($tmp === null)  throw new Exception(get_string('error_vars_undefined', 'qtype_formulas', $data->value) . ' in substitute_vname_by_variables');
+                if ($tmp === null)  throw new Exception(get_string('error_vars_undefined', 'qtype_numericalrecit', $data->value) . ' in substitute_vname_by_variables');
                 if (!array_key_exists($data->value, $appearedvars))
                     $appearedvars[$data->value] = $this->vstack_add_temporary_variable($vstack, $tmp->type, $tmp->value);
                 $splitted[$i] = $appearedvars[$data->value];
@@ -325,14 +325,14 @@ class qtype_formulas_variables {
     private function substitute_strings_by_placholders(&$vstack, $text) {
         $text = stripcslashes($text);
         $splitted = explode("\"", $text);
-        if (mycount($splitted) % 2 == 0)  throw new Exception(get_string('error_vars_string', 'qtype_formulas'));
+        if (mycount($splitted) % 2 == 0)  throw new Exception(get_string('error_vars_string', 'qtype_numericalrecit'));
         foreach ($splitted as $i => &$s)  if ($i % 2 == 1) {
             if (strpos($s, '\'') !== false || strpos($s, "\n") !== false)
-                throw new Exception(get_string('error_vars_string', 'qtype_formulas'));
+                throw new Exception(get_string('error_vars_string', 'qtype_numericalrecit'));
             $s = $this->vstack_add_temporary_variable($vstack, 's', $s);
         }
         else if (strpos($s, '@') !== false || strpos($s, '`') !== false) // Characters @ and ` can't be used in the main text.
-            throw new Exception(get_string('error_forbid_char', 'qtype_formulas'));
+            throw new Exception(get_string('error_forbid_char', 'qtype_numericalrecit'));
         return implode('', $splitted);
     }
 
@@ -342,13 +342,13 @@ class qtype_formulas_variables {
         $splitted = explode('`', preg_replace($rangepattern, '`$1`', $text));
         for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the numbers are stored in odd index.
             $res = $this->parse_fixed_range($vstack, substr($splitted[$i], 1, -1));
-            if ($res === null)  throw new Exception(get_string('error_fixed_range', 'qtype_formulas'));
+            if ($res === null)  throw new Exception(get_string('error_fixed_range', 'qtype_numericalrecit'));
             $data = array();
             for ($z = $res->element[0]; $z < $res->element[1]; $z += $res->element[2]) {
                 $data[] = $z;
-                if (mycount($data) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_formulas'));
+                if (mycount($data) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
             }
-            if (mycount($data) < 1)  throw new Exception(get_string('error_vars_array_size', 'qtype_formulas'));
+            if (mycount($data) < 1)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, 'ln', $data);
         }
         return implode('', $splitted);
@@ -394,7 +394,7 @@ class qtype_formulas_variables {
         $funclists = $internal ? $this->func_all : $this->func_algebraic;
         $splitted = explode('`', preg_replace($varpattern, '`$1`', $text));
         for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
-            if (array_key_exists($splitted[$i], $funclists))  throw new Exception(get_string('error_vars_reserved', 'qtype_formulas', $splitted[$i]));
+            if (array_key_exists($splitted[$i], $funclists))  throw new Exception(get_string('error_vars_reserved', 'qtype_numericalrecit', $splitted[$i]));
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, 'v', $splitted[$i]);
         }
         return implode('', $splitted);
@@ -450,15 +450,15 @@ class qtype_formulas_variables {
                     continue;   // If empty assignment.
                 }
                 if (mycount($ex) != 2) {
-                    throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                    throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                 }
                 if (!preg_match('/^[A-Za-z0-9_]+$/', $name)) {
-                    throw new Exception(get_string('error_vars_name', 'qtype_formulas'));
+                    throw new Exception(get_string('error_vars_name', 'qtype_numericalrecit'));
                 }
                 $expression = trim($ex[1]);
                 $expression = $this->substitute_fixed_ranges_by_placeholders($vstack, $expression);
                 if (strlen($expression) == 0) {
-                    throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                    throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                 }
 
                 // Check whether the expression contains only the valid character set.
@@ -466,14 +466,14 @@ class qtype_formulas_variables {
                 if ($expression[0] == '{') {
                     $allowableoperatorchar = '-+*/:@0-9,\s}{\]\[';  // Restricted set, prevent too many calculations.
                     if (!preg_match('~^['.$allowableoperatorchar.']*$~', $expression))   // The result expression should only contains simple characters.
-                        throw new Exception(get_string('error_forbid_char', 'qtype_formulas'));
+                        throw new Exception(get_string('error_forbid_char', 'qtype_numericalrecit'));
 
                     $bracket = $this->get_expressions_in_bracket($expression, 0, '{');
                     if ($bracket === null) {
-                        throw new Exception(get_string('error_vars_bracket_mismatch', 'qtype_formulas'));
+                        throw new Exception(get_string('error_vars_bracket_mismatch', 'qtype_numericalrecit'));
                     }
                     if (!($bracket->openloc == 0 && $bracket->closeloc == strlen($expression) - 1)) {
-                        throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                        throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                     }
 
                     $type = null;
@@ -484,13 +484,13 @@ class qtype_formulas_variables {
                         if ($type != 'n') {
                             $result = $this->evaluate_general_expression_substituted_recursively($vstack, $ele);
                             if ($i == 0)  $type = $result->type;
-                            if ($i > 0 && $result->type != $type)  throw new Exception(get_string('error_randvars_type', 'qtype_formulas'));
+                            if ($i > 0 && $result->type != $type)  throw new Exception(get_string('error_randvars_type', 'qtype_numericalrecit'));
                             $element = $result->value;
                             $numelement = 1;
                         }
                         if ($type == 'n') { // Special handle for number, because it can be specified as a range.
                             $result = $this->parse_fixed_range($vstack, $ele);
-                            if ($result === null)  throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                            if ($result === null)  throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                             $element = $result->element;
                             $numelement = $result->numelement;
                         }
@@ -499,7 +499,7 @@ class qtype_formulas_variables {
                         }
                         if ($i > 0) {
                             if (($type[0] == 'l' ? mycount($element) : 1) != $listsize) {
-                                throw new Exception(get_string('error_randvars_type', 'qtype_formulas'));
+                                throw new Exception(get_string('error_randvars_type', 'qtype_numericalrecit'));
                             }
                         }
                         $var->elements[] = $element;
@@ -509,18 +509,18 @@ class qtype_formulas_variables {
                 } else if ( preg_match('~^shuffle\s*\(([-+*/@0-9,\s\[\]]+)\)$~', $expression, $matches) ) {
                     $result = $this->evaluate_general_expression_substituted_recursively($vstack, $matches[1]);
                     if ($result === null || $result->type[0] != 'l') {
-                        throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                        throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                     }
                     $type = 'zh'.$result->type;
                     $var->numelement = mycount($result->value);   // The actual number should be a!, but it will not be used anyway.
                     $var->elements = $result->value;
                 } else {
-                    throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                    throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                 }
 
                 // There must be at least two elements to draw from, otherwise it is not a random variable.
                 if ($var->numelement < 2) {
-                    throw new Exception(get_string('error_randvars_set_size', 'qtype_formulas'));
+                    throw new Exception(get_string('error_randvars_set_size', 'qtype_numericalrecit'));
                 }
                 $this->vstack_update_variable($vstack, $name, null, $type, $var);
             } catch (Exception $e) {    // Append the error message by the line info.
@@ -591,7 +591,7 @@ class qtype_formulas_variables {
         $expression = $this->substitute_variables_by_placeholders($vstack, $expression, true);
         $allowableoperatorchar = '-+/*%>:^\~<?=&|!,0-9\s)(\]\[' . '@';
         if (!preg_match('~^['.$allowableoperatorchar.']*$~', $expression))   // The result expression should only contains simple characters.
-            throw new Exception(get_string('error_forbid_char', 'qtype_formulas'));
+            throw new Exception(get_string('error_forbid_char', 'qtype_numericalrecit'));
         $expression = $this->substitute_vname_by_variables($vstack, $expression);
         return $this->evaluate_general_expression_substituted_recursively($vstack, $expression);
     }
@@ -608,12 +608,12 @@ class qtype_formulas_variables {
                 $header = $this->get_expressions_in_bracket($subtext, $first->endloc, '(');
                 if ($header === null)  throw new Exception('Unknown error: for loop');
                 $h = explode(':', implode('', $header->expressions), 2);
-                if (mycount($h) == 1)  throw new Exception(get_string('error_forloop', 'qtype_formulas'));
+                if (mycount($h) == 1)  throw new Exception(get_string('error_forloop', 'qtype_numericalrecit'));
                 $loopvar = $this->vstack_get_variable($vstack, trim($h[0]));
-                if ($loopvar === null || $loopvar->type != 'v' || $loopvar->value[0] == '_')  throw new Exception(get_string('error_forloop_var', 'qtype_formulas'));
+                if ($loopvar === null || $loopvar->type != 'v' || $loopvar->value[0] == '_')  throw new Exception(get_string('error_forloop_var', 'qtype_numericalrecit'));
                 $expression = $this->substitute_vname_by_variables($vstack, $h[1]);
                 $list = $this->evaluate_general_expression_substituted_recursively($vstack, $expression);
-                if ($list->type[0] != 'l')  throw new Exception(get_string('error_forloop_expression', 'qtype_formulas'));
+                if ($list->type[0] != 'l')  throw new Exception(get_string('error_forloop_expression', 'qtype_numericalrecit'));
 
                 // Get the assignments in the inner for loop.
                 $isopen = strpos($subtext, '{', $header->closeloc);
@@ -647,7 +647,7 @@ class qtype_formulas_variables {
                 // Check whether the assignment contains only the valid character set.
                 $allowableoperatorchar = '-+/*%>:^\~<?=&|!,0-9\s)(}{\]\[' . '@';
                 if (!preg_match('~^['.$allowableoperatorchar.']*$~', $assignment))   // The result expression should contains simple characters only.
-                    throw new Exception(get_string('error_forbid_char', 'qtype_formulas'));
+                    throw new Exception(get_string('error_forbid_char', 'qtype_numericalrecit'));
 
                 // Split into variable name and expression.
                 $ex = explode('=', $assignment, 2);
@@ -656,11 +656,11 @@ class qtype_formulas_variables {
                     continue;   // If empty assignment.
                 }
                 if (mycount($ex) != 2)
-                    throw new Exception(get_string('error_syntax', 'qtype_formulas'));
+                    throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                 $expression = trim($ex[1]);
                 // Check variable name format.
                 $nameindex = $this->get_variable_name_index($vstack, $name);
-                if ($nameindex === null)  throw new Exception(get_string('error_vars_name', 'qtype_formulas'));
+                if ($nameindex === null)  throw new Exception(get_string('error_vars_name', 'qtype_numericalrecit'));
                 // Check whether all variables name are defined before and then replacing them by the value.
                 $expression = $this->substitute_vname_by_variables($vstack, $expression);
 
@@ -679,7 +679,7 @@ class qtype_formulas_variables {
     private function evaluate_general_expression_substituted_recursively(&$vstack, $expression) {
         $expression = trim($expression);
         if (strlen($expression) == 0)     // Check whether expression is empty.
-            throw new Exception(get_string('error_subexpression_empty', 'qtype_formulas'));
+            throw new Exception(get_string('error_subexpression_empty', 'qtype_numericalrecit'));
         $curtop = $this->vstack_mark_current_top($vstack);
         while (true) {
             $result = $this->vstack_get_variable($vstack, $expression);
@@ -721,12 +721,12 @@ class qtype_formulas_variables {
         if ($expression[0] != '{')  return null;
         $bracket = $this->get_expressions_in_bracket($expression, 0, '{');
         if ($bracket === null)  throw new Exception('Unknown error: parse_algebraic_variable()');
-        if ($bracket->closeloc != strlen($expression) - 1)  throw new Exception(get_string('error_algebraic_var', 'qtype_formulas'));
+        if ($bracket->closeloc != strlen($expression) - 1)  throw new Exception(get_string('error_algebraic_var', 'qtype_numericalrecit'));
         $numelement = 0;
         $elements = array();
         foreach ($bracket->expressions as $e) {
             $res = $this->parse_fixed_range($vstack, $e);
-            if ($res === null)  throw new Exception(get_string('error_algebraic_var', 'qtype_formulas'));
+            if ($res === null)  throw new Exception(get_string('error_algebraic_var', 'qtype_numericalrecit'));
             $numelement += $res->numelement;
             $elements[] = $res->element;
         }
@@ -739,18 +739,18 @@ class qtype_formulas_variables {
         $res = $this->get_expressions_in_bracket($expression, 0, '[');
         if ($res == null)  return false;
         if (mycount($res->expressions) < 1 || mycount($res->expressions) > self::$listmaxsize)
-            throw new Exception(get_string('error_vars_array_size', 'qtype_formulas'));
+            throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
         $list = array();
         foreach ($res->expressions as $e)
             $list[] = $this->evaluate_general_expression_substituted_recursively($vstack, $e);
         $data = $this->get_previous_variable($vstack, $expression, $res->openloc);
         if ($data !== null) {   // If the square bracket has a variable before it.
             if ($data->var->type != 'ln' && $data->var->type != 'ls')
-                throw new Exception(get_string('error_vars_array_unsubscriptable', 'qtype_formulas'));
+                throw new Exception(get_string('error_vars_array_unsubscriptable', 'qtype_numericalrecit'));
             if ($list[0]->type != 'n' || mycount($list) > 1)
-                throw new Exception(get_string('error_vars_array_index_nonnumeric', 'qtype_formulas'));
+                throw new Exception(get_string('error_vars_array_index_nonnumeric', 'qtype_numericalrecit'));
             if ($list[0]->value < 0 || $list[0]->value >= mycount($data->var->value))
-                throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_formulas'));
+                throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
             $this->replace_middle($vstack, $expression, $data->startloc, $res->closeloc + 1, $data->var->type[1], $data->var->value[$list[0]->value]);
             return true;
         }
@@ -793,7 +793,7 @@ class qtype_formulas_variables {
             case 'fill':
                 if (!($sz == 2 && ($typestr == 'n,n' || $typestr == 'n,s') && is_string($values[0])))  break;
                 $N = intval($values[0]);  // Note that if $values[0]===string means that it is constant number.
-                if ($N < 1 || $N > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_formulas'));
+                if ($N < 1 || $N > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
                 $this->replace_middle($vstack, $expression, $l, $r, 'l'.$types[1], array_fill(0, $N, $values[1]));
                 return true;
             case 'len':
@@ -834,7 +834,7 @@ class qtype_formulas_variables {
                 foreach ($values[1] as $idx) {
                     $idx = intval($idx);
                     if ($idx >= 0 && $idx < mycount($values[0]))  $sub[] = $values[0][$idx];
-                    else throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_formulas'));
+                    else throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
                 }
                 $this->replace_middle($vstack, $expression, $l, $r, $types[0], $sub);
                 return true;
@@ -844,7 +844,7 @@ class qtype_formulas_variables {
                 foreach ($values[0] as $i => $idx) {
                     $idx = intval($idx);
                     if ($idx >= 0 && $idx < mycount($values[0]))  $sub[$idx] = $i;
-                    else throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_formulas'));
+                    else throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
                 }
                 $this->replace_middle($vstack, $expression, $l, $r, 'ln', $sub);
                 return true;
@@ -969,7 +969,7 @@ class qtype_formulas_variables {
             default:
                 return false;   // If no match, then the expression will be evaluated as a mathematical expression.
         }
-        throw new Exception(get_string('error_func_param', 'qtype_formulas', $data->value));
+        throw new Exception(get_string('error_func_param', 'qtype_numericalrecit', $data->value));
     }
 
     /**
@@ -988,7 +988,7 @@ class qtype_formulas_variables {
             // $data = $this->vstack_get_variable($vstacks[0], $splitted[$i]);
             $data = $vstacks[0]->all[$splitted[$i]];    // For optimization, bypassing function call.
             if ($data === null || ($data->type != 'n' && $data->type != $functype)) {
-                throw new Exception(get_string('error_eval_numerical', 'qtype_formulas'));
+                throw new Exception(get_string('error_eval_numerical', 'qtype_numericalrecit'));
             }
             if ($data->type == $functype) {    // If it is a function, put it back into the expression.
                 $splitted[$i] = $data->value;
@@ -1020,9 +1020,9 @@ class qtype_formulas_variables {
             try {
                 eval('$res = ' . implode(' ', $splitted) . ';');
             } catch (Throwable $t) {
-                throw new Exception(get_string('error_eval_numerical', 'qtype_formulas'));
+                throw new Exception(get_string('error_eval_numerical', 'qtype_numericalrecit'));
             }
-            if (!isset($res))  throw new Exception(get_string('error_eval_numerical', 'qtype_formulas'));
+            if (!isset($res))  throw new Exception(get_string('error_eval_numerical', 'qtype_numericalrecit'));
             $results[] = floatval($res);    // Make sure it is a number, not other data type such as bool.
         }
 
@@ -1060,7 +1060,7 @@ class qtype_formulas_variables {
                 return (object)array('openloc' => $firstopenloc, 'closeloc' => $i, 'expressions' => $expressions);
             }
         }
-        throw new Exception(get_string('error_vars_bracket_mismatch', 'qtype_formulas'));
+        throw new Exception(get_string('error_vars_bracket_mismatch', 'qtype_numericalrecit'));
     }
 
     // Get the variable immediately before the location $loc.
@@ -1294,15 +1294,15 @@ class qtype_formulas_variables {
         return $diffs;
     }
 
-    // Substitute the variable with numeric value in the list of algebraic formulas, it is used to show correct answer with random numeric value.
-    public function substitute_partial_formula(&$vars, $formulas) {
+    // Substitute the variable with numeric value in the list of algebraic numericalrecit, it is used to show correct answer with random numeric value.
+    public function substitute_partial_formula(&$vars, $numericalrecit) {
         $res = array();
-        for ($idx = 0; $idx < mycount($formulas); $idx++) {
-            if (!is_string($formulas[$idx]))  return null;  // Internal error for calling this function.
-            $formulas[$idx] = trim($formulas[$idx]);
-            $vstack = $this->get_formula_information($vars, $formulas[$idx]);
+        for ($idx = 0; $idx < mycount($numericalrecit); $idx++) {
+            if (!is_string($numericalrecit[$idx]))  return null;  // Internal error for calling this function.
+            $numericalrecit[$idx] = trim($numericalrecit[$idx]);
+            $vstack = $this->get_formula_information($vars, $numericalrecit[$idx]);
             if ($vstack === null || preg_match('/^[ )(^\/*+-]*$/', $vstack->remaining) == false)
-                throw new Exception(get_string('error_forbid_char', 'qtype_formulas'));
+                throw new Exception(get_string('error_forbid_char', 'qtype_numericalrecit'));
             $vstack = $this->replace_vstack_variables($vstack, $this->evalreplacelist);
 
             // Replace the variable with numeric value by the number.
@@ -1311,7 +1311,7 @@ class qtype_formulas_variables {
                 $data = $this->vstack_get_variable($vstack, $splitted[$i]);
                 if ($data->type == 'v') {
                     $tmp = $this->vstack_get_variable($vstack, $data->value);
-                    if ($tmp === null)  throw new Exception(get_string('error_vars_undefined', 'qtype_formulas', $data->value) . ' in substitute_partial_formula');
+                    if ($tmp === null)  throw new Exception(get_string('error_vars_undefined', 'qtype_numericalrecit', $data->value) . ' in substitute_partial_formula');
                     if ($tmp->type == 'n')  $data = $tmp;
                 }
                 $splitted[$i] = $data->value;
@@ -1344,14 +1344,14 @@ class qtype_formulas_variables {
                 // Simple parenthesis.
                 case '':
                     if (strlen($regs[4]) != 0 || strlen($regs[3]) == 0) {
-                        return get_string('illegalformulasyntax', 'qtype_formulas', $regs[0]);
+                        return get_string('illegalnumericalrecityntax', 'qtype_numericalrecit', $regs[0]);
                     }
                     break;
 
                 // Zero argument functions.
                 case 'pi':
                     if (strlen($regs[3]) != 0) {
-                        return get_string('functiontakesnoargs', 'qtype_formulas', $regs[2]);
+                        return get_string('functiontakesnoargs', 'qtype_numericalrecit', $regs[2]);
                     }
                     break;
 
@@ -1364,33 +1364,33 @@ class qtype_formulas_variables {
                         case 'octdec': case 'rad2deg': case 'sin': case 'sinh': case 'sqrt':
                         case 'tan': case 'tanh': case 'fact':
                     if (strlen($regs[4]) != 0 || strlen($regs[3]) == 0) {
-                        return get_string('functiontakesonearg', 'qtype_formulas', $regs[2]);
+                        return get_string('functiontakesonearg', 'qtype_numericalrecit', $regs[2]);
                     }
                     break;
 
                 // Functions that take one or two arguments.
                 case 'log': case 'round':
                     if (strlen($regs[5]) != 0 || strlen($regs[3]) == 0) {
-                        return get_string('functiontakesoneortwoargs', 'qtype_formulas', $regs[2]);
+                        return get_string('functiontakesoneortwoargs', 'qtype_numericalrecit', $regs[2]);
                     }
                     break;
 
                 // Functions that must have two arguments.
                 case 'atan2': case 'fmod': case 'pow': case 'ncr': case 'npr': case 'lcm': case 'gcd': case 'sigfig':
                     if (strlen($regs[5]) != 0 || strlen($regs[4]) == 0) {
-                        return get_string('functiontakestwoargs', 'qtype_formulas', $regs[2]);
+                        return get_string('functiontakestwoargs', 'qtype_numericalrecit', $regs[2]);
                     }
                     break;
 
                 // Functions that take two or more arguments.
                 case 'min': case 'max':
                     if (strlen($regs[4]) == 0) {
-                        return get_string('functiontakesatleasttwo', 'qtype_formulas', $regs[2]);
+                        return get_string('functiontakesatleasttwo', 'qtype_numericalrecit', $regs[2]);
                     }
                     break;
 
                 default:
-                    return get_string('unsupportedformulafunction', 'qtype_formulas', $regs[2]);
+                    return get_string('unsupportedformulafunction', 'qtype_numericalrecit', $regs[2]);
             }
 
             // Exchange the function call with '1' and then check for
@@ -1405,7 +1405,7 @@ class qtype_formulas_variables {
         }
 
         if (preg_match("~[^$safeoperatorchar.0-9eE]+~", $formula, $regs)) {
-            return get_string('illegalformulasyntax', 'qtype_formulas', $regs[0]);
+            return get_string('illegalnumericalrecityntax', 'qtype_numericalrecit', $regs[0]);
         } else {
             // Formula just might be valid.
             return false;

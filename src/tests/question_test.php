@@ -17,7 +17,7 @@
 /**
  * Unit tests for the OU multiple response question class.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright 2012 Jean-Michel Védrine
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,31 +27,31 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
-require_once($CFG->dirroot . '/question/type/formulas/tests/helper.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/tests/helper.php');
 
 /**
- * Unit tests for (some of) question/type/formulas/question.php.
+ * Unit tests for (some of) question/type/numericalrecit/question.php.
  *
  * @copyright  2008 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @group qtype_formulas
+ * @group qtype_numericalrecit
  */
-class qtype_formulas_question_test extends basic_testcase {
+class qtype_numericalrecit_question_test extends basic_testcase {
 
     /**
-     * @return qtype_formulas_question the requested question object.
+     * @return qtype_numericalrecit_question the requested question object.
      */
-    protected function get_test_formulas_question($which = null) {
-        return test_question_maker::make_question('formulas', $which);
+    protected function get_test_numericalrecit_question($which = null) {
+        return test_question_maker::make_question('numericalrecit', $which);
     }
 
     public function test_get_expected_data_test0() {
-        $q = $this->get_test_formulas_question('test0');
+        $q = $this->get_test_numericalrecit_question('test0');
         $this->assertEquals(array('0_0' => PARAM_RAW), $q->get_expected_data());
     }
 
     public function test_get_expected_data_test1() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $this->assertEquals(array('0_0' => PARAM_RAW,
                                   '1_0' => PARAM_RAW,
                                   '2_0' => PARAM_RAW),
@@ -59,7 +59,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_expected_data_test2() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
         $this->assertEquals(array('0_' => PARAM_RAW,
                                   '1_0' => PARAM_RAW,
                                   '1_1' => PARAM_RAW,
@@ -69,7 +69,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_is_complete_response_test0() {
-        $q = $this->get_test_formulas_question('test0');
+        $q = $this->get_test_numericalrecit_question('test0');
 
         $this->assertFalse($q->is_complete_response(array()));
         $this->assertTrue($q->is_complete_response(array('0_0' => '0')));
@@ -78,7 +78,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_is_complete_response_test1() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
 
         $this->assertFalse($q->is_complete_response(array()));
         $this->assertFalse($q->is_complete_response(array('0_0' => '1')));
@@ -87,7 +87,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_question_summary_test0() {
-        $q = $this->get_test_formulas_question('test0');
+        $q = $this->get_test_numericalrecit_question('test0');
         $q->start_attempt(new question_attempt_step(), 1);
         $this->assertEquals(
                 "Minimal question : For a minimal question,"
@@ -97,14 +97,14 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_question_summary_test1() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
         $this->assertEquals("Multiple parts : --This is first part.--This is second part.--This is third part.\n",
                 $q->get_question_summary());
     }
 
     public function test_get_question_summary_test2() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $globalvars = $q->get_global_variables();
@@ -120,14 +120,14 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_correct_response_test0() {
-        $q = $this->get_test_formulas_question('test0');
+        $q = $this->get_test_numericalrecit_question('test0');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $this->assertEquals(array('0_0' => '5'), $q->get_correct_response());
     }
 
     public function test_get_correct_response_test1() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $this->assertEquals(array('0_0' => '5', '1_0' => '6', '2_0' => '7'), $q->get_correct_response());
@@ -138,7 +138,7 @@ class qtype_formulas_question_test extends basic_testcase {
 
 
     public function test_get_correct_response_test2() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $globalvars = $q->get_global_variables();
@@ -157,7 +157,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_correct_response_test3() {
-        $q = $this->get_test_formulas_question('test5');
+        $q = $this->get_test_numericalrecit_question('test5');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $this->assertEquals(array('0_0' => "1"),
@@ -166,7 +166,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_is_same_response_for_part_test2() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $this->assertTrue($q->is_same_response_for_part('1',
@@ -178,7 +178,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_grade_parts_that_can_be_graded_test1() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_0' => '5', '1_0' => '6', '2_0' => '8');
@@ -195,7 +195,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_grade_parts_that_can_be_graded_test2() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_0' => '5', '1_0' => '6', '2_0' => '7');
@@ -212,7 +212,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_grade_parts_that_can_be_graded_test3() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_0' => '5', '1_0' => '6', '2_0' => '7');
@@ -228,7 +228,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_grade_parts_that_can_be_graded_test4() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_0' => '5', '1_0' => '6', '2_0' => '7');
@@ -245,7 +245,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_grade_parts_that_can_be_graded_test5() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_0' => '5', '1_0' => '', '2_0' => '');
@@ -260,25 +260,25 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_get_parts_and_weights_test0() {
-        $q = $this->get_test_formulas_question('test0');
+        $q = $this->get_test_numericalrecit_question('test0');
 
         $this->assertEquals(array('0' => 1), $q->get_parts_and_weights());
     }
 
     public function test_get_parts_and_weights_test1() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
 
         $this->assertEquals(array('0' => 1 / 3, '1' => 1 / 3, '2' => 1 / 3), $q->get_parts_and_weights());
     }
 
     public function test_get_parts_and_weights_test2() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
 
         $this->assertEquals(array('0' => .25, '1' => .25, '2' => .25, '3' => .25), $q->get_parts_and_weights());
     }
 
     public function test_compute_final_grade_test0() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $responses = array(0 => array('0_0' => '5', '1_0' => '7', '2_0' => '6'),
@@ -291,7 +291,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_compute_final_grade_test1() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $responses = array(0 => array('0_0' => '5', '1_0' => '7', '2_0' => '6'),
@@ -303,19 +303,19 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_part_has_multichoice_coordinate0() {
-        $p = new qtype_formulas_part;
+        $p = new qtype_numericalrecit_part;
         $p->subqtext = '{_0} - {_1:choices} - {_2}';
         $this->assertTrue($p->part_has_multichoice_coordinate());
     }
 
     public function test_part_has_multichoice_coordinate1() {
-        $p = new qtype_formulas_part;
+        $p = new qtype_numericalrecit_part;
         $p->subqtext = '{_0} - {_1} - {_2}';
         $this->assertFalse($p->part_has_multichoice_coordinate());
     }
 
     public function test_summarise_response_test0() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_0' => '5', '1_0' => '6', '2_0' => '7');
@@ -330,7 +330,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_summarise_response_test1() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
         $q->start_attempt(new question_attempt_step(), 1);
 
         $response = array('0_' => "30m/s", '1_0' => "20", '1_1' => 'm/s', '2_0' => "40", '3_0' => "50");
@@ -347,7 +347,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_is_complete_response_test3() {
-        $q = $this->get_test_formulas_question('test3');
+        $q = $this->get_test_numericalrecit_question('test3');
 
         $this->assertFalse($q->is_complete_response(array()));
         $this->assertTrue($q->is_complete_response(array('0_0' => '0')));
@@ -356,7 +356,7 @@ class qtype_formulas_question_test extends basic_testcase {
     }
 
     public function test_is_gradable_response_test3() {
-        $q = $this->get_test_formulas_question('test3');
+        $q = $this->get_test_numericalrecit_question('test3');
 
         $this->assertFalse($q->is_gradable_response(array()));
         $this->assertTrue($q->is_gradable_response(array('0_0' => '0')));

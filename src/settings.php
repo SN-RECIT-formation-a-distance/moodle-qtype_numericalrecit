@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -24,27 +24,27 @@ defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
     // Use tooltip or not to display correct answer.
-    $settings->add(new admin_setting_configcheckbox('qtype_formulas/usepopup',
-            new lang_string('settingusepopup', 'qtype_formulas'),
-            new lang_string('settingusepopup_desc', 'qtype_formulas'), 0));
+    $settings->add(new admin_setting_configcheckbox('qtype_numericalrecit/usepopup',
+            new lang_string('settingusepopup', 'qtype_numericalrecit'),
+            new lang_string('settingusepopup_desc', 'qtype_numericalrecit'), 0));
     // Default answer type.
-    $settings->add(new admin_setting_configselect('qtype_formulas/defaultanswertype',
-            new lang_string('defaultanswertype', 'qtype_formulas'),
-            new lang_string('defaultanswertype_desc', 'qtype_formulas'), 0,
-            array(0 => new lang_string('number', 'qtype_formulas'),
-                    10 => new lang_string('numeric', 'qtype_formulas'),
-                        100 => new lang_string('numerical_formula', 'qtype_formulas'),
-                        1000 => new lang_string('algebraic_formula', 'qtype_formulas'))));
+    $settings->add(new admin_setting_configselect('qtype_numericalrecit/defaultanswertype',
+            new lang_string('defaultanswertype', 'qtype_numericalrecit'),
+            new lang_string('defaultanswertype_desc', 'qtype_numericalrecit'), 0,
+            array(0 => new lang_string('number', 'qtype_numericalrecit'),
+                    10 => new lang_string('numeric', 'qtype_numericalrecit'),
+                        100 => new lang_string('numerical_formula', 'qtype_numericalrecit'),
+                        1000 => new lang_string('algebraic_formula', 'qtype_numericalrecit'))));
     // Default correctness.
-    $settings->add(new admin_setting_configtext('qtype_formulas/defaultcorrectness',
-        get_string('defaultcorrectness', 'qtype_formulas'),
-        get_string('defaultcorrectness_desc', 'qtype_formulas'), '_relerr < 0.01'));
+    $settings->add(new admin_setting_configtext('qtype_numericalrecit/defaultcorrectness',
+        get_string('defaultcorrectness', 'qtype_numericalrecit'),
+        get_string('defaultcorrectness_desc', 'qtype_numericalrecit'), '_relerr < 0.01'));
     // Default answermark.
-    $settings->add(new admin_setting_configtext('qtype_formulas/defaultanswermark',
-        get_string('defaultanswermark', 'qtype_formulas'),
-        get_string('defaultanswermark_desc', 'qtype_formulas'), 1));
+    $settings->add(new admin_setting_configtext('qtype_numericalrecit/defaultanswermark',
+        get_string('defaultanswermark', 'qtype_numericalrecit'),
+        get_string('defaultanswermark_desc', 'qtype_numericalrecit'), 1));
     // Default unit penalty.
-    $settings->add(new admin_setting_configtext('qtype_formulas/defaultunitpenalty',
-        get_string('defaultunitpenalty', 'qtype_formulas'),
-        get_string('defaultunitpenalty_desc', 'qtype_formulas'), 1));
+    $settings->add(new admin_setting_configtext('qtype_numericalrecit/defaultunitpenalty',
+        get_string('defaultunitpenalty', 'qtype_numericalrecit'),
+        get_string('defaultunitpenalty_desc', 'qtype_numericalrecit'), 1));
 }

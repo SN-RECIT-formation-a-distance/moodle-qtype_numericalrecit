@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Test helper code for the formulas question type.
+ * Test helper code for the numericalrecit question type.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2012 Jean-Michel Védrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,19 +25,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Test helper class for the formulas question type.
+ * Test helper class for the numericalrecit question type.
  *
  * @copyright  2012 Jean-Michel Védrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_test_helper extends question_test_helper {
+class qtype_numericalrecit_test_helper extends question_test_helper {
     const DEFAULT_CORRECT_FEEDBACK          = '<p>Correct answer, well done.</p>';
     const DEFAULT_PARTIALLYCORRECT_FEEDBACK = '<p>Your answer is partially correct.</p>';
     const DEFAULT_INCORRECT_FEEDBACK        = '<p>Incorrect answer.</p>';
 
     public function get_test_questions() {
         return array(
-            'test0', // Minimal formulas question : one part, not randomised (answer = 5),
+            'test0', // Minimal numericalrecit question : one part, not randomised (answer = 5),
             'test1', // 3 parts, not randomised. (answers = 5, 6, 7),
             'test2', // 4 parts, separated and combined unit field, not ramdomized,
             'test3', // one part, not randomized, answer = 0 (to test problem with 0 as answer,
@@ -47,22 +47,22 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * Does the basical initialisation of a new formulas question that all the test
+     * Does the basical initialisation of a new numericalrecit question that all the test
      * questions will need.
-     * @return qtype_formulas_question the new question.
+     * @return qtype_numericalrecit_question the new question.
      */
-    protected static function make_a_formulas_question() {
-        question_bank::load_question_definition_classes('formulas');
+    protected static function make_a_numericalrecit_question() {
+        question_bank::load_question_definition_classes('numericalrecit');
 
-        $q = new qtype_formulas_question();
+        $q = new qtype_numericalrecit_question();
         test_question_maker::initialise_a_question($q);
-        $q->qtype = question_bank::get_qtype('formulas');
+        $q->qtype = question_bank::get_qtype('numericalrecit');
         $q->contextid = context_system::instance()->id;
         $q->varsrandom = '';
         $q->varsglobal = '';
         $q->shownumcorrect = 0;
         $q->answernumbering = 'abc';
-        $q->qv = new qtype_formulas_variables();
+        $q->qv = new qtype_numericalrecit_variables();
         $q->penalty = 0.2; // The default.
         test_question_maker::set_standard_combined_feedback_fields($q);
         $q->numpart = 0;   // This is of course invalid but should be changed by all tests.
@@ -74,10 +74,10 @@ class qtype_formulas_test_helper extends question_test_helper {
         return $q;
     }
 
-    protected static function make_a_formulas_part() {
-        question_bank::load_question_definition_classes('formulas');
+    protected static function make_a_numericalrecit_part() {
+        question_bank::load_question_definition_classes('numericalrecit');
 
-        $p = new qtype_formulas_part();
+        $p = new qtype_numericalrecit_part();
         $p->id = 0;
         $p->placeholder = '';
         $p->answermark = 1;
@@ -107,10 +107,10 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * @return qtype_formulas_question the question from the test0.xml file.
+     * @return qtype_numericalrecit_question the question from the test0.xml file.
      */
-    public static function make_formulas_question_test0() {
-        $q = self::make_a_formulas_question();
+    public static function make_numericalrecit_question_test0() {
+        $q = self::make_a_numericalrecit_question();
 
         $q->name = 'test-0';
         $q->questiontext = '<p>Minimal question : For a minimal question, you must define a part with'
@@ -122,7 +122,7 @@ class qtype_formulas_test_helper extends question_test_helper {
                                   1 => '');
         $q->numpart = 1;
         $q->defaultmark = 2;
-        $p = self::make_a_formulas_part();
+        $p = self::make_a_numericalrecit_part();
         $p->id = 14;
         $p->answermark = 2;
         $p->answer = '5';
@@ -132,11 +132,11 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * @return qtype_formulas_question with 3 parts.
+     * @return qtype_numericalrecit_question with 3 parts.
      * this version is non randomized to ease testing
      */
-    public static function make_formulas_question_test1() {
-        $q = self::make_a_formulas_question();
+    public static function make_numericalrecit_question_test1() {
+        $q = self::make_a_numericalrecit_question();
 
         $q->name = 'test-1';
         $q->questiontext = '<p>Multiple parts : --{#1}--{#2}--{#3}</p>';
@@ -147,7 +147,7 @@ class qtype_formulas_test_helper extends question_test_helper {
                 3 => '</p>');
         $q->numpart = 3;
         $q->defaultmark = 6;
-        $p0 = self::make_a_formulas_part();
+        $p0 = self::make_a_numericalrecit_part();
         $p0->placeholder = '#1';
         $p0->id = 14;
         $p0->answermark = 2;
@@ -157,7 +157,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p0->partpartiallycorrectfb = 'Part 1 partially correct feedback.';
         $p0->partincorrectfb = 'Part 1 incorrect feedback.';
         $q->parts[0] = $p0;
-        $p1 = self::make_a_formulas_part();
+        $p1 = self::make_a_numericalrecit_part();
         $p1->placeholder = '#2';
         $p1->id = 15;
         $p1->partindex = 1;
@@ -168,7 +168,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p1->partpartiallycorrectfb = 'Part 2 partially correct feedback.';
         $p1->partincorrectfb = 'Part 2 incorrect feedback.';
         $q->parts[1] = $p1;
-        $p2 = self::make_a_formulas_part();
+        $p2 = self::make_a_numericalrecit_part();
         $p2->placeholder = '#3';
         $p2->id = 16;
         $p2->partindex = 2;
@@ -184,10 +184,10 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * Gets the question form data for the test1 formulas question
+     * Gets the question form data for the test1 numericalrecit question
      * @return stdClass
      */
-    public function get_formulas_question_form_data_test1() {
+    public function get_numericalrecit_question_form_data_test1() {
         $form = new stdClass();
 
         $form->name = 'test-1';
@@ -252,11 +252,11 @@ class qtype_formulas_test_helper extends question_test_helper {
         return $form;
     }
     /**
-     * @return qtype_formulas_question the question from the test1.xml file.
+     * @return qtype_numericalrecit_question the question from the test1.xml file.
      * Non randomized version for Behat tests.
      */
-    public static function make_formulas_question_test2() {
-        $q = self::make_a_formulas_question();
+    public static function make_numericalrecit_question_test2() {
+        $q = self::make_a_numericalrecit_question();
 
         $q->name = 'test-2';
         $q->questiontext = '<p>This question shows different display methods of the answer and unit box.</p>';
@@ -271,7 +271,7 @@ class qtype_formulas_test_helper extends question_test_helper {
                 );
         $q->varsrandom = '';
         $q->varsglobal = 'v = 40;dt = 3;s = v*dt;';
-        $p0 = self::make_a_formulas_part();
+        $p0 = self::make_a_numericalrecit_part();
         $p0->id = 14;
         $p0->partindex = 0;
         $p0->answermark = 2;
@@ -279,7 +279,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p0->answer = 'v';
         $p0->postunit = 'm/s';
         $q->parts[0] = $p0;
-        $p1 = self::make_a_formulas_part();
+        $p1 = self::make_a_numericalrecit_part();
         $p1->id = 15;
         $p1->partindex = 1;
         $p1->answermark = 2;
@@ -287,7 +287,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p1->answer = 'v';
         $p1->postunit = 'm/s';
         $q->parts[1] = $p1;
-        $p2 = self::make_a_formulas_part();
+        $p2 = self::make_a_numericalrecit_part();
         $p2->id = 16;
         $p2->partindex = 2;
         $p2->answermark = 2;
@@ -295,7 +295,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p2->answer = 'v';
         $p2->postunit = '';
         $q->parts[2] = $p2;
-        $p3 = self::make_a_formulas_part();
+        $p3 = self::make_a_numericalrecit_part();
         $p3->id = 17;
         $p3->partindex = 3;
         $p3->answermark = 2;
@@ -311,13 +311,13 @@ class qtype_formulas_test_helper extends question_test_helper {
      * Get the question data, as it would be loaded by get_question_options.
      * @return object
      */
-    public static function get_formulas_question_data_test2() {
+    public static function get_numericalrecit_question_data_test2() {
         global $USER;
 
         $qdata = new stdClass();
         test_question_maker::initialise_question_data($qdata);
 
-        $qdata->qtype = 'formulas';
+        $qdata->qtype = 'numericalrecit';
         $qdata->name = 'test-2';
         $qdata->questiontext = '<p>This question shows different display methods of the answer and unit box.</p>';
         $qdata->questiontextformat = FORMAT_HTML;
@@ -472,10 +472,10 @@ class qtype_formulas_test_helper extends question_test_helper {
         return $qdata;
     }
     /**
-     * Gets the question form data for a formulas question
+     * Gets the question form data for a numericalrecit question
      * @return stdClass
      */
-    public function get_formulas_question_form_data_test2() {
+    public function get_numericalrecit_question_form_data_test2() {
         $form = new stdClass();
 
         $form->name = 'test-2';
@@ -606,10 +606,10 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * @return qtype_formulas_question the question with 0 as answer.
+     * @return qtype_numericalrecit_question the question with 0 as answer.
      */
-    public static function make_formulas_question_test3() {
-        $q = self::make_a_formulas_question();
+    public static function make_numericalrecit_question_test3() {
+        $q = self::make_a_numericalrecit_question();
 
         $q->name = 'test-3';
         $q->questiontext = '<p>This question has 0.0 as answer to test problem when answer is equal to 0.</p>';
@@ -619,7 +619,7 @@ class qtype_formulas_test_helper extends question_test_helper {
                 1 => '');
         $q->numpart = 1;
         $q->defaultmark = 2;
-        $p = self::make_a_formulas_part();
+        $p = self::make_a_numericalrecit_part();
         $p->id = 17;
         $p->answermark = 2;
         $p->answer = '0';
@@ -629,11 +629,11 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * @return qtype_formulas_question the question from the test1.xml file.
+     * @return qtype_numericalrecit_question the question from the test1.xml file.
      * Randomized version.
      */
-    public static function make_formulas_question_test4() {
-        $q = self::make_a_formulas_question();
+    public static function make_numericalrecit_question_test4() {
+        $q = self::make_a_numericalrecit_question();
 
         $q->name = 'test-4';
         $q->questiontext = '<p>This question shows different display methods of the answer and unit box.</p>';
@@ -648,7 +648,7 @@ class qtype_formulas_test_helper extends question_test_helper {
                 );
         $q->varsrandom = 'v = {20:100:10}; dt = {2:6};';
         $q->varsglobal = 's = v*dt;';
-        $p0 = self::make_a_formulas_part();
+        $p0 = self::make_a_numericalrecit_part();
         $p0->id = 18;
         $p0->partindex = 0;
         $p0->answermark = 2;
@@ -656,7 +656,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p0->answer = 'v';
         $p0->postunit = 'm/s';
         $q->parts[0] = $p0;
-        $p1 = self::make_a_formulas_part();
+        $p1 = self::make_a_numericalrecit_part();
         $p1->id = 19;
         $p1->partindex = 1;
         $p1->answermark = 2;
@@ -664,7 +664,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p1->answer = 'v';
         $p1->postunit = 'm/s';
         $q->parts[1] = $p1;
-        $p2 = self::make_a_formulas_part();
+        $p2 = self::make_a_numericalrecit_part();
         $p2->id = 20;
         $p2->partindex = 2;
         $p2->answermark = 2;
@@ -672,7 +672,7 @@ class qtype_formulas_test_helper extends question_test_helper {
         $p2->answer = 'v';
         $p2->postunit = '';
         $q->parts[2] = $p2;
-        $p3 = self::make_a_formulas_part();
+        $p3 = self::make_a_numericalrecit_part();
         $p3->id = 21;
         $p3->partindex = 3;
         $p3->answermark = 2;
@@ -685,10 +685,10 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * Gets the question form data for a formulas question
+     * Gets the question form data for a numericalrecit question
      * @return stdClass
      */
-    public function get_formulas_question_form_data_test4() {
+    public function get_numericalrecit_question_form_data_test4() {
         $form = new stdClass();
 
         $form->name = 'test-4';
@@ -759,10 +759,10 @@ class qtype_formulas_test_helper extends question_test_helper {
     }
 
     /**
-     * @return qtype_formulas_question with a multichoice answer.
+     * @return qtype_numericalrecit_question with a multichoice answer.
      */
-    public static function make_formulas_question_test5() {
-        $q = self::make_a_formulas_question();
+    public static function make_numericalrecit_question_test5() {
+        $q = self::make_a_numericalrecit_question();
 
         $q->name = 'test-5';
         $q->questiontext = '<p>This question has a multichoice answer.</p>';
@@ -772,7 +772,7 @@ class qtype_formulas_test_helper extends question_test_helper {
                                   1 => '');
         $q->numpart = 1;
         $q->defaultmark = 2;
-        $p = self::make_a_formulas_part();
+        $p = self::make_a_numericalrecit_part();
         $p->id = 14;
         $p->answermark = 1;
         $p->answer = '1';

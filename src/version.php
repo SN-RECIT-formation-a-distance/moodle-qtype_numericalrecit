@@ -15,17 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for the formulas question type.
+ * Version information for the numericalrecit question type.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'qtype_formulas';
-$plugin->version   = 2020061900;
+$plugin->component = 'qtype_numericalrecit';
+$plugin->version   = 2021031600;
 
 $plugin->cron      = 0;
 $plugin->requires  = 2015111600;

@@ -17,19 +17,19 @@
 /**
  * Privacy main class.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2018 Jean-Michel vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace qtype_formulas\privacy;
+namespace qtype_numericalrecit\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy main class.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2018 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

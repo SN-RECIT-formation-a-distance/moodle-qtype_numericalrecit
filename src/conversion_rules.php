@@ -27,8 +27,8 @@ class unit_conversion_rules {
 
     // Initialize the internal conversion rule.
     public function __construct() {
-        $this->basicunitconversionrule[0] = array(get_string('none', 'qtype_formulas'), '');
-        $this->basicunitconversionrule[1] = array(get_string('commonsiunit', 'qtype_formulas'), '
+        $this->basicunitconversionrule[0] = array(get_string('none', 'qtype_numericalrecit'), '');
+        $this->basicunitconversionrule[1] = array(get_string('commonsiunit', 'qtype_numericalrecit'), '
 m: k c d m u n p f;
 s: m u n p f;
 g: k m u n p f;

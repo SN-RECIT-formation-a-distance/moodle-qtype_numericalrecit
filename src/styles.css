@@ -1,24 +1,24 @@
-.que.formulas .formulas_input_warning_outer {
+.que.numericalrecit .numericalrecit_input_warning_outer {
 
     display: inline;
     position: absolute;
     z-index: 1;
 }
 
-.que.formulas .formulas_input_warning {
+.que.numericalrecit .numericalrecit_input_warning {
     background: transparent;
     left: -1.3em;
     position: absolute;
     top: 0.3em;
 }
 
-.que.formulas .formulas_input_info_outer {
+.que.numericalrecit .numericalrecit_input_info_outer {
     display: inline;
     position: absolute;
     z-index: 2;
 }
 
-.que.formulas .formulas_input_info {
+.que.numericalrecit .numericalrecit_input_info {
     background-color: #eef;
     border: 1px solid #88c;
     left: 0;
@@ -27,138 +27,138 @@
     width: 150px;
 }
 
-.que.formulas .formulas_input_info_title {
+.que.numericalrecit .numericalrecit_input_info_title {
     padding: 2px;
 }
 
-.que.formulas .formulas_input_info_interpretation {
+.que.numericalrecit .numericalrecit_input_info_interpretation {
     border-top: 1px solid #88c;
     padding: 2px;
 }
 
-.que.formulas .formulas_input_info_interpretation_incorrect {
+.que.numericalrecit .numericalrecit_input_info_interpretation_incorrect {
     border-top: 1px solid #88c;
     color: #bbb;
     padding: 2px;
 }
 
-.que.formulas .formulas_unit {
+.que.numericalrecit .numericalrecit_unit {
     margin: 0 0 0 0;
     width: 40px;
 }
 
-.que.formulas .formulas_number {
+.que.numericalrecit .numericalrecit_number {
     margin: 0 0 0 0;
     width: 40px;
 }
 
-.que.formulas .formulas_number_unit {
+.que.numericalrecit .numericalrecit_number_unit {
     margin: 0 0 0 0;
     width: 80px;
 }
 
-.que.formulas .formulas_numeric {
+.que.numericalrecit .numericalrecit_numeric {
     margin: 0 0 0 0;
     width: 100px;
 }
 
-.que.formulas .formulas_numeric_unit {
+.que.numericalrecit .numericalrecit_numeric_unit {
     margin: 0 0 0 0;
     width: 200px;
 }
 
-.que.formulas .formulas_numerical_formula {
+.que.numericalrecit .numericalrecit_numerical_formula {
     margin: 0 0 0 0;
     width: 200px;
 }
 
-.que.formulas .formulas_numerical_formula_unit {
+.que.numericalrecit .numericalrecit_numerical_formula_unit {
     margin: 0 0 0 0;
     width: 300px;
 }
 
-.que.formulas .formulas_algebraic_formula {
+.que.numericalrecit .numericalrecit_algebraic_formula {
     margin: 0 0 0 0;
     width: 200px;
 }
 
-.que.formulas .formulas_algebraic_formula_unit {
+.que.numericalrecit .numericalrecit_algebraic_formula_unit {
     margin: 0 0 0 0;
     width: 300px;
 }
 
-.que.formulas .formulation .formulaspart {
+.que.numericalrecit .formulation .numericalrecitpart {
     display: block;
     margin: 0 0 1.2em 0;
     padding-bottom: 0;
 }
 
-.que.formulas .formulation .formulas_menu {
+.que.numericalrecit .formulation .numericalrecit_menu {
     display: inline;
     margin: 0 0 1.2em 0;
     padding-bottom: 0;
 }
 
-.que.formulas .multichoice_answer div.r0,
-.que.formulas .multichoice_answer div.r1 {
+.que.numericalrecit .multichoice_answer div.r0,
+.que.numericalrecit .multichoice_answer div.r1 {
     padding: 0.3em 0 0.3em 25px;
     text-indent: -25px;
 }
 
 
-.que.formulas .formulas_mark {
+.que.numericalrecit .numericalrecit_mark {
     display: inline;
 }
 
-.que.formulas .formulas_grade {
+.que.numericalrecit .numericalrecit_grade {
     font-size: 0.8em;
 }
 
-.que.formulas .formulation .formulaspartfeedback,
-.que.formulas .formulation .formulaspartcorrectanswer,
-.que.formulas .formulation .formulaslocalfeedback {
+.que.numericalrecit .formulation .numericalrecitpartfeedback,
+.que.numericalrecit .formulation .numericalrecitpartcorrectanswer,
+.que.numericalrecit .formulation .numericalrecitlocalfeedback {
     padding-top: 6px;
 }
 
-.que.formulas .formulation .formulaspartoutcome {
+.que.numericalrecit .formulation .numericalrecitpartoutcome {
     background: #fff3bf;
     color: black;
     margin: 0.2em -0.2em 0.5em;
     padding: 0.2em;
 }
 
-.que.formulas .formulation .formulaspartfeedback .correct,
-.que.formulas .formulation .formulaspartfeedback .partiallycorrect,
-.que.formulas .formulation .formulaspartfeedback .incorrect {
+.que.numericalrecit .formulation .numericalrecitpartfeedback .correct,
+.que.numericalrecit .formulation .numericalrecitpartfeedback .partiallycorrect,
+.que.numericalrecit .formulation .numericalrecitpartfeedback .incorrect {
     background: transparent;
 }
 
 /* Styles for the editing form. */
-body#page-question-type-formulas .formulas_correctness_show {
+body#page-question-type-numericalrecit .numericalrecit_correctness_show {
     display: inline;
 }
 
-body#page-question-type-formulas .formulas_input_warning_outer {
+body#page-question-type-numericalrecit .numericalrecit_input_warning_outer {
 
     display: inline;
     position: absolute;
     z-index: 1;
 }
 
-body#page-question-type-formulas .formulas_input_warning {
+body#page-question-type-numericalrecit .numericalrecit_input_warning {
     background: transparent;
     left: -1.3em;
     position: absolute;
     top: 0.3em;
 }
 
-body#page-question-type-formulas .formulas_input_info_outer {
+body#page-question-type-numericalrecit .numericalrecit_input_info_outer {
     display: inline;
     position: absolute;
     z-index: 2;
 }
 
-body#page-question-type-formulas .formulas_input_info {
+body#page-question-type-numericalrecit .numericalrecit_input_info {
     background-color: #eef;
     border: 1px solid #88c;
     left: 0;
@@ -167,25 +167,32 @@ body#page-question-type-formulas .formulas_input_info {
     width: 150px;
 }
 */
-body#page-question-type-formulas .formulas_input_info_title {
+body#page-question-type-numericalrecit .numericalrecit_input_info_title {
     padding: 2px;
 }
 
-body#page-question-type-formulas .formulas_input_info_interpretation {
+body#page-question-type-numericalrecit .numericalrecit_input_info_interpretation {
     border-top: 1px solid #88c;
     padding: 2px;
 }
 
-body#page-question-type-formulas .formulas_input_info_interpretation_incorrect {
+body#page-question-type-numericalrecit .numericalrecit_input_info_interpretation_incorrect {
     border-top: 1px solid #88c;
     color: #bbb;
     padding: 2px;
 }
 
 /* RTL hacks */
-#page-question-type-formulas #id_varsrandom,
-#page-question-type-formulas #id_varsglobal {
+#page-question-type-numericalrecit #id_varsrandom,
+#page-question-type-numericalrecit #id_varsglobal {
     height: 80px;
     direction: ltr;
     text-align: left;
+}
+
+.mark_r {
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
 }

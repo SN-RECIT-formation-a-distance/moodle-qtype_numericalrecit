@@ -15,35 +15,35 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Moodle formulas question definition class.
+ * Moodle numericalrecit question definition class.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2010-2011 Hon Wai, Lau
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/question/type/formulas/questiontype.php');
-require_once($CFG->dirroot . '/question/type/formulas/variables.php');
-require_once($CFG->dirroot . '/question/type/formulas/answer_unit.php');
-require_once($CFG->dirroot . '/question/type/formulas/conversion_rules.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/questiontype.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/variables.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/answer_unit.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/conversion_rules.php');
 require_once($CFG->dirroot . '/question/behaviour/adaptivemultipart/behaviour.php');
 
 /**
- * Base class for formulas questions.
+ * Base class for numericalrecit questions.
  *
  * @copyright  2010-2011 Hon Wai, Lau
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_question extends question_graded_automatically_with_countback
+class qtype_numericalrecit_question extends question_graded_automatically_with_countback
         implements question_automatically_gradable_with_multiple_parts {
     /**
-     * @var int: number of formulas_parts for the question.
+     * @var int: number of numericalrecit_parts for the question.
      */
     public $numpart;
     /**
-     * @var array of qtype_formulas_part, the $numpart parts of the question.
+     * @var array of qtype_numericalrecit_part, the $numpart parts of the question.
      */
     public $parts = array();
     /**
@@ -61,7 +61,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
     public $varsrandom;
     /** global variables serialized as string (as saved in database) */
     public $varsglobal;
-    /** qtype_formulas_variables */
+    /** qtype_numericalrecit_variables */
     public $qv;
     /** instancied random variables  */
     public $randomsvars;
@@ -69,10 +69,12 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
     public $randomsvarstext;
 
     public function make_behaviour(question_attempt $qa, $preferredbehaviour) {
-        if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
+       /* if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
             return question_engine::make_behaviour('adaptivemultipart', $qa, $preferredbehaviour);
         }
-        return parent::make_behaviour($qa, $preferredbehaviour);
+        return parent::make_behaviour($qa, $preferredbehaviour);*/
+        
+        return question_engine::make_behaviour('manualgraded', $qa, $preferredbehaviour);
     }
     /**
      * What data may be included in the form submission when a student enter a response.
@@ -89,6 +91,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
      */
     public function get_expected_data() {
         $expected = array();
+        $expected['stepn'] = question_attempt::PARAM_RAW_FILES;
         foreach ($this->parts as $part) {
             $expected += $part->part_get_expected_data();
         }
@@ -161,19 +164,19 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
      *      parts of the question do not need to be cleaned, and student input does.
      * @return string the text formatted for output by format_text.
      */
-    public function formulas_format_text($vars, $text, $format, $qa, $component, $filearea, $itemid,
+    public function numericalrecit_format_text($vars, $text, $format, $qa, $component, $filearea, $itemid,
             $clean = false) {
         return $this->format_text($this->qv->substitute_variables_in_text($vars, $text),
                  $format, $qa, $component, $filearea, $itemid, $clean);
     }
 
     /**
-     * This has to be a formulas-specific method
+     * This has to be a numericalrecit-specific method
      * so that global variables are replaced by their values.
      */
     public function format_generalfeedback($qa) {
         $globalvars = $this->get_global_variables();
-        return $this->formulas_format_text($globalvars, $this->generalfeedback, $this->generalfeedbackformat,
+        return $this->numericalrecit_format_text($globalvars, $this->generalfeedback, $this->generalfeedbackformat,
                 $qa, 'question', 'generalfeedback', $this->id, false);
     }
 
@@ -452,7 +455,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
         if ($this->is_complete_response($response)) {
             return '';
         }
-        return get_string('pleaseputananswer', 'qtype_formulas');
+        return get_string('pleaseputananswer', 'qtype_numericalrecit');
     }
 
     /**
@@ -489,7 +492,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
     public function get_correct_responses_individually($part) {
         try {
             $res = $this->get_evaluated_answer($part);
-            // If the answer is algebraic formulas (i.e. string), then replace the variable with numeric value by their number.
+            // If the answer is algebraic numericalrecit (i.e. string), then replace the variable with numeric value by their number.
             $localvars = $this->get_local_variables($part);
             if (is_string($res[0])) {
                 $res = $this->qv->substitute_partial_formula($localvars, $res);
@@ -657,7 +660,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
         $vars = $this->qv->evaluate_assignments($vars, $part->vars2);
         $correctness = $this->qv->evaluate_general_expression($vars, $part->correctness);
         if ($correctness->type != 'n') {
-            throw new Exception(get_string('error_criterion', 'qtype_formulas'));
+            throw new Exception(get_string('error_criterion', 'qtype_numericalrecit'));
         }
 
         // Step 8: Restrict the correctness value within 0 and 1 (inclusive). Also, all non-finite numbers are incorrect.
@@ -746,8 +749,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
             $this->rationalize_responses_for_part($part, $response);
             list($anscorr, $unitcorr) = $this->grade_responses_individually($part, $response, $checkunit);
             $fraction = $anscorr * ($unitcorr ? 1 : (1 - $part->unitpenalty));
-            $partresults[$name] = new qbehaviour_adaptivemultipart_part_result(
-                    $name, $fraction, $this->penalty);
+            //$partresults[$name] = new qbehaviour_adaptivemultipart_part_result( $name, $fraction, $this->penalty);
         }
         return $partresults;
     }
@@ -774,7 +776,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
      * @return bool true if any part of the response is invalid.
      */
     public function is_any_part_invalid(array $response) {
-        // TODO find in what case a formulas part is to be considered as invalid.
+        // TODO find in what case a numericalrecit part is to be considered as invalid.
         return false;
     }
 
@@ -786,7 +788,7 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
             $this->evaluatedanswer[$part->partindex] = $res->type[0] == 'l' ? $res->value : array($res->value); // Convert to numbers array.
             $a = $res->type[strlen($res->type) - 1];
             if (($part->answertype == 1000 ? $a != 's' : $a != 'n')) {
-                throw new Exception(get_string('error_answertype_mistmatch', 'qtype_formulas'));
+                throw new Exception(get_string('error_answertype_mistmatch', 'qtype_numericalrecit'));
             }
         }   // Perform the evaluation only when the local variable does not exist before.
         return $this->evaluatedanswer[$part->partindex]; // No type information needed, it returns numbers or strings array.
@@ -794,7 +796,9 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
 
     public function check_file_access($qa, $options, $component, $filearea, $args, $forcedownload) {
         $itemid = reset($args);
-        if ($component == 'qtype_formulas' && ($filearea == 'answersubqtext' || $filearea == 'answerfeedback'
+        if ($component == 'question' && $filearea) {
+            return true;
+        }else if ($component == 'qtype_numericalrecit' && ($filearea == 'answersubqtext' || $filearea == 'answerfeedback'
                 || $filearea == 'partcorrectfb' || $filearea == 'partpartiallycorrectfb' || $filearea == 'partincorrectfb')) {
             // Check if answer id exists.
             for ($i = 0; $i < $this->numpart; $i++) {
@@ -857,10 +861,10 @@ class qtype_formulas_question extends question_graded_automatically_with_countba
  * Class to represent a question subpart, loaded from the question_answers table
  * in the database.
  *
- * @copyright  2012 Jean-Michel Védrine
+ * @copyright  2012 Jean-Michel Vï¿½drine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_part {
+class qtype_numericalrecit_part {
     /** @var integer the answer id. */
     public $id;
     public $partindex;

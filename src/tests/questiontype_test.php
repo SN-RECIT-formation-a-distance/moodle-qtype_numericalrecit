@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for (some of) question/type/formulas/questiontype.php.
+ * Unit tests for (some of) question/type/numericalrecit/questiontype.php.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,33 +27,33 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
-require_once($CFG->dirroot . '/question/type/formulas/questiontype.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/questiontype.php');
 require_once($CFG->dirroot . '/question/type/edit_question_form.php');
-require_once($CFG->dirroot . '/question/type/formulas/tests/helper.php');
-require_once($CFG->dirroot . '/question/type/formulas/edit_formulas_form.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/tests/helper.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/edit_numericalrecit_form.php');
 
 
 /**
- * Unit tests for question/type/formulas/questiontype.php.
+ * Unit tests for question/type/numericalrecit/questiontype.php.
  *
  * @copyright  2013 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_test extends advanced_testcase {
+class qtype_numericalrecit_test extends advanced_testcase {
 
     protected $tolerance = 0.00000001;
-    /** @var formulas instance of the question type class to test. */
+    /** @var numericalrecit instance of the question type class to test. */
     protected $qtype;
 
     /**
-     * @return qtype_formulas_question the requested question object.
+     * @return qtype_numericalrecit_question the requested question object.
      */
-    protected function get_test_formulas_question($which = null) {
-        return test_question_maker::make_question('formulas', $which);
+    protected function get_test_numericalrecit_question($which = null) {
+        return test_question_maker::make_question('numericalrecit', $which);
     }
 
     protected function setUp() {
-        $this->qtype = new qtype_formulas();
+        $this->qtype = new qtype_numericalrecit();
     }
 
     protected function tearDown() {
@@ -61,7 +61,7 @@ class qtype_formulas_test extends advanced_testcase {
     }
 
     public function test_name() {
-        $this->assertEquals($this->qtype->name(), 'formulas');
+        $this->assertEquals($this->qtype->name(), 'numericalrecit');
     }
 
     public function test_can_analyse_responses() {
@@ -133,7 +133,7 @@ class qtype_formulas_test extends advanced_testcase {
     }
 
     public function test_split_questiontext0() {
-        $q = $this->get_test_formulas_question('test1');
+        $q = $this->get_test_numericalrecit_question('test1');
         $expected = array(0 => '<p>Multiple parts : --',
                 1 => '--',
                 2 => '--',
@@ -142,7 +142,7 @@ class qtype_formulas_test extends advanced_testcase {
     }
 
     public function test_split_questiontext1() {
-        $q = $this->get_test_formulas_question('test4');
+        $q = $this->get_test_numericalrecit_question('test4');
         $expected = array(0 => '<p>This question shows different display methods of the answer and unit box.</p>',
                 1 => '',
                 2 => '',
@@ -161,20 +161,20 @@ class qtype_formulas_test extends advanced_testcase {
         $this->setAdminUser();
 
         // Create a complete, in DB question to use.
-        $questiondata = test_question_maker::get_question_data('formulas', 'test2');
+        $questiondata = test_question_maker::get_question_data('numericalrecit', 'test2');
         // echo "questiondata";
         // var_dump(count($questiondata->options->answers));
-        $formdata = test_question_maker::get_question_form_data('formulas', 'test2');
+        $formdata = test_question_maker::get_question_form_data('numericalrecit', 'test2');
         // var_dump((array)$formdata);
         $generator = $this->getDataGenerator()->get_plugin_generator('core_question');
         $cat = $generator->create_question_category(array());
 
         $formdata->category = "{$cat->id},{$cat->contextid}";
         $formdata->id = 0;
-        qtype_formulas_edit_form::mock_submit((array)$formdata);
+        qtype_numericalrecit_edit_form::mock_submit((array)$formdata);
         // echo "after mocksubmit";
         // var_dump($_POST);
-        $form = qtype_formulas_test_helper::get_question_editing_form($cat, $questiondata);
+        $form = qtype_numericalrecit_test_helper::get_question_editing_form($cat, $questiondata);
         $form->id = 0;
         // var_dump($form);
         $this->assertTrue($form->is_validated());
@@ -185,7 +185,7 @@ class qtype_formulas_test extends advanced_testcase {
         // var_dump($returnedfromsave);
         // Now get just the raw DB record.
         $question = $DB->get_record('question', ['id' => $returnedfromsave->id], '*', MUST_EXIST);
-        // $testanswers = $DB->get_records('qtype_formulas_answers');
+        // $testanswers = $DB->get_records('qtype_numericalrecit_answers');
         // var_dump($testanswers);
         // Load it.
         $this->qtype->get_question_options($question);
@@ -200,13 +200,13 @@ class qtype_formulas_test extends advanced_testcase {
         $this->assertCount(4, $options->answers);
 
         // Now we are going to delete the options record.
-        $DB->delete_records('qtype_formulas_options', ['questionid' => $question->id]);
+        $DB->delete_records('qtype_numericalrecit_options', ['questionid' => $question->id]);
 
         // Now see what happens.
         $question = $DB->get_record('question', ['id' => $returnedfromsave->id], '*', MUST_EXIST);
         $this->qtype->get_question_options($question);
 
-        $this->assertDebuggingCalled('Formulas question ID '.$question->id.' was missing an options record. Using default.');
+        $this->assertDebuggingCalled('numericalrecit question ID '.$question->id.' was missing an options record. Using default.');
         $this->assertInstanceOf(stdClass::class, $question->options);
         $options = $question->options;
         $this->assertEquals($question->id, $options->questionid);
@@ -217,12 +217,12 @@ class qtype_formulas_test extends advanced_testcase {
         $this->assertEquals(FORMAT_HTML, $options->correctfeedbackformat);
 
         // And finally we try again with no answer either.
-        $DB->delete_records('qtype_formulas_answers', ['questionid' => $question->id]);
+        $DB->delete_records('qtype_numericalrecit_answers', ['questionid' => $question->id]);
 
         $question = $DB->get_record('question', ['id' => $returnedfromsave->id], '*', MUST_EXIST);
         $this->qtype->get_question_options($question);
 
-        $this->assertDebuggingCalled('Formulas question ID '.$question->id.' was missing an options record. Using default.');
+        $this->assertDebuggingCalled('numericalrecit question ID '.$question->id.' was missing an options record. Using default.');
         $this->assertInstanceOf(stdClass::class, $question->options);
         $options = $question->options;
         $this->assertEquals($question->id, $options->questionid);

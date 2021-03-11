@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quiz>
 <!-- question: 410  -->
-  <question type="formulas">
+  <question type="numericalrecit">
     <name>
-      <text>Formulas question 001</text>
+      <text>numericalrecit question 001</text>
     </name>
     <questiontext format="html">
       <text><![CDATA[For a minimal question, you must define a subquestion with (1) mark, (2) answer, (3) grading criteria]]></text>

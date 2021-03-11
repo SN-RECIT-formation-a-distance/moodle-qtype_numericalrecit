@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -23,12 +23,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Provides the information to backup formulas questions
+ * Provides the information to backup numericalrecit questions
  *
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_qtype_formulas_plugin extends backup_qtype_plugin {
+class backup_qtype_numericalrecit_plugin extends backup_qtype_plugin {
 
     /**
      * Returns the qtype information to attach to question element
@@ -36,7 +36,7 @@ class backup_qtype_formulas_plugin extends backup_qtype_plugin {
     protected function define_question_plugin_structure() {
 
         // Define the virtual plugin element with the condition to fulfill.
-        $plugin = $this->get_plugin_element(null, '../../qtype', 'formulas');
+        $plugin = $this->get_plugin_element(null, '../../qtype', 'numericalrecit');
 
         // Create one standard named plugin element (the visible container).
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
@@ -44,19 +44,19 @@ class backup_qtype_formulas_plugin extends backup_qtype_plugin {
         // Connect the visible container ASAP.
         $plugin->add_child($pluginwrapper);
 
-        // WARNING This qtype don't uses standard question_answers, qtype_formulas_answers are differents.
+        // WARNING This qtype don't uses standard question_answers, qtype_numericalrecit_answers are differents.
 
         // Now create the qtype own structures.
 
-        $formulas = new backup_nested_element('formulas', array('id'), array(
+        $numericalrecit = new backup_nested_element('numericalrecit', array('id'), array(
             'varsrandom', 'varsglobal',
             'correctfeedback', 'correctfeedbackformat',
             'partiallycorrectfeedback', 'partiallycorrectfeedbackformat',
             'incorrectfeedback', 'incorrectfeedbackformat', 'shownumcorrect',
-            'answernumbering'));
+            'answernumbering', 'stepmark'));
 
-        $formulasanswers = new backup_nested_element('formulas_answers');
-        $formulasanswer = new backup_nested_element('formulas_answer', array('id'), array(
+        $numericalrecitanswers = new backup_nested_element('numericalrecit_answers');
+        $numericalrecitanswer = new backup_nested_element('numericalrecit_answer', array('id'), array(
             'placeholder', 'answermark', 'answertype', 'numbox', 'vars1', 'answer', 'vars2', 'correctness',
             'unitpenalty', 'postunit', 'ruleid', 'otherrule', 'subqtext', 'subqtextformat', 'feedback', 'feedbackformat',
             'partcorrectfb', 'partcorrectfbformat',
@@ -65,21 +65,21 @@ class backup_qtype_formulas_plugin extends backup_qtype_plugin {
 
         // Don't need to annotate ids nor files.
         // Now the own qtype tree.
-        // Order is important because we need to know formulas_answers ids,
-        // to fill the formulas answerids field at restore.
-        $pluginwrapper->add_child($formulasanswers);
-        $formulasanswers->add_child($formulasanswer);
-        $pluginwrapper->add_child($formulas);
+        // Order is important because we need to know numericalrecit_answers ids,
+        // to fill the numericalrecit answerids field at restore.
+        $pluginwrapper->add_child($numericalrecitanswers);
+        $numericalrecitanswers->add_child($numericalrecitanswer);
+        $pluginwrapper->add_child($numericalrecit);
 
         // Set source to populate the data.
-        $formulasanswer->set_source_sql('
+        $numericalrecitanswer->set_source_sql('
                 SELECT *
-                FROM {qtype_formulas_answers}
+                FROM {qtype_numericalrecit_answers}
                 WHERE questionid = :questionid
                 ORDER BY partindex',
                 array('questionid' => backup::VAR_PARENTID));
 
-        $formulas->set_source_table('qtype_formulas_options', array('questionid' => backup::VAR_PARENTID));
+        $numericalrecit->set_source_table('qtype_numericalrecit_options', array('questionid' => backup::VAR_PARENTID));
 
         // Don't need to annotate ids nor files.
 
@@ -94,13 +94,13 @@ class backup_qtype_formulas_plugin extends backup_qtype_plugin {
      */
     public static function get_qtype_fileareas() {
         return array(
-            'answersubqtext' => 'qtype_formulas_answers',
-            'answerfeedback' => 'qtype_formulas_answers',
+            'answersubqtext' => 'qtype_numericalrecit_answers',
+            'answerfeedback' => 'qtype_numericalrecit_answers',
             'correctfeedback' => 'question_created',
             'partiallycorrectfeedback' => 'question_created',
             'incorrectfeedback' => 'question_created',
-            'partcorrectfb' => 'qtype_formulas_answers',
-            'partpartiallycorrectfb' => 'qtype_formulas_answers',
-            'partincorrectfb' => 'qtype_formulas_answers');
+            'partcorrectfb' => 'qtype_numericalrecit_answers',
+            'partpartiallycorrectfb' => 'qtype_numericalrecit_answers',
+            'partincorrectfb' => 'qtype_numericalrecit_answers');
     }
 }

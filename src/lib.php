@@ -26,8 +26,8 @@ defined('MOODLE_INTERNAL') || die();
  * @subpackage questiontypes
  */
 
-function qtype_formulas_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
+function qtype_numericalrecit_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
     global $CFG;
     require_once($CFG->libdir . '/questionlib.php');
-    question_pluginfile($course, $context, 'qtype_formulas', $filearea, $args, $forcedownload, $options);
+    question_pluginfile($course, $context, 'qtype_numericalrecit', $filearea, $args, $forcedownload, $options);
 }

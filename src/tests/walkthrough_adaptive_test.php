@@ -16,9 +16,9 @@
 
 
 /**
- * Unit tests for the formulas question type.
+ * Unit tests for the numericalrecit question type.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2012 Jean-Michel Védrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,26 +30,26 @@ global $CFG;
 require_once(dirname(__FILE__) . '/../../../engine/lib.php');
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
 require_once(dirname(__FILE__) . '/test_base.php');
-require_once($CFG->dirroot . '/question/type/formulas/tests/helper.php');
+require_once($CFG->dirroot . '/question/type/numericalrecit/tests/helper.php');
 
 
 /**
- * Unit tests for the formulas question type.
+ * Unit tests for the numericalrecit question type.
  *
  * @copyright  2012 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_walkthrough_adaptive_test extends qtype_formulas_walkthrough_test_base {
+class qtype_numericalrecit_walkthrough_adaptive_test extends qtype_numericalrecit_walkthrough_test_base {
     /**
-     * @return qtype_formulas_question the requested question object.
+     * @return qtype_numericalrecit_question the requested question object.
      */
-    protected function get_test_formulas_question($which = null) {
-        return test_question_maker::make_question('formulas', $which);
+    protected function get_test_numericalrecit_question($which = null) {
+        return test_question_maker::make_question('numericalrecit', $which);
     }
 
     public function test_test0_submit_right_first_time() {
-        // Create the formulas question 'test0'.
-        $q = $this->get_test_formulas_question('test0');
+        // Create the numericalrecit question 'test0'.
+        $q = $this->get_test_numericalrecit_question('test0');
         $this->start_attempt_at_question($q, 'adaptive', 1);
 
         // Check the initial state.
@@ -94,8 +94,8 @@ class qtype_formulas_walkthrough_adaptive_test extends qtype_formulas_walkthroug
     }
 
     public function test_test0_submit_wrong_submit_right() {
-        // Create the formulas question 'test0'.
-        $q = $this->get_test_formulas_question('test0');
+        // Create the numericalrecit question 'test0'.
+        $q = $this->get_test_numericalrecit_question('test0');
         $this->start_attempt_at_question($q, 'adaptive', 1);
 
         // Check the initial state.
@@ -133,8 +133,8 @@ class qtype_formulas_walkthrough_adaptive_test extends qtype_formulas_walkthroug
 
     public function test_test0_submit_wrong_wrong_right() {
         // Here we test that the student is not penalized twice for the same error.
-        // Create the formulas question 'test0'.
-        $q = $this->get_test_formulas_question('test0');
+        // Create the numericalrecit question 'test0'.
+        $q = $this->get_test_numericalrecit_question('test0');
         $this->start_attempt_at_question($q, 'adaptive', 1);
 
         // Check the initial state.
@@ -183,8 +183,8 @@ class qtype_formulas_walkthrough_adaptive_test extends qtype_formulas_walkthroug
 
     public function test_test0_submit_wrong_same_wrong_right() {
         // Here we test that the student is not penalized twice for the same error.
-        // Create the formulas question 'test0'.
-        $q = $this->get_test_formulas_question('test0');
+        // Create the numericalrecit question 'test0'.
+        $q = $this->get_test_numericalrecit_question('test0');
         $this->start_attempt_at_question($q, 'adaptive', 1);
 
         // Check the initial state.

@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the editing form for the formulas question type.
+ * Defines the editing form for the numericalrecit question type.
  *
  * @copyright &copy; 2010-2011 Hon Wai, Lau
  * @author Hon Wai, Lau <lau65536@gmail.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License version 3
- * @package qtype_formulas
+ * @package qtype_numericalrecit
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -30,7 +30,7 @@ require_once($CFG->dirroot.'/question/type/edit_question_form.php');
 /**
  * coodinate question type editing form definition.
  */
-class qtype_formulas_edit_form extends question_edit_form {
+class qtype_numericalrecit_edit_form extends question_edit_form {
 
     /**
      * Add question-type specific form fields.
@@ -39,49 +39,49 @@ class qtype_formulas_edit_form extends question_edit_form {
      */
     protected function definition_inner($mform) {
         global $PAGE;
-        $PAGE->requires->js('/question/type/formulas/script/editing.js');
-        $PAGE->requires->string_for_js('relerror', 'qtype_formulas');
-        $PAGE->requires->string_for_js('abserror', 'qtype_formulas');
-        $PAGE->requires->string_for_js('instantiate', 'qtype_formulas');
-        $PAGE->requires->string_for_js('renew', 'qtype_formulas');
-        $PAGE->requires->string_for_js('unit', 'qtype_formulas');
-        $PAGE->requires->js('/question/type/formulas/script/formatcheck.js');
-        $PAGE->requires->css('/question/type/formulas/styles.css');
+        $PAGE->requires->js('/question/type/numericalrecit/script/editing.js');
+        $PAGE->requires->string_for_js('relerror', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('abserror', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('instantiate', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('renew', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('unit', 'qtype_numericalrecit');
+        $PAGE->requires->js('/question/type/numericalrecit/script/formatcheck.js');
+        $PAGE->requires->css('/question/type/numericalrecit/styles.css');
         // Hide the unused form fields.
         $mform->removeElement('defaultmark');
         $mform->addElement('hidden', 'defaultmark');
         $mform->setType('defaultmark', PARAM_RAW);
 
-        $mform->addHelpButton('questiontext', 'questiontext', 'qtype_formulas');
+        $mform->addHelpButton('questiontext', 'questiontext', 'qtype_numericalrecit');
 
         // Random and global variables and main question.
-        $mform->insertElementBefore($mform->createElement('header', 'globalvarshdr', get_string('globalvarshdr', 'qtype_formulas'),
+        $mform->insertElementBefore($mform->createElement('header', 'globalvarshdr', get_string('globalvarshdr', 'qtype_numericalrecit'),
             ''), 'questiontext');
 
-        $mform->insertElementBefore($mform->createElement('textarea', 'varsrandom', get_string('varsrandom', 'qtype_formulas'),
+        $mform->insertElementBefore($mform->createElement('textarea', 'varsrandom', get_string('varsrandom', 'qtype_numericalrecit'),
             array('cols' => 80, 'rows' => 1)) , 'questiontext');
-        $mform->addHelpButton('varsrandom', 'varsrandom', 'qtype_formulas');
+        $mform->addHelpButton('varsrandom', 'varsrandom', 'qtype_numericalrecit');
 
-        $mform->insertElementBefore($mform->createElement('textarea', 'varsglobal', get_string('varsglobal', 'qtype_formulas'),
+        $mform->insertElementBefore($mform->createElement('textarea', 'varsglobal', get_string('varsglobal', 'qtype_numericalrecit'),
             array('cols' => 80, 'rows'  => 1)) , 'questiontext');
-        $mform->addHelpButton('varsglobal', 'varsglobal', 'qtype_formulas');
+        $mform->addHelpButton('varsglobal', 'varsglobal', 'qtype_numericalrecit');
 
-        $mform->insertElementBefore($mform->createElement('header', 'mainq', get_string('mainq', 'qtype_formulas'),
+        $mform->insertElementBefore($mform->createElement('header', 'mainq', get_string('mainq', 'qtype_numericalrecit'),
             ''), 'questiontext');
         $numberingoptions = question_bank::get_qtype('multichoice')->get_numbering_styles();
         $mform->addElement('select', 'answernumbering',
                 get_string('answernumbering', 'qtype_multichoice'), $numberingoptions);
         $mform->setDefault('answernumbering', get_config('qtype_multichoice', 'answernumbering'));
         // Part's answers.
-        $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_formulas', '{no}'),
+        $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_numericalrecit', '{no}'),
             question_bank::fraction_options(), 1, 2);
         // Display options, flow options and global part's options.
-        $mform->addElement('header', 'subqoptions', get_string('subqoptions', 'qtype_formulas'));
+        $mform->addElement('header', 'subqoptions', get_string('subqoptions', 'qtype_numericalrecit'));
 
         $mform->addElement('text', 'globalunitpenalty',
-                get_string('globaloptions', 'qtype_formulas') . get_string('unitpenalty', 'qtype_formulas'),
+                get_string('globaloptions', 'qtype_numericalrecit') . get_string('unitpenalty', 'qtype_numericalrecit'),
             array('size' => 3));
-        $mform->addHelpButton('globalunitpenalty', 'unitpenalty', 'qtype_formulas');
+        $mform->addHelpButton('globalunitpenalty', 'unitpenalty', 'qtype_numericalrecit');
         $mform->setDefault('globalunitpenalty', 1);
         $mform->setAdvanced('globalunitpenalty');
         $mform->SetType('globalunitpenalty', PARAM_FLOAT);
@@ -92,22 +92,26 @@ class qtype_formulas_edit_form extends question_edit_form {
             $defaultrulechoice[$id] = $entry[0];
         }
         $mform->addElement('select', 'globalruleid',
-                get_string('globaloptions', 'qtype_formulas') . get_string('ruleid', 'qtype_formulas'),
+                get_string('globaloptions', 'qtype_numericalrecit') . get_string('ruleid', 'qtype_numericalrecit'),
             $defaultrulechoice);
         $mform->setDefault('globalruleid', 1);
-         $mform->addHelpButton('globalruleid', 'ruleid', 'qtype_formulas');
+        $mform->addHelpButton('globalruleid', 'ruleid', 'qtype_numericalrecit');
+        
+        $mform->addElement('text', 'stepmark', get_string('stepmark', 'qtype_numericalrecit'));
+        $mform->setDefault('stepmark', 1);
+        $mform->SetType('stepmark', PARAM_FLOAT);
 
         // Allow instantiate random variables and display the data for instantiated variables.
-        $mform->addElement('header', 'checkvarshdr', get_string('checkvarshdr', 'qtype_formulas'));
-        $mform->addElement('static', 'numdataset', get_string('numdataset', 'qtype_formulas'),
+        $mform->addElement('header', 'checkvarshdr', get_string('checkvarshdr', 'qtype_numericalrecit'));
+        $mform->addElement('static', 'numdataset', get_string('numdataset', 'qtype_numericalrecit'),
             '<div id="numdataset_option"></div>');
-        $mform->addElement('static', 'qtextpreview', get_string('qtextpreview', 'qtype_formulas'),
+        $mform->addElement('static', 'qtextpreview', get_string('qtextpreview', 'qtype_numericalrecit'),
             '<div id="qtextpreview_controls"></div>'
             .'<div id="qtextpreview_display"></div>');
-        $mform->addElement('static', 'varsstatistics', get_string('varsstatistics', 'qtype_formulas'),
+        $mform->addElement('static', 'varsstatistics', get_string('varsstatistics', 'qtype_numericalrecit'),
             '<div id="varsstatistics_controls"></div>'
             .'<div id="varsstatistics_display"></div>');
-        $mform->addElement('static', 'varsdata', get_string('varsdata', 'qtype_formulas'),
+        $mform->addElement('static', 'varsdata', get_string('varsdata', 'qtype_numericalrecit'),
             '<div id="varsdata_controls"></div>'
             .'<div id="varsdata_display"></div>');
         $mform->closeHeaderBefore('instantiatevars');
@@ -124,57 +128,57 @@ class qtype_formulas_edit_form extends question_edit_form {
      */
     protected function get_per_answer_fields($mform, $label, $gradeoptions,
             &$repeatedoptions, &$answersoption) {
-        $config = get_config('qtype_formulas');
+        $config = get_config('qtype_numericalrecit');
         $repeated = array();
         $repeated[] = $mform->createElement('header', 'answerhdr', $label);
         // Part's mark.
-        $repeated[] = $mform->createElement('text', 'answermark', get_string('answermark', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('text', 'answermark', get_string('answermark', 'qtype_numericalrecit'),
             array('size' => 3));
-        $repeatedoptions['answermark']['helpbutton'] = array('answermark', 'qtype_formulas');
+        $repeatedoptions['answermark']['helpbutton'] = array('answermark', 'qtype_numericalrecit');
         $repeatedoptions['answermark']['default'] = $config->defaultanswermark;
         $repeatedoptions['answermark']['type'] = PARAM_FLOAT;
         // Part's number of coordinates.
         $repeated[] = $mform->createElement('hidden', 'numbox', '', '');   // Exact value will be computed during validation.
         $repeatedoptions['numbox']['type'] = PARAM_INT;
         // Part's local variables.
-        $repeated[] = $mform->createElement('textarea', 'vars1', get_string('vars1', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('textarea', 'vars1', get_string('vars1', 'qtype_numericalrecit'),
             array('cols' => 80, 'rows' => 1));
-        $repeatedoptions['vars1']['helpbutton'] = array('vars1', 'qtype_formulas');
+        $repeatedoptions['vars1']['helpbutton'] = array('vars1', 'qtype_numericalrecit');
         $repeatedoptions['vars1']['advanced'] = true;
         // Part's answer type (0, 10, 100, 1000).
-        $repeated[] = $mform->createElement('select', 'answertype', get_string('answertype', 'qtype_formulas'),
-                array(0 => get_string('number', 'qtype_formulas'), 10 => get_string('numeric', 'qtype_formulas'),
-                        100 => get_string('numerical_formula', 'qtype_formulas'),
-                        1000 => get_string('algebraic_formula', 'qtype_formulas')));;
+        $repeated[] = $mform->createElement('select', 'answertype', get_string('answertype', 'qtype_numericalrecit'),
+                array(0 => get_string('number', 'qtype_numericalrecit'), 10 => get_string('numeric', 'qtype_numericalrecit'),
+                        100 => get_string('numerical_formula', 'qtype_numericalrecit'),
+                        1000 => get_string('algebraic_formula', 'qtype_numericalrecit')));;
         $repeatedoptions['answertype']['default'] = $config->defaultanswertype;
         $repeatedoptions['answertype']['type'] = PARAM_INT;
-        $repeatedoptions['answertype']['helpbutton'] = array('answertype', 'qtype_formulas');
+        $repeatedoptions['answertype']['helpbutton'] = array('answertype', 'qtype_numericalrecit');
         // Part's answer.
-        $repeated[] = $mform->createElement('text', 'answer', get_string('answer', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('text', 'answer', get_string('answer', 'qtype_numericalrecit'),
             array('size' => 80));
-        $repeatedoptions['answer']['helpbutton'] = array('answer', 'qtype_formulas');
+        $repeatedoptions['answer']['helpbutton'] = array('answer', 'qtype_numericalrecit');
         $repeatedoptions['answer']['type'] = PARAM_RAW;
         // Part's grading variables.
-        $repeated[] = $mform->createElement('textarea', 'vars2', get_string('vars2', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('textarea', 'vars2', get_string('vars2', 'qtype_numericalrecit'),
             array('cols' => 80, 'rows' => 1));
-        $repeatedoptions['vars2']['helpbutton'] = array('vars2', 'qtype_formulas');
+        $repeatedoptions['vars2']['helpbutton'] = array('vars2', 'qtype_numericalrecit');
         $repeatedoptions['vars2']['advanced'] = true;
         // Part's grading criteria.
-        $repeated[] = $mform->createElement('text', 'correctness', get_string('correctness', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('text', 'correctness', get_string('correctness', 'qtype_numericalrecit'),
             array('size' => 60));
         $repeatedoptions['correctness']['default'] = $config->defaultcorrectness;
-        $repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_formulas');
+        $repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_numericalrecit');
         $repeatedoptions['correctness']['type'] = PARAM_RAW;
         // Part's unit penalty.
-        $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'),
             array('size' => 3));
         $repeatedoptions['unitpenalty']['default'] = $config->defaultunitpenalty;
-        $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_formulas');
+        $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
         $repeatedoptions['unitpenalty']['type'] = PARAM_FLOAT;
         // Part's unit.
-        $repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_formulas'),
-            array('size' => 60, 'class' => 'formulas_editing_unit'));
-        $repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_formulas');
+        $repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'),
+            array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
+        $repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
         $repeatedoptions['postunit']['type'] = PARAM_RAW;
         // Part's basic conversion rules.
         $conversionrules = new unit_conversion_rules;
@@ -182,40 +186,40 @@ class qtype_formulas_edit_form extends question_edit_form {
         foreach ($allrules as $id => $entry) {
             $defaultrulechoice[$id] = $entry[0];
         }
-        $repeated[] = $mform->createElement('select', 'ruleid', get_string('ruleid', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('select', 'ruleid', get_string('ruleid', 'qtype_numericalrecit'),
             $defaultrulechoice);
         $repeatedoptions['ruleid']['default'] = 1;
         // Part's other rules.
-        $repeated[] = $mform->createElement('textarea', 'otherrule', get_string('otherrule', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('textarea', 'otherrule', get_string('otherrule', 'qtype_numericalrecit'),
             array('cols' => 80, 'rows' => 1));
-        $repeatedoptions['otherrule']['helpbutton'] = array('otherrule', 'qtype_formulas');
+        $repeatedoptions['otherrule']['helpbutton'] = array('otherrule', 'qtype_numericalrecit');
         $repeatedoptions['otherrule']['advanced'] = true;
         // Part's placeholder.
-        $repeated[] = $mform->createElement('text', 'placeholder', get_string('placeholder', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('text', 'placeholder', get_string('placeholder', 'qtype_numericalrecit'),
             array('size' => 20));
-        $repeatedoptions['placeholder']['helpbutton'] = array('placeholder', 'qtype_formulas');
+        $repeatedoptions['placeholder']['helpbutton'] = array('placeholder', 'qtype_numericalrecit');
         $repeatedoptions['placeholder']['type'] = PARAM_RAW;
         // Part's text.
-        $repeated[] = $mform->createElement('editor', 'subqtext', get_string('subqtext', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('editor', 'subqtext', get_string('subqtext', 'qtype_numericalrecit'),
             array('rows' => 3), $this->editoroptions);
-        $repeatedoptions['subqtext']['helpbutton'] = array('subqtext', 'qtype_formulas');
+        $repeatedoptions['subqtext']['helpbutton'] = array('subqtext', 'qtype_numericalrecit');
         // Part's feedback.
-        $repeated[] = $mform->createElement('editor', 'feedback', get_string('feedback', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('editor', 'feedback', get_string('feedback', 'qtype_numericalrecit'),
             array('rows' => 3), $this->editoroptions);
-        $repeatedoptions['feedback']['helpbutton'] = array('feedback', 'qtype_formulas');
+        $repeatedoptions['feedback']['helpbutton'] = array('feedback', 'qtype_numericalrecit');
         $repeatedoptions['feedback']['advanced'] = true;
         // Part's combined feedback.
-        $repeated[] = $mform->createElement('editor', 'partcorrectfb', get_string('correctfeedback', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('editor', 'partcorrectfb', get_string('correctfeedback', 'qtype_numericalrecit'),
             array('rows' => 3), $this->editoroptions);
-        $repeatedoptions['partcorrectfb']['helpbutton'] = array('correctfeedback', 'qtype_formulas');
+        $repeatedoptions['partcorrectfb']['helpbutton'] = array('correctfeedback', 'qtype_numericalrecit');
         $repeatedoptions['partcorrectfb']['advanced'] = true;
-        $repeated[] = $mform->createElement('editor', 'partpartiallycorrectfb', get_string('partiallycorrectfeedback', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('editor', 'partpartiallycorrectfb', get_string('partiallycorrectfeedback', 'qtype_numericalrecit'),
             array('rows' => 3), $this->editoroptions);
-        $repeatedoptions['partpartiallycorrectfb']['helpbutton'] = array('partiallycorrectfeedback', 'qtype_formulas');
+        $repeatedoptions['partpartiallycorrectfb']['helpbutton'] = array('partiallycorrectfeedback', 'qtype_numericalrecit');
         $repeatedoptions['partpartiallycorrectfb']['advanced'] = true;
-        $repeated[] = $mform->createElement('editor', 'partincorrectfb', get_string('incorrectfeedback', 'qtype_formulas'),
+        $repeated[] = $mform->createElement('editor', 'partincorrectfb', get_string('incorrectfeedback', 'qtype_numericalrecit'),
             array('rows' => 3), $this->editoroptions);
-        $repeatedoptions['partincorrectfb']['helpbutton'] = array('incorrectfeedback', 'qtype_formulas');
+        $repeatedoptions['partincorrectfb']['helpbutton'] = array('incorrectfeedback', 'qtype_numericalrecit');
         $repeatedoptions['partincorrectfb']['advanced'] = true;
         $answersoption = 'answers';
         return $repeated;
@@ -250,7 +254,7 @@ class qtype_formulas_edit_form extends question_edit_form {
     }
 
     protected function get_more_choices_string() {
-        return get_string('addmorepartsblanks', 'qtype_formulas');
+        return get_string('addmorepartsblanks', 'qtype_numericalrecit');
     }
 
     protected function data_preprocessing($question) {
@@ -271,7 +275,7 @@ class qtype_formulas_edit_form extends question_edit_form {
                     foreach ($fields as $field) {
                         $fieldformat = $field . 'format';
                         $itemid = file_get_submitted_draft_itemid($field . '[' . $key . ']');
-                        $fieldtxt = file_prepare_draft_area($itemid, $this->context->id, 'qtype_formulas',
+                        $fieldtxt = file_prepare_draft_area($itemid, $this->context->id, 'qtype_numericalrecit',
                                 'answer' . $field, empty($answer->id) ? null : (int)$answer->id,
                                 $this->fileoptions, $answer->$field);
                         $defaultvalues[$field . '[' . $key . ']'] = array('text' => $fieldtxt,
@@ -281,7 +285,7 @@ class qtype_formulas_edit_form extends question_edit_form {
                     foreach ($fields as $field) {
                         $fieldformat = $field . 'format';
                         $itemid = file_get_submitted_draft_itemid($field . '[' . $key . ']');
-                        $fieldtxt = file_prepare_draft_area($itemid, $this->context->id, 'qtype_formulas',
+                        $fieldtxt = file_prepare_draft_area($itemid, $this->context->id, 'qtype_numericalrecit',
                                 $field, empty($answer->id) ? null : (int)$answer->id,
                                 $this->fileoptions, $answer->$field);
                         $defaultvalues[$field . '[' . $key . ']'] = array('text' => $fieldtxt,
@@ -318,6 +322,6 @@ class qtype_formulas_edit_form extends question_edit_form {
     }
 
     public function qtype() {
-        return 'formulas';
+        return 'numericalrecit';
     }
 }

@@ -1,7 +1,7 @@
-@qtype @qtype_formulas
-Feature: Test editing a Formulas question
+@qtype @qtype_numericalrecit
+Feature: Test editing a numericalrecit question
   As a teacher
-  In order to be able to update my Formulas question
+  In order to be able to update my numericalrecit question
   I need to edit them
 
   Background:
@@ -19,28 +19,28 @@ Feature: Test editing a Formulas question
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype       | name                      | template   |
-      | Test questions   | formulas     | formulas-001 for editing | test1      |
+      | Test questions   | numericalrecit     | numericalrecit-001 for editing | test1      |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" in current page administration
 
   @javascript @_switch_window
-  Scenario: Edit a Formulas question
-    When I click on "Edit" "link" in the "formulas-001 for editing" "table_row"
+  Scenario: Edit a numericalrecit question
+    When I click on "Edit" "link" in the "numericalrecit-001 for editing" "table_row"
     And I set the following fields to these values:
       | Question name | |
     And I press "id_submitbutton"
     Then I should see "You must supply a value here."
     When I set the following fields to these values:
-      | Question name | Edited formulas-001 name |
+      | Question name | Edited numericalrecit-001 name |
     And I press "id_submitbutton"
-    Then I should see "Edited formulas-001 name"
-    When I click on "Edit" "link" in the "Edited formulas-001 name" "table_row"
+    Then I should see "Edited numericalrecit-001 name"
+    When I click on "Edit" "link" in the "Edited numericalrecit-001 name" "table_row"
     And I set the following fields to these values:
       | Random variables     | v = {40:120:10}; dt = {2:6};  |
     And I press "id_submitbutton"
-    Then I should see "Edited formulas-001 name"
-    When I click on "Preview" "link" in the "Edited formulas-001 name" "table_row"
+    Then I should see "Edited numericalrecit-001 name"
+    When I click on "Preview" "link" in the "Edited numericalrecit-001 name" "table_row"
     And I switch to "questionpreview" window
     Then I should see "Multiple parts : --"
     # Set behaviour options

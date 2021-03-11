@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2012 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -23,35 +23,35 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Formulas question type conversion handler
+ * numericalrecit question type conversion handler
  */
-class moodle1_qtype_formulas_handler extends moodle1_qtype_handler {
+class moodle1_qtype_numericalrecit_handler extends moodle1_qtype_handler {
 
     /**
      * @return array
      */
     public function get_question_subpaths() {
         return array(
-            'FORMULAS',
-            'FORMULAS/ANSWERS'
+            'numericalrecit',
+            'numericalrecit/ANSWERS'
 
         );
     }
 
     /**
-     * Appends the formulas specific information to the question
+     * Appends the numericalrecit specific information to the question
      */
     public function process_question(array $data, array $raw) {
-        // Convert and write the formulas answers first.
+        // Convert and write the numericalrecit answers first.
         // We can't use write_answers  for that task.
-        // Because formulas answers aren't standard answers.
-        if (isset($data['formulas'][0]['answers'])) {
-            $answers   = $data['formulas'][0]['answers'];
+        // Because numericalrecit answers aren't standard answers.
+        if (isset($data['numericalrecit'][0]['answers'])) {
+            $answers   = $data['numericalrecit'][0]['answers'];
         } else {
             $answers   = array();
         }
         $anscount = 0;
-        $this->xmlwriter->begin_tag('formulas_answers');
+        $this->xmlwriter->begin_tag('numericalrecit_answers');
         foreach ($answers as $answer) {
             // Create an artificial 'id' attribute (is not included in moodle.xml).
             $answer['id'] = $this->converter->get_nextid();
@@ -69,10 +69,10 @@ class moodle1_qtype_formulas_handler extends moodle1_qtype_handler {
 
             // Migrate images in answers subqtext and feedback fields.
             // Uncomment the 2 following lines once MDL-33424 is closed.
-            $answer['subqtext'] = $this->migrate_files($answer['subqtext'], 'qtype_formulas', 'answersubqtext', $answer['id']);
-            $answer['feedback'] = $this->migrate_files($answer['feedback'], 'qtype_formulas', 'answerfeedback', $answer['id']);
+            $answer['subqtext'] = $this->migrate_files($answer['subqtext'], 'qtype_numericalrecit', 'answersubqtext', $answer['id']);
+            $answer['feedback'] = $this->migrate_files($answer['feedback'], 'qtype_numericalrecit', 'answerfeedback', $answer['id']);
 
-            $this->xmlwriter->begin_tag('formulas_answer', array('id' => $answer['id']));
+            $this->xmlwriter->begin_tag('numericalrecit_answer', array('id' => $answer['id']));
             foreach (array(
                 'partindex', 'placeholder', 'answermark', 'answertype',
                 'numbox', 'vars1', 'answer', 'vars2', 'correctness', 'unitpenalty',
@@ -82,17 +82,17 @@ class moodle1_qtype_formulas_handler extends moodle1_qtype_handler {
                 'partincorrectfb', 'partincorrectfbformat'
             ) as $fieldname) {
                 if (!array_key_exists($fieldname, $answer)) {
-                    throw new moodle1_convert_exception('missing_formulas_answer_field', $fieldname);
+                    throw new moodle1_convert_exception('missing_numericalrecit_answer_field', $fieldname);
                 }
                 $this->xmlwriter->full_tag($fieldname, $answer[$fieldname]);
             }
-            $this->xmlwriter->end_tag('formulas_answer');
+            $this->xmlwriter->end_tag('numericalrecit_answer');
             ++$anscount;
         }
-        $this->xmlwriter->end_tag('formulas_answers');
+        $this->xmlwriter->end_tag('numericalrecit_answers');
 
-        // And finally the formulas options.
-        $options = $data['formulas'][0];
+        // And finally the numericalrecit options.
+        $options = $data['numericalrecit'][0];
         if (!isset($options)) {
             // This should never happen, but it can do if the 1.9 site contained
             // corrupt data.
@@ -101,7 +101,7 @@ class moodle1_qtype_formulas_handler extends moodle1_qtype_handler {
                 'varsglobal' => ''
             );
         }
-        $this->xmlwriter->begin_tag('formulas', array('id' => $this->converter->get_nextid()));
+        $this->xmlwriter->begin_tag('numericalrecit', array('id' => $this->converter->get_nextid()));
         $this->xmlwriter->full_tag('varsrandom', $options['varsrandom']);
         $this->xmlwriter->full_tag('varsglobal', $options['varsglobal']);
         $this->xmlwriter->full_tag('correctfeedback', '');
@@ -112,6 +112,6 @@ class moodle1_qtype_formulas_handler extends moodle1_qtype_handler {
         $this->xmlwriter->full_tag('incorrectfeedbackformat', FORMAT_HTML);
         $this->xmlwriter->full_tag('shownumcorrect', 0);
         $this->xmlwriter->full_tag('answernumbering', 'none');
-        $this->xmlwriter->end_tag('formulas');
+        $this->xmlwriter->end_tag('numericalrecit');
     }
 }

@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Formulas question type upgrade code.
+ * numericalrecit question type upgrade code.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 // This file keeps track of upgrades to
-// the formulas qtype plugin.
-function xmldb_qtype_formulas_upgrade($oldversion=0) {
+// the numericalrecit qtype plugin.
+function xmldb_qtype_numericalrecit_upgrade($oldversion=0) {
     global $DB, $CFG;
 
     $dbman = $DB->get_manager();
@@ -36,8 +36,8 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
 
     // Add the format for the subqtext and feedback.
     if ($oldversion < 2011080200) {
-        // Define field subqtextformat to be added to question_formulas_answers.
-        $table = new xmldb_table('question_formulas_answers');
+        // Define field subqtextformat to be added to question_numericalrecit_answers.
+        $table = new xmldb_table('question_numericalrecit_answers');
         $field = new xmldb_field('subqtextformat', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, '0', 'subqtext');
 
         // Conditionally launch add field subqtextformat.
@@ -45,8 +45,8 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field feedbackformat to be added to question_formulas_answers.
-        $table = new xmldb_table('question_formulas_answers');
+        // Define field feedbackformat to be added to question_numericalrecit_answers.
+        $table = new xmldb_table('question_numericalrecit_answers');
         $field = new xmldb_field('feedbackformat', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, '0', 'feedback');
 
         // Conditionally launch add field feedbackformat.
@@ -54,19 +54,19 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2011080200, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2011080200, 'qtype', 'numericalrecit');
     }
 
     // Drop the answerids field wich is totaly redundant.
     if ($oldversion < 2011080700) {
-        $table = new xmldb_table('question_formulas');
+        $table = new xmldb_table('question_numericalrecit');
         $field = new xmldb_field('answerids');
 
         if ($dbman->field_exists($table, $field)) {
             $dbman->drop_field($table, $field);
         }
-        upgrade_plugin_savepoint(true, 2011080700, 'qtype', 'formulas');
+        upgrade_plugin_savepoint(true, 2011080700, 'qtype', 'numericalrecit');
     }
 
     // Moodle v2.1.0 release upgrade line.
@@ -74,19 +74,19 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
 
     if ($oldversion < 2012071400) {
         // Renaming old tables.
-        $table = new xmldb_table('question_formulas');
+        $table = new xmldb_table('question_numericalrecit');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'qtype_formulas');
+            $dbman->rename_table($table, 'qtype_numericalrecit');
         }
-        $table = new xmldb_table('question_formulas_answers');
+        $table = new xmldb_table('question_numericalrecit_answers');
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'qtype_formulas_answers');
+            $dbman->rename_table($table, 'qtype_numericalrecit_answers');
         }
 
         // Add combined feedback fields.
-        $table = new xmldb_table('qtype_formulas');
+        $table = new xmldb_table('qtype_numericalrecit');
 
-        // Define field correctfeedback to be added to qtype_formulas.
+        // Define field correctfeedback to be added to qtype_numericalrecit.
         $field = new xmldb_field('correctfeedback', XMLDB_TYPE_TEXT, 'small', null,
                 null, null, null, 'showperanswermark');
 
@@ -95,7 +95,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
 
             // Now fill it with ''.
-            $DB->set_field('qtype_formulas', 'correctfeedback', '');
+            $DB->set_field('qtype_numericalrecit', 'correctfeedback', '');
 
             // Now add the not null constraint.
             $field = new xmldb_field('correctfeedback', XMLDB_TYPE_TEXT, 'small', null,
@@ -103,7 +103,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->change_field_notnull($table, $field);
         }
 
-        // Define field correctfeedbackformat to be added to qtype_formulas.
+        // Define field correctfeedbackformat to be added to qtype_numericalrecit.
         $field = new xmldb_field('correctfeedbackformat', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'correctfeedback');
 
@@ -112,7 +112,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field partiallycorrectfeedback to be added to qtype_formulas.
+        // Define field partiallycorrectfeedback to be added to qtype_numericalrecit.
         $field = new xmldb_field('partiallycorrectfeedback', XMLDB_TYPE_TEXT, 'small', null,
                 null, null, null, 'correctfeedbackformat');
 
@@ -121,7 +121,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
 
             // Now fill it with ''.
-            $DB->set_field('qtype_formulas', 'partiallycorrectfeedback', '');
+            $DB->set_field('qtype_numericalrecit', 'partiallycorrectfeedback', '');
 
             // Now add the not null constraint.
             $field = new xmldb_field('partiallycorrectfeedback', XMLDB_TYPE_TEXT, 'small', null,
@@ -129,7 +129,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->change_field_notnull($table, $field);
         }
 
-        // Define field partiallycorrectfeedbackformat to be added to qtype_formulas.
+        // Define field partiallycorrectfeedbackformat to be added to qtype_numericalrecit.
         $field = new xmldb_field('partiallycorrectfeedbackformat', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'partiallycorrectfeedback');
 
@@ -138,7 +138,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field incorrectfeedback to be added to qtype_formulas.
+        // Define field incorrectfeedback to be added to qtype_numericalrecit.
         $field = new xmldb_field('incorrectfeedback', XMLDB_TYPE_TEXT, 'small', null,
                 null, null, null, 'partiallycorrectfeedbackformat');
 
@@ -147,7 +147,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
 
             // Now fill it with ''.
-            $DB->set_field('qtype_formulas', 'incorrectfeedback', '');
+            $DB->set_field('qtype_numericalrecit', 'incorrectfeedback', '');
 
             // Now add the not null constraint.
             $field = new xmldb_field('incorrectfeedback', XMLDB_TYPE_TEXT, 'small', null,
@@ -155,7 +155,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->change_field_notnull($table, $field);
         }
 
-        // Define field incorrectfeedbackformat to be added to qtype_formulas.
+        // Define field incorrectfeedbackformat to be added to qtype_numericalrecit.
         $field = new xmldb_field('incorrectfeedbackformat', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'incorrectfeedback');
 
@@ -164,7 +164,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field shownumcorrect to be added to qtype_formulas.
+        // Define field shownumcorrect to be added to qtype_numericalrecit.
         $field = new xmldb_field('shownumcorrect', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'incorrectfeedbackformat');
 
@@ -173,13 +173,13 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2012071400, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2012071400, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2012071401) {
         // Suppress some obsolete fields.
-        $table = new xmldb_table('qtype_formulas');
+        $table = new xmldb_table('qtype_numericalrecit');
         $field = new xmldb_field('peranswersubmit');
 
         if ($dbman->field_exists($table, $field)) {
@@ -190,32 +190,32 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
         if ($dbman->field_exists($table, $field)) {
             $dbman->drop_field($table, $field);
         }
-        $table = new xmldb_table('qtype_formulas_answers');
+        $table = new xmldb_table('qtype_numericalrecit_answers');
         $field = new xmldb_field('trialmarkseq');
 
         if ($dbman->field_exists($table, $field)) {
             $dbman->drop_field($table, $field);
         }
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2012071401, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2012071401, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2012071402) {
-        // Define table qtype_formulas to be renamed to qtype_formulas_options.
-        $table = new xmldb_table('qtype_formulas');
+        // Define table qtype_numericalrecit to be renamed to qtype_numericalrecit_options.
+        $table = new xmldb_table('qtype_numericalrecit');
 
-        // Launch rename table for qtype_formulas_options.
-        $dbman->rename_table($table, 'qtype_formulas_options');
+        // Launch rename table for qtype_numericalrecit_options.
+        $dbman->rename_table($table, 'qtype_numericalrecit_options');
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2012071402, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2012071402, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2012071406) {
 
-        // Define field partindex to be added to qtype_formulas_answers.
-        $table = new xmldb_table('qtype_formulas_answers');
+        // Define field partindex to be added to qtype_numericalrecit_answers.
+        $table = new xmldb_table('qtype_numericalrecit_answers');
         $field = new xmldb_field('partindex', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'questionid');
 
         // Conditionally launch add field partindex.
@@ -223,34 +223,34 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
         }
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2012071406, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2012071406, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2012071407) {
-        // Get all formulas questions.
+        // Get all numericalrecit questions.
         $questions = $DB->get_records('question',
-                array('qtype' => 'formulas'), 'id');
+                array('qtype' => 'numericalrecit'), 'id');
         foreach ($questions as $question) {
             $anscount = 0;
-            $rs = $DB->get_recordset('qtype_formulas_answers', array('questionid' => $question->id),
+            $rs = $DB->get_recordset('qtype_numericalrecit_answers', array('questionid' => $question->id),
                    'id');
             foreach ($rs as $record) {
                 $record->partindex = $anscount;
-                $DB->update_record('qtype_formulas_answers', $record);
+                $DB->update_record('qtype_numericalrecit_answers', $record);
                 ++$anscount;
             }
             $rs->close();
         }
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2012071407, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2012071407, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2018042800) {
         // Add combined feedback fields for each question part.
-        $table = new xmldb_table('qtype_formulas_answers');
+        $table = new xmldb_table('qtype_numericalrecit_answers');
 
-        // Define field partcorrectfb to be added to qtype_formulas_answers.
+        // Define field partcorrectfb to be added to qtype_numericalrecit_answers.
         $field = new xmldb_field('partcorrectfb', XMLDB_TYPE_TEXT, 'small', null,
                 null, null, null, 'feedbackformat');
 
@@ -259,7 +259,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
 
             // Now fill it with ''.
-            $DB->set_field('qtype_formulas_answers', 'partcorrectfb', '');
+            $DB->set_field('qtype_numericalrecit_answers', 'partcorrectfb', '');
 
             // Now add the not null constraint.
             $field = new xmldb_field('partcorrectfb', XMLDB_TYPE_TEXT, 'small', null,
@@ -267,7 +267,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->change_field_notnull($table, $field);
         }
 
-        // Define field partcorrectfbformat to be added to qtype_formulas_answers.
+        // Define field partcorrectfbformat to be added to qtype_numericalrecit_answers.
         $field = new xmldb_field('partcorrectfbformat', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'partcorrectfb');
 
@@ -275,11 +275,11 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
             // Now fill it with FORMAT_HTML.
-            $DB->set_field('qtype_formulas_answers', 'partcorrectfbformat', FORMAT_HTML);
+            $DB->set_field('qtype_numericalrecit_answers', 'partcorrectfbformat', FORMAT_HTML);
 
         }
 
-        // Define field partpartiallycorrectfb to be added to qtype_formulas_answers.
+        // Define field partpartiallycorrectfb to be added to qtype_numericalrecit_answers.
         $field = new xmldb_field('partpartiallycorrectfb', XMLDB_TYPE_TEXT, 'small', null,
                 null, null, null, 'partcorrectfbformat');
 
@@ -288,7 +288,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
 
             // Now fill it with ''.
-            $DB->set_field('qtype_formulas_answers', 'partpartiallycorrectfb', '');
+            $DB->set_field('qtype_numericalrecit_answers', 'partpartiallycorrectfb', '');
 
             // Now add the not null constraint.
             $field = new xmldb_field('partpartiallycorrectfb', XMLDB_TYPE_TEXT, 'small', null,
@@ -296,7 +296,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->change_field_notnull($table, $field);
         }
 
-        // Define field partpartiallycorrectfbformat to be added to qtype_formulas_answers.
+        // Define field partpartiallycorrectfbformat to be added to qtype_numericalrecit_answers.
         $field = new xmldb_field('partpartiallycorrectfbformat', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'partpartiallycorrectfb');
 
@@ -304,10 +304,10 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
             // Now fill it with FORMAT_HTML.
-            $DB->set_field('qtype_formulas_answers', 'partpartiallycorrectfbformat', FORMAT_HTML);
+            $DB->set_field('qtype_numericalrecit_answers', 'partpartiallycorrectfbformat', FORMAT_HTML);
         }
 
-        // Define field partincorrectfb to be added to qtype_formulas_answers.
+        // Define field partincorrectfb to be added to qtype_numericalrecit_answers.
         $field = new xmldb_field('partincorrectfb', XMLDB_TYPE_TEXT, 'small', null,
                 null, null, null, 'partpartiallycorrectfbformat');
 
@@ -316,7 +316,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->add_field($table, $field);
 
             // Now fill it with ''.
-            $DB->set_field('qtype_formulas_answers', 'partincorrectfb', '');
+            $DB->set_field('qtype_numericalrecit_answers', 'partincorrectfb', '');
 
             // Now add the not null constraint.
             $field = new xmldb_field('partincorrectfb', XMLDB_TYPE_TEXT, 'small', null,
@@ -324,7 +324,7 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
             $dbman->change_field_notnull($table, $field);
         }
 
-        // Define field partincorrectfbformat to be added to qtype_formulas_answers.
+        // Define field partincorrectfbformat to be added to qtype_numericalrecit_answers.
         $field = new xmldb_field('partincorrectfbformat', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'partincorrectfb');
 
@@ -332,43 +332,43 @@ function xmldb_qtype_formulas_upgrade($oldversion=0) {
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
             // Now fill it with FORMAT_HTML.
-            $DB->set_field('qtype_formulas_answers', 'partincorrectfbformat', FORMAT_HTML);
+            $DB->set_field('qtype_numericalrecit_answers', 'partincorrectfbformat', FORMAT_HTML);
         }
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2018042800, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2018042800, 'qtype', 'numericalrecit');
     }
     if ($oldversion < 2018042801) {
-        $sql = "UPDATE {qtype_formulas_answers} SET partincorrectfb = feedback";
+        $sql = "UPDATE {qtype_numericalrecit_answers} SET partincorrectfb = feedback";
         $DB->execute($sql);
-        $DB->set_field('qtype_formulas_answers', 'feedback', '');
-        upgrade_plugin_savepoint(true, 2018042801, 'qtype', 'formulas');
+        $DB->set_field('qtype_numericalrecit_answers', 'feedback', '');
+        upgrade_plugin_savepoint(true, 2018042801, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2018060400) {
-        // Define field answernumbering to be added to qtype_formulas_options.
-        $table = new xmldb_table('qtype_formulas_options');
+        // Define field answernumbering to be added to qtype_numericalrecit_options.
+        $table = new xmldb_table('qtype_numericalrecit_options');
         $field = new xmldb_field('answernumbering', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, 'none', 'shownumcorrect');
 
         // Conditionally launch add field answernumbering.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
             // Now fill it with 'none' for compatibility with existing questions'.
-            $DB->set_field('qtype_formulas_options', 'answernumbering', 'none');
+            $DB->set_field('qtype_numericalrecit_options', 'answernumbering', 'none');
         }
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2018060400, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2018060400, 'qtype', 'numericalrecit');
     }
 
     if ($oldversion < 2018080300) {
         // Import from xml code was wrong for answernumbering,
         // There was also a typo in the upgrade code.
         // Fix all broken questions in database.
-        $DB->set_field('qtype_formulas_options', 'answernumbering', 'none', array('answernumbering' => ''));
+        $DB->set_field('qtype_numericalrecit_options', 'answernumbering', 'none', array('answernumbering' => ''));
 
-        // Formulas savepoint reached.
-        upgrade_plugin_savepoint(true, 2018080300, 'qtype', 'formulas');
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2018080300, 'qtype', 'numericalrecit');
     }
     return true;
 }

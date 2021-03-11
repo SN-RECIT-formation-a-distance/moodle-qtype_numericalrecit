@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Formulas question renderer class.
+ * numericalrecit question renderer class.
  *
- * @package    qtype_formulas
+ * @package    qtype_numericalrecit
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,12 +25,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Base class for generating the bits of output for formulas questions.
+ * Base class for generating the bits of output for numericalrecit questions.
  *
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
+class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_renderer {
     /**
      * Generate the display of the formulation part of the question. This is the
      * area that contains the question text, and the controls for students to
@@ -57,7 +57,7 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
 
         $questiontext = '';
         foreach ($question->parts as $part) {
-            $questiontext .= $question->formulas_format_text(
+            $questiontext .= $question->numericalrecit_format_text(
                     $globalvars,
                     $question->textfragments[$part->partindex],
                     FORMAT_HTML,
@@ -68,7 +68,7 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
                     false);
             $questiontext .= $this->part_formulation_and_controls($qa, $options, $part);
         }
-        $questiontext .= $question->formulas_format_text(
+        $questiontext .= $question->numericalrecit_format_text(
                 $globalvars,
                 $question->textfragments[$question->get_number_of_parts()],
                 FORMAT_HTML,
@@ -90,7 +90,7 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
     public function head_code(question_attempt $qa) {
         global $PAGE;
 
-        $PAGE->requires->js('/question/type/formulas/script/formatcheck.js');
+        $PAGE->requires->js('/question/type/numericalrecit/script/formatcheck.js');
     }
 
     // Return the part text, controls, grading details and feedbacks.
@@ -106,7 +106,15 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         $sub = $this->get_part_image_and_class($qa, $partoptions, $part);
         $localvars = $question->get_local_variables($part);
 
-        $output = $this->get_part_formulation(
+        $step = $qa->get_last_step_with_qt_var('stepn');
+
+        if (!$step->has_qt_var('stepn') && empty($options->readonly)) {
+            // Question has never been answered, fill it with response template.
+            $step = new question_attempt_step(array('answer'=>'', 'stepn' => ''));
+        }
+
+        $output = "<div class='row'><div class='col-md-6'>";
+        $output .= $this->get_part_formulation(
                 $qa,
                 $partoptions,
                 $part->partindex,
@@ -124,12 +132,28 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         // If one of the part's coordinates is a MC or select question, the correct answer
         // stored in the database is not the right answer, but the index of the right answer,
         // so in that case, we need to calculate the right answer.
-        if ($partoptions->rightanswer) {
+        if (!empty($options->readonly)) {
             $feedback .= $this->part_correct_response($part->partindex, $qa);
         }
         $output .= html_writer::nonempty_tag('div', $feedback,
-                array('class' => 'formulaspartoutcome'));
-        return html_writer::tag('div', $output , array('class' => 'formulaspart'));
+                array('class' => 'numericalrecitpartoutcome'));
+        
+
+        $output .= "<div class='mark_r'>/{$part->answermark}</div>";
+        
+        $output .= "</div><div class='col-md-6'>";
+        $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
+        if (empty($options->readonly)) {
+            $output .= $responseoutput->response_area_input('stepn', $qa,
+                    $step, 12, $options->context);
+        } else {
+            $output .= $responseoutput->response_area_read_only('stepn', $qa,
+                    $step, 12, $options->context);
+        }
+        $output .= "<div class='mark_r'>/{$question->stepmark}</div>";
+        $output .= "</div></div>";
+        
+        return html_writer::tag('div', $output , array('class' => 'numericalrecitpart'));
     }
 
     // Return class and image for the part feedback.
@@ -203,8 +227,8 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         $part = &$question->parts[$i];
         $localvars = $question->get_local_variables($part);
 
-        $subqreplaced = $question->formulas_format_text($localvars, $part->subqtext,
-                $part->subqtextformat, $qa, 'qtype_formulas', 'answersubqtext', $part->id, false);
+        $subqreplaced = $question->numericalrecit_format_text($localvars, $part->subqtext,
+                $part->subqtextformat, $qa, 'qtype_numericalrecit', 'answersubqtext', $part->id, false);
         $types = array(0 => 'number', 10 => 'numeric', 100 => 'numerical_formula', 1000 => 'algebraic_formula');
         $gradingtype = ($part->answertype != 10 && $part->answertype != 100 && $part->answertype != 1000) ? 0 : $part->answertype;
         $gtype = $types[$gradingtype];
@@ -228,10 +252,10 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
             $inputattributes = array(
                 'type' => 'text',
                 'name' => $inputname,
-                'title' => get_string($gtype.($part->postunit == '' ? '' : '_unit'), 'qtype_formulas'),
+                'title' => get_string($gtype.($part->postunit == '' ? '' : '_unit'), 'qtype_numericalrecit'),
                 'value' => $currentanswer,
                 'id' => $inputname,
-                'class' => 'formulas_' . $gtype . '_unit ' . $sub->feedbackclass,
+                'class' => 'numericalrecit_' . $gtype . '_unit ' . $sub->feedbackclass,
                 'maxlength' => 128,
             );
 
@@ -243,9 +267,9 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
             $a->part = $i + 1;
             $a->numanswer = '';
             if ($question->get_number_of_parts() == 1) {
-                $label = get_string('answercombinedunitsingle', 'qtype_formulas', $a);
+                $label = get_string('answercombinedunitsingle', 'qtype_numericalrecit', $a);
             } else {
-                $label = get_string('answercombinedunitmulti', 'qtype_formulas', $a);
+                $label = get_string('answercombinedunitmulti', 'qtype_numericalrecit', $a);
             }
             $input = html_writer::tag('label', $label,
                                 array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
@@ -289,11 +313,11 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
                         $choices = array();
                         foreach ($stexts->value as $x => $mctxt) {
                             $choices[$x] = $question->format_text($mctxt, $part->subqtextformat , $qa,
-                                    'qtype_formulas', 'answersubqtext', $part->id, false);
+                                    'qtype_numericalrecit', 'answersubqtext', $part->id, false);
                         }
                         $select = html_writer::select($choices, $inputname,
                                 $currentanswer, array('' => ''), $inputattributes);
-                        $output = html_writer::start_tag('span', array('class' => 'formulas_menu'));
+                        $output = html_writer::start_tag('span', array('class' => 'numericalrecit_menu'));
                         $output .= html_writer::tag('label', get_string('answer'),
                                 array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
                         $output .= $select;
@@ -309,7 +333,7 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
                         foreach ($stexts->value as $x => $mctxt) {
                             $mctxt = html_writer::span($this->number_in_style($x, $question->answernumbering), 'answernumber')
                                     . $question->format_text($mctxt, $part->subqtextformat , $qa,
-                                    'qtype_formulas', 'answersubqtext', $part->id, false);
+                                    'qtype_numericalrecit', 'answersubqtext', $part->id, false);
                             $inputattributes['id'] = $inputname.'_'.$x;
                             $inputattributes['value'] = $x;
                             $isselected = ($currentanswer != '' && $x == $currentanswer);
@@ -344,37 +368,37 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
             if ($j == $part->numbox) {
                 // Check if it's an input for unit.
                 if (strlen($part->postunit) > 0) {
-                    $inputattributes['title'] = get_string('unit', 'qtype_formulas');
-                    $inputattributes['class'] = 'formulas_unit '.$sub->unitfeedbackclass;
+                    $inputattributes['title'] = get_string('unit', 'qtype_numericalrecit');
+                    $inputattributes['class'] = 'numericalrecit_unit '.$sub->unitfeedbackclass;
                     $a = new stdClass();
                     $a->part = $i + 1;
                     $a->numanswer = $j + 1;
                     if ($question->get_number_of_parts() == 1) {
-                        $label = get_string('answerunitsingle', 'qtype_formulas', $a);
+                        $label = get_string('answerunitsingle', 'qtype_numericalrecit', $a);
                     } else {
-                        $label = get_string('answerunitmulti', 'qtype_formulas', $a);
+                        $label = get_string('answerunitmulti', 'qtype_numericalrecit', $a);
                     }
                     $inputs[$placeholder] = html_writer::tag('label', $label,
                             array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
                     $inputs[$placeholder] .= html_writer::empty_tag('input', $inputattributes);
                 }
             } else {
-                $inputattributes['title'] = get_string($gtype, 'qtype_formulas');
-                $inputattributes['class'] = 'formulas_'.$gtype.' '.$sub->boxfeedbackclass;
+                $inputattributes['title'] = get_string($gtype, 'qtype_numericalrecit');
+                $inputattributes['class'] = 'numericalrecit_'.$gtype.' '.$sub->boxfeedbackclass;
                 $a = new stdClass();
                 $a->part = $i + 1;
                 $a->numanswer = $j + 1;
                 if ($part->numbox == 1) {
                     if ($question->get_number_of_parts() == 1) {
-                        $label = get_string('answersingle', 'qtype_formulas', $a);
+                        $label = get_string('answersingle', 'qtype_numericalrecit', $a);
                     } else {
-                        $label = get_string('answermulti', 'qtype_formulas', $a);
+                        $label = get_string('answermulti', 'qtype_numericalrecit', $a);
                     }
                 } else {
                     if ($question->get_number_of_parts() == 1) {
-                        $label = get_string('answercoordinatesingle', 'qtype_formulas', $a);
+                        $label = get_string('answercoordinatesingle', 'qtype_numericalrecit', $a);
                     } else {
-                        $label = get_string('answercoordinatemulti', 'qtype_formulas', $a);
+                        $label = get_string('answercoordinatemulti', 'qtype_numericalrecit', $a);
                     }
                 }
                 $inputs[$placeholder] = html_writer::tag('label', $label,
@@ -439,9 +463,9 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         $part = $question->parts[$i];
 
         $correctanswer = $question->format_text($question->correct_response_formatted($part),
-                $part->subqtextformat , $qa, 'qtype_formulas', 'answersubqtext', $part->id, false);
-        return html_writer::nonempty_tag('div', get_string('correctansweris', 'qtype_formulas', $correctanswer),
-                    array('class' => 'formulaspartcorrectanswer'));
+                $part->subqtextformat , $qa, 'qtype_numericalrecit', 'answersubqtext', $part->id, false);
+        return html_writer::nonempty_tag('div', get_string('correctansweris', 'qtype_numericalrecit', $correctanswer),
+                    array('class' => 'numericalrecitpartcorrectanswer'));
     }
 
     /**
@@ -461,7 +485,7 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         if (is_null($a->outof)) {
             return '';
         } else {
-            return get_string('yougotnright', 'qtype_formulas', $a);
+            return get_string('yougotnright', 'qtype_numericalrecit', $a);
         }
     }
 
@@ -496,7 +520,7 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         $format = $state->get_feedback_class() . 'feedbackformat';
         if ($question->$field) {
             $globalvars = $question->get_global_variables();
-            $feedback .= $question->formulas_format_text($globalvars, $question->$field, $question->$format,
+            $feedback .= $question->numericalrecit_format_text($globalvars, $question->$field, $question->$format,
                     $qa, 'question', $field, $question->id, false);
         }
 
@@ -534,10 +558,10 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
         $showfeedback = $options->feedback && $state->get_feedback_class() != '';
         if ($showfeedback) {
             $localvars = $question->get_local_variables($part);
-            $feedbacktext = $question->formulas_format_text($localvars, $part->feedback, FORMAT_HTML, $qa, 'qtype_formulas', 'answerfeedback', $part->id, false);
-            $feedback = html_writer::tag('div', $feedbacktext , array('class' => 'feedback formulaslocalfeedback'));
+            $feedbacktext = $question->numericalrecit_format_text($localvars, $part->feedback, FORMAT_HTML, $qa, 'qtype_numericalrecit', 'answerfeedback', $part->id, false);
+            $feedback = html_writer::tag('div', $feedbacktext , array('class' => 'feedback numericalrecitlocalfeedback'));
             return html_writer::nonempty_tag('div', $feedback . $gradingdetails,
-                    array('class' => 'formulaspartfeedback formulaspartfeedback-' . $part->partindex));
+                    array('class' => 'numericalrecitpartfeedback numericalrecitpartfeedback-' . $part->partindex));
         }
         return '';
     }
@@ -572,15 +596,156 @@ class qtype_formulas_renderer extends qtype_with_combined_feedback_renderer {
             $field = 'part' . $feedbackclass . 'fb';
             $format = 'part' . $feedbackclass . 'fbformat';
             if ($part->$field) {
-                $feedback = $question->formulas_format_text($localvars, $part->$field, $part->$format,
-                        $qa, 'qtype_formulas', $field, $part->id, false);
+                $feedback = $question->numericalrecit_format_text($localvars, $part->$field, $part->$format,
+                        $qa, 'qtype_numericalrecit', $field, $part->id, false);
             }
         }
         if ($showfeedback && $feedback) {
-                $feedback = html_writer::tag('div', $feedback , array('class' => 'feedback formulaslocalfeedback'));
+                $feedback = html_writer::tag('div', $feedback , array('class' => 'feedback numericalrecitlocalfeedback'));
                 return html_writer::nonempty_tag('div', $feedback,
-                        array('class' => 'formulaspartfeedback formulaspartfeedback-' . $part->partindex));
+                        array('class' => 'numericalrecitpartfeedback numericalrecitpartfeedback-' . $part->partindex));
         }
         return '';
     }
+}
+
+class qtype_numericalrecit_format_editorfilepicker_renderer {
+    
+
+    public function response_area_read_only($name, $qa, $step, $lines, $context) {
+        return html_writer::tag('div', $this->prepare_response($name, $qa, $step, $context),
+                ['class' => '_response readonly',
+                        'style' => 'min-height: ' . ($lines * 1.5) . 'em;']);
+        // Height $lines * 1.5 because that is a typical line-height on web pages.
+        // That seems to give results that look OK.
+    }
+
+    public function response_area_input($name, $qa, $step, $lines, $context) {
+        global $CFG;
+        require_once($CFG->dirroot . '/repository/lib.php');
+
+        $inputname = $qa->get_qt_field_name($name);
+        
+        $responseformat = 'editorfilepicker';
+        $id = $inputname . '_id';
+
+        $editor = editors_get_preferred_editor();
+        $strformats = format_text_menu();
+        $formats = $editor->get_supported_formats();
+        foreach ($formats as $fid) {
+            $formats[$fid] = $strformats[$fid];
+        }
+
+        list($draftitemid, $response) = $this->prepare_response_for_editing(
+                $name, $step, $context);
+
+        $editor->set_text($response);
+        $editor->use_editor($id, $this->get_editor_options($context),
+                $this->get_filepicker_options($context, $draftitemid));
+
+        $output = '';
+        $output .= html_writer::start_tag('div', array('class' => 'step0'));
+
+        $output .= html_writer::tag('div', 'Démarche ici');
+
+        $output .= html_writer::tag('div', html_writer::tag('textarea', s($response),
+                array('id' => $id, 'name' => $inputname, 'rows' => $lines, 'cols' => 60)));
+
+        $output .= html_writer::start_tag('div');
+        
+        $output .= html_writer::empty_tag('input', array('type' => 'hidden',
+                    'name' => $inputname . 'format', 'value' => key($formats)));
+
+        $output .= html_writer::end_tag('div');
+
+        $output .= $this->filepicker_html($inputname, $draftitemid);
+
+        $output .= html_writer::end_tag('div');
+        return $output;
+    }
+
+    protected function prepare_response($name, question_attempt $qa,
+            question_attempt_step $step, $context) {
+        if (!$step->has_qt_var($name)) {
+            return 'Aucune démarche';
+        }
+
+        $formatoptions = new stdClass();
+        $formatoptions->para = false;
+        $text = $qa->rewrite_response_pluginfile_urls($step->get_qt_var($name),
+                $context->id, $name, $step);
+        return format_text($text, 1, $formatoptions);
+    }
+
+    protected function prepare_response_for_editing($name,
+            question_attempt_step $step, $context) {
+        return $step->prepare_response_files_draft_itemid_with_text(
+                $name, $context->id, $step->get_qt_var($name));
+    }
+
+    /**
+     * Get editor options for question response text area.
+     * @param object $context the context the attempt belongs to.
+     * @return array options for the editor.
+     */
+    protected function get_editor_options($context) {
+        return question_utils::get_editor_options($context);
+    }
+
+    /**
+     * Get the options required to configure the filepicker for one of the editor
+     * toolbar buttons.
+     * @deprecated since 3.5
+     * @param mixed $acceptedtypes array of types of '*'.
+     * @param int $draftitemid the draft area item id.
+     * @param object $context the context.
+     * @return object the required options.
+     */
+    protected function specific_filepicker_options($acceptedtypes, $draftitemid, $context) {
+        debugging('qtype_essay_format_editorfilepicker_renderer::specific_filepicker_options() is deprecated, ' .
+            'use question_utils::specific_filepicker_options() instead.', DEBUG_DEVELOPER);
+
+        $filepickeroptions = new stdClass();
+        $filepickeroptions->accepted_types = $acceptedtypes;
+        $filepickeroptions->return_types = FILE_INTERNAL | FILE_EXTERNAL;
+        $filepickeroptions->context = $context;
+        $filepickeroptions->env = 'filepicker';
+
+        $options = initialise_filepicker($filepickeroptions);
+        $options->context = $context;
+        $options->client_id = uniqid();
+        $options->env = 'editor';
+        $options->itemid = $draftitemid;
+
+        return $options;
+    }
+
+    /**
+     * @param object $context the context the attempt belongs to.
+     * @param int $draftitemid draft item id.
+     * @return array filepicker options for the editor.
+     */
+    protected function get_filepicker_options($context, $draftitemid) {
+        return question_utils::get_filepicker_options($context, $draftitemid);
+    }
+
+    protected function filepicker_html($inputname, $draftitemid) {
+        $nonjspickerurl = new moodle_url('/repository/draftfiles_manager.php', array(
+            'action' => 'browse',
+            'env' => 'editor',
+            'itemid' => $draftitemid,
+            'subdirs' => false,
+            'maxfiles' => -1,
+            'sesskey' => sesskey(),
+        ));
+
+        return html_writer::empty_tag('input', array('type' => 'hidden',
+                'name' => $inputname . ':itemid', 'value' => $draftitemid)) .
+                html_writer::tag('noscript', html_writer::tag('div',
+                    html_writer::tag('object', '', array('type' => 'text/html',
+                        'data' => $nonjspickerurl, 'height' => 160, 'width' => 600,
+                        'style' => 'border: 1px solid #000;'))));
+    }
+
+
 }
