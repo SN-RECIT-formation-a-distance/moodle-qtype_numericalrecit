@@ -75,7 +75,7 @@ class qtype_numericalrecit extends question_type {
      * @return mixed array as above, or null to tell the base class to do nothing.
      */
     public function extra_question_fields() {
-        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark');
+        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark', 'stepfeedback');
     }
 
     /**
@@ -178,6 +178,7 @@ class qtype_numericalrecit extends question_type {
 
         $options->answernumbering = 'none';
         $options->stepmark = 0;
+        $options->stepfeedback = '';
         $options->shownumcorrect = 0;
 
         return $options;
@@ -285,6 +286,7 @@ class qtype_numericalrecit extends question_type {
             $options->incorrectfeedback = '';
             $options->answernumbering = 'none';
             $options->stepmark = 0;
+            $options->stepfeedback = '';
             $options->id = $DB->insert_record('qtype_numericalrecit_options', $options);
         }
         $extraquestionfields = $this->extra_question_fields();
@@ -296,6 +298,7 @@ class qtype_numericalrecit extends question_type {
         }
 
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
+        $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'qtype_numericalrecit', 'stepfeedback', $question->id);
 
         $DB->update_record('qtype_numericalrecit_options', $options);
 
@@ -386,6 +389,7 @@ class qtype_numericalrecit extends question_type {
         $question->varsglobal = $questiondata->options->varsglobal;
         $question->answernumbering = $questiondata->options->answernumbering;
         $question->stepmark = $questiondata->options->stepmark;
+        $question->stepfeedback = $questiondata->options->stepfeedback;
         $question->qv = new qtype_numericalrecit_variables();
         $question->numpart = $questiondata->options->numpart;
         if ($question->numpart != 0) {
@@ -481,6 +485,7 @@ class qtype_numericalrecit extends question_type {
         $fromform->varsglobal = $format->getpath($xml, array('#', 'varsglobal', 0, '#', 'text', 0, '#'), '', true);
         $fromform->answernumbering = $format->getpath($xml, array('#', 'answernumbering', 0, '#', 'text', 0, '#'), 'none', true);
         $fromform->stepmark = $format->getpath($xml, array('#', 'stepmark', 0, '#', 'text', 0, '#'), 'none', true);
+        $fromform->stepfeedback = $format->getpath($xml, array('#', 'stepfeedback', 0, '#', 'text', 0, '#'), 'none', true);
 
         // Loop over each answer block found in the XML.
         $tags = $this->part_tags();

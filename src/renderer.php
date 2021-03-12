@@ -135,8 +135,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         if (!empty($options->readonly)) {
             $feedback .= $this->part_correct_response($part->partindex, $qa);
         }
-        $output .= html_writer::nonempty_tag('div', $feedback,
-                array('class' => 'numericalrecitpartoutcome'));
+        $output .= html_writer::nonempty_tag('div', $feedback, array('class' => 'numericalrecitpartoutcome'));
         
 
         $output .= "<div class='mark_r'>/{$part->answermark}</div>";
@@ -149,6 +148,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         } else {
             $output .= $responseoutput->response_area_read_only('stepn', $qa,
                     $step, 12, $options->context);
+            $output .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
         $output .= "<div class='mark_r'>/{$question->stepmark}</div>";
         $output .= "</div></div>";
@@ -667,7 +667,7 @@ class qtype_numericalrecit_format_editorfilepicker_renderer {
     protected function prepare_response($name, question_attempt $qa,
             question_attempt_step $step, $context) {
         if (!$step->has_qt_var($name)) {
-            return 'Aucune démarche';
+            return '';
         }
 
         $formatoptions = new stdClass();

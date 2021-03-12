@@ -97,9 +97,12 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->setDefault('globalruleid', 1);
         $mform->addHelpButton('globalruleid', 'ruleid', 'qtype_numericalrecit');
         
+        $mform->addElement('header', 'steppart', get_string('steppart', 'qtype_numericalrecit'));
         $mform->addElement('text', 'stepmark', get_string('stepmark', 'qtype_numericalrecit'));
         $mform->setDefault('stepmark', 1);
         $mform->SetType('stepmark', PARAM_FLOAT);
+        $mform->addElement('editor', 'stepfeedback', get_string('stepfeedback', 'qtype_numericalrecit'));
+        $mform->SetType('stepfeedback', PARAM_RAW);
 
         // Allow instantiate random variables and display the data for instantiated variables.
         $mform->addElement('header', 'checkvarshdr', get_string('checkvarshdr', 'qtype_numericalrecit'));

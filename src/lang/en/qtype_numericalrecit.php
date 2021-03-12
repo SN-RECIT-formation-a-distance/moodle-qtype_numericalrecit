@@ -40,6 +40,8 @@ $string['pleaseputananswer'] = 'Please put an answer in each input field.';
 $string['modelanswer'] = 'Model answer';
 
 $string['stepmark'] = 'Step Mark';
+$string['steppart'] = 'Step Part';
+$string['stepfeedback'] = 'Step Feedback';
 
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';

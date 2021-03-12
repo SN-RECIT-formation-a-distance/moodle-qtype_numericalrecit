@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="question/type/numericalrecit/db" VERSION="20130130" COMMENT="XMLDB file for Moodle question/type/numericalrecit"
+<XMLDB PATH="question/type/numericalrecit/db" VERSION="20210130" COMMENT="XMLDB file for Moodle question/type/numericalrecit"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
@@ -16,6 +16,8 @@
         <FIELD NAME="partiallycorrectfeedbackformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="incorrectfeedback" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Feedback shown for any incorrect response."/>
         <FIELD NAME="incorrectfeedbackformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="stepmark" TYPE="float" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="stepfeedback" TYPE="text" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="shownumcorrect" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="If true, then when the user gets a question partially correct, tell them how many parts they got correct alongside the feedback."/>
         <FIELD NAME="answernumbering" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="none" SEQUENCE="false" COMMENT="Indicates how and whether the choices should be numbered."/>
       </FIELDS>
@@ -43,7 +45,6 @@
         <FIELD NAME="otherrule" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="subqtext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="subqtextformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="stepmark" TYPE="float" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="feedback" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="feedbackformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="partcorrectfb" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
