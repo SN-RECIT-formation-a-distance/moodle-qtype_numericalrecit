@@ -935,8 +935,9 @@ function numericalrecit_format_check() {
 };
 
 window.onload = (function(oldfunc, newfunc) {
-    if (oldfunc && typeof oldfunc == 'function')
+    if (oldfunc && typeof oldfunc == 'function'){
         return function() { oldfunc(); newfunc(); }
-    else
+    }else{
         return newfunc;
+    }
 })(window.onload, function() { numericalrecit_format_check(); });
