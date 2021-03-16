@@ -48,6 +48,7 @@ $string['notavailable'] = 'N/A';
 $string['fillallfields'] = 'Please fill all fields';
 $string['addcolumn'] = 'Add column';
 $string['addline'] = 'Add line';
+$string['showexample'] = 'Show Example';
 
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';

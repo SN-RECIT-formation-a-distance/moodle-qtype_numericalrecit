@@ -50,6 +50,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $PAGE->requires->string_for_js('fillallfields', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('addcolumn', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('addline', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('showexample', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('error_algebraic_var', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('unit', 'qtype_numericalrecit');
         $PAGE->requires->js('/question/type/numericalrecit/script/formatcheck.js');
