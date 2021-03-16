@@ -40,10 +40,17 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
     protected function definition_inner($mform) {
         global $PAGE;
         $PAGE->requires->js('/question/type/numericalrecit/script/editing.js');
+        $PAGE->requires->js('/question/type/numericalrecit/script/tablevalue.js');
         $PAGE->requires->string_for_js('relerror', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('abserror', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('instantiate', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('renew', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('answermissing', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('notavailable', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('fillallfields', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('addcolumn', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('addline', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('error_algebraic_var', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('unit', 'qtype_numericalrecit');
         $PAGE->requires->js('/question/type/numericalrecit/script/formatcheck.js');
         $PAGE->requires->css('/question/type/numericalrecit/styles.css');
@@ -65,6 +72,8 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->insertElementBefore($mform->createElement('textarea', 'varsglobal', get_string('varsglobal', 'qtype_numericalrecit'),
             array('cols' => 80, 'rows'  => 1)) , 'questiontext');
         $mform->addHelpButton('varsglobal', 'varsglobal', 'qtype_numericalrecit');
+
+        $mform->insertElementBefore($mform->createElement('button', 'valuetable', get_string('valuetable', 'qtype_numericalrecit')), 'questiontext');
 
         $mform->insertElementBefore($mform->createElement('header', 'mainq', get_string('mainq', 'qtype_numericalrecit'),
             ''), 'questiontext');
@@ -167,21 +176,18 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['vars2']['helpbutton'] = array('vars2', 'qtype_numericalrecit');
         $repeatedoptions['vars2']['advanced'] = true;
         // Part's grading criteria.
-        $repeated[] = $mform->createElement('text', 'correctness', get_string('correctness', 'qtype_numericalrecit'),
-            array('size' => 60));
+        //$repeated[] = $mform->createElement('text', 'correctness', get_string('correctness', 'qtype_numericalrecit'),            array('size' => 60, 'style' => 'display:none'));
         $repeatedoptions['correctness']['default'] = $config->defaultcorrectness;
-        $repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_numericalrecit');
+        //$repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_numericalrecit');
         $repeatedoptions['correctness']['type'] = PARAM_RAW;
         // Part's unit penalty.
-        $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'),
-            array('size' => 3));
+        //$repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'),            array('size' => 3));
         $repeatedoptions['unitpenalty']['default'] = $config->defaultunitpenalty;
-        $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
+        //$repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
         $repeatedoptions['unitpenalty']['type'] = PARAM_FLOAT;
         // Part's unit.
-        $repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'),
-            array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
-        $repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
+        //$repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'),            array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
+        //$repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
         $repeatedoptions['postunit']['type'] = PARAM_RAW;
         // Part's basic conversion rules.
         $conversionrules = new unit_conversion_rules;

@@ -42,6 +42,12 @@ $string['modelanswer'] = 'Model answer';
 $string['stepmark'] = 'Step Mark';
 $string['steppart'] = 'Step Part';
 $string['stepfeedback'] = 'Step Feedback';
+$string['valuetable'] = 'Value Table';
+$string['answermissing'] = 'Please input answer formula first';
+$string['notavailable'] = 'N/A';
+$string['fillallfields'] = 'Please fill all fields';
+$string['addcolumn'] = 'Add column';
+$string['addline'] = 'Add line';
 
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';

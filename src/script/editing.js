@@ -110,7 +110,6 @@ var numericalrecitform = {
             try {
                 this.init_selective_criteria(i);
             } catch (e) {
-                alert(e);
             }
         }
 
