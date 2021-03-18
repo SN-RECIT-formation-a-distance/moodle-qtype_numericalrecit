@@ -640,6 +640,7 @@ class qtype_numericalrecit extends question_type {
         $tags = $this->part_tags();
         $res = (object)array('answers' => array());
         foreach ($form->answermark as $i => $a) {
+            $skip = false;
             if ((strlen(trim($form->answermark[$i])) == 0 || strlen(trim($form->answer[$i])) == 0)
                     && (strlen(trim($form->subqtext[$i]['text'])) != 0
                     || strlen(trim($form->feedback[$i]['text'])) != 0
@@ -655,10 +656,12 @@ class qtype_numericalrecit extends question_type {
             if (floatval($form->answermark[$i]) <= 0) {
                 $res->errors["answermark[$i]"] = get_string('error_mark', 'qtype_numericalrecit');
             }
-            $skip = false;
-            if (strlen(trim($form->correctness[$i])) == 0) {
-                $res->errors["correctness[$i]"] = get_string('error_criterion', 'qtype_numericalrecit');
-                $skip = true;
+            if (!isset($form->correctness[$i]) || strlen(trim($form->correctness[$i])) == 0) {
+                $form->correctness[$i] = "0";
+                $form->unitpenalty[$i] = "0";
+                $form->postunit[$i] = "0";
+                //$res->errors["correctness[$i]"] = get_string('error_criterion', 'qtype_numericalrecit');
+                //$skip = true;
             }
             if ($skip) {
                 continue;   // If no answer or correctness conditions, it cannot check other parts, so skip.
