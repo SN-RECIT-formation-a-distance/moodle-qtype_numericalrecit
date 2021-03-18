@@ -118,6 +118,7 @@ var numericalrecitform = {
             this.init_numdataset_option();
             this.show_dataset_and_preview('none');
         } catch (e) {}
+
     },
 
     // Return the number of parts in the form.

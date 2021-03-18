@@ -91,6 +91,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         global $PAGE;
 
         $PAGE->requires->js('/question/type/numericalrecit/script/formatcheck.js');
+        $PAGE->requires->js('/question/type/numericalrecit/script/answering.js');
     }
 
     // Return the part text, controls, grading details and feedbacks.
@@ -143,6 +144,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $output .= "</div><div class='col-md-6'>";
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
         if (empty($options->readonly)) {
+            $output .= "<button class='btn btn-primary' id='button_takephoto'>". get_string('takephoto', 'qtype_numericalrecit')."</button>";
             $output .= $responseoutput->response_area_input('stepn', $qa,
                     $step, 12, $options->context);
         } else {
