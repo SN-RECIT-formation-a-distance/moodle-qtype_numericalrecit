@@ -1,6 +1,6 @@
 function initOnCompleteLoad(){
     $('#id_valuetable').click(function(){
-        if (document.getElementById('popup_valuetable')) return;
+        if (document.getElementById('popup_valuetable')) $("#popup_valuetable").remove();
 
         var formula = getAnswerFormula();
         if (formula == ''){
@@ -8,7 +8,7 @@ function initOnCompleteLoad(){
             return;
         }
 
-        $(document.body).append('<div id="popup_valuetable" class="modal show fade in" tabindex="-1" role="dialog">\
+        $(document.body).append('<div id="popup_valuetable" class="modal" tabindex="-1" role="dialog">\
         <div class="modal-dialog" role="document">\
           <div class="modal-content">\
             <div class="modal-header">\
@@ -32,6 +32,7 @@ function initOnCompleteLoad(){
       </div>');
 
       buildValueTable();
+      $("#popup_valuetable").modal('show');
     });
 
     $("body").on("change", "#popup_valuetable input", function(){
@@ -40,11 +41,12 @@ function initOnCompleteLoad(){
     })
 
     $("body").on("click", "#closevaluetable", function(){
+        $("#popup_valuetable").modal('hide');
         $("#popup_valuetable").remove();
     })
 
     $("body").on("click", "#addcolvaluetable", function(){
-        //addColumnToValueTable();
+        addColumnToValueTable();
     })
 
     $("body").on("click", "#addlinevaluetable", function(){
@@ -69,6 +71,7 @@ function initOnCompleteLoad(){
         }
         $("textarea[name=varsrandom]").val(random);
         $("textarea[name=varsglobal]").val(vars);
+        $("#popup_valuetable").modal('hide');
         $("#popup_valuetable").remove();
     });
 
@@ -82,6 +85,8 @@ function initOnCompleteLoad(){
         $("input[name=\"questiontext[text]\"]").val("Calculez {a} + {b}");
         $("#id_questiontexteditable p").html("Calculez {a} + {b}");
         $("input[name=name]").val("q1");
+
+        $('.collapsible').removeClass('collapsed');
         
     })
 };
