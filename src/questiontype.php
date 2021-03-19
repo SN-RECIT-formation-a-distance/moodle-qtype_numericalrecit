@@ -54,8 +54,7 @@ class qtype_numericalrecit extends question_type {
      * @return array.
      */
     public function part_tags() {
-        return array('placeholder', 'answermark', 'answertype', 'numbox', 'vars1', 'answer', 'vars2', 'correctness'
-            , 'unitpenalty', 'postunit', 'ruleid', 'otherrule');
+        return array('placeholder', 'answermark', 'answertype', 'numbox', 'vars1', 'answer', 'vars2', 'ruleid', 'otherrule');
     }
 
     /**
@@ -728,7 +727,7 @@ class qtype_numericalrecit extends question_type {
         }
         $validanswers = $answerschecked->answers;
         foreach ($validanswers as $idx => $part) {
-            if ($part->unitpenalty < 0 || $part->unitpenalty > 1) {
+            if (isset($part->unitpenalty) && ($part->unitpenalty < 0 || $part->unitpenalty > 1)) {
                 $errors["unitpenalty[$idx]"] = get_string('error_unitpenalty', 'qtype_numericalrecit');
             }
             try {
@@ -845,7 +844,7 @@ class qtype_numericalrecit extends question_type {
             $unitcheck = new answer_unit_conversion;
 
             try {
-                $unitcheck->parse_targets($ans->postunit);
+                if (isset($ans->postunit)) $unitcheck->parse_targets($ans->postunit);
             } catch (Exception $e) {
                 $errors["postunit[$idx]"] = get_string('error_unit', 'qtype_numericalrecit') . $e->getMessage();
             }

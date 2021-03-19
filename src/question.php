@@ -504,7 +504,8 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         foreach (range(0, count($res) - 1) as $j) {
             $responses[$part->partindex."_$j"] = $res[$j]; // Coordinates.
         }
-        $tmp = explode('=', $part->postunit, 2);
+        $tmp = array('');
+        if (isset($part->postunit)) $tmp = explode('=', $part->postunit, 2);
         $responses[$part->partindex."_".count($res)] = $tmp[0];  // Postunit.
         return $responses;
     }
@@ -614,6 +615,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         $entry = $conversionrules->entry($part->ruleid);
         $checkunit->assign_default_rules($part->ruleid, $entry[1]);
         $checkunit->assign_additional_rules($part->otherrule);
+        if (!isset($part->postunit)) $part->postunit = '';
         $checked = $checkunit->check_convertibility($postunit, $part->postunit);
         $cfactor = $checked->cfactor;
         $unitcorrect = $checked->convertible ? 1 : 0;  // Convertible is regarded as correct here.
@@ -658,6 +660,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
 
         // Step 7: Evaluate the grading variables and grading criteria to determine whether the answer is correct.
         $vars = $this->qv->evaluate_assignments($vars, $part->vars2);
+        if (!isset($part->correctness)) $part->correctness = 0;
         $correctness = $this->qv->evaluate_general_expression($vars, $part->correctness);
         if ($correctness->type != 'n') {
             throw new Exception(get_string('error_criterion', 'qtype_numericalrecit'));
