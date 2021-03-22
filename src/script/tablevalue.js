@@ -81,7 +81,7 @@ function initOnCompleteLoad(){
 
     $("body").on("click", "#showexamplertr", function(){
         $("textarea[name=varsrandom]").val("k = {0,1};");
-        $("textarea[name=varsglobal]").val("a = [1,3][k]; b = [3,6][k];");
+        $("textarea[name=varsglobal]").val("a = [1,3][k];b = [3,6][k];");
         $("input[name=\"answer[0]\"]").val("a + b");
         $("input[name=\"questiontext[text]\"]").val("Calculez {a} + {b}");
         $("#id_questiontexteditable p").html("Calculez {a} + {b}");
