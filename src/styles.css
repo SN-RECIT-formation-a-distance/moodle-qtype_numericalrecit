@@ -120,7 +120,7 @@
     padding-top: 6px;
 }
 
-.que.numericalrecit .formulation .numericalrecitpartoutcome {
+.que.numericalrecit .formulation .numericalrecitpartoutcome, .que.numericalrecit .comment {
     background: #fff3bf;
     color: black;
     margin: 0.2em -0.2em 0.5em;
@@ -136,6 +136,10 @@
 /* Styles for the editing form. */
 body#page-question-type-numericalrecit .numericalrecit_correctness_show {
     display: inline;
+}
+
+.que.numericalrecit div[id^='fitem_id_correctness_'] {
+    display: none;
 }
 
 body#page-question-type-numericalrecit .numericalrecit_input_warning_outer {

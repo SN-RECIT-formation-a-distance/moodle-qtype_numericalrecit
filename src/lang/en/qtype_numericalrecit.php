@@ -53,7 +53,7 @@ $string['showexample'] = 'Show Example';
 
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';
-$string['pluginname'] = 'Numerical RÉCIT';
+$string['pluginname'] = 'Formula with steps RÉCIT';
 $string['pluginnameadding'] = 'Adding a formulas question';
 $string['pluginnameediting'] = 'Editing a formulas question';
 $string['pluginname_help'] = 'To start using this question, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>.

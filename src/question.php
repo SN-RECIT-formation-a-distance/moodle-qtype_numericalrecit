@@ -91,7 +91,6 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
      */
     public function get_expected_data() {
         $expected = array();
-        $expected['stepn'] = question_attempt::PARAM_RAW_FILES;
         foreach ($this->parts as $part) {
             $expected += $part->part_get_expected_data();
         }
@@ -799,7 +798,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
 
     public function check_file_access($qa, $options, $component, $filearea, $args, $forcedownload) {
         $itemid = reset($args);
-        if ($component == 'question' && $filearea == 'response_stepn') {
+        if ($component == 'question' && strpos($filearea, 'response_stepn')) {
             return true;
         }else if ($component == 'qtype_numericalrecit' && ($filearea == 'answersubqtext' || $filearea == 'answerfeedback'
                 || $filearea == 'partcorrectfb' || $filearea == 'partpartiallycorrectfb' || $filearea == 'partincorrectfb')) {
@@ -936,6 +935,7 @@ class qtype_numericalrecit_part {
     public function part_get_expected_data() {
         $expected = array();
         $i = $this->partindex;
+        $expected['stepn'.$i] = question_attempt::PARAM_RAW_FILES;
         if ($this->part_has_combined_unit_field()) {
                 $expected["${i}_"] = PARAM_RAW;
         } else {

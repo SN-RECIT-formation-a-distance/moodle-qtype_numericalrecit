@@ -107,11 +107,11 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $sub = $this->get_part_image_and_class($qa, $partoptions, $part);
         $localvars = $question->get_local_variables($part);
 
-        $step = $qa->get_last_step_with_qt_var('stepn');
+        $step = $qa->get_last_step_with_qt_var('stepn'.$part->partindex);
 
-        if (!$step->has_qt_var('stepn') && empty($options->readonly)) {
+        if (!$step->has_qt_var('stepn'.$part->partindex) && empty($options->readonly)) {
             // Question has never been answered, fill it with response template.
-            $step = new question_attempt_step(array('answer'=>'', 'stepn' => ''));
+            $step = new question_attempt_step(array('answer'=>'', 'stepn'.$part->partindex => ''));
         }
 
         $output = "<div class='row'><div class='col-md-6'>";
@@ -145,10 +145,10 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
         if (empty($options->readonly)) {
             $output .= "<button class='btn btn-primary' id='button_takephoto'>". get_string('takephoto', 'qtype_numericalrecit')."</button>";
-            $output .= $responseoutput->response_area_input('stepn', $qa,
+            $output .= $responseoutput->response_area_input('stepn'.$part->partindex, $qa,
                     $step, 12, $options->context);
         } else {
-            $output .= $responseoutput->response_area_read_only('stepn', $qa,
+            $output .= $responseoutput->response_area_read_only('stepn'.$part->partindex, $qa,
                     $step, 12, $options->context);
             $output .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
