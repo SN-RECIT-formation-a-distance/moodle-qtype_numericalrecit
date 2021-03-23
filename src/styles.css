@@ -139,7 +139,6 @@ body#page-question-type-numericalrecit .numericalrecit_correctness_show {
 }
 
 body#page-question-type-numericalrecit .numericalrecit_input_warning_outer {
-
     display: inline;
     position: absolute;
     z-index: 1;
@@ -166,7 +165,7 @@ body#page-question-type-numericalrecit .numericalrecit_input_info {
     top: 1.94em;
     width: 150px;
 }
-*/
+
 body#page-question-type-numericalrecit .numericalrecit_input_info_title {
     padding: 2px;
 }
@@ -190,11 +189,17 @@ body#page-question-type-numericalrecit .numericalrecit_input_info_interpretation
     text-align: left;
 }
 
+.mark_l {
+    font-weight: bold;
+    margin-left: 20px;
+    display: inline;
+}
+
 .mark_r {
     font-weight: bold;
     position: absolute;
     right: 15px;
-    bottom: 10px;
+    top: 10px;
 }
 
 

@@ -76,8 +76,9 @@ function initOnCompleteLoad(){
     });
 
     //Add show example button
-    $('.collapsible-actions').append(' ­ <a href="#" id="showexamplertr">'+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
+    $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-primary" id="showexamplertr">'+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('#fitem_id_correctness_0').hide();
+    $('#id_subqoptions').hide();
 
     $("body").on("click", "#showexamplertr", function(){
         $("textarea[name=varsrandom]").val("k = {0,1};");

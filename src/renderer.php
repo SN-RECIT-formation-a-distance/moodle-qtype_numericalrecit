@@ -127,6 +127,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         } else {
             $output .= $sub->feedbackimage;
         }
+        $output .= "<div class='mark_l'>/{$part->answermark}</div>";
 
         $feedback = $this->part_combined_feedback($qa, $partoptions, $part, $sub->fraction);
         $feedback .= $this->part_general_feedback($qa, $partoptions, $part);
@@ -139,7 +140,6 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $output .= html_writer::nonempty_tag('div', $feedback, array('class' => 'numericalrecitpartoutcome'));
         
 
-        $output .= "<div class='mark_r'>/{$part->answermark}</div>";
         
         $output .= "</div><div class='col-md-6'>";
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
