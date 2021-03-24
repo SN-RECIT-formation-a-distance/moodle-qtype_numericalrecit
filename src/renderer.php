@@ -55,6 +55,14 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
             return;
         }
 
+        $step = $qa->get_last_step_with_qt_var('stepn');
+
+        if (!$step->has_qt_var('stepn') && empty($options->readonly)) {
+            // Question has never been answered, fill it with response template.
+            $step = new question_attempt_step(array('answer'=>'', 'stepn' => ''));
+        }
+
+        $result = "<div class='row'><div class='col-md-6'>";
         $questiontext = '';
         foreach ($question->parts as $part) {
             $questiontext .= $question->numericalrecit_format_text(
@@ -78,12 +86,26 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
                 $question->id,
                 false);
 
-        $result = html_writer::tag('div', $questiontext, array('class' => 'qtext'));
+        $result .= html_writer::tag('div', $questiontext, array('class' => 'qtext'));
         if ($qa->get_state() == question_state::$invalid) {
             $result .= html_writer::nonempty_tag('div',
                     $question->get_validation_error($qa->get_last_qt_data()),
                     array('class' => 'validationerror'));
         }
+        
+        $result .= "</div><div class='col-md-6'>";
+        $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
+        if (empty($options->readonly)) {
+            $result .= "<button class='btn btn-primary' id='button_takephoto'>". get_string('takephoto', 'qtype_numericalrecit')."</button>";
+            $result .= $responseoutput->response_area_input('stepn', $qa,
+                    $step, 12, $options->context);
+        } else {
+            $result .= $responseoutput->response_area_read_only('stepn', $qa,
+                    $step, 12, $options->context);
+            $result .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
+        }
+        $result .= "<div class='mark_r'>/{$question->stepmark}</div>";
+        $result .= "</div></div>";
         return $result;
     }
 
@@ -107,15 +129,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $sub = $this->get_part_image_and_class($qa, $partoptions, $part);
         $localvars = $question->get_local_variables($part);
 
-        $step = $qa->get_last_step_with_qt_var('stepn'.$part->partindex);
-
-        if (!$step->has_qt_var('stepn'.$part->partindex) && empty($options->readonly)) {
-            // Question has never been answered, fill it with response template.
-            $step = new question_attempt_step(array('answer'=>'', 'stepn'.$part->partindex => ''));
-        }
-
-        $output = "<div class='row'><div class='col-md-6'>";
-        $output .= $this->get_part_formulation(
+        $output = $this->get_part_formulation(
                 $qa,
                 $partoptions,
                 $part->partindex,
@@ -138,22 +152,6 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
             $feedback .= $this->part_correct_response($part->partindex, $qa);
         }
         $output .= html_writer::nonempty_tag('div', $feedback, array('class' => 'numericalrecitpartoutcome'));
-        
-
-        
-        $output .= "</div><div class='col-md-6'>";
-        $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
-        if (empty($options->readonly)) {
-            $output .= "<button class='btn btn-primary' id='button_takephoto'>". get_string('takephoto', 'qtype_numericalrecit')."</button>";
-            $output .= $responseoutput->response_area_input('stepn'.$part->partindex, $qa,
-                    $step, 12, $options->context);
-        } else {
-            $output .= $responseoutput->response_area_read_only('stepn'.$part->partindex, $qa,
-                    $step, 12, $options->context);
-            $output .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
-        }
-        $output .= "<div class='mark_r'>/{$question->stepmark}</div>";
-        $output .= "</div></div>";
         
         return html_writer::tag('div', $output , array('class' => 'numericalrecitpart'));
     }
