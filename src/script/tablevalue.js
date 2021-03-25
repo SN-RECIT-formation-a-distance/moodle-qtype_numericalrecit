@@ -3,9 +3,13 @@ function initOnCompleteLoad(){
         if (document.getElementById('popup_valuetable')) $("#popup_valuetable").remove();
 
         var formula = getAnswerFormula();
-        if (formula == ''){
+        if (formula[0] == ''){
             alert(M.util.get_string('answermissing', 'qtype_numericalrecit'));
             return;
+        }
+        var th = '';
+        for (let formul of formula){
+            th += '<th type="formula">'+formul+'</th>';
         }
 
         $(document.body).append('<div id="popup_valuetable" class="modal" tabindex="-1" role="dialog">\
@@ -18,14 +22,14 @@ function initOnCompleteLoad(){
               </button>\
             </div>\
             <div class="modal-body">\
-            <table class="table"><thead><tr><th>a</th><th>b</th><th type="formula">'+formula+'</th></tr></thead>\
+            <table class="table"><thead><tr><th>a</th><th>b</th>'+th+'</tr></thead>\
             <tbody>\
             </tbody></table>\
             <button type="button" class="btn btn-primary" id="addcolvaluetable">'+M.util.get_string('addcolumn', 'qtype_numericalrecit')+'</button>\
             <button type="button" class="btn btn-primary" id="addlinevaluetable">'+M.util.get_string('addline', 'qtype_numericalrecit')+'</button>\
             </div>\
             <div class="modal-footer">\
-              <button type="button" class="btn btn-primary" id="savevaluetable">Save changes</button>\
+              <button type="button" class="btn btn-primary" id="savevaluetable"><i class="fa fa-save"></i></button>\
             </div>\
           </div>\
         </div>\
@@ -37,7 +41,10 @@ function initOnCompleteLoad(){
 
     $("body").on("change", "#popup_valuetable input", function(){
         var row = $(this).closest('tr');
-        getAnswerForRow(row);
+        var formulas = getAnswerFormula();
+        for (var formula of formulas){
+            getAnswerForRow(row, formula);
+        }
     })
 
     $("body").on("click", "#closevaluetable", function(){
@@ -76,7 +83,7 @@ function initOnCompleteLoad(){
     });
 
     //Add show example button
-    $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-primary" id="showexamplertr">'+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
+    $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-danger" id="showexamplertr">'+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('#fitem_id_correctness_0').hide();
     $('#id_subqoptions').hide();
 
@@ -121,6 +128,7 @@ function buildValueTable(){
     }
 
     var rows = [];
+    var formulas = getAnswerFormula();
 
     for (var i = 0; i < rowsnum; i++){
         var row = addRowToValueTable();
@@ -134,7 +142,9 @@ function buildValueTable(){
     }
 
     for (var row of rows) {
-        getAnswerForRow(row);
+        for (var formula of formulas){
+            getAnswerForRow(row, formula);
+        }
     }
 }
 
@@ -178,12 +188,12 @@ function getTHFromTD(td){
     return $th;
 }
 
-function getAnswerColumn(row){
+function getAnswerColumn(row, formula){
     var col = null;
     $(row).find("td").each(function() {
         var th = getTHFromTD(this)
         var k = th.text();
-        if (th.attr('type') == 'formula'){
+        if (th.attr('type') == 'formula' && th.text() == formula){
             col = this;
         }
     });
@@ -203,36 +213,47 @@ function doesColumnExist(name){
 function addColumnToValueTable(letter){
     if (!letter) letter = getNextLetter();
     if (!letter) return;
+    var alen = getAnswerFormula().length;
     $('#popup_valuetable table').find('tr').each(function(){
-        $(this).find('th').eq(-1).before('<th>'+letter+'</th>');
-        $(this).find('td').eq(-1).before('<td><input type="number" value=""></td>'); 
+        $(this).find('th').eq(-alen).before('<th>'+letter+'</th>');
+        $(this).find('td').eq(-alen).before('<td><input type="number" value=""></td>'); 
     });
 }
 
 function addRowToValueTable(){
     var td = '';
-    var len = $('#popup_valuetable').find("th").length - 1;
+    var alen = getAnswerFormula().length;
+    var len = $('#popup_valuetable').find("th").length - alen;
     for (var i = 0; i < len; i++){
         td += '<td><input type="number" value=""></td>';
     }
-    td += '<td>'+M.util.get_string('notavailable', 'qtype_numericalrecit')+'</td>';
+    for (let i = 0; i < alen; i++){
+        td += '<td>'+M.util.get_string('notavailable', 'qtype_numericalrecit')+'</td>';
+    }
 
     $('#popup_valuetable table').append('<tr>'+td+'</tr>');
     return $('#popup_valuetable table tr:last');
 }
 
 function getNextLetter(){
+    var alen = getAnswerFormula().length;
     var letters = ['a','b','c','d','e','f','g','h'];
     var len = $('#popup_valuetable').find("th").length;
-    return letters[len-1];
+    return letters[len-alen];
 }
 
 
 function getAnswerFormula(){
-    return $("input[name=\"answer[0]\"]").val();
+    var answers = [];
+    $("input[name^=\"answer[\"]").each(function(_, a){
+        a = a.value;
+        if (a !== '')
+            answers.push(a);
+    });
+    return answers
 }
 
-function getAnswerForRow(row){
+function getAnswerForRow(row, formula){
     var varsglobal = '';
     var values = getRowValues(row);
     for (var val in values){
@@ -244,7 +265,7 @@ function getAnswerForRow(row){
     data['varsrandom'] = '';
     data['varsglobal'] = varsglobal;
     data['varslocals[0]'] = '';
-    data['answers[0]'] = getAnswerFormula();
+    data['answers[0]'] = formula;
     
     data['start'] = 0;
     data['N'] = 1;
@@ -271,7 +292,7 @@ function getAnswerForRow(row){
                     alert(vars['errors'][0]);
                     return;
                 }
-                var td = getAnswerColumn(row);
+                var td = getAnswerColumn(row, data['answers[0]']);
                 $(td).text(vars['lists'][0]['answer0'][0]);
             }catch(e){
                 alert(M.util.get_string('error_algebraic_var', 'qtype_numericalrecit'))

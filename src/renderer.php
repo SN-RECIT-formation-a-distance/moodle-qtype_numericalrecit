@@ -96,7 +96,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $result .= "</div><div class='col-md-6'>";
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
         if (empty($options->readonly)) {
-            $result .= "<button class='btn btn-primary' id='button_takephoto'>". get_string('takephoto', 'qtype_numericalrecit')."</button>";
+            $result .= "<button class='btn btn-primary' id='button_takephoto'><i class='fa fa-camera'></i> ". get_string('takephoto', 'qtype_numericalrecit')."</button>";
             $result .= $responseoutput->response_area_input('stepn', $qa,
                     $step, 12, $options->context);
         } else {
@@ -104,7 +104,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
                     $step, 12, $options->context);
             $result .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
-        $result .= "<div class='mark_r'>/{$question->stepmark}</div>";
+        $result .= "<div class='mark_r'><span class='badge badge-secondary'>/{$question->stepmark}</span></div>";
         $result .= "</div></div>";
         return $result;
     }
@@ -141,7 +141,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         } else {
             $output .= $sub->feedbackimage;
         }
-        $output .= "<div class='mark_l'>/{$part->answermark}</div>";
+        $output .= "<div style='display:inline-block'><span class='input-group-text'>/{$part->answermark}</span></div>";
 
         $feedback = $this->part_combined_feedback($qa, $partoptions, $part, $sub->fraction);
         $feedback .= $this->part_general_feedback($qa, $partoptions, $part);
@@ -403,6 +403,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
                 }
                 $inputs[$placeholder] = html_writer::tag('label', $label,
                                 array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
+                $inputs[$placeholder] .= "<div style='display:inline-block'><span class='input-group-text'>".get_string('answersingle', 'qtype_numericalrecit')."</span></div>";
                 $inputs[$placeholder] .= html_writer::empty_tag('input', $inputattributes);
             }
         }

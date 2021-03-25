@@ -45,7 +45,7 @@ $string['valuetable'] = 'Table de valeurs';
 $string['answermissing'] = 'Veuillez renseigner la formule de la réponse';
 $string['notavailable'] = 'N/D';
 $string['fillallfields'] = 'Veuillez renseigner tous les champs';
-$string['addcolumn'] = 'Ajouter une colone';
+$string['addcolumn'] = 'Ajouter une colonne';
 $string['addline'] = 'Ajouter une ligne';
 $string['showexample'] = 'Montrer une example';
 
