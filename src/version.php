@@ -26,7 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_numericalrecit';
 $plugin->version   = 2021031600;
-
 $plugin->cron      = 0;
 $plugin->requires  = 2015111600;
 $plugin->dependencies = array(
@@ -35,5 +34,4 @@ $plugin->dependencies = array(
     'qtype_multichoice' => 2015111600,
 );
 $plugin->release   = 'R12';
-
-$plugin->maturity  = MATURITY_STABLE;
+$plugin->maturity  = MATURITY_ALPHA;

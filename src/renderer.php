@@ -96,15 +96,15 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $result .= "</div><div class='col-md-6'>";
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
         if (empty($options->readonly)) {
-            $result .= "<button class='btn btn-primary' id='button_takephoto'><i class='fa fa-camera'></i> ". get_string('takephoto', 'qtype_numericalrecit')."</button>";
+            $result .= "<button class='btn btn-primary d-block m-auto' id='button_takephoto'><i class='fa fa-camera'></i> ". get_string('takephoto', 'qtype_numericalrecit')."</button>";
             $result .= $responseoutput->response_area_input('stepn', $qa,
-                    $step, 12, $options->context);
+                    $step, 12, $options->context, $question->stepmark);
         } else {
             $result .= $responseoutput->response_area_read_only('stepn', $qa,
-                    $step, 12, $options->context);
+                    $step, 12, $options->context, $question->stepmark);
             $result .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
-        $result .= "<div class='mark_r'><span class='badge badge-secondary'>/{$question->stepmark}</span></div>";
+
         $result .= "</div></div>";
         return $result;
     }
@@ -141,7 +141,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         } else {
             $output .= $sub->feedbackimage;
         }
-        $output .= "<div style='display:inline-block'><span class='input-group-text'>/{$part->answermark}</span></div>";
+        $output .= "<span class='badge m-3 p-2'>/{$part->answermark}</span>";
 
         $feedback = $this->part_combined_feedback($qa, $partoptions, $part, $sub->fraction);
         $feedback .= $this->part_general_feedback($qa, $partoptions, $part);
@@ -403,7 +403,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
                 }
                 $inputs[$placeholder] = html_writer::tag('label', $label,
                                 array('class' => 'subq accesshide', 'for' => $inputattributes['id']));
-                $inputs[$placeholder] .= "<div style='display:inline-block'><span class='input-group-text'>".get_string('answersingle', 'qtype_numericalrecit')."</span></div>";
+                $inputs[$placeholder] .= "<span class='h6 mr-2'>".get_string('answersingle', 'qtype_numericalrecit')."</span>";
                 $inputs[$placeholder] .= html_writer::empty_tag('input', $inputattributes);
             }
         }
@@ -613,15 +613,17 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
 class qtype_numericalrecit_format_editorfilepicker_renderer {
     
 
-    public function response_area_read_only($name, $qa, $step, $lines, $context) {
-        return html_writer::tag('div', $this->prepare_response($name, $qa, $step, $context),
+    public function response_area_read_only($name, $qa, $step, $lines, $context, $stepmark) {
+        $output = "<span class='badge ml-2 mb-2 p-2'>/{$stepmark}</span>";
+        $output .= html_writer::tag('div', $this->prepare_response($name, $qa, $step, $context),
                 ['class' => '_response readonly',
                         'style' => 'min-height: ' . ($lines * 1.5) . 'em;']);
         // Height $lines * 1.5 because that is a typical line-height on web pages.
         // That seems to give results that look OK.
+        return $output;
     }
 
-    public function response_area_input($name, $qa, $step, $lines, $context) {
+    public function response_area_input($name, $qa, $step, $lines, $context, $stepmark) {
         global $CFG;
         require_once($CFG->dirroot . '/repository/lib.php');
 
@@ -645,9 +647,10 @@ class qtype_numericalrecit_format_editorfilepicker_renderer {
                 $this->get_filepicker_options($context, $draftitemid));
 
         $output = '';
-        $output .= html_writer::start_tag('div', array('class' => 'step0'));
+        $output .= html_writer::start_tag('div', array('class' => 'step0 mt-3'));
 
-        $output .= html_writer::tag('div', 'Démarche ici');
+        $output .= html_writer::tag('span', 'Démarche ici', array('class' => 'h6'));
+        $output .= "<span class='badge ml-2 mb-2 p-2'>/{$stepmark}</span>";
 
         $output .= html_writer::tag('div', html_writer::tag('textarea', s($response),
                 array('id' => $id, 'name' => $inputname, 'rows' => $lines, 'cols' => 60)));

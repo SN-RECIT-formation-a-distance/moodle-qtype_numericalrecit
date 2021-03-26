@@ -25,11 +25,11 @@ function initOnCompleteLoad(){
             <table class="table"><thead><tr><th>a</th><th>b</th>'+th+'</tr></thead>\
             <tbody>\
             </tbody></table>\
-            <button type="button" class="btn btn-primary" id="addcolvaluetable">'+M.util.get_string('addcolumn', 'qtype_numericalrecit')+'</button>\
-            <button type="button" class="btn btn-primary" id="addlinevaluetable">'+M.util.get_string('addline', 'qtype_numericalrecit')+'</button>\
+            <button type="button" class="btn btn-primary" id="addcolvaluetable"><i class="fa fa-plus"></i> '+M.util.get_string('addcolumn', 'qtype_numericalrecit')+'</button>\
+            <button type="button" class="btn btn-primary" id="addlinevaluetable"><i class="fa fa-plus"></i> '+M.util.get_string('addline', 'qtype_numericalrecit')+'</button>\
             </div>\
             <div class="modal-footer">\
-              <button type="button" class="btn btn-primary" id="savevaluetable"><i class="fa fa-save"></i></button>\
+              <button type="button" class="btn btn-success" id="savevaluetable"><i class="fa fa-save"></i> '+M.util.get_string('save', 'qtype_numericalrecit')+ '</button>\
             </div>\
           </div>\
         </div>\
@@ -83,7 +83,7 @@ function initOnCompleteLoad(){
     });
 
     //Add show example button
-    $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-danger" id="showexamplertr">'+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
+    $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('#fitem_id_correctness_0').hide();
     $('#id_subqoptions').hide();
 
@@ -93,7 +93,7 @@ function initOnCompleteLoad(){
         $("input[name=\"answer[0]\"]").val("a + b");
         $("input[name=\"questiontext[text]\"]").val("Calculez {a} + {b}");
         $("#id_questiontexteditable p").html("Calculez {a} + {b}");
-        $("input[name=name]").val("q1");
+        $("input[name=name]").val("Exemple de question avec démarche");
 
         $('.collapsible').removeClass('collapsed');
         

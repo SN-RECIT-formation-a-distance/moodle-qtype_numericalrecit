@@ -39,15 +39,16 @@ Notez que le nombre d\'éléments de la liste définit le nombre de champs répo
 
 $string['takephoto'] = 'Prendre une photo';
 $string['stepmark'] = 'Note de la démarche';
-$string['steppart'] = 'Note de la partie';
+$string['steppart'] = 'Démarche';
 $string['stepfeedback'] = 'Description de la démarche';
 $string['valuetable'] = 'Table de valeurs';
 $string['answermissing'] = 'Veuillez renseigner la formule de la réponse';
 $string['notavailable'] = 'N/D';
 $string['fillallfields'] = 'Veuillez renseigner tous les champs';
-$string['addcolumn'] = 'Ajouter une colonne';
-$string['addline'] = 'Ajouter une ligne';
-$string['showexample'] = 'Montrer une example';
+$string['addcolumn'] = 'Colonne';
+$string['addline'] = 'Ligne';
+$string['showexample'] = 'Créer un exemple';
+$string['save'] = 'Enregistrer';
 
 $string['answercombinedunitmulti'] = 'Réponse et unité pour la partie {$a->part}';
 $string['answercombinedunitsingle'] = 'Réponse et unité';
