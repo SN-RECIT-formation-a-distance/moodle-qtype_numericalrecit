@@ -16,6 +16,7 @@
     display: inline;
     position: absolute;
     z-index: 2;
+    margin-top: 19px;
 }
 
 .que.numericalrecit .numericalrecit_input_info {
@@ -149,7 +150,6 @@ body#page-question-type-numericalrecit .numericalrecit_input_warning_outer {
     display: inline;
     position: absolute;
     z-index: 1;
-    margin-top: 19px;
 }
 
 body#page-question-type-numericalrecit .numericalrecit_input_warning {
@@ -163,6 +163,7 @@ body#page-question-type-numericalrecit .numericalrecit_input_info_outer {
     display: inline;
     position: absolute;
     z-index: 2;
+    margin-top: 19px;
 }
 
 body#page-question-type-numericalrecit .numericalrecit_input_info {
