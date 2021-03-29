@@ -85,7 +85,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->setDefault('answernumbering', get_config('qtype_multichoice', 'answernumbering'));
         // Part's answers.
         $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_numericalrecit', '{no}'),
-            question_bank::fraction_options(), 1, 2);
+            question_bank::fraction_options(), 1, 1);
         // Display options, flow options and global part's options.
         $mform->addElement('header', 'subqoptions', get_string('subqoptions', 'qtype_numericalrecit'));
 

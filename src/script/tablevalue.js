@@ -86,6 +86,7 @@ function initOnCompleteLoad(){
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('#fitem_id_correctness_0').hide();
     $('#id_subqoptions').hide();
+    //$('.collapsible').addClass('collapsed');
 
     $("body").on("click", "#showexamplertr", function(){
         $("textarea[name=varsrandom]").val("k = {0,1};");
