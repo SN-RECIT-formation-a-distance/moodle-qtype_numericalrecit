@@ -294,7 +294,8 @@ function getAnswerForRow(row, formula){
                     return;
                 }
                 var td = getAnswerColumn(row, data['answers[0]']);
-                $(td).text(vars['lists'][0]['answer0'][0]);
+                var num = Math.round((parseFloat(vars['lists'][0]['answer0'][0]) + Number.EPSILON) * 1000) / 1000
+                $(td).text(num);
             }catch(e){
                 alert(M.util.get_string('error_algebraic_var', 'qtype_numericalrecit'))
             }
