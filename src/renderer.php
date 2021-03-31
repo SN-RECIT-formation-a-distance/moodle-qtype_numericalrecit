@@ -102,6 +102,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         } else {
             $result .= $responseoutput->response_area_read_only('stepn', $qa,
                     $step, 12, $options->context, $question->stepmark);
+            if (is_array($question->stepfeedback)) $question->stepfeedback = $question->stepfeedback['text'];
             $result .= html_writer::nonempty_tag('div', $question->stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
 
@@ -465,6 +466,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
 
         $correctanswer = $question->format_text($question->correct_response_formatted($part),
                 $part->subqtextformat , $qa, 'qtype_numericalrecit', 'answersubqtext', $part->id, false);
+        if (is_numeric($correctanswer)) $correctanswer = round($correctanswer, 3);
         return html_writer::nonempty_tag('div', get_string('correctansweris', 'qtype_numericalrecit', $correctanswer),
                     array('class' => 'numericalrecitpartcorrectanswer'));
     }
