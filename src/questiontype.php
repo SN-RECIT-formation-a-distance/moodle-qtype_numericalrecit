@@ -151,6 +151,7 @@ class qtype_numericalrecit extends question_type {
         $question->options->answers = $DB->get_records('qtype_numericalrecit_answers', array('questionid' => $question->id), 'partindex ASC');
         $question->options->numpart = count($question->options->answers);
         $question->options->answers = array_values($question->options->answers);
+        $question->options->stepfeedback = array('text' => $question->options->stepfeedback);
         return true;
     }
 

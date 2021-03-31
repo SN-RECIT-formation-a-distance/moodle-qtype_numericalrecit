@@ -167,6 +167,10 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['answertype']['default'] = $config->defaultanswertype;
         $repeatedoptions['answertype']['type'] = PARAM_INT;
         $repeatedoptions['answertype']['helpbutton'] = array('answertype', 'qtype_numericalrecit');
+        // Part's text.
+        $repeated[] = $mform->createElement('editor', 'subqtext', get_string('subqtext', 'qtype_numericalrecit'),
+            array('rows' => 3), $this->editoroptions);
+        $repeatedoptions['subqtext']['helpbutton'] = array('subqtext', 'qtype_numericalrecit');
         // Part's answer.
         $repeated[] = $mform->createElement('text', 'answer', get_string('answer', 'qtype_numericalrecit'),
             array('size' => 80));
@@ -210,10 +214,6 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
             array('size' => 20));
         $repeatedoptions['placeholder']['helpbutton'] = array('placeholder', 'qtype_numericalrecit');
         $repeatedoptions['placeholder']['type'] = PARAM_RAW;
-        // Part's text.
-        $repeated[] = $mform->createElement('editor', 'subqtext', get_string('subqtext', 'qtype_numericalrecit'),
-            array('rows' => 3), $this->editoroptions);
-        $repeatedoptions['subqtext']['helpbutton'] = array('subqtext', 'qtype_numericalrecit');
         // Part's feedback.
         $repeated[] = $mform->createElement('editor', 'feedback', get_string('feedback', 'qtype_numericalrecit'),
             array('rows' => 3), $this->editoroptions);
