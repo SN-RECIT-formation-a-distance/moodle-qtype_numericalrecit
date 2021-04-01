@@ -14,7 +14,7 @@ function initOnCompleteLoad(){
 
         $(document.body).append('<div id="popup_valuetable" class="modal" tabindex="-1" role="dialog">\
         <div class="modal-dialog" role="document">\
-          <div class="modal-content">\
+          <div class="modal-content w-auto">\
             <div class="modal-header">\
               <h5 class="modal-title">Value Table</h5>\
               <button type="button" class="close" data-dismiss="modal" id="closevaluetable" aria-label="Close">\
@@ -22,7 +22,7 @@ function initOnCompleteLoad(){
               </button>\
             </div>\
             <div class="modal-body">\
-            <table class="table"><thead><tr><th>a</th><th>b</th>'+th+'</tr></thead>\
+            <table class="table w-auto"><thead><tr><th>a</th><th>b</th>'+th+'</tr></thead>\
             <tbody>\
             </tbody></table>\
             <button type="button" class="btn btn-primary" id="addcolvaluetable"><i class="fa fa-plus"></i> '+M.util.get_string('addcolumn', 'qtype_numericalrecit')+'</button>\
@@ -86,6 +86,7 @@ function initOnCompleteLoad(){
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('div[id^="fitem_id_correctness_"]').hide();
     $('div[id^="fitem_id_answertype_"]').hide();
+    $('#id_combinedfeedbackhdr').hide();
     $('#id_subqoptions').hide();
     //$('.collapsible').addClass('collapsed');
 

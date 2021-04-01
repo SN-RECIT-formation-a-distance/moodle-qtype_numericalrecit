@@ -217,3 +217,8 @@ body#page-question-type-numericalrecit .numericalrecit_input_info_interpretation
 #popup_valuetable input {
     max-width: 65px;
 }
+
+#popup_valuetable .modal-content {
+    min-width: 400px;
+    display: table;
+}
