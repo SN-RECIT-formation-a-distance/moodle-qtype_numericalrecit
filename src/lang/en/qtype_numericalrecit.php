@@ -55,8 +55,8 @@ $string['save'] = 'Save';
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';
 $string['pluginname'] = 'Formula with steps RÉCIT';
-$string['pluginnameadding'] = 'Adding a formulas question';
-$string['pluginnameediting'] = 'Editing a formulas question';
+$string['pluginnameadding'] = 'Adding a formulas with steps RÉCIT question';
+$string['pluginnameediting'] = 'Editing a formulas with steps RÉCIT question';
 $string['pluginname_help'] = 'To start using this question, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>.
 
 For possible questions, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>.

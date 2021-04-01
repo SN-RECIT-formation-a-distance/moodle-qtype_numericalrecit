@@ -182,9 +182,9 @@ ou consulter les <a href="http://code.google.com/p/moodle-coordinate-question/wi
 Pour comprendre les options dans le formulaire ci-dessous, consultez les <a href="http://code.google.com/p/moodle-coordinate-question/wiki/QuestionOptions">options de questions</a>
 
 Pour la documentation complète, lisez <a href="http://code.google.com/p/moodle-coordinate-question/wiki/Documentation">la documentation</a>';
-$string['pluginname_link'] = 'question/type/formulas';
-$string['pluginnameadding'] = 'Ajout d\'une question formules';
-$string['pluginnameediting'] = 'Modification d\'une question formules';
+$string['pluginname_link'] = 'question/type/numericalrecit';
+$string['pluginnameadding'] = 'Ajout d\'une question formules avec démarche RÉCIT';
+$string['pluginnameediting'] = 'Modification d\'une question formules avec démarche RÉCIT';
 $string['pluginnamesummary'] = 'Type de questions avec des valeurs aléatoires et des champs de réponse multiples.
 Les champs de réponse peuvent être placés n\'importe où dans le texte de la question, ce qui permet de créer des questions
 impliquant des structures variées comme des vecteurs, des polynômes ou des matrices.
