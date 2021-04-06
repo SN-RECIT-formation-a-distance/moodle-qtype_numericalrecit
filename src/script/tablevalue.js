@@ -84,7 +84,7 @@ function initOnCompleteLoad(){
 
     //Add show example button
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
-    $('div[id^="fitem_id_correctness_"]').hide();
+    //$('div[id^="fitem_id_correctness_"]').hide();
     $('div[id^="fitem_id_answertype_"]').hide();
     $('#id_combinedfeedbackhdr').hide();
     $('#id_subqoptions').hide();
@@ -96,6 +96,8 @@ function initOnCompleteLoad(){
         $("input[name=\"answer[0]\"]").val("a + b");
         $("#id_questiontext").val("Calculez {a} + {b}");
         $("#id_questiontexteditable p").html("Calculez {a} + {b}");
+        $("#id_stepfeedback").val("Description de la démarche ici");
+        $("#id_stepfeedbackeditable p").html("Description de la démarche ici");
         $("input[name=name]").val("Exemple de question avec démarche");
 
         $('.collapsible').removeClass('collapsed');
