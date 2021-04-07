@@ -653,7 +653,7 @@ class qtype_numericalrecit extends question_type {
             if (strlen(trim($form->answermark[$i])) == 0 || strlen(trim($form->answer[$i])) == 0) {
                 continue;   // If no mark or no answer, then skip this answer.
             }
-            if (floatval($form->answermark[$i]) <= 0) {
+            if (floatval($form->answermark[$i]) < 0) {
                 $res->errors["answermark[$i]"] = get_string('error_mark', 'qtype_numericalrecit');
             }
             if (!isset($form->correctness[$i]) || strlen(trim($form->correctness[$i])) == 0) {

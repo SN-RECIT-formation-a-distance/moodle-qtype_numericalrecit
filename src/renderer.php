@@ -154,8 +154,9 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
             $feedback .= $this->part_correct_response($part->partindex, $qa);
         }
         $output .= html_writer::nonempty_tag('div', $feedback, array('class' => 'numericalrecitpartoutcome'));
-        
-        return html_writer::tag('div', $output , array('class' => 'numericalrecitpart'));
+        $style = '';
+        if ($part->answermark == 0) $style = 'display:none';
+        return html_writer::tag('div', $output , array('class' => 'numericalrecitpart', 'style' => $style));
     }
 
     // Return class and image for the part feedback.
