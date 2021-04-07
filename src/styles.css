@@ -1,5 +1,4 @@
 .que.numericalrecit .numericalrecit_input_warning_outer {
-
     display: inline;
     position: absolute;
     z-index: 1;
@@ -140,10 +139,6 @@
 /* Styles for the editing form. */
 body#page-question-type-numericalrecit .numericalrecit_correctness_show {
     display: inline;
-}
-
-.que.numericalrecit div[id^='fitem_id_correctness_'] {
-    display: none;
 }
 
 .que.numericalrecit .step0 .editor_atto {

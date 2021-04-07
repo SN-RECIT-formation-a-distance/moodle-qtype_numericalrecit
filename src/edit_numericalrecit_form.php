@@ -192,8 +192,8 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
         $repeatedoptions['unitpenalty']['type'] = PARAM_FLOAT;
         // Part's unit.
-        //$repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'),            array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
-        //$repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
+        $repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'),            array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
+        $repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
         $repeatedoptions['postunit']['type'] = PARAM_RAW;
         // Part's basic conversion rules.
         $conversionrules = new unit_conversion_rules;
