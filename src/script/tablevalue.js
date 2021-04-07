@@ -87,6 +87,7 @@ function initOnCompleteLoad(){
     $('#fitem_id_answernumbering').hide();
     //$('div[id^="fitem_id_answertype_"]').hide();
     $('div[id^="fitem_id_correctness_"]').hide();
+    $('#id_multitriesheader').hide();
     $('#id_combinedfeedbackhdr').hide();
     $('#id_subqoptions').hide();
     //$('.collapsible').addClass('collapsed');
