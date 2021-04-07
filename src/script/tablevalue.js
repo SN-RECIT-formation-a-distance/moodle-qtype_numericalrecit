@@ -3,7 +3,7 @@ function initOnCompleteLoad(){
         if (document.getElementById('popup_valuetable')) $("#popup_valuetable").remove();
 
         var formula = getAnswerFormula();
-        if (formula[0] == ''){
+        if (formula.length == 0 || formula[0] == ''){
             alert(M.util.get_string('answermissing', 'qtype_numericalrecit'));
             return;
         }
@@ -86,6 +86,7 @@ function initOnCompleteLoad(){
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('#fitem_id_answernumbering').hide();
     $('div[id^="fitem_id_answertype_"]').hide();
+    $('div[id^="fitem_id_correctness_"]').hide();
     $('#id_combinedfeedbackhdr').hide();
     $('#id_subqoptions').hide();
     //$('.collapsible').addClass('collapsed');

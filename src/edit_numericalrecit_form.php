@@ -63,19 +63,6 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
 
         $mform->addHelpButton('questiontext', 'questiontext', 'qtype_numericalrecit');
 
-        // Random and global variables and main question.
-        $mform->insertElementBefore($mform->createElement('header', 'globalvarshdr', get_string('globalvarshdr', 'qtype_numericalrecit'),
-            ''), 'questiontext');
-
-        $mform->insertElementBefore($mform->createElement('textarea', 'varsrandom', get_string('varsrandom', 'qtype_numericalrecit'),
-            array('cols' => 80, 'rows' => 1)) , 'questiontext');
-        $mform->addHelpButton('varsrandom', 'varsrandom', 'qtype_numericalrecit');
-
-        $mform->insertElementBefore($mform->createElement('textarea', 'varsglobal', get_string('varsglobal', 'qtype_numericalrecit'),
-            array('cols' => 80, 'rows'  => 1)) , 'questiontext');
-        $mform->addHelpButton('varsglobal', 'varsglobal', 'qtype_numericalrecit');
-
-        $mform->insertElementBefore($mform->createElement('button', 'valuetable', get_string('valuetable', 'qtype_numericalrecit')), 'questiontext');
 
         $mform->insertElementBefore($mform->createElement('header', 'mainq', get_string('mainq', 'qtype_numericalrecit'),
             ''), 'questiontext');
@@ -86,6 +73,19 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         // Part's answers.
         $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_numericalrecit', '{no}'),
             question_bank::fraction_options(), 1, 1);
+        // Random and global variables and main question.
+        $mform->addElement($mform->createElement('header', 'globalvarshdr', get_string('globalvarshdr', 'qtype_numericalrecit'),
+            ''));
+
+        $mform->addElement($mform->createElement('textarea', 'varsrandom', get_string('varsrandom', 'qtype_numericalrecit'),
+            array('cols' => 80, 'rows' => 1)));
+        $mform->addHelpButton('varsrandom', 'varsrandom', 'qtype_numericalrecit');
+
+        $mform->addElement($mform->createElement('textarea', 'varsglobal', get_string('varsglobal', 'qtype_numericalrecit'),
+            array('cols' => 80, 'rows'  => 1)));
+        $mform->addHelpButton('varsglobal', 'varsglobal', 'qtype_numericalrecit');
+
+        $mform->addElement($mform->createElement('button', 'valuetable', get_string('valuetable', 'qtype_numericalrecit')));
         // Display options, flow options and global part's options.
         $mform->addElement('header', 'subqoptions', get_string('subqoptions', 'qtype_numericalrecit'));
 
