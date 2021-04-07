@@ -54,7 +54,7 @@ class qtype_numericalrecit extends question_type {
      * @return array.
      */
     public function part_tags() {
-        return array('placeholder', 'answermark', 'answertype', 'numbox', 'vars1', 'answer', 'vars2', 'ruleid', 'otherrule');
+        return array('placeholder', 'answermark', 'answertype', 'numbox', 'vars1', 'answer', 'vars2', 'ruleid', 'otherrule', 'postunit');
     }
 
     /**
