@@ -85,7 +85,7 @@ function initOnCompleteLoad(){
     //Add show example button
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     $('#fitem_id_answernumbering').hide();
-    //$('div[id^="fitem_id_answertype_"]').hide();
+    $('div[id^="fitem_id_answertype_"]').hide();
     $('div[id^="fitem_id_correctness_"]').hide();
     $('#id_multitriesheader').hide();
     $('#id_combinedfeedbackhdr').hide();
