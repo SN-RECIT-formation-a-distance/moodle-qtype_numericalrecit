@@ -24,102 +24,104 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Helper function to emulate the behaviour of the count() function
-// before php 7.2.
-// Needed because a string is passed as parameter in many places in the code.
-function mycount($a) {
-    if ($a === null) {
-        return 0;
-    } else {
-        if ($a instanceof \Countable || is_array($a)) {
-            return count($a);
+class QTypeNumericalRecitUtils{
+    // Helper function to emulate the behaviour of the count() function
+    // before php 7.2.
+    // Needed because a string is passed as parameter in many places in the code.
+    public static function mycount($a) {
+        if ($a === null) {
+            return 0;
         } else {
-            return 1;
+            if ($a instanceof \Countable || is_array($a)) {
+                return count($a);
+            } else {
+                return 1;
+            }
         }
     }
-}
 
-function fact($n) {
-    $n = (int) $n;
-    if ( $n < 2 ) {
-        return 1;
-    }
-    $return = 1;
-    for ($i = $n; $i > 1; $i--) {
-        $return *= $i;
+    public static function fact($n) {
+        $n = (int) $n;
+        if ( $n < 2 ) {
+            return 1;
+        }
+        $return = 1;
+        for ($i = $n; $i > 1; $i--) {
+            $return *= $i;
+        }
+
+        return $return;
     }
 
-    return $return;
-}
+    public static function npr($n, $r) {
+        $n = (int)$n;
+        $r = (int)$r;
+        if ($r > $n) {
+            return 0;
+        }
+        if (($n - $r) < $r) {
+            return self::npr($n, ($n - $r));
+        }
+        $return = 1;
+        for ($i = 0; $i < $r; $i++) {
+            $return *= ($n - $i);
+        }
+        return $return;
+    }
 
-function npr($n, $r) {
-    $n = (int)$n;
-    $r = (int)$r;
-    if ($r > $n) {
-        return 0;
+    public static function ncr($n, $r) {
+        $n = (int)$n;
+        $r = (int)$r;
+        if ($r > $n) {
+            return 0;
+        }
+        if (($n - $r) < $r) {
+            return self::ncr($n, ($n - $r));
+        }
+        $return = 1;
+        for ($i = 0; $i < $r; $i++) {
+            $return *= ($n - $i) / ($i + 1);
+        }
+        return $return;
     }
-    if (($n - $r) < $r) {
-        return npr($n, ($n - $r));
-    }
-    $return = 1;
-    for ($i = 0; $i < $r; $i++) {
-         $return *= ($n - $i);
-    }
-    return $return;
-}
 
-function ncr($n, $r) {
-    $n = (int)$n;
-    $r = (int)$r;
-    if ($r > $n) {
-        return 0;
-    }
-    if (($n - $r) < $r) {
-        return ncr($n, ($n - $r));
-    }
-    $return = 1;
-    for ($i = 0; $i < $r; $i++) {
-         $return *= ($n - $i) / ($i + 1);
-    }
-    return $return;
-}
-
-function gcd($a, $b) {
-    if ($a < 0) {
-        $a = 0 - $a;
-    }
-    if ($b < 0 ) {
-        $b = 0 - $b;
-    }
-    if ($a == 0 || $b == 0) {
-        return 1;
-    }
-    if ($a == $b) {
+    public static function gcd($a, $b) {
+        if ($a < 0) {
+            $a = 0 - $a;
+        }
+        if ($b < 0 ) {
+            $b = 0 - $b;
+        }
+        if ($a == 0 || $b == 0) {
+            return 1;
+        }
+        if ($a == $b) {
+            return $a;
+        }
+        do {
+            $rest = (int) $a % $b;
+            $a = $b;
+            $b = $rest;
+        } while ($rest > 0);
         return $a;
     }
-    do {
-        $rest = (int) $a % $b;
-        $a = $b;
-        $b = $rest;
-    } while ($rest > 0);
-    return $a;
-}
 
-function lcm($a, $b) {
-    return $a * $b / gcd($a, $b);
-}
-
-function sigfig($number, $precision) {
-    if ($number == 0) {
-        $decimalplaces = $precision - 1;
-    } else if ($number < 0) {
-        $decimalplaces = $precision - floor(log10($number * -1)) - 1;
-    } else {
-        $decimalplaces = $precision - floor(log10($number)) - 1;
+    public static function lcm($a, $b) {
+        return $a * $b / self::gcd($a, $b);
     }
-    $answer = ($decimalplaces > 0) ?
-            number_format($number, $decimalplaces, '.', '') : number_format(round($number, $decimalplaces), 0, '.', '');
-    return $answer;
+
+    public static function sigfig($number, $precision) {
+        if ($number == 0) {
+            $decimalplaces = $precision - 1;
+        } else if ($number < 0) {
+            $decimalplaces = $precision - floor(log10($number * -1)) - 1;
+        } else {
+            $decimalplaces = $precision - floor(log10($number)) - 1;
+        }
+        $answer = ($decimalplaces > 0) ?
+                number_format($number, $decimalplaces, '.', '') : number_format(round($number, $decimalplaces), 0, '.', '');
+        return $answer;
+    }
 }
 
 /**
@@ -185,7 +187,7 @@ class qtype_numericalrecit_variables {
         foreach ($vstack->all as $name => $data) {
             if (array_key_exists($data->type, $ctype)) {
                 $values = $data->type[0] == 'l' ? $data->value : array($data->value);   // Convert all into arrays for homogeneous treatment.
-                if ($data->type == 's' || $data->type == 'ls')  for ($i = 0; $i < mycount($values); $i++)
+                if ($data->type == 's' || $data->type == 'ls')  for ($i = 0; $i < QTypeNumericalRecitUtils::mycount($values); $i++)
                     $values[$i] = '"'.$values[$i].'"';    // String has a quotation.
                 $vstr .= $name . '=' . ($data->type[0] == 'l' ? ('['.implode(',', $values).']') : $values[0]) . ';';
             }
@@ -222,15 +224,15 @@ class qtype_numericalrecit_variables {
         if ($index === null) {
             if ($type[0] == 'l') {  // Error check for list.
                 if (!is_array($value))  throw new Exception('Unknown error. vstack_update_variable()');
-                if (mycount($value) < 1 || mycount($value) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
+                if (QTypeNumericalRecitUtils::mycount($value) < 1 || QTypeNumericalRecitUtils::mycount($value) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
                 if (!is_numeric($value[0]) && !is_string($value[0]))  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
                 if ($type[1] == 'n') {
-                    for ($i = 0; $i < mycount($value); $i++) {
+                    for ($i = 0; $i < QTypeNumericalRecitUtils::mycount($value); $i++) {
                         if (!is_numeric($value[$i]))  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
                         $value[$i] = floatval($value[$i]);
                     }
                 } else {
-                    for ($i = 0; $i < mycount($value); $i++)
+                    for ($i = 0; $i < QTypeNumericalRecitUtils::mycount($value); $i++)
                         if (!is_string($value[$i]))  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
                 }
             }
@@ -239,14 +241,14 @@ class qtype_numericalrecit_variables {
             $list = &$vstack->all[$name];
             if ($list->type[0] != 'l')  throw new Exception(get_string('error_vars_array_unsubscriptable', 'qtype_numericalrecit'));
             $index = intval($index);
-            if ($index < 0 || $index >= mycount($list->value))  throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
+            if ($index < 0 || $index >= QTypeNumericalRecitUtils::mycount($list->value))  throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
             if ($list->type[1] != $type)  throw new Exception(get_string('error_vars_array_type', 'qtype_numericalrecit'));
             $list->value[$index] = $type == 'n' ? floatval($value) : $value;
         }
     }
 
     private function vstack_mark_current_top(&$vstack) {
-        return (object)array('idcounter' => $vstack->idcounter, 'sz' => mycount($vstack->all));
+        return (object)array('idcounter' => $vstack->idcounter, 'sz' => QTypeNumericalRecitUtils::mycount($vstack->all));
     }
 
     private function vstack_restore_previous_top(&$vstack, $previoustop) {
@@ -281,7 +283,7 @@ class qtype_numericalrecit_variables {
         $ts = explode("\n`", $text);     // The ` is the separator, so split it first.
         foreach ($ts as $text) {
             $splitted = explode("\n`", preg_replace($funcpattern, "\n`$1\n`", $text));
-            for ($i = 1; $i < mycount($splitted); $i += 2) {
+            for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {
                 try {
                     $expr = substr($splitted[$i], $splitted[$i][1] == '=' ? 2 : 1 , -1);
                     $res = $this->evaluate_general_expression($vstack, $expr);
@@ -299,7 +301,7 @@ class qtype_numericalrecit_variables {
     // Return the original string by substituting back the placeholders (given by variables in $vstack) in the input $text.
     private function substitute_placeholders_in_text(&$vstack, $text) {
         $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $text));
-        for ($i = 1; $i < mycount($splitted); $i += 2)      // The length will always be odd, and the placeholder is stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2)      // The length will always be odd, and the placeholder is stored in odd index.
             $splitted[$i] = $this->vstack_get_variable($vstack, $splitted[$i])->value;   // Substitute back the strings.
         return implode('', $splitted);
     }
@@ -308,7 +310,7 @@ class qtype_numericalrecit_variables {
     private function substitute_vname_by_variables(&$vstack, $text) {
         $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $text));
         $appearedvars = array();     // Reuse the temporary variable if possible.
-        for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the numbers are stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {    // The length will always be odd, and the numbers are stored in odd index.
             $data = $this->vstack_get_variable($vstack, $splitted[$i]);
             if ($data->type == 'v') {
                 $tmp = $this->vstack_get_variable($vstack, $data->value);
@@ -325,7 +327,7 @@ class qtype_numericalrecit_variables {
     private function substitute_strings_by_placholders(&$vstack, $text) {
         $text = stripcslashes($text);
         $splitted = explode("\"", $text);
-        if (mycount($splitted) % 2 == 0)  throw new Exception(get_string('error_vars_string', 'qtype_numericalrecit'));
+        if (QTypeNumericalRecitUtils::mycount($splitted) % 2 == 0)  throw new Exception(get_string('error_vars_string', 'qtype_numericalrecit'));
         foreach ($splitted as $i => &$s)  if ($i % 2 == 1) {
             if (strpos($s, '\'') !== false || strpos($s, "\n") !== false)
                 throw new Exception(get_string('error_vars_string', 'qtype_numericalrecit'));
@@ -340,15 +342,15 @@ class qtype_numericalrecit_variables {
     private function substitute_fixed_ranges_by_placeholders(&$vstack, $text) {
         $rangepattern = '/(\[[^\]]+:[^\]]+\])/';
         $splitted = explode('`', preg_replace($rangepattern, '`$1`', $text));
-        for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the numbers are stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {    // The length will always be odd, and the numbers are stored in odd index.
             $res = $this->parse_fixed_range($vstack, substr($splitted[$i], 1, -1));
             if ($res === null)  throw new Exception(get_string('error_fixed_range', 'qtype_numericalrecit'));
             $data = array();
             for ($z = $res->element[0]; $z < $res->element[1]; $z += $res->element[2]) {
                 $data[] = $z;
-                if (mycount($data) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
+                if (QTypeNumericalRecitUtils::mycount($data) > self::$listmaxsize)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
             }
-            if (mycount($data) < 1)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
+            if (QTypeNumericalRecitUtils::mycount($data) < 1)  throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, 'ln', $data);
         }
         return implode('', $splitted);
@@ -358,7 +360,7 @@ class qtype_numericalrecit_variables {
     private function substitute_numbers_by_placeholders(&$vstack, $text) {
         $numpattern = '/(^|[\]\[)(}{, ?:><=~!|&%^\/*+-])(([0-9]+\.?[0-9]*|[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?)/';
         $splitted = explode('`', preg_replace($numpattern, '$1`$2`', $text));
-        for ($i = 1; $i < mycount($splitted); $i += 2)      // The length will always be odd, and the numbers are stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2)      // The length will always be odd, and the numbers are stored in odd index.
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, 'n', $splitted[$i]);
         return implode('', $splitted);
     }
@@ -369,7 +371,7 @@ class qtype_numericalrecit_variables {
         $funclists = $internal ? $this->func_all : $this->func_algebraic;
         $type = $internal ? 'F' : 'f';
         $splitted = explode('`', preg_replace($funcpattern, '`$1`$2', $text));
-        for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
             if (!array_key_exists($splitted[$i], $funclists))  continue;
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, $type, $splitted[$i]);
         }
@@ -380,7 +382,7 @@ class qtype_numericalrecit_variables {
     private function substitute_constants_by_placeholders(&$vstack, $text, $preserve) {
         $varpattern = '/([A-Za-z][A-Za-z0-9_]*)/';
         $splitted = explode('`', preg_replace($varpattern, '`$1`', $text));
-        for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
             if (!array_key_exists($splitted[$i], $this->constlist))  continue;
             $constnumber = $preserve ? $splitted[$i] : $this->constlist[$splitted[$i]];
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, 'n', $constnumber);
@@ -393,7 +395,7 @@ class qtype_numericalrecit_variables {
         $varpattern = $internal ? '/([A-Za-z_][A-Za-z0-9_]*)/' : '/([A-Za-z][A-Za-z0-9_]*)/';
         $funclists = $internal ? $this->func_all : $this->func_algebraic;
         $splitted = explode('`', preg_replace($varpattern, '`$1`', $text));
-        for ($i = 1; $i < mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {    // The length will always be odd, and the variables are stored in odd index.
             if (array_key_exists($splitted[$i], $funclists))  throw new Exception(get_string('error_vars_reserved', 'qtype_numericalrecit', $splitted[$i]));
             $splitted[$i] = $this->vstack_add_temporary_variable($vstack, 'v', $splitted[$i]);
         }
@@ -403,18 +405,18 @@ class qtype_numericalrecit_variables {
     // Parse the number or range in the format of start(:stop(:interval)). return null if error.
     private function parse_fixed_range(&$vstack, $expression) {
         $ex = explode(':', $expression);
-        if (mycount($ex) > 3)  return null;
-        $numpart = mycount($ex);
+        if (QTypeNumericalRecitUtils::mycount($ex) > 3)  return null;
+        $numpart = QTypeNumericalRecitUtils::mycount($ex);
         for ($i = 0; $i < $numpart; $i++) {
             $ex[$i] = trim($ex[$i]);
-            if (mycount($ex[$i]) == 0)  return null;
+            if (QTypeNumericalRecitUtils::mycount($ex[$i]) == 0)  return null;
             $v = $ex[$i][0] == '-' ? trim(substr($ex[$i], 1)) : $ex[$i]; // Get the sign of the number.
             $num = $this->vstack_get_variable($vstack, $v);     // Num must be a constant number.
             if ($num === null || $num->type != 'n' || !is_string($num->value))  return null;
             $ex[$i] = strlen($ex[$i]) == strlen($v) ? floatval($num->value) : -floatval($num->value); // Multiply the sign back.
         }
-        if (mycount($ex) == 1)  $ex = array($ex[0], $ex[0] + 0.5, 1.);
-        if (mycount($ex) == 2)  $ex = array($ex[0], $ex[1], 1.);
+        if (QTypeNumericalRecitUtils::mycount($ex) == 1)  $ex = array($ex[0], $ex[0] + 0.5, 1.);
+        if (QTypeNumericalRecitUtils::mycount($ex) == 2)  $ex = array($ex[0], $ex[1], 1.);
         if ($ex[0] > $ex[1] || $ex[2] <= 0)  return null;
         return (object)array('numelement' => ceil( ($ex[1] - $ex[0]) / $ex[2] ), 'element' => $ex, 'numpart' => $numpart);
     }
@@ -446,10 +448,10 @@ class qtype_numericalrecit_variables {
                 // Split into variable name and expression.
                 $ex = explode('=', $assignment, 2);
                 $name = trim($ex[0]);
-                if (mycount($ex) == 1 && strlen($name) == 0) {
+                if (QTypeNumericalRecitUtils::mycount($ex) == 1 && strlen($name) == 0) {
                     continue;   // If empty assignment.
                 }
-                if (mycount($ex) != 2) {
+                if (QTypeNumericalRecitUtils::mycount($ex) != 2) {
                     throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                 }
                 if (!preg_match('/^[A-Za-z0-9_]+$/', $name)) {
@@ -495,10 +497,10 @@ class qtype_numericalrecit_variables {
                             $numelement = $result->numelement;
                         }
                         if ($i == 0) {
-                            $listsize = $type[0] == 'l' ? mycount($element) : 1;
+                            $listsize = $type[0] == 'l' ? QTypeNumericalRecitUtils::mycount($element) : 1;
                         }
                         if ($i > 0) {
-                            if (($type[0] == 'l' ? mycount($element) : 1) != $listsize) {
+                            if (($type[0] == 'l' ? QTypeNumericalRecitUtils::mycount($element) : 1) != $listsize) {
                                 throw new Exception(get_string('error_randvars_type', 'qtype_numericalrecit'));
                             }
                         }
@@ -512,7 +514,7 @@ class qtype_numericalrecit_variables {
                         throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                     }
                     $type = 'zh'.$result->type;
-                    $var->numelement = mycount($result->value);   // The actual number should be a!, but it will not be used anyway.
+                    $var->numelement = QTypeNumericalRecitUtils::mycount($result->value);   // The actual number should be a!, but it will not be used anyway.
                     $var->elements = $result->value;
                 } else {
                     throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
@@ -608,7 +610,7 @@ class qtype_numericalrecit_variables {
                 $header = $this->get_expressions_in_bracket($subtext, $first->endloc, '(');
                 if ($header === null)  throw new Exception('Unknown error: for loop');
                 $h = explode(':', implode('', $header->expressions), 2);
-                if (mycount($h) == 1)  throw new Exception(get_string('error_forloop', 'qtype_numericalrecit'));
+                if (QTypeNumericalRecitUtils::mycount($h) == 1)  throw new Exception(get_string('error_forloop', 'qtype_numericalrecit'));
                 $loopvar = $this->vstack_get_variable($vstack, trim($h[0]));
                 if ($loopvar === null || $loopvar->type != 'v' || $loopvar->value[0] == '_')  throw new Exception(get_string('error_forloop_var', 'qtype_numericalrecit'));
                 $expression = $this->substitute_vname_by_variables($vstack, $h[1]);
@@ -652,10 +654,10 @@ class qtype_numericalrecit_variables {
                 // Split into variable name and expression.
                 $ex = explode('=', $assignment, 2);
                 $name = trim($ex[0]);
-                if (mycount($ex) == 1 && strlen($name) == 0) {
+                if (QTypeNumericalRecitUtils::mycount($ex) == 1 && strlen($name) == 0) {
                     continue;   // If empty assignment.
                 }
-                if (mycount($ex) != 2)
+                if (QTypeNumericalRecitUtils::mycount($ex) != 2)
                     throw new Exception(get_string('error_syntax', 'qtype_numericalrecit'));
                 $expression = trim($ex[1]);
                 // Check variable name format.
@@ -738,7 +740,7 @@ class qtype_numericalrecit_variables {
     private function handle_square_bracket_syntax(&$vstack, &$expression) {
         $res = $this->get_expressions_in_bracket($expression, 0, '[');
         if ($res == null)  return false;
-        if (mycount($res->expressions) < 1 || mycount($res->expressions) > self::$listmaxsize)
+        if (QTypeNumericalRecitUtils::mycount($res->expressions) < 1 || QTypeNumericalRecitUtils::mycount($res->expressions) > self::$listmaxsize)
             throw new Exception(get_string('error_vars_array_size', 'qtype_numericalrecit'));
         $list = array();
         foreach ($res->expressions as $e)
@@ -747,16 +749,16 @@ class qtype_numericalrecit_variables {
         if ($data !== null) {   // If the square bracket has a variable before it.
             if ($data->var->type != 'ln' && $data->var->type != 'ls')
                 throw new Exception(get_string('error_vars_array_unsubscriptable', 'qtype_numericalrecit'));
-            if ($list[0]->type != 'n' || mycount($list) > 1)
+            if ($list[0]->type != 'n' || QTypeNumericalRecitUtils::mycount($list) > 1)
                 throw new Exception(get_string('error_vars_array_index_nonnumeric', 'qtype_numericalrecit'));
-            if ($list[0]->value < 0 || $list[0]->value >= mycount($data->var->value))
+            if ($list[0]->value < 0 || $list[0]->value >= QTypeNumericalRecitUtils::mycount($data->var->value))
                 throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
             $this->replace_middle($vstack, $expression, $data->startloc, $res->closeloc + 1, $data->var->type[1], $data->var->value[$list[0]->value]);
             return true;
         }
         // Check the elements in the list is of the same type and then construct a new list.
         $elementtype = $list[0]->type;
-        for ($i = 0; $i < mycount($list); $i++)  $list[$i] = $list[$i]->value;
+        for ($i = 0; $i < QTypeNumericalRecitUtils::mycount($list); $i++)  $list[$i] = $list[$i]->value;
         $this->replace_middle($vstack, $expression, $res->openloc, $res->closeloc + 1, $elementtype == 'n' ? 'ln' : 'ls', $list);
         return true;
     }
@@ -766,7 +768,7 @@ class qtype_numericalrecit_variables {
     private function handle_special_functions(&$vstack, &$expression) {
         $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $expression));
         $loc = 0;
-        for ($i = 1; $i < mycount($splitted); $i += 2) {
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {
             $data = $this->vstack_get_variable($vstack, $splitted[$i]);
             if ($data->type == 'F' && array_key_exists($data->value, $this->func_special)) {
                 for ($j = 0; $j <= $i; $j++)  $loc += strlen($splitted[$j]);
@@ -786,7 +788,7 @@ class qtype_numericalrecit_variables {
             $types[] = $tmp->type;
             $values[] = $tmp->value;
         }
-        $sz = mycount($types);
+        $sz = QTypeNumericalRecitUtils::mycount($types);
         $typestr = implode(',', $types);
 
         switch ($data->value) {
@@ -798,7 +800,7 @@ class qtype_numericalrecit_variables {
                 return true;
             case 'len':
                 if (!($sz == 1 && $typestr[0] == 'l'))  break;  // Note: type 'n' with strval is treated as constant.
-                $this->replace_middle($vstack, $expression, $l, $r, 'n', strval(mycount($values[0])));
+                $this->replace_middle($vstack, $expression, $l, $r, 'n', strval(QTypeNumericalRecitUtils::mycount($values[0])));
                 return true;
             case 'pick':
                 if (!($sz >= 2 && $types[0] == 'n'))  break;
@@ -823,7 +825,7 @@ class qtype_numericalrecit_variables {
                 if (!($sz >= 1 && $sz <= 2 && $types[0][0] == 'l'))  break;
                 if ($sz == 2)  if ($types[1][0] != 'l')  break;
                 if ($sz == 1)  $values[1] = $values[0];
-                if (mycount($values[0]) != mycount($values[1]))  break;
+                if (QTypeNumericalRecitUtils::mycount($values[0]) != QTypeNumericalRecitUtils::mycount($values[1]))  break;
                 $tmp = array_combine($values[1], $values[0]);
                 ksort($tmp);
                 $this->replace_middle($vstack, $expression, $l, $r, $types[0], array_values($tmp));
@@ -833,7 +835,7 @@ class qtype_numericalrecit_variables {
                 $sub = array();
                 foreach ($values[1] as $idx) {
                     $idx = intval($idx);
-                    if ($idx >= 0 && $idx < mycount($values[0]))  $sub[] = $values[0][$idx];
+                    if ($idx >= 0 && $idx < QTypeNumericalRecitUtils::mycount($values[0]))  $sub[] = $values[0][$idx];
                     else throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
                 }
                 $this->replace_middle($vstack, $expression, $l, $r, $types[0], $sub);
@@ -843,7 +845,7 @@ class qtype_numericalrecit_variables {
                 $sub = $values[0];
                 foreach ($values[0] as $i => $idx) {
                     $idx = intval($idx);
-                    if ($idx >= 0 && $idx < mycount($values[0]))  $sub[$idx] = $i;
+                    if ($idx >= 0 && $idx < QTypeNumericalRecitUtils::mycount($values[0]))  $sub[$idx] = $i;
                     else throw new Exception(get_string('error_vars_array_index_out_of_range', 'qtype_numericalrecit'));
                 }
                 $this->replace_middle($vstack, $expression, $l, $r, 'ln', $sub);
@@ -858,8 +860,8 @@ class qtype_numericalrecit_variables {
                     $value = array_map(function ($a) use ($values){return floatval($values[0]($a));}, $values[1]);
                 } else {
                     if (!($typestr == 's,ln,n' || $typestr == 's,n,ln' || $typestr == 's,ln,ln'))  break;
-                    if ($types[1] != 'ln')  $values[1] = array_fill(0, mycount($values[2]), $values[1]);
-                    if ($types[2] != 'ln')  $values[2] = array_fill(0, mycount($values[1]), $values[2]);
+                    if ($types[1] != 'ln')  $values[1] = array_fill(0, QTypeNumericalRecitUtils::mycount($values[2]), $values[1]);
+                    if ($types[2] != 'ln')  $values[2] = array_fill(0, QTypeNumericalRecitUtils::mycount($values[1]), $values[2]);
                     if (array_key_exists($values[0], $this->binary_op_map))
                         // The create_function function is deprecated since php 7.2.
                         // $value = array_map(create_function('$a,$b', 'return floatval(($a)'.$values[0].'($b));'), $values[1], $values[2]);
@@ -896,7 +898,7 @@ class qtype_numericalrecit_variables {
                     break;
                 }
 
-                $pow = mycount($vals);
+                $pow = QTypeNumericalRecitUtils::mycount($vals);
                 $pp = '';
                 foreach ($vals as $v) {
                     $pow--;
@@ -959,7 +961,7 @@ class qtype_numericalrecit_variables {
                 return true;
             case 'diff':
                 if (!($typestr == 'ls,ls,n' || $typestr == 'ls,ls' || $typestr == 'ln,ln'))  break;
-                if (mycount($values[0]) != mycount($values[1]))  break;
+                if (QTypeNumericalRecitUtils::mycount($values[0]) != QTypeNumericalRecitUtils::mycount($values[1]))  break;
                 if ($typestr == 'ln,ln')
                     $diff = $this->compute_numerical_formula_difference($values[0], $values[1], 1.0, 0);
                 else
@@ -983,8 +985,8 @@ class qtype_numericalrecit_variables {
     private function evaluate_numerical_expression($vstacks, $expression, $functype='F') {
         $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $expression));
         // Check and convert the vstacks into an array of array of numbers.
-        $all = array_fill(0, mycount($vstacks), array());
-        for ($i = 1; $i < mycount($splitted); $i += 2) {
+        $all = array_fill(0, QTypeNumericalRecitUtils::mycount($vstacks), array());
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {
             // $data = $this->vstack_get_variable($vstacks[0], $splitted[$i]);
             $data = $vstacks[0]->all[$splitted[$i]];    // For optimization, bypassing function call.
             if ($data === null || ($data->type != 'n' && $data->type != $functype)) {
@@ -995,7 +997,7 @@ class qtype_numericalrecit_variables {
             }
             if ($data->type == 'n') {   // If it is a number, store in $a for later evaluation.
                 $all[0][$i] = floatval($data->value);
-                for ($j = 1; $j < mycount($vstacks); $j++) {  // If it need to evaluate the same expression with different values.
+                for ($j = 1; $j < QTypeNumericalRecitUtils::mycount($vstacks); $j++) {  // If it need to evaluate the same expression with different values.
                     // $tmp = $this->vstack_get_variable($vstacks[$j], $splitted[$i]);
                     $tmp = $vstacks[$j]->all[$splitted[$i]];    // For optimization, bypassing function call.
                     if ($tmp === null || $tmp->type != 'n') {
@@ -1009,7 +1011,7 @@ class qtype_numericalrecit_variables {
 
         // Check for possible formula error for the substituted string, before directly calling eval().
         $replaced = $splitted;
-        for ($i = 1; $i < mycount($replaced); $i += 2)  if ($replaced[$i][0] == '$')  $replaced[$i] = 1;  // Substitute a dummy value for testing.
+        for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($replaced); $i += 2)  if ($replaced[$i][0] == '$')  $replaced[$i] = 1;  // Substitute a dummy value for testing.
         $res = $this->find_formula_errors(implode(' ', $replaced));
         if ($res)  throw new Exception($res);   // Forward the error.
         // Now, it should contains pure code of mathematical expression and all numerical variables are stored in $a.
@@ -1038,11 +1040,11 @@ class qtype_numericalrecit_variables {
             if ($text[$i] == $open) {
                 $ostack[] = $open;
             }
-            if (mycount($ostack) > 0) {
+            if (QTypeNumericalRecitUtils::mycount($ostack) > 0) {
                 break;     // When the first open bracket is found.
             }
         }
-        if (mycount($ostack) == 0) {
+        if (QTypeNumericalRecitUtils::mycount($ostack) == 0) {
             return null;
         }
         $firstopenloc = $i;
@@ -1050,12 +1052,12 @@ class qtype_numericalrecit_variables {
         $ploc = $i + 1;
         for ($i = $i + 1; $i < strlen($text); $i++) {
             if (array_key_exists($text[$i], $bset))  $ostack[] = $text[$i];
-            if ($text[$i] == ',' && mycount($ostack) == 1) {
+            if ($text[$i] == ',' && QTypeNumericalRecitUtils::mycount($ostack) == 1) {
                 $expressions[] = substr($text, $ploc, $i - $ploc);
                 $ploc = $i + 1;
             }
             if (array_key_exists($text[$i], $bflip))  if (array_pop($ostack) != $bflip[$text[$i]])  break;
-            if (mycount($ostack) == 0) {
+            if (QTypeNumericalRecitUtils::mycount($ostack) == 0) {
                 $expressions[] = substr($text, $ploc, $i - $ploc);
                 return (object)array('openloc' => $firstopenloc, 'closeloc' => $i, 'expressions' => $expressions);
             }
@@ -1142,7 +1144,7 @@ class qtype_numericalrecit_variables {
     // Insert the multiplication symbol whenever juxtaposition occurs.
     public function insert_multiplication_for_juxtaposition($vstack, $text) {
         $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $text));
-        for ($i = 3; $i < mycount($splitted); $i += 2) {    // The length will always be odd: placeholder in odd index, operators in even index.
+        for ($i = 3; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {    // The length will always be odd: placeholder in odd index, operators in even index.
             $op = trim($splitted[$i - 1]);    // The operator(s) between this and the previous variable.
             if ($this->vstack_get_variable($vstack, $splitted[$i - 2])->type == 'f')  continue;   // No need to add '*' if the left is function.
             if (strlen($op) == 0)  $op = ' * ';    // Add multiplication if no operator.
@@ -1224,7 +1226,7 @@ class qtype_numericalrecit_variables {
     // Find the numerical value of students response $B and compute the difference between the modelanswer and students response.
     public function compute_numerical_formula_difference(&$A, &$B, $cfactor, $gradingtype) {
         $diffs = array();
-        for ($i = 0; $i < mycount($B); $i++) {
+        for ($i = 0; $i < QTypeNumericalRecitUtils::mycount($B); $i++) {
             $value = $this->compute_numerical_formula_value($B[$i], $gradingtype);
             if ($value === null)  return null;  // If the coordinate cannot convert to a number.
             $B[$i] = $value * $cfactor;         // Rescale students' response to match unit of model answer.
@@ -1240,7 +1242,7 @@ class qtype_numericalrecit_variables {
     public function compute_algebraic_formula_difference(&$vars, $A, $B, $N=100) {
         if ($N < 1)  $N = 100;
         $diffs = array();
-        for ($idx = 0; $idx < mycount($A); $idx++) {
+        for ($idx = 0; $idx < QTypeNumericalRecitUtils::mycount($A); $idx++) {
             if (!is_string($A[$idx]) || !is_string($B[$idx])) {
                 return null;
             }
@@ -1264,7 +1266,7 @@ class qtype_numericalrecit_variables {
             // Create a vstack contains purely the variables that appears in the formula.
             $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $d));
             $vstack = $this->vstack_create();
-            for ($i = 1; $i < mycount($splitted); $i += 2) {
+            for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {
                 $data = $this->vstack_get_variable($info, $splitted[$i]);
                 if ($data === null || ($data->type != 'f' && $data->type != 'n' && $data->type != 'zn'))  return null;
                 if ($data->type == 'f')     // If it is a function, put it back into the expression.
@@ -1286,7 +1288,7 @@ class qtype_numericalrecit_variables {
             // Evaluate and find the root mean square of the difference over all instantiation.
             if (strlen($newexpr) == 0)  return null;
             $nums = $this->evaluate_numerical_expression($vstacks, $newexpr, 'f');
-            for ($i = 0; $i < mycount($nums); $i++)  $nums[$i] = $nums[$i] * $nums[$i];
+            for ($i = 0; $i < QTypeNumericalRecitUtils::mycount($nums); $i++)  $nums[$i] = $nums[$i] * $nums[$i];
             $res = sqrt(array_sum($nums) / $N);    // It must be a positive integer, Nan or inf.
             if (is_nan($res))  $res = INF;
             $diffs[] = $res;
@@ -1297,7 +1299,7 @@ class qtype_numericalrecit_variables {
     // Substitute the variable with numeric value in the list of algebraic numericalrecit, it is used to show correct answer with random numeric value.
     public function substitute_partial_formula(&$vars, $numericalrecit) {
         $res = array();
-        for ($idx = 0; $idx < mycount($numericalrecit); $idx++) {
+        for ($idx = 0; $idx < QTypeNumericalRecitUtils::mycount($numericalrecit); $idx++) {
             if (!is_string($numericalrecit[$idx]))  return null;  // Internal error for calling this function.
             $numericalrecit[$idx] = trim($numericalrecit[$idx]);
             $vstack = $this->get_formula_information($vars, $numericalrecit[$idx]);
@@ -1307,7 +1309,7 @@ class qtype_numericalrecit_variables {
 
             // Replace the variable with numeric value by the number.
             $splitted = explode('`', preg_replace('/(@[0-9]+)/', '`$1`', $vstack->sub));
-            for ($i = 1; $i < mycount($splitted); $i += 2) {
+            for ($i = 1; $i < QTypeNumericalRecitUtils::mycount($splitted); $i += 2) {
                 $data = $this->vstack_get_variable($vstack, $splitted[$i]);
                 if ($data->type == 'v') {
                     $tmp = $this->vstack_get_variable($vstack, $data->value);
