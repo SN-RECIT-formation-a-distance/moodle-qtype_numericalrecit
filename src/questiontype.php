@@ -842,7 +842,7 @@ class qtype_numericalrecit extends question_type {
         // Attempt to compute answers to see if they are wrong or not.
         foreach ($validanswers as $idx => $ans) {
             $ans->partindex = $idx;
-            $unitcheck = new answer_unit_conversion;
+            $unitcheck = new qtype_numericalrecit_answer_unit_conversion;
 
             try {
                 if (isset($ans->postunit)) $unitcheck->parse_targets($ans->postunit);

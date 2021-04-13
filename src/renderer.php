@@ -167,7 +167,7 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
 
         $response = $qa->get_last_qt_data();
         $question->rationalize_responses($response);
-        $checkunit = new answer_unit_conversion;
+        $checkunit = new qtype_numericalrecit_answer_unit_conversion;
 
         list( $sub->anscorr, $sub->unitcorr) = $question->grade_responses_individually($part, $response, $checkunit);
         $sub->fraction = $sub->anscorr * ($sub->unitcorr ? 1 : (1 - $part->unitpenalty));

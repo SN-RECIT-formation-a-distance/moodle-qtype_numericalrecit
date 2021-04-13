@@ -44,7 +44,7 @@ defined('MOODLE_INTERNAL') || die();
  * alternative rules format for 'base unit' is that a string with a unit and colon, then followed by
  * a list of SI prefix separated by a space, e.g. "W: M k m" equal to "W = 1e3 mW = 1e-3kW = 1e-6MW"
  */
-class answer_unit_conversion {
+class qtype_numericalrecit_answer_unit_conversion {
     private $mapping;           // Mapping of the unit to the (dimension class, scale).
     private $additional_rules;  // Additional rules other than the default rules.
     private $default_mapping;   // Default mapping of a user selected rules, usually Common SI prefix.

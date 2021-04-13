@@ -213,7 +213,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
      */
     public function clear_wrong_from_response(array $response) {
         $this->rationalize_responses($response);
-        $checkunit = new answer_unit_conversion;
+        $checkunit = new qtype_numericalrecit_answer_unit_conversion;
         foreach ($this->parts as $part) {
             list( $answercorrect, $unitcorrect) = $this->grade_responses_individually($part, $response, $checkunit);
             if ($answercorrect * $unitcorrect < 1.0) {
@@ -245,7 +245,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
      */
     public function get_num_parts_right(array $response) {
         $this->rationalize_responses($response);      // May throw if subqtext have changed.
-        $checkunit = new answer_unit_conversion;
+        $checkunit = new qtype_numericalrecit_answer_unit_conversion;
         $c = 0;
         foreach ($this->parts as $part) {
             list( $answercorrect, $unitcorrect) = $this->grade_responses_individually($part, $response, $checkunit);
@@ -380,7 +380,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
                 $classification[$part->partindex] = question_classified_response::no_response();
                 continue;
             }
-            $checkunit = new answer_unit_conversion;
+            $checkunit = new qtype_numericalrecit_answer_unit_conversion;
             list($anscorr, $unitcorr)
                     = $this->grade_responses_individually($part, $response, $checkunit);
 
@@ -471,7 +471,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         $totalvalue = 0;
         try {
             $this->rationalize_responses($response);      // May throw if subqtext have changed.
-            $checkunit = new answer_unit_conversion; // Defined here for the possibility of reusing parsed default set.
+            $checkunit = new qtype_numericalrecit_answer_unit_conversion; // Defined here for the possibility of reusing parsed default set.
             foreach ($this->parts as $part) {
                 list($this->anscorrs[$part->partindex], $this->unitcorrs[$part->partindex])
                         = $this->grade_responses_individually($part, $response, $checkunit);
@@ -731,7 +731,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
      */
     public function grade_parts_that_can_be_graded(array $response, array $lastgradedresponses, $finalsubmit) {
         $partresults = array();
-        $checkunit = new answer_unit_conversion;
+        $checkunit = new qtype_numericalrecit_answer_unit_conversion;
 
         foreach ($this->parts as $part) {
             $name = (string) $part->partindex;
@@ -836,7 +836,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
     public function compute_final_grade($responses, $totaltries) {
         $fractionsum = 0;
         $fractionmax = 0;
-        $checkunit = new answer_unit_conversion;
+        $checkunit = new qtype_numericalrecit_answer_unit_conversion;
 
         foreach ($this->parts as $part) {
             $fractionmax += $part->answermark;
