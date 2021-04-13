@@ -97,7 +97,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->setAdvanced('globalunitpenalty');
         $mform->SetType('globalunitpenalty', PARAM_FLOAT);
 
-        $conversionrules = new unit_conversion_rules;
+        $conversionrules = new qtype_numericalrecit_unit_conversion_rules;
         $allrules = $conversionrules->allrules();
         foreach ($allrules as $id => $entry) {
             $defaultrulechoice[$id] = $entry[0];
@@ -196,7 +196,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
         $repeatedoptions['postunit']['type'] = PARAM_RAW;
         // Part's basic conversion rules.
-        $conversionrules = new unit_conversion_rules;
+        $conversionrules = new qtype_numericalrecit_unit_conversion_rules;
         $allrules = $conversionrules->allrules();
         foreach ($allrules as $id => $entry) {
             $defaultrulechoice[$id] = $entry[0];

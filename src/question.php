@@ -611,7 +611,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         $postunit = trim($response["${i}_{$part->numbox}"]);
 
         // Step 2: Use the unit system to check whether the unit in student responses is *convertible* to the true unit.
-        $conversionrules = new unit_conversion_rules;
+        $conversionrules = new qtype_numericalrecit_unit_conversion_rules;
         $entry = $conversionrules->entry($part->ruleid);
         $checkunit->assign_default_rules($part->ruleid, $entry[1]);
         $checkunit->assign_additional_rules($part->otherrule);

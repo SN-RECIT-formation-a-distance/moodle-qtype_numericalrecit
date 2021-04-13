@@ -33,5 +33,5 @@ $plugin->dependencies = array(
     'qbehaviour_adaptivemultipart'     => 2014092500,
     'qtype_multichoice' => 2015111600,
 );
-$plugin->release   = 'R12-1.12.2';
+$plugin->release   = 'R12-1.12.3';
 $plugin->maturity  = MATURITY_ALPHA;

@@ -858,7 +858,7 @@ class qtype_numericalrecit extends question_type {
             }
 
             try {
-                $conversionrules = new unit_conversion_rules;
+                $conversionrules = new qtype_numericalrecit_unit_conversion_rules;
                 $entry = $conversionrules->entry($ans->ruleid);
                 if ($entry === null || $entry[1] === null) {
                     throw new Exception(get_string('error_ruleid', 'qtype_numericalrecit'));

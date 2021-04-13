@@ -22,7 +22,7 @@ defined('MOODLE_INTERNAL') || die();
  *  - The array index is the unique id for the rule, which will be stored in the database
  * Note: the id from 0 to 99 are reserved, please do not use to create you own rules
  */
-class unit_conversion_rules {
+class qtype_numericalrecit_unit_conversion_rules {
     private $basicunitconversionrule = array();
 
     // Initialize the internal conversion rule.
