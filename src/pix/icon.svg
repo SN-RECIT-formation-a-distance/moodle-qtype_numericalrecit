@@ -1,71 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   style="isolation:isolate"
-   width="16"
-   height="16"
-   preserveAspectRatio="xMinYMid meet"
-   id="svg2"
-   version="1.1">
-  <metadata
-     id="metadata17">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs4">
-    <clipPath
-       id="a">
-      <path
-         d="M0 0h16v16H0z"
-         id="path7" />
-    </clipPath>
-  </defs>
-  <text
-     id="text3341"
-     y="6.0823979"
-     x="-0.086517774"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.73787737px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.26335192px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"
-     transform="scale(0.83589297,1.1963254)"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.73787737px;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1.26335192px"
-       y="6.0823979"
-       x="-0.086517774"
-       id="tspan3343">x=</tspan></text>
-  <text
-     id="text3341-6"
-     y="11.077769"
-     x="0.34386635"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.84380436px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.28321326px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     xml:space="preserve"
-     transform="scale(0.79373363,1.2598685)"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.84380436px;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1.28321326px"
-       y="11.077769"
-       x="0.34386635"
-       id="tspan3343-0">y=</tspan></text>
-  <rect
-     y="1.6949152"
-     x="9.6271181"
-     height="5.8983049"
-     width="5.762712"
-     id="rect822"
-     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.09399998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-  <rect
-     y="8.9830513"
-     x="9.5932207"
-     height="5.8983049"
-     width="5.762712"
-     id="rect822-3"
-     style="isolation:isolate;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.09399998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--Generator: Xara Designer (www.xara.com), SVG filter version: 6.3.0.31-->
+<svg fill="none" fill-rule="evenodd" stroke="black" stroke-width="0.501" stroke-linejoin="bevel" stroke-miterlimit="10" font-family="Times New Roman" font-size="16" style="font-variant-ligatures:none" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" overflow="visible" width="232.826pt" height="232.826pt" viewBox="0 -232.826 232.826 232.826">
+ <defs>
+	</defs>
+ <g id="Layer 1" transform="scale(1 -1)">
+  <g id="ClipView">
+   <rect x="-116.413" y="-116.413" width="232.826" height="232.826" rx="0" ry="0" transform="matrix(1 0 0 1 116.413 116.413)" stroke="none"/>
+   <clipPath id="ClipPath">
+    <path d="M 0,232.826 L 232.826,232.826 L 232.826,0 L 0,0 L 0,232.826 Z"/>
+   </clipPath>
+   <g clip-path="url(#ClipPath)">
+    <text xml:space="preserve" transform="translate(-1.052 126.94) scale(1 -1) scale(0.698715 1)" kerning="0" stroke="none" fill="#000000" stroke-width="15.367" fill-rule="nonzero" stroke-linejoin="miter" font-family="Sans" font-weight="bold" font-size="117.297" style="-moz-font-feature-settings:'liga' on;-ms-font-feature-settings:'liga' on;-webkit-font-feature-settings:'liga' on;font-feature-settings:'liga' on;font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures"><tspan x="0" y="0">x=</tspan></text>
+    <text xml:space="preserve" transform="translate(3.971 29.735) scale(1 -1) scale(0.63002 1)" kerning="0" stroke="none" fill="#000000" stroke-width="14.821" fill-rule="nonzero" stroke-linejoin="miter" font-family="Sans" font-weight="bold" font-size="125.469" style="-moz-font-feature-settings:'liga' on;-ms-font-feature-settings:'liga' on;-webkit-font-feature-settings:'liga' on;font-feature-settings:'liga' on;font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures"><tspan x="0" y="0">y=</tspan></text>
+    <rect x="-33.6775" y="-5.0405" width="67.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 140.274 205.066)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-33.6775" y="-5.0405" width="67.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 183.024 171.176)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-9.6775" y="-5.0405" width="19.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 116.743 170.707)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-9.6775" y="-5.0405" width="19.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 206.274 205.066)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-33.6775" y="-5.0405" width="67.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 140.789 137.941)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-9.6775" y="-5.0405" width="19.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 207.024 137.941)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-9.6775" y="-5.0405" width="19.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 207.071 104.753)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-10.8025" y="-5.0405" width="21.605" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 162.399 104.003)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-10.8025" y="-5.0405" width="21.605" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 117.68 104.66)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-33.6775" y="-5.0405" width="67.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 183.679 70.206)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-9.6775" y="-5.0405" width="19.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 116.087 70.91)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-9.6775" y="-5.0405" width="19.355" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 207.539 36.784)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-10.8025" y="-5.0405" width="21.605" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 161.696 36.503)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+    <rect x="-10.8025" y="-5.0405" width="21.605" height="10.081" rx="0" ry="0" transform="matrix(1 0 0 1 116.508 36.691)" stroke="#7f7f7f" fill="#7f7f7f" fill-rule="nonzero" stroke-linejoin="miter" stroke-width="15.92"/>
+   </g>
+  </g>
+ </g>
 </svg>
