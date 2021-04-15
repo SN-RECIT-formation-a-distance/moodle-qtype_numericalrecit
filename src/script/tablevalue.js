@@ -22,7 +22,7 @@ function initOnCompleteLoad(){
               </button>\
             </div>\
             <div class="modal-body">\
-            <table class="table w-auto"><thead><tr><th>a</th><th>b</th>'+th+'</tr></thead>\
+            <table class="table w-auto"><thead><tr><th>a</th>'+th+'</tr></thead>\
             <tbody>\
             </tbody></table>\
             <button type="button" class="btn btn-primary" id="addcolvaluetable"><i class="fa fa-plus"></i> '+M.util.get_string('addcolumn', 'qtype_numericalrecit')+'</button>\
