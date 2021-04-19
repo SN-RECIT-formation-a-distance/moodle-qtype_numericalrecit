@@ -531,12 +531,15 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
                 }
                 if ($stexts != null) {
                     // Replace index with calculated choice.
-                     $tmp["{$part->partindex}". $key] = $stexts->value[$tmp["{$part->partindex}". $key]];
+                    $tmp["{$part->partindex}". $key] = $stexts->value[$tmp["{$part->partindex}". $key]];
                 }
             }
 
         }
         if ($part->part_has_combined_unit_field()) {
+            if (is_numeric($tmp["{$part->partindex}_0"])){
+                $tmp["{$part->partindex}_0"] = number_format($tmp["{$part->partindex}_0"], 3, ',', ' ');
+            }
             $correctanswer = implode(' ', $tmp);
         } else {
             if (!$part->part_has_separate_unit_field()) {

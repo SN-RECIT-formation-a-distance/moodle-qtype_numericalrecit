@@ -542,6 +542,7 @@ class qtype_numericalrecit extends question_type {
         $extraquestionfields = $this->extra_question_fields();
         array_shift($extraquestionfields);
         foreach ($extraquestionfields as $extra) {
+            if (is_array($question->options->$extra)) $question->options->$extra = $question->options->$extra['text'];
             $expout .= "<$extra>".$format->writetext($question->options->$extra)."</$extra>\n";
         }
 

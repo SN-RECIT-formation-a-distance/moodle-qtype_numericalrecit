@@ -468,9 +468,6 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
 
         $correctanswer = $question->format_text($question->correct_response_formatted($part),
                 $part->subqtextformat , $qa, 'qtype_numericalrecit', 'answersubqtext', $part->id, false);
-        if (is_numeric($correctanswer)){
-            $correctanswer = number_format($correctanswer, 3, ',', ' ');
-        }
         return html_writer::nonempty_tag('div', get_string('correctansweris', 'qtype_numericalrecit', $correctanswer),
                     array('class' => 'numericalrecitpartcorrectanswer'));
     }
