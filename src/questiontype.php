@@ -298,7 +298,9 @@ class qtype_numericalrecit extends question_type {
         }
 
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
-        $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'qtype_numericalrecit', 'stepfeedback', $question->id);
+        if (is_array($options->stepfeedback)){
+            $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'qtype_numericalrecit', 'stepfeedback', $question->id);
+        }
 
         $DB->update_record('qtype_numericalrecit_options', $options);
 
