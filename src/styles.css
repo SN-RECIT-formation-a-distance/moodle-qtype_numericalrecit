@@ -1,5 +1,5 @@
 .que.numericalrecit .numericalrecit_input_warning_outer {
-    display: inline;
+    display: none;
     position: absolute;
     z-index: 1;
 }
