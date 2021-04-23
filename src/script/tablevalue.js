@@ -90,6 +90,7 @@ function initOnCompleteLoad(){
     $('#id_multitriesheader').hide();
     $('#id_combinedfeedbackhdr').hide();
     $('#id_subqoptions').hide();
+    setTimeout(function(){ $('.moreless-actions').hide(); }, 1000)
     //$('.collapsible').addClass('collapsed');
 
     $("body").on("click", "#showexamplertr", function(){
