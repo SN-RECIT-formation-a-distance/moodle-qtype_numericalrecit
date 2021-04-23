@@ -245,10 +245,10 @@ class qtype_numericalrecit_answer_unit_conversion {
      * @return array(conversion factor, unit exponent) if it can be converted, otherwise null.
      */
     private function attempt_conversion($test_unit_name, $base_unit_array) {
-        $oclass = $this->mapping[$test_unit_name];
-        if (!isset($oclass)) {
+        if (!isset($this->mapping[$test_unit_name])) {
             return null;  // It does not exist in the mapping implies it is not convertible.
         }
+        $oclass = $this->mapping[$test_unit_name];
         foreach ($base_unit_array as $u => $e) {
             $tclass = $this->mapping[$u];   // Try to match the dimension class of each base unit.
             if (isset($tclass) && $oclass[0] == $tclass[0]) {
