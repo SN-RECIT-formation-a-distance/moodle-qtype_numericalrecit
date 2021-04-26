@@ -100,10 +100,11 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
             $result .= $responseoutput->response_area_input('stepn', $qa,
                     $step, 12, $options->context, $question->stepmark);
         } else {
-            $result .= $responseoutput->response_area_read_only('stepn', $qa,
+            $result .= $responseoutput->response_area_read_only('stepn', $qa, 
                     $step, 12, $options->context, $question->stepmark);
             $stepfeedback = '';
-            if (is_array($question->stepfeedback)) $stepfeedback = $question->qv->substitute_variables_in_text($globalvars, $question->stepfeedback['text']);
+            if (is_array($question->stepfeedback)) $stepfeedback = $question->numericalrecit_format_text($globalvars, $question->stepfeedback['text'], FORMAT_HTML,
+                    $qa, 'question', 'stepfeedback', $question->id, false);
             $result .= html_writer::nonempty_tag('div', $stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
 
