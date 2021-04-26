@@ -43,6 +43,8 @@ $string['takephoto'] = 'Take Photo';
 $string['stepmark'] = 'Step Mark';
 $string['steppart'] = 'Step Part';
 $string['stepfeedback'] = 'Step Feedback';
+$string['stepfeedback_link'] = '#';
+$string['stepfeedback_help'] = 'Step Feedback';
 $string['valuetable'] = 'Value Table';
 $string['answermissing'] = 'Please input answer formula first';
 $string['notavailable'] = 'N/A';
@@ -71,6 +73,7 @@ Other features such as unit checking and multiple parts questions are also integ
 $string['pluginname_link'] = 'question/type/formulas';
 $string['privacy:metadata'] = 'The Formulas question type plugin does not store any personal data.';
 $string['questiontext'] = 'Question text';
+$string['questiontext_link'] = '#';
 $string['questiontext_help'] = 'In addition to the normal question text, you can also use global variables and placeholders here.
 
 Global variables will be replaced by their values and placeholders will be replaced by parts.
@@ -168,6 +171,7 @@ Students are required to use the same input format. For example,
 
 <pre class="prettyprint">1 m<br>0.1 m^2<br>20 m s^(-1)<br>400 kg m/s<br>100 kW</pre>';
 $string['unitpenalty'] = 'Deduction for wrong unit (0-1)*';
+$string['unitpenalty_link'] = '#';
 $string['unitpenalty_help'] = 'This option specify the mark you want to penalize the student for a wrong unit.
 
 It takes value between 0 to 1. If it takes value 1, the unit and answer
@@ -186,7 +190,7 @@ effect if no unit has been used.';
 $string['none'] = 'None';
 $string['commonsiunit'] = 'Common SI unit';
 $string['otherrule'] = 'Other rules';
-$string['otherrule_help'] = 'Here the question\' author can define additional  conversion rules for other accepted base units. See documentation for the advanced usages.';
+$string['otherrule_help'] = 'Here the question\' author can define additional conversion rules for other accepted base units. See documentation for the advanced usages.';
 $string['subqtext'] = 'Part\'s text';
 $string['subqtext_help'] = 'Part text and answer fields places can be specified here. The placeholders that can be used to specifie answer fields places are:
 
@@ -195,7 +199,8 @@ $string['subqtext_help'] = 'Part text and answer fields places can be specified 
 The <tt> {_0}, {_1}, {_2} </tt> are the input fields for coordinates and <tt> {_u} </tt> is the input field for unit.
 
 All missing fields are automatically appended at the end of the part\'s text. A special case is that if <tt> {_0}, {_u} </tt> are specified consecutively, and there is only one coordinate and unit, i.e. <tt> {_0}{_u} </tt>, they will be combined into a single long input answer field for both answer and unit.';
-$string['feedback'] = 'Part general feedback';
+$string['feedback'] = 'Par general feedback';
+$string['feedback_link'] = '#';
 $string['feedback_help'] = 'This part feedback will be show to all students. It can include global and locals variables that will be replaced by their values';
 $string['incorrectfeedback'] = 'For any incorrect response';
 $string['partiallycorrectfeedback'] = 'For any partially correct response';
@@ -207,6 +212,7 @@ $string['globaloptions'] = '[Global] - ';
 
 // The language string for the variables instantiation and preview.
 $string['checkvarshdr'] = 'Check variables instantiation';
+$string['checkvarshdr_link'] = '#';
 $string['instantiate'] = 'Instantiate';
 $string['numdataset'] = 'Number of dataset';
 $string['renew'] = 'Update';

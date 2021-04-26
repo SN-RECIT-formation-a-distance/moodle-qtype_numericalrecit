@@ -41,6 +41,8 @@ $string['takephoto'] = 'Prendre une photo';
 $string['stepmark'] = 'Note de la démarche';
 $string['steppart'] = 'Démarche';
 $string['stepfeedback'] = 'Description de la démarche';
+$string['stepfeedback_help'] = 'Description de la démarche';
+$string['stepfeedback_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#18_Description_de_la_demarche';
 $string['valuetable'] = 'Table de valeurs';
 $string['answermissing'] = 'Veuillez renseigner la formule de la réponse';
 $string['notavailable'] = 'N/D';
@@ -55,6 +57,7 @@ $string['answercombinedunitsingle'] = 'Réponse et unité';
 $string['answercoordinatemulti'] = 'Réponse pour la partie {$a->part} et les coordonnées {$a->numanswer}';
 $string['answercoordinatesingle'] = 'Réponse pour les coordonnées {$a->numanswer}';
 $string['answermark'] = 'Note de la partie*';
+$string['answermark_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#13_Note_de_la_partie';
 $string['answermark_help'] = '**Requis**.
 La note attribuée à cette partie de la question, qui doit être un nombre supérieur à 0.
 La note totale de la question est la somme des notes de ses différentes parties.
@@ -77,6 +80,7 @@ $string['answertype_link'] = 'http://code.google.com/p/moodle-coordinate-questio
 $string['answerunitmulti'] = 'Unité pour la partie {$a->part}';
 $string['answerunitsingle'] = 'Unité';
 $string['checkvarshdr'] = 'Test d\'instanciation des variables';
+$string['checkvarshdr_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables';
 $string['choiceno'] = 'Non';
 $string['choiceyes'] = 'Oui';
 $string['commonsiunit'] = 'Unités courantes SI';
@@ -139,6 +143,7 @@ $string['error_vars_reserved'] = 'La fonction {$a}() est réservée et ne peut p
 $string['error_vars_string'] = 'Erreur ! Chaîne sans délimiteur " de fin, ou utilisation d\'un caractère non accepté comme \'.';
 $string['error_vars_undefined'] = 'La variable « {$a} » n\'est pas définie.';
 $string['feedback'] = 'Feedback général de la partie';
+$string['feedback_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#12_Retroaction_generale';
 $string['feedback_help'] = 'Le feedback de cette partie sera affiché seulement aux étudiants qui n\'ont pas obtenu la note maximale à la partie.
 Il peut contenir des variables globales et locales qui seront remplacées par leur valeur';
 $string['functiontakesatleasttwo'] = 'La fonction {$a} doit avoir au moins deux arguments';
@@ -174,14 +179,14 @@ où sera inséré le contenu de la partie. C\'est une chaîne de caractères alp
 Si ce champ est laissé vide, la partie sera ajoutée à la fin du texte principal de la question.';
 $string['pleaseputananswer'] = 'Veuillez remplir tous les champs.';
 $string['pluginname'] = 'Formules avec démarche RÉCIT';
-$string['pluginname_help'] = 'Pour commencer à utiliser ce type de questions, veuillez lire le <a href="http://code.google.com/p/moodle-coordinate-question/wiki/Tutorial">tutoriel</a>.
+$string['pluginname_help'] = 'Pour commencer à utiliser ce type de questions, veuillez lire le <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#10_Creation_de_la_question">tutoriel</a>.
 
 Pour des exemples de questions possibles, téléchargez et importez <a href="http://code.google.com/p/moodle-coordinate-question/downloads/list">les exemples</a>,
-ou consulter les <a href="http://code.google.com/p/moodle-coordinate-question/wiki/ScreenShots">copies d\'écran</a>.
+ou consulter les <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#10_Creation_de_la_question">copies d\'écran</a>.
 
 Pour comprendre les options dans le formulaire ci-dessous, consultez les <a href="http://code.google.com/p/moodle-coordinate-question/wiki/QuestionOptions">options de questions</a>
 
-Pour la documentation complète, lisez <a href="http://code.google.com/p/moodle-coordinate-question/wiki/Documentation">la documentation</a>';
+Pour la documentation complète, lisez <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html">la documentation</a>';
 $string['pluginname_link'] = 'question/type/numericalrecit';
 $string['pluginnameadding'] = 'Ajout d\'une question formules avec démarche RÉCIT';
 $string['pluginnameediting'] = 'Modification d\'une question formules avec démarche RÉCIT';
@@ -218,6 +223,7 @@ $string['settingusepopup'] = 'Utiliser les infobulles';
 $string['settingusepopup_desc'] = 'Afficher la réponse correcte et le feedback dans une infobulle';
 $string['subqoptions'] = 'Options supplémentaires';
 $string['subqtext'] = 'Texte de la partie';
+$string['subqtext_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#11_Texte_de_la_question';
 $string['subqtext_help'] = 'Le texte de la partie et les emplacements des champs de réponse peuvent être spécifés ici.
 Les espaces réservés qui peuvent être utilisés pour marquer les emplacements des champs réponse sont :
 
@@ -230,6 +236,7 @@ Un cas spécial est que si <tt> {_0} </tt> et <tt> {_u} </tt> sont spécifiés c
 et que la réponse ne comporte qu\'une coordonnée et une unité, c\'est à dire. <tt> {_0}{_u} </tt>,
 ils seront combinés en un seul champ réponse long pour entrer à la fois la réponse et l\'unité.';
 $string['unit'] = 'Unité';
+$string['unit_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#15_Unite';
 $string['unitpenalty'] = 'Pénalité pour unité incorrecte (0-1)*';
 $string['unitpenalty_help'] = 'Cette option spécifie la pénalité pour une unité incorrecte.
 
@@ -243,18 +250,18 @@ $string['unsupportedformulafunction'] = 'La fonction {$a} n\'est pas supportée'
 $string['vars1'] = 'Variables locales';
 $string['vars1_help'] = 'Vous pouvez définir ici des variables locales à la partie de la même manière que les variables globales sont définies
 au niveau de la question. Les variables définies ici peuvent être utilisées dans la réponse ou le feedback de la partie.
-Leur portée et leur visibilité sontt limitées à la partie.';
+Leur portée et leur visibilité sont limitées à la partie.';
 $string['vars2'] = 'Variables de notation';
 $string['vars2_help'] = 'Toutes les variables locales et les réponses de l\'étudiant peuvent être utilisées ici.
 Voir la documentation pour les utilisations avancées.';
-$string['vars2_link'] = 'http://code.google.com/p/moodle-coordinate-question/wiki/Documentation#Grading_variables';
+$string['vars2_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard';
 $string['varsdata'] = 'Jeu de données instancié';
 $string['varsglobal'] = 'Variables globales';
 $string['varsglobal_help'] = 'Des formules définissant des variables globales en fonction des variables au hasard ou d\'autres variables globales peuvent être entrées ici.
 (toutes les variables au hasard sont disponibles ici). La liste complète des opérations et fonctions disponibles est donnée dans la documentation
 
 <pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre>';
-$string['varsglobal_link'] = 'https://code.google.com/p/moodle-coordinate-question/wiki/Documentation#Variable_assignments';
+$string['varsglobal_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#17_Variables_globales';
 $string['varsrandom'] = 'Variables au hasard';
 $string['varsrandom_help'] = 'Une nouvelle valeur pour chacune de ces variables est choisie aléatoirement au début de chaque tentative.
 Ce tirage peut se faire en définissant l\'ensemble des possibilités :
@@ -264,6 +271,6 @@ Ce tirage peut se faire en définissant l\'ensemble des possibilités :
 Les élément de l\'ensemble peuvent être des nombres, des chaînes ou des listes de nombres ou de chaînes.
 Au début d\'une tentative, un élément de l\'ensemble au second membre sera tiré au sort et assigné à la variable au premier membre.
 Pour un ensemble de nombres, vous pouvez utiliser la notation intervalle comme 10:100:10 (voir exemple E ci-dessus.).';
-$string['varsrandom_link'] = 'http://code.google.com/p/moodle-coordinate-question/wiki/Documentation#Random_variables';
+$string['varsrandom_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard';
 $string['varsstatistics'] = 'Statistiques';
 $string['yougotnright'] = 'Vous avez correctement répondu à {$a->num} parties de cette question.';

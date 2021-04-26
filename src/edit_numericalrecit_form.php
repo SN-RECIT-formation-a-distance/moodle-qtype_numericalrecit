@@ -113,6 +113,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->setDefault('stepmark', 1);
         $mform->SetType('stepmark', PARAM_FLOAT);
         $mform->addElement('editor', 'stepfeedback', get_string('stepfeedback', 'qtype_numericalrecit'));
+        $mform->addHelpButton('stepfeedback', 'stepfeedback', 'qtype_numericalrecit');
         $mform->SetType('stepfeedback', PARAM_RAW);
 
         // Allow instantiate random variables and display the data for instantiated variables.
