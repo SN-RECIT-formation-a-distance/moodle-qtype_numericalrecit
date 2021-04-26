@@ -119,6 +119,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->addElement('header', 'checkvarshdr', get_string('checkvarshdr', 'qtype_numericalrecit'));
         $mform->addElement('static', 'numdataset', get_string('numdataset', 'qtype_numericalrecit'),
             '<div id="numdataset_option"></div>');
+            $mform->addHelpButton('numdataset', 'numdataset', 'qtype_numericalrecit');
         $mform->addElement('static', 'qtextpreview', get_string('qtextpreview', 'qtype_numericalrecit'),
             '<div id="qtextpreview_controls"></div>'
             .'<div id="qtextpreview_display"></div>');

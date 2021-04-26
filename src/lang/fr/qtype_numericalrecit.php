@@ -145,7 +145,7 @@ $string['error_vars_undefined'] = 'La variable « {$a} » n\'est pas définie.
 $string['feedback'] = 'Feedback général de la partie';
 $string['feedback_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#12_Retroaction_generale';
 $string['feedback_help'] = 'Le feedback de cette partie sera affiché seulement aux étudiants qui n\'ont pas obtenu la note maximale à la partie.
-Il peut contenir des variables globales et locales qui seront remplacées par leur valeur';
+Il peut contenir des variables globales et locales qui seront remplacées par leur valeur <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#12_Retroaction_generale" target="_blank">En savoir plus</a>';
 $string['functiontakesatleasttwo'] = 'La fonction {$a} doit avoir au moins deux arguments';
 $string['functiontakesnoargs'] = 'La fonction {$a} ne prend aucun argument';
 $string['functiontakesonearg'] = 'La fonction {$a} doit avoir exactement un argument';
@@ -163,6 +163,7 @@ $string['none'] = 'Aucune';
 $string['number'] = 'Nombre';
 $string['number_unit'] = 'Nombre et unité';
 $string['numdataset'] = 'Nombre de jeux de données';
+$string['numdataset_help'] = 'Nombre de jeux de données <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables" target="_blank">En savoir plus</a>';
 $string['numeric'] = 'Numérique';
 $string['numeric_unit'] = 'Numérique et unité';
 $string['numerical_formula'] = 'Formule numérique avec démarche RÉCIT';
@@ -223,7 +224,6 @@ $string['settingusepopup'] = 'Utiliser les infobulles';
 $string['settingusepopup_desc'] = 'Afficher la réponse correcte et le feedback dans une infobulle';
 $string['subqoptions'] = 'Options supplémentaires';
 $string['subqtext'] = 'Texte de la partie';
-$string['subqtext_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#11_Texte_de_la_question';
 $string['subqtext_help'] = 'Le texte de la partie et les emplacements des champs de réponse peuvent être spécifés ici.
 Les espaces réservés qui peuvent être utilisés pour marquer les emplacements des champs réponse sont :
 
@@ -234,9 +234,9 @@ Les espaces réservés qui peuvent être utilisés pour marquer les emplacements
 Tous les champs manquants sont ajoutés automatiquement à la fin du texte de la partie.
 Un cas spécial est que si <tt> {_0} </tt> et <tt> {_u} </tt> sont spécifiés consécutivement,
 et que la réponse ne comporte qu\'une coordonnée et une unité, c\'est à dire. <tt> {_0}{_u} </tt>,
-ils seront combinés en un seul champ réponse long pour entrer à la fois la réponse et l\'unité.';
+ils seront combinés en un seul champ réponse long pour entrer à la fois la réponse et l\'unité. <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#11_Texte_de_la_question" target="_blank">En savoir plus</a>';
 $string['unit'] = 'Unité';
-$string['unit_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#15_Unite';
+$string['postunit_help'] = '<a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#15_Unite" target="_blank">En savoir plus</a>';
 $string['unitpenalty'] = 'Pénalité pour unité incorrecte (0-1)*';
 $string['unitpenalty_help'] = 'Cette option spécifie la pénalité pour une unité incorrecte.
 
@@ -253,15 +253,14 @@ au niveau de la question. Les variables définies ici peuvent être utilisées d
 Leur portée et leur visibilité sont limitées à la partie.';
 $string['vars2'] = 'Variables de notation';
 $string['vars2_help'] = 'Toutes les variables locales et les réponses de l\'étudiant peuvent être utilisées ici.
-Voir la documentation pour les utilisations avancées.';
-$string['vars2_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard';
+Voir la documentation pour les utilisations avancées. <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
 $string['varsdata'] = 'Jeu de données instancié';
 $string['varsglobal'] = 'Variables globales';
 $string['varsglobal_help'] = 'Des formules définissant des variables globales en fonction des variables au hasard ou d\'autres variables globales peuvent être entrées ici.
 (toutes les variables au hasard sont disponibles ici). La liste complète des opérations et fonctions disponibles est donnée dans la documentation
 
-<pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre>';
-$string['varsglobal_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#17_Variables_globales';
+<pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre>
+<a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#17_Variables_globales" target="_blank">En savoir plus</a>';
 $string['varsrandom'] = 'Variables au hasard';
 $string['varsrandom_help'] = 'Une nouvelle valeur pour chacune de ces variables est choisie aléatoirement au début de chaque tentative.
 Ce tirage peut se faire en définissant l\'ensemble des possibilités :
@@ -270,7 +269,6 @@ Ce tirage peut se faire en définissant l\'ensemble des possibilités :
 
 Les élément de l\'ensemble peuvent être des nombres, des chaînes ou des listes de nombres ou de chaînes.
 Au début d\'une tentative, un élément de l\'ensemble au second membre sera tiré au sort et assigné à la variable au premier membre.
-Pour un ensemble de nombres, vous pouvez utiliser la notation intervalle comme 10:100:10 (voir exemple E ci-dessus.).';
-$string['varsrandom_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard';
+Pour un ensemble de nombres, vous pouvez utiliser la notation intervalle comme 10:100:10 (voir exemple E ci-dessus.). <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
 $string['varsstatistics'] = 'Statistiques';
 $string['yougotnright'] = 'Vous avez correctement répondu à {$a->num} parties de cette question.';

@@ -199,7 +199,7 @@ $string['subqtext_help'] = 'Part text and answer fields places can be specified 
 The <tt> {_0}, {_1}, {_2} </tt> are the input fields for coordinates and <tt> {_u} </tt> is the input field for unit.
 
 All missing fields are automatically appended at the end of the part\'s text. A special case is that if <tt> {_0}, {_u} </tt> are specified consecutively, and there is only one coordinate and unit, i.e. <tt> {_0}{_u} </tt>, they will be combined into a single long input answer field for both answer and unit.';
-$string['feedback'] = 'Par general feedback';
+$string['feedback'] = 'Part general feedback';
 $string['feedback_link'] = '#';
 $string['feedback_help'] = 'This part feedback will be show to all students. It can include global and locals variables that will be replaced by their values';
 $string['incorrectfeedback'] = 'For any incorrect response';
@@ -214,6 +214,8 @@ $string['globaloptions'] = '[Global] - ';
 $string['checkvarshdr'] = 'Check variables instantiation';
 $string['checkvarshdr_link'] = '#';
 $string['instantiate'] = 'Instantiate';
+$string['numdataset_help'] = 'Nombre de jeux de données';
+$string['numdataset_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables';
 $string['numdataset'] = 'Number of dataset';
 $string['renew'] = 'Update';
 $string['qtextpreview'] = 'Preview using dataset';
