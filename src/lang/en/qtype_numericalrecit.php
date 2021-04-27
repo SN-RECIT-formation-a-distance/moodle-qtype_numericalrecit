@@ -43,7 +43,6 @@ $string['takephoto'] = 'Take Photo';
 $string['stepmark'] = 'Step Mark';
 $string['steppart'] = 'Step Part';
 $string['stepfeedback'] = 'Step Feedback';
-$string['stepfeedback_link'] = '#';
 $string['stepfeedback_help'] = 'Step Feedback';
 $string['valuetable'] = 'Value Table';
 $string['answermissing'] = 'Please input answer formula first';

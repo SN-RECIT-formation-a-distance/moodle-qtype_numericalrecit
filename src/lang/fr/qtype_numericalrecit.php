@@ -74,7 +74,6 @@ Les réponses formule algébrique requièrent une chaîne ou une liste de chaîn
 Les différents types de réponses imposent diférentes restrictions lors de la saisie des réponses, aussi les étudiants ont besoin de savoir
 comment les saisir. Le code de vérification du format dans la question leur signalera
 en cours de frappe s\'ils entrent une réponse illégale. Lisez la documentation pour plus de détails.';
-$string['answertype_link'] = '#';
 $string['answerunitmulti'] = 'Unité pour la partie {$a->part}';
 $string['answerunitsingle'] = 'Unité';
 $string['checkvarshdr'] = 'Test d\'instanciation des variables';
@@ -89,7 +88,6 @@ $string['correctness_help'] = '**Requis**. Vous pouvez choisir une erreur relati
 On ne peut pas utiliser une erreur relative avec une réponse de type formule algébrique.
 
 Pour une définition précise de l\'erreur relative ou absolue quand il y a plusieurs champs de réponse, voir la documentation.';
-$string['correctness_link'] = '#';
 $string['correctnessexpert'] = 'Expert';
 $string['correctnesssimple'] = 'Simple';
 $string['defaultanswermark'] = 'Note de partie par défaut';
