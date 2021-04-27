@@ -222,6 +222,7 @@ $string['qtextpreview'] = 'Preview using dataset';
 $string['varsstatistics'] = 'Statistics';
 $string['varsdata'] = 'Instantiated dataset';
 
+$string['docs'] = 'Documentation';
 // Errors message used by editing form's validation.
 $string['error_no_answer'] = 'At least one answer is required.';
 $string['error_mark'] = 'The answer mark must take a value larger than 0.';

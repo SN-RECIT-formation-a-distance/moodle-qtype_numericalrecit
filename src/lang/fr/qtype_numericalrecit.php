@@ -272,3 +272,4 @@ Au début d\'une tentative, un élément de l\'ensemble au second membre sera ti
 Pour un ensemble de nombres, vous pouvez utiliser la notation intervalle comme 10:100:10 (voir exemple E ci-dessus.). <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
 $string['varsstatistics'] = 'Statistiques';
 $string['yougotnright'] = 'Vous avez correctement répondu à {$a->num} parties de cette question.';
+$string['docs'] = 'Documentation';
