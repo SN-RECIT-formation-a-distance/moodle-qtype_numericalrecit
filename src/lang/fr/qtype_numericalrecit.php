@@ -181,7 +181,7 @@ $string['pluginname_help'] = 'Pour commencer à utiliser ce type de questions, v
 Pour des exemples de questions possibles, nous avons mis à votre disposition <a href="https://ena.recitfad.com/course/view.php?id=455">des exemples</a>.
 
 Pour la documentation complète, lisez <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html">la documentation</a>';
-$string['pluginname_link'] = 'question/type/numericalrecit';
+$string['pluginname_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html';
 $string['pluginnameadding'] = 'Ajout d\'une question formules avec démarche RÉCIT';
 $string['pluginnameediting'] = 'Modification d\'une question formules avec démarche RÉCIT';
 $string['pluginnamesummary'] = 'Type de questions avec des valeurs aléatoires et des champs de réponse multiples.
