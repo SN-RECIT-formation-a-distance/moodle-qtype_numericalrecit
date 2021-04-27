@@ -34,15 +34,14 @@ Doit être une liste de nombres ou une liste de chaînes suivant le type de rép
 Lorsqu\'il n\'y a qu\'une réponse, un nombre ou une chaîne peut être entré directement sans les délimiteurs de liste.
 Notez que le nombre d\'éléments de la liste définit le nombre de champs réponses pour cette partie.
 
-<pre class="prettyprint">123<br>[1, 0, 0, 1]<br>a<br>[1, a, b]<br>"exp(-a t)"<br>["vx t","vy t - 0.5 a t^2"]</pre>';
+<pre class="prettyprint">123<br>[1, 0, 0, 1]<br>a<br>[1, a, b]<br>"exp(-a t)"<br>["vx t","vy t - 0.5 a t^2"]</pre> <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#14_Reponse" target="_blank">En savoir plus</a>';
 
 
 $string['takephoto'] = 'Prendre une photo';
 $string['stepmark'] = 'Note de la démarche';
 $string['steppart'] = 'Démarche';
 $string['stepfeedback'] = 'Description de la démarche';
-$string['stepfeedback_help'] = 'Description de la démarche';
-$string['stepfeedback_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#18_Description_de_la_demarche';
+$string['stepfeedback_help'] = 'Description de la démarche <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#18_Description_de_la_demarche" target="_blank">En savoir plus</a>';
 $string['valuetable'] = 'Table de valeurs';
 $string['answermissing'] = 'Veuillez renseigner la formule de la réponse';
 $string['notavailable'] = 'N/D';
@@ -57,12 +56,11 @@ $string['answercombinedunitsingle'] = 'Réponse et unité';
 $string['answercoordinatemulti'] = 'Réponse pour la partie {$a->part} et les coordonnées {$a->numanswer}';
 $string['answercoordinatesingle'] = 'Réponse pour les coordonnées {$a->numanswer}';
 $string['answermark'] = 'Note de la partie*';
-$string['answermark_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#13_Note_de_la_partie';
 $string['answermark_help'] = '**Requis**.
 La note attribuée à cette partie de la question, qui doit être un nombre supérieur à 0.
 La note totale de la question est la somme des notes de ses différentes parties.
 
-Note : si la note de la partie est laissée vide ou nulle, la partie sera supprimée lors de l\'enregistrement de la question.';
+Note : si la note de la partie est laissée vide ou nulle, la partie sera supprimée lors de l\'enregistrement de la question. <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#13_Note_de_la_partie" target="_blank">En savoir plus</a>';
 $string['answermulti'] = 'Réponse pour la partie {$a->part}';
 $string['answerno'] = 'Partie {$a}';
 $string['answersingle'] = 'Réponse';
@@ -76,11 +74,10 @@ Les réponses formule algébrique requièrent une chaîne ou une liste de chaîn
 Les différents types de réponses imposent diférentes restrictions lors de la saisie des réponses, aussi les étudiants ont besoin de savoir
 comment les saisir. Le code de vérification du format dans la question leur signalera
 en cours de frappe s\'ils entrent une réponse illégale. Lisez la documentation pour plus de détails.';
-$string['answertype_link'] = 'http://code.google.com/p/moodle-coordinate-question/wiki/Documentation#Answer_type';
+$string['answertype_link'] = '#';
 $string['answerunitmulti'] = 'Unité pour la partie {$a->part}';
 $string['answerunitsingle'] = 'Unité';
 $string['checkvarshdr'] = 'Test d\'instanciation des variables';
-$string['checkvarshdr_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables';
 $string['choiceno'] = 'Non';
 $string['choiceyes'] = 'Oui';
 $string['commonsiunit'] = 'Unités courantes SI';
@@ -92,7 +89,7 @@ $string['correctness_help'] = '**Requis**. Vous pouvez choisir une erreur relati
 On ne peut pas utiliser une erreur relative avec une réponse de type formule algébrique.
 
 Pour une définition précise de l\'erreur relative ou absolue quand il y a plusieurs champs de réponse, voir la documentation.';
-$string['correctness_link'] = 'http://code.google.com/p/moodle-coordinate-question/wiki/Documentation#Manual_grading_criteria';
+$string['correctness_link'] = '#';
 $string['correctnessexpert'] = 'Expert';
 $string['correctnesssimple'] = 'Simple';
 $string['defaultanswermark'] = 'Note de partie par défaut';
@@ -143,7 +140,6 @@ $string['error_vars_reserved'] = 'La fonction {$a}() est réservée et ne peut p
 $string['error_vars_string'] = 'Erreur ! Chaîne sans délimiteur " de fin, ou utilisation d\'un caractère non accepté comme \'.';
 $string['error_vars_undefined'] = 'La variable « {$a} » n\'est pas définie.';
 $string['feedback'] = 'Feedback général de la partie';
-$string['feedback_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#12_Retroaction_generale';
 $string['feedback_help'] = 'Le feedback de cette partie sera affiché seulement aux étudiants qui n\'ont pas obtenu la note maximale à la partie.
 Il peut contenir des variables globales et locales qui seront remplacées par leur valeur <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#12_Retroaction_generale" target="_blank">En savoir plus</a>';
 $string['functiontakesatleasttwo'] = 'La fonction {$a} doit avoir au moins deux arguments';
@@ -180,12 +176,9 @@ où sera inséré le contenu de la partie. C\'est une chaîne de caractères alp
 Si ce champ est laissé vide, la partie sera ajoutée à la fin du texte principal de la question.';
 $string['pleaseputananswer'] = 'Veuillez remplir tous les champs.';
 $string['pluginname'] = 'Formules avec démarche RÉCIT';
-$string['pluginname_help'] = 'Pour commencer à utiliser ce type de questions, veuillez lire le <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#10_Creation_de_la_question">tutoriel</a>.
+$string['pluginname_help'] = 'Pour commencer à utiliser ce type de questions, veuillez lire le <a href="https://ena.recitfad.com/course/view.php?id=455">tutoriel</a>.
 
-Pour des exemples de questions possibles, téléchargez et importez <a href="http://code.google.com/p/moodle-coordinate-question/downloads/list">les exemples</a>,
-ou consulter les <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#10_Creation_de_la_question">copies d\'écran</a>.
-
-Pour comprendre les options dans le formulaire ci-dessous, consultez les <a href="http://code.google.com/p/moodle-coordinate-question/wiki/QuestionOptions">options de questions</a>
+Pour des exemples de questions possibles, nous avons mis à votre disposition <a href="https://ena.recitfad.com/course/view.php?id=455">des exemples</a>.
 
 Pour la documentation complète, lisez <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html">la documentation</a>';
 $string['pluginname_link'] = 'question/type/numericalrecit';
@@ -212,6 +205,7 @@ Les variables globales seront remplacées par leur valeur et les espaces réserv
     Un exemple simple avec des variables globales <tt> A, B, C </tt> et des espaces réservés <tt> #1, #2, #3 </tt> is:
 
 <pre class="prettyprint">Quel est le résultat de {A} + {B}?<br>{#1}<br>Quel est le résultat de {A} - {B}?<br>{#2}<br>Quel est le résultat de {C} / {B}?<br>{#3}</pre>';
+$string['questiontext_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#11_Texte_de_la_question';
 $string['relerror'] = 'Erreur relative';
 $string['renew'] = 'Actualiser';
 $string['ruleid'] = 'Règles de conversion de base';
