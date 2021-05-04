@@ -32,6 +32,7 @@ $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,
     'qbehaviour_adaptivemultipart'     => 2014092500,
     'qtype_multichoice' => 2015111600,
+	'atto_recittakepicture' => 2021030200
 );
 $plugin->release   = 'R13-1.13.0';
 $plugin->maturity  = MATURITY_ALPHA;
