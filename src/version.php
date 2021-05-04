@@ -27,11 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'qtype_numericalrecit';
 $plugin->version   = 2021031600;
 $plugin->cron      = 0;
-$plugin->requires  = 2015111600;
+$plugin->requires  = 2018050800;
 $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,
     'qbehaviour_adaptivemultipart'     => 2014092500,
     'qtype_multichoice' => 2015111600,
 );
-$plugin->release   = 'R12-1.12.4';
+$plugin->release   = 'R13-1.13.0';
 $plugin->maturity  = MATURITY_ALPHA;
