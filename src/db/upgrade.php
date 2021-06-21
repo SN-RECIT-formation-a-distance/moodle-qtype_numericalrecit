@@ -32,17 +32,7 @@ function xmldb_qtype_numericalrecit_upgrade($oldversion=0) {
     $dbman = $DB->get_manager();
 
 
-    if ($oldversion < 2018080300) {
-        // Import from xml code was wrong for answernumbering,
-        // There was also a typo in the upgrade code.
-        // Fix all broken questions in database.
-        $DB->set_field('qtype_numericalrecit_options', 'answernumbering', 'none', array('answernumbering' => ''));
-
-        // numericalrecit savepoint reached.
-        upgrade_plugin_savepoint(true, 2018080300, 'qtype', 'numericalrecit');
-    }
-
-    if ($oldversion < 2021050000){
+    if ($oldversion < 2021062000){
         // Define field jsoncontent to be added
         $table = new xmldb_table('qtype_numericalrecit_options');
 
@@ -58,7 +48,7 @@ function xmldb_qtype_numericalrecit_upgrade($oldversion=0) {
         }
 
         // numericalrecit savepoint reached.
-        upgrade_plugin_savepoint(true, 2021050400, 'qtype', 'numericalrecit');
+        upgrade_plugin_savepoint(true, 2021062000, 'qtype', 'numericalrecit');
     }
     return true;
 }

@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_numericalrecit';
-$plugin->version   = 2021060400;
+$plugin->version   = 2021061400;
 $plugin->cron      = 0;
 $plugin->requires  = 2018050800;
 $plugin->dependencies = array(
