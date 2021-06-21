@@ -74,7 +74,7 @@ class qtype_numericalrecit extends question_type {
      * @return mixed array as above, or null to tell the base class to do nothing.
      */
     public function extra_question_fields() {
-        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark', 'stepfeedback');
+        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark', 'stepfeedback', 'automark');
     }
 
     /**
@@ -180,6 +180,7 @@ class qtype_numericalrecit extends question_type {
         $options->stepmark = 0;
         $options->stepfeedback = '';
         $options->shownumcorrect = 0;
+        $options->automark = 0;
 
         return $options;
     }
@@ -286,6 +287,7 @@ class qtype_numericalrecit extends question_type {
             $options->incorrectfeedback = '';
             $options->answernumbering = 'none';
             $options->stepmark = 0;
+            $options->automark = 0;
             $options->stepfeedback = '';
             $options->id = $DB->insert_record('qtype_numericalrecit_options', $options);
         }
@@ -319,6 +321,7 @@ class qtype_numericalrecit extends question_type {
             // Question's default mark is the total of all non empty parts's marks.
             $form->defaultmark += $form->answermark[$key];
         }
+        if (!isset($form->automark)) $form->automark = 0;
         $form->defaultmark += $form->stepmark;
         $question = parent::save_question($question, $form);
         return $question;
@@ -390,6 +393,7 @@ class qtype_numericalrecit extends question_type {
         $question->varsrandom = $questiondata->options->varsrandom;
         $question->varsglobal = $questiondata->options->varsglobal;
         $question->answernumbering = $questiondata->options->answernumbering;
+        $question->automark = $questiondata->options->automark;
         $question->stepmark = $questiondata->options->stepmark;
         $question->stepfeedback = $questiondata->options->stepfeedback;
         $question->qv = new qtype_numericalrecit_variables();
@@ -484,6 +488,7 @@ class qtype_numericalrecit extends question_type {
         $format->import_hints($fromform, $xml, true);
 
         $fromform->varsrandom = $format->getpath($xml, array('#', 'varsrandom', 0, '#', 'text', 0, '#'), '', true);
+        $fromform->automark = $format->getpath($xml, array('#', 'automark', 0, '#', 'text', 0, '#'), '', true);
         $fromform->varsglobal = $format->getpath($xml, array('#', 'varsglobal', 0, '#', 'text', 0, '#'), '', true);
         $fromform->answernumbering = $format->getpath($xml, array('#', 'answernumbering', 0, '#', 'text', 0, '#'), 'none', true);
         $fromform->stepmark = $format->getpath($xml, array('#', 'stepmark', 0, '#', 'text', 0, '#'), 'none', true);

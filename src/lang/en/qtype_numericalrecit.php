@@ -37,6 +37,8 @@ $string['algebraic_formula'] = 'Algebraic formula';
 $string['yougotnright'] = 'You have correctly answered {$a->num} part(s) of this question.';
 $string['pleaseputananswer'] = 'Please put an answer in each input field.';
 
+
+$string['automark'] = 'Enable automatic grading';
 $string['modelanswer'] = 'Model answer';
 
 $string['takephoto'] = 'Take Photo';

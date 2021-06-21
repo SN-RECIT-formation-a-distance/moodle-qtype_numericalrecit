@@ -69,10 +69,12 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
     public $randomsvarstext;
 
     public function make_behaviour(question_attempt $qa, $preferredbehaviour) {
-       /* if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
-            return question_engine::make_behaviour('adaptivemultipart', $qa, $preferredbehaviour);
+        if ($qa->get_question()->automark == 1){
+            if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
+                return question_engine::make_behaviour('adaptivemultipart', $qa, $preferredbehaviour);
+            }
+            return parent::make_behaviour($qa, $preferredbehaviour);
         }
-        return parent::make_behaviour($qa, $preferredbehaviour);*/
         
         return question_engine::make_behaviour('manualgraded', $qa, $preferredbehaviour);
     }
@@ -755,7 +757,9 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
             $this->rationalize_responses_for_part($part, $response);
             list($anscorr, $unitcorr) = $this->grade_responses_individually($part, $response, $checkunit);
             $fraction = $anscorr * ($unitcorr ? 1 : (1 - $part->unitpenalty));
-            //$partresults[$name] = new qbehaviour_adaptivemultipart_part_result( $name, $fraction, $this->penalty);
+            if ($part->get_question()->automark == 1){
+                $partresults[$name] = new qbehaviour_adaptivemultipart_part_result( $name, $fraction, $this->penalty);
+            }
         }
         return $partresults;
     }

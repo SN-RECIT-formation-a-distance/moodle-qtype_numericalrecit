@@ -85,14 +85,13 @@ function initOnCompleteLoad(){
     //Add show example button
     $('.collapsible-actions').append(' ­ <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html" target="_blank" class="btn btn-light"><i class="fa fa-info-circle"></i> '+M.util.get_string('docs', 'qtype_numericalrecit')+'</a>');
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
-    $('#fitem_id_answernumbering').hide();
-    $('div[id^="fitem_id_answertype_"]').hide();
-    $('div[id^="fitem_id_correctness_"]').hide();
-    $('#id_multitriesheader').hide();
-    $('#id_combinedfeedbackhdr').hide();
-    $('#id_subqoptions').hide();
-    setTimeout(function(){ $('.moreless-actions').hide(); }, 1000)
-    //$('.collapsible').addClass('collapsed');
+    hideAutoGradingFields(true);
+    //Check if auto grading is ticked
+    setTimeout(function(){
+        if ($('#id_automark').is(':checked')){
+            hideAutoGradingFields(false);
+        }
+    }, 1000);
 
     $("body").on("click", "#showexamplertr", function(){
         $("textarea[name=varsrandom]").val("k = {0,1};");
@@ -105,9 +104,42 @@ function initOnCompleteLoad(){
         $("input[name=name]").val("Exemple de question avec démarche");
 
         $('.collapsible').removeClass('collapsed');
-        
-    })
+    });
+
+    
+    $("body").on("change", "#id_automark", function(){
+        if (this.checked){
+            hideAutoGradingFields(false);
+        }else{
+            hideAutoGradingFields(true);
+        }
+    });
 };
+
+function hideAutoGradingFields(hide){
+    if (hide){
+        $('#fitem_id_answernumbering').hide();
+        $('div[id^="fitem_id_answertype_"]').hide();
+        $('div[id^="fitem_id_correctness_"]').hide();
+        $('#id_multitriesheader').hide();
+        $('#id_combinedfeedbackhdr').hide();
+        $('#id_subqoptions').hide();
+        $('#id_stepmark').prop('disabled', false);
+        setTimeout(function(){ $('.moreless-actions').hide(); }, 1000);
+    }else{
+        //$('#fitem_id_answernumbering').show();
+        $('div[id^="fitem_id_answertype_"]').show();
+        $('div[id^="fitem_id_correctness_"]').show();
+        $('#id_multitriesheader').show();
+        $('#id_combinedfeedbackhdr').show();
+        $('#id_subqoptions').show();
+        $('.moreless-actions').show();
+        $('#id_stepmark').attr('value', '0');
+        $('#id_stepmark').val('0');
+        $('#fitem_id_stepmark').hide();
+    }
+
+}
 
 document.onreadystatechange = function () {
     var state = document.readyState;

@@ -51,6 +51,7 @@ $string['addline'] = 'Ligne';
 $string['showexample'] = 'Créer un exemple';
 $string['save'] = 'Enregistrer';
 
+$string['automark'] = 'Activer la correction automatique';
 $string['answercombinedunitmulti'] = 'Réponse et unité pour la partie {$a->part}';
 $string['answercombinedunitsingle'] = 'Réponse et unité';
 $string['answercoordinatemulti'] = 'Réponse pour la partie {$a->part} et les coordonnées {$a->numanswer}';

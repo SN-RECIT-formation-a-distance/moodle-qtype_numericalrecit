@@ -41,5 +41,24 @@ function xmldb_qtype_numericalrecit_upgrade($oldversion=0) {
         // numericalrecit savepoint reached.
         upgrade_plugin_savepoint(true, 2018080300, 'qtype', 'numericalrecit');
     }
+
+    if ($oldversion < 2021050000){
+        // Define field jsoncontent to be added
+        $table = new xmldb_table('qtype_numericalrecit_options');
+
+        $fields = array(
+            new xmldb_field('automark', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0),
+        );
+
+        // Conditionally launch add field.
+        foreach ($fields as $field){
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+
+        // numericalrecit savepoint reached.
+        upgrade_plugin_savepoint(true, 2021050400, 'qtype', 'numericalrecit');
+    }
     return true;
 }
