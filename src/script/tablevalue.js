@@ -124,6 +124,7 @@ function hideAutoGradingFields(hide){
         $('#id_multitriesheader').hide();
         $('#id_combinedfeedbackhdr').hide();
         $('#id_subqoptions').hide();
+        $('div[id^="fitem_id_unitpenalty_"]').hide();
         $('#id_stepmark').prop('disabled', false);
         setTimeout(function(){ $('.moreless-actions').hide(); }, 1000);
     }else{
@@ -134,6 +135,7 @@ function hideAutoGradingFields(hide){
         $('#id_combinedfeedbackhdr').show();
         $('#id_subqoptions').show();
         $('.moreless-actions').show();
+        $('div[id^="fitem_id_unitpenalty_"]').show();
         $('#id_stepmark').attr('value', '0');
         $('#id_stepmark').val('0');
         $('#fitem_id_stepmark').hide();

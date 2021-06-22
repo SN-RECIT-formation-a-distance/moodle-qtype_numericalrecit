@@ -185,17 +185,17 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['vars2']['helpbutton'] = array('vars2', 'qtype_numericalrecit');
         $repeatedoptions['vars2']['advanced'] = true;
         // Part's grading criteria.
-        $repeated[] = $mform->createElement('text', 'correctness', get_string('correctness', 'qtype_numericalrecit'),            array('size' => 60, 'style' => 'display:none'));
+        $repeated[] = $mform->createElement('text', 'correctness', get_string('correctness', 'qtype_numericalrecit'), array('size' => 60));
         $repeatedoptions['correctness']['default'] = $config->defaultcorrectness;
         $repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_numericalrecit');
         $repeatedoptions['correctness']['type'] = PARAM_RAW;
         // Part's unit penalty.
-        $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'),            array('size' => 3));
+        $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'), array('size' => 3));
         $repeatedoptions['unitpenalty']['default'] = $config->defaultunitpenalty;
         $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
         $repeatedoptions['unitpenalty']['type'] = PARAM_FLOAT;
         // Part's unit.
-        $repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'),            array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
+        $repeated[] = $mform->createElement('text', 'postunit', get_string('postunit', 'qtype_numericalrecit'), array('size' => 60, 'class' => 'numericalrecit_editing_unit'));
         $repeatedoptions['postunit']['helpbutton'] = array('postunit', 'qtype_numericalrecit');
         $repeatedoptions['postunit']['type'] = PARAM_RAW;
         // Part's basic conversion rules.
