@@ -125,6 +125,7 @@ function hideAutoGradingFields(hide){
         $('#id_combinedfeedbackhdr').hide();
         $('#id_subqoptions').hide();
         $('div[id^="fitem_id_unitpenalty_"]').hide();
+        $('#fitem_id_stepmark').show();
         $('#id_stepmark').prop('disabled', false);
         setTimeout(function(){ $('.moreless-actions').hide(); }, 1000);
     }else{
