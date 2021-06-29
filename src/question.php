@@ -1020,6 +1020,10 @@ class qtype_numericalrecit_part {
 
     }
 
+    public function get_question(){
+        return false;
+    }
+
     public function part_is_unanswered(array$response) {
         $i = $this->partindex;
         if (array_key_exists("${i}_", $response) && $response["${i}_"] != '') {
