@@ -25,14 +25,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_numericalrecit';
-$plugin->version   = 2021070100;
+$plugin->version   = 2021092400;
 $plugin->cron      = 0;
 $plugin->requires  = 2018050800;
 $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,
     'qbehaviour_adaptivemultipart'     => 2014092500,
     'qtype_multichoice' => 2015111600,
-	'atto_recittakepicture' => 2021050400
+	'atto_recittakepicture' => 2021092400
 );
-$plugin->release   = 'R13-1.13.2';
+$plugin->release   = 'R14-1.0';
 $plugin->maturity  = MATURITY_ALPHA;
