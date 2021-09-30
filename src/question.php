@@ -296,17 +296,21 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         // TODO add tests to verify it works in all cases : combined and separate unit field, no unit field.
         $complete = true;
         foreach ($this->parts as $part) {
-            if ($part->part_has_combined_unit_field()) {
-                $complete = $complete && array_key_exists($part->partindex . "_", $response)
-                        && $response[$part->partindex . "_"] !== '';
-            } else {
-                foreach (range(0, $part->numbox - 1) as $j) {
-                    $complete = $complete && array_key_exists($part->partindex . "_$j", $response)
-                            && $response[$part->partindex . "_$j"] !== '';
-                }
-                if ($part->part_has_separate_unit_field()) {
-                    $complete = $complete && array_key_exists($part->partindex . "_" . $part->numbox, $response)
-                            && $response[$part->partindex . "_" . $part->numbox] != '';
+            if ($part->answermark == 0){
+                $complete = true;
+            }else{
+                if ($part->part_has_combined_unit_field()) {
+                    $complete = $complete && array_key_exists($part->partindex . "_", $response)
+                            && $response[$part->partindex . "_"] !== '';
+                } else {
+                    foreach (range(0, $part->numbox - 1) as $j) {
+                        $complete = $complete && array_key_exists($part->partindex . "_$j", $response)
+                                && $response[$part->partindex . "_$j"] !== '';
+                    }
+                    if ($part->part_has_separate_unit_field()) {
+                        $complete = $complete && array_key_exists($part->partindex . "_" . $part->numbox, $response)
+                                && $response[$part->partindex . "_" . $part->numbox] != '';
+                    }
                 }
             }
         }
@@ -1024,8 +1028,9 @@ class qtype_numericalrecit_part {
         return false;
     }
 
-    public function part_is_unanswered(array$response) {
+    public function part_is_unanswered(array $response) {
         $i = $this->partindex;
+        if ($this->answermark == 0) return false;
         if (array_key_exists("${i}_", $response) && $response["${i}_"] != '') {
             return false;
         }
