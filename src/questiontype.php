@@ -87,16 +87,12 @@ class qtype_numericalrecit extends question_type {
         $fs = get_file_storage();
 
         parent::move_files($questionid, $oldcontextid, $newcontextid);
-        $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
-        $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
-        $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
-        $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $questionid);
-        $fs->move_area_files_to_new_context($oldcontextid,
-            $newcontextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'stepfeedback', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
         $this->move_files_in_combined_feedback($questionid, $oldcontextid, $newcontextid);
         $this->move_files_in_hints($questionid, $oldcontextid, $newcontextid);
     }
@@ -115,6 +111,7 @@ class qtype_numericalrecit extends question_type {
         $fs->delete_area_files($contextid, 'question', 'correctfeedback', $questionid);
         $fs->delete_area_files($contextid, 'question', 'partiallycorrectfeedback', $questionid);
         $fs->delete_area_files($contextid, 'question', 'incorrectfeedback', $questionid);
+        $fs->delete_area_files($contextid, 'question', 'stepfeedback', $questionid);
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
@@ -135,7 +132,15 @@ class qtype_numericalrecit extends question_type {
      *                         specific information (it is passed by reference).
      */
     public function get_question_options($question) {
-        global $DB;
+        global $DB, $PAGE;
+
+        if (!$questionn = $DB->get_record_sql('
+        SELECT q.*, qc.contextid
+        FROM {question} q
+        JOIN {question_categories} qc ON qc.id = q.category
+        WHERE q.id = ?', [$question->id])) {
+            print_error('questiondoesnotexist', 'question');
+        }
 
         $question->options = $DB->get_record('qtype_numericalrecit_options', ['questionid' => $question->id]);
 
@@ -151,7 +156,7 @@ class qtype_numericalrecit extends question_type {
         $question->options->answers = $DB->get_records('qtype_numericalrecit_answers', array('questionid' => $question->id), 'partindex ASC');
         $question->options->numpart = count($question->options->answers);
         $question->options->answers = array_values($question->options->answers);
-        $question->options->stepfeedback = array('text' => $question->options->stepfeedback);
+        $question->options->stepfeedback = array('text' => file_rewrite_pluginfile_urls($question->options->stepfeedback, 'pluginfile.php', $questionn->contextid, 'qtype_numericalrecit', 'stepfeedback', $question->id));
         return true;
     }
 
@@ -171,7 +176,7 @@ class qtype_numericalrecit extends question_type {
         // Get the default strings and just set the format.
         $options->correctfeedback = get_string('correctfeedbackdefault', 'question');
         $options->correctfeedbackformat = FORMAT_HTML;
-        $options->partiallycorrectfeedback = get_string('partiallycorrectfeedbackdefault', 'question');;
+        $options->partiallycorrectfeedback = get_string('partiallycorrectfeedbackdefault', 'question');
         $options->partiallycorrectfeedbackformat = FORMAT_HTML;
         $options->incorrectfeedback = get_string('incorrectfeedbackdefault', 'question');
         $options->incorrectfeedbackformat = FORMAT_HTML;
@@ -301,7 +306,7 @@ class qtype_numericalrecit extends question_type {
 
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
         if (is_array($options->stepfeedback)){
-            $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'qtype_numericalrecit', 'stepfeedback', $question->id);
+            $options->stepfeedback = file_save_draft_area_files($options->stepfeedback['itemid'], $context->id, 'qtype_numericalrecit', 'stepfeedback', $question->id, array('subdirs'=>true), $options->stepfeedback['text']);
         }
 
         $DB->update_record('qtype_numericalrecit_options', $options);
@@ -521,6 +526,9 @@ class qtype_numericalrecit extends question_type {
             $fromform->partpartiallycorrectfb[$anscount] = $format->import_text_with_files($feedbackxml,
                         array(), '', $format->get_format($fromform->questiontextformat));
             $feedbackxml = $format->getpath($answer, array('#', 'incorrectfeedback', 0), array());
+            $fromform->partincorrectfb[$anscount] = $format->import_text_with_files($feedbackxml,
+                        array(), '', $format->get_format($fromform->questiontextformat));
+            $feedbackxml = $format->getpath($answer, array('#', 'stepfeedback', 0), array());
             $fromform->partincorrectfb[$anscount] = $format->import_text_with_files($feedbackxml,
                         array(), '', $format->get_format($fromform->questiontextformat));
             ++$anscount;

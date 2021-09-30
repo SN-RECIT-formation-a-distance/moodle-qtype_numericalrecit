@@ -7,5 +7,11 @@ document.onreadystatechange = function () {
                 $('.atto_recittakepicture_button_takephoto').trigger('click');
              }
          });
+
+        let inputs = document.querySelectorAll('.numericalrecitpart.disabled input');
+        for (let i = 0; i < inputs.length; i++){
+            inputs[i].value = '0';
+            inputs[i].setAttribute('value', '0');
+        }
     }
 };

@@ -810,7 +810,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
 
     public function check_file_access($qa, $options, $component, $filearea, $args, $forcedownload) {
         $itemid = reset($args);
-        if ($component == 'question' && $filearea == 'response_stepn') {
+        if ($component == 'question' && in_array($filearea, array('response_stepn', 'stepfeedback'))) {
             return true;
         }else if ($component == 'qtype_numericalrecit' && ($filearea == 'answersubqtext' || $filearea == 'answerfeedback'
                 || $filearea == 'partcorrectfb' || $filearea == 'partpartiallycorrectfb' || $filearea == 'partincorrectfb')) {
