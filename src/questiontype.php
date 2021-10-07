@@ -261,6 +261,7 @@ class qtype_numericalrecit extends question_type {
                 } else {
                     $ans->id = $answer->id;
                 }
+                $ans->answer = str_replace(',', '.', $ans->answer);
                 $ans->subqtext = $this->import_or_save_files($subqtextarr, $context, 'qtype_numericalrecit', 'answersubqtext', $ans->id);
                 $ans->feedback = $this->import_or_save_files($feedbackarr, $context, 'qtype_numericalrecit', 'answerfeedback', $ans->id);
                 $ans->partcorrectfb = $this->import_or_save_files($correctfbarr, $context, 'qtype_numericalrecit', 'partcorrectfb', $ans->id);

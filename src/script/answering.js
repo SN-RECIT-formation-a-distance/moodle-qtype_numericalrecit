@@ -8,10 +8,19 @@ document.onreadystatechange = function () {
              }
          });
 
-        let inputs = document.querySelectorAll('.numericalrecitpart.disabled input');
-        for (let i = 0; i < inputs.length; i++){
-            inputs[i].value = '0';
-            inputs[i].setAttribute('value', '0');
-        }
+         let inputs = document.querySelectorAll('.numericalrecitpart.disabled input');
+         for (let i = 0; i < inputs.length; i++){
+             inputs[i].value = '0';
+             inputs[i].setAttribute('value', '0');
+         }
+
+         inputs = document.querySelectorAll('.numericalrecitpart input');
+         for (let i = 0; i < inputs.length; i++){
+             inputs[i].onchange = function(){
+                 if (this.value.includes(',')){
+                     this.value = this.value.replace(',', '.');
+                 }
+             }
+         }
     }
 };
