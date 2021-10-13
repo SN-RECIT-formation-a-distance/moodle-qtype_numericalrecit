@@ -297,7 +297,9 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         $complete = true;
         foreach ($this->parts as $part) {
             if ($part->answermark == 0){
-                $complete = true;
+                if (empty($response['stepn'])){
+                    $complete = false;
+                }
             }else{
                 if ($part->part_has_combined_unit_field()) {
                     $complete = $complete && array_key_exists($part->partindex . "_", $response)
@@ -1025,7 +1027,7 @@ class qtype_numericalrecit_part {
     }
 
     public function get_question(){
-        return false;
+        return $this;
     }
 
     public function part_is_unanswered(array $response) {
