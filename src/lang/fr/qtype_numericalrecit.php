@@ -161,7 +161,7 @@ $string['numdataset'] = 'Nombre de jeux de données';
 $string['numdataset_help'] = 'Nombre de jeux de données <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables" target="_blank">En savoir plus</a>';
 $string['numeric'] = 'Numérique';
 $string['numeric_unit'] = 'Numérique et unité';
-$string['numerical_formula'] = 'Formule numérique avec démarche RÉCIT';
+$string['numerical_formula'] = 'Formule numérique';
 $string['numerical_formula_unit'] = 'Formule numérique et unité';
 $string['otherrule'] = 'Autres règles';
 $string['otherrule_help'] = 'L\'auteur de la question peut définir ici des règles de conversion additionnelles pour des unités de base supplémentaires.
