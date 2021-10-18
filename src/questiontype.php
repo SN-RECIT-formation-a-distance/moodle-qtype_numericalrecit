@@ -89,7 +89,7 @@ class qtype_numericalrecit extends question_type {
         parent::move_files($questionid, $oldcontextid, $newcontextid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
-        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'stepfeedback', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'question', 'stepfeedback', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
@@ -132,13 +132,19 @@ class qtype_numericalrecit extends question_type {
      *                         specific information (it is passed by reference).
      */
     public function get_question_options($question) {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $COURSE;
 
         if (!$questionn = $DB->get_record_sql('
         SELECT q.*, qc.contextid
         FROM {question} q
         JOIN {question_categories} qc ON qc.id = q.category
         WHERE q.id = ?', [$question->id])) {
+            print_error('questiondoesnotexist', 'question');
+        }
+        if (!$questionusage = $DB->get_record_sql('
+        SELECT *
+        FROM {question_usages}
+        WHERE contextid = ?', [$PAGE->context->id])) {
             print_error('questiondoesnotexist', 'question');
         }
 
@@ -156,7 +162,11 @@ class qtype_numericalrecit extends question_type {
         $question->options->answers = $DB->get_records('qtype_numericalrecit_answers', array('questionid' => $question->id), 'partindex ASC');
         $question->options->numpart = count($question->options->answers);
         $question->options->answers = array_values($question->options->answers);
-        $question->options->stepfeedback = array('text' => file_rewrite_pluginfile_urls($question->options->stepfeedback, 'pluginfile.php', $questionn->contextid, 'qtype_numericalrecit', 'stepfeedback', $question->id));
+        
+        if (count($question->options->answers)) {
+            $answ = $question->options->answers[0];
+            $question->options->stepfeedback = array('text' => file_rewrite_pluginfile_urls($question->options->stepfeedback, 'pluginfile.php', $questionn->contextid, 'question', 'stepfeedback', $questionusage->id.'/1/'.$answ->id), 'format' => FORMAT_HTML);
+        }
         return true;
     }
 
@@ -307,7 +317,7 @@ class qtype_numericalrecit extends question_type {
 
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
         if (is_array($options->stepfeedback)){
-            $options->stepfeedback = file_save_draft_area_files($options->stepfeedback['itemid'], $context->id, 'qtype_numericalrecit', 'stepfeedback', $question->id, array('subdirs'=>true), $options->stepfeedback['text']);
+            $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'question', 'stepfeedback', $newanswers[0]->id);
         }
 
         $DB->update_record('qtype_numericalrecit_options', $options);

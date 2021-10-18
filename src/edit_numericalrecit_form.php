@@ -276,6 +276,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $question = $this->data_preprocessing_combined_feedback($question, true);
         $question = $this->data_preprocessing_hints($question, true, true);
         if (isset($question->options)) {
+
             $defaultvalues = array();
             if (count($question->options->answers)) {
                 $tags = question_bank::get_qtype($question->qtype)->part_tags();
@@ -289,11 +290,8 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
                     foreach ($fields as $field) {
                         $fieldformat = $field . 'format';
                         $itemid = file_get_submitted_draft_itemid($field . '[' . $key . ']');
-                        $fieldtxt = file_prepare_draft_area($itemid, $this->context->id, 'qtype_numericalrecit',
-                                'answer' . $field, empty($answer->id) ? null : (int)$answer->id,
-                                $this->fileoptions, $answer->$field);
-                        $defaultvalues[$field . '[' . $key . ']'] = array('text' => $fieldtxt,
-                            'format' => $answer->$fieldformat, 'itemid' => $itemid);
+                        $fieldtxt = file_prepare_draft_area($itemid, $this->context->id, 'qtype_numericalrecit',  'answer' . $field, empty($answer->id) ? null : (int)$answer->id, $this->fileoptions, $answer->$field);
+                        $defaultvalues[$field . '[' . $key . ']'] = array('text' => $fieldtxt, 'format' => $answer->$fieldformat, 'itemid' => $itemid);
                     }
                     $fields = array('partcorrectfb', 'partpartiallycorrectfb', 'partincorrectfb');
                     foreach ($fields as $field) {

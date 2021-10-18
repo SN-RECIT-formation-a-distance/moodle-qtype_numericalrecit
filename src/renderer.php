@@ -97,15 +97,13 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
         if (empty($options->readonly)) {
             $result .= "<button class='btn btn-primary d-block m-auto' id='button_takephoto'><i class='fa fa-camera'></i> ". get_string('takephoto', 'qtype_numericalrecit')."</button>";
-            $result .= $responseoutput->response_area_input('stepn', $qa,
-                    $step, 12, $options->context, $question->stepmark);
+            $result .= $responseoutput->response_area_input('stepn', $qa, $step, 12, $options->context, $question->stepmark);
         } else {
-            $result .= $responseoutput->response_area_read_only('stepn', $qa, 
-                    $step, 12, $options->context, $question->stepmark);
-            $stepfeedback = '';
-            if (is_array($question->stepfeedback)){
-                $stepfeedback = $question->numericalrecit_format_text($globalvars, $question->stepfeedback['text'], FORMAT_HTML, $qa, 'question', 'stepfeedback', $question->id, false);
-            }
+            $result .= $responseoutput->response_area_read_only('stepn', $qa, $step, 12, $options->context, $question->stepmark);
+
+            $stepfeedback = $question->stepfeedback;
+            if (is_array($stepfeedback)) $stepfeedback = $question->stepfeedback['text'];
+            $stepfeedback = $question->numericalrecit_format_text($globalvars, $stepfeedback, FORMAT_HTML, $qa, 'question', 'stepfeedback', $question->parts[0]->id, false);
             $result .= html_writer::nonempty_tag('div', $stepfeedback, array('class' => 'numericalrecitpartoutcome'));
         }
 
