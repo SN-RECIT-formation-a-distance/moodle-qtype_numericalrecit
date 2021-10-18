@@ -145,7 +145,8 @@ class qtype_numericalrecit extends question_type {
         SELECT *
         FROM {question_usages}
         WHERE contextid = ?', [$PAGE->context->id])) {
-            print_error('questiondoesnotexist', 'question');
+            $questionusage = new stdClass();
+            $questionusage->id = 0;
         }
 
         $question->options = $DB->get_record('qtype_numericalrecit_options', ['questionid' => $question->id]);
