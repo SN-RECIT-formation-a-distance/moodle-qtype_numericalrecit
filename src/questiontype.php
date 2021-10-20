@@ -141,7 +141,7 @@ class qtype_numericalrecit extends question_type {
         WHERE q.id = ?', [$question->id])) {
             print_error('questiondoesnotexist', 'question');
         }
-        if (!$questionusage = $DB->get_record_sql('
+        if (!isset($PAGE->context) || !$questionusage = $DB->get_record_sql('
         SELECT *
         FROM {question_usages}
         WHERE contextid = ?', [$PAGE->context->id])) {

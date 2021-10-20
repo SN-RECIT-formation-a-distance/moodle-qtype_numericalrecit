@@ -295,12 +295,13 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
     public function is_complete_response(array $response) {
         // TODO add tests to verify it works in all cases : combined and separate unit field, no unit field.
         $complete = true;
+        if ($this->stepmark > 0){
+            if (empty(strip_tags($response['stepn'], 'img'))){
+                $complete = false;
+            }
+        }
         foreach ($this->parts as $part) {
-            if ($part->answermark == 0){
-                if (empty($response['stepn'])){
-                    $complete = false;
-                }
-            }else{
+            if ($part->answermark > 0){
                 if ($part->part_has_combined_unit_field()) {
                     $complete = $complete && array_key_exists($part->partindex . "_", $response)
                             && $response[$part->partindex . "_"] !== '';
