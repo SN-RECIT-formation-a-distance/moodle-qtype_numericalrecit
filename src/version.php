@@ -18,7 +18,8 @@
  * Version information for the numericalrecit question type.
  *
  * @package    qtype_numericalrecit
- * @copyright  2010 Hon Wai, Lau <lau65536@gmail.com>
+ * @copyright  2019 RECIT
+ * @copyright  Based on work by 2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

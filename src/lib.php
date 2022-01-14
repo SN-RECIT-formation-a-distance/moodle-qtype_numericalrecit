@@ -19,11 +19,10 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Used to save and restore image correctly
  *
- * @copyright &copy; 2010-2011 Hon Wai, Lau
- * @author Hon Wai, Lau <lau65536@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU Public License version 3
- * @package questionbank
- * @subpackage questiontypes
+ * @package    qtype_numericalrecit
+ * @copyright  2019 RECIT
+ * @copyright  Based on work by 2010 Hon Wai, Lau <lau65536@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 function qtype_numericalrecit_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {

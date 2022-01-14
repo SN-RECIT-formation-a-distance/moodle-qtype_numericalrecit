@@ -15,8 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ *
  * @package    qtype_numericalrecit
- * @copyright  2013 Jean-Michel Vedrine
+ * @copyright  2019 RECIT
+ * @copyright  Based on work by 2010 Hon Wai, Lau <lau65536@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

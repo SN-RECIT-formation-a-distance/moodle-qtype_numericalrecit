@@ -15,12 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the editing form for the numericalrecit question type.
  *
- * @copyright &copy; 2010-2011 Hon Wai, Lau
- * @author Hon Wai, Lau <lau65536@gmail.com>
- * @license http://www.gnu.org/copyleft/gpl.html GNU Public License version 3
- * @package qtype_numericalrecit
+ * @package    qtype_numericalrecit
+ * @copyright  2019 RECIT
+ * @copyright  Based on work by 2010 Hon Wai, Lau <lau65536@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
