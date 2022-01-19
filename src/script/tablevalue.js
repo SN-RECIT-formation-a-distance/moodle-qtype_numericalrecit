@@ -39,7 +39,7 @@ function initOnCompleteLoad(){
         <div class="modal-dialog" role="document">\
           <div class="modal-content w-auto">\
             <div class="modal-header">\
-              <h5 class="modal-title">Value Table</h5>\
+              <h5 class="modal-title">'+M.util.get_string('valuetable', 'qtype_numericalrecit')+'</h5>\
               <button type="button" class="close" data-dismiss="modal" id="closevaluetable" aria-label="Close">\
                 <span aria-hidden="true">&times;</span>\
               </button>\
