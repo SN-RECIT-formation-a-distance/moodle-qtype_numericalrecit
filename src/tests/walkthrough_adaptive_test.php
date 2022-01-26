@@ -47,9 +47,18 @@ class qtype_numericalrecit_walkthrough_adaptive_test extends qtype_numericalreci
         return test_question_maker::make_question('numericalrecit', $which);
     }
 
+    protected function setUp(): void {
+        global $PAGE;
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
+        $PAGE->set_url('/question/index.php');
+        parent::setUp();
+    }
+
     public function test_test0_submit_right_first_time() {
+
         // Create the numericalrecit question 'test0'.
-        $q = $this->get_test_numericalrecit_question('test0');
+        $q = $this->get_test_numericalrecit_question('test0'); 
         $this->start_attempt_at_question($q, 'adaptive', 1);
 
         // Check the initial state.

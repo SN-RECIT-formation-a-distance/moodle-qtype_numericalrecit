@@ -1346,7 +1346,7 @@ class qtype_numericalrecit_variables {
                 // Simple parenthesis.
                 case '':
                     if (strlen($regs[4]) != 0 || strlen($regs[3]) == 0) {
-                        return get_string('illegalnumericalrecityntax', 'qtype_numericalrecit', $regs[0]);
+                        return get_string('illegalformulasyntax', 'qtype_numericalrecit', $regs[0]);
                     }
                     break;
 
@@ -1407,7 +1407,7 @@ class qtype_numericalrecit_variables {
         }
 
         if (preg_match("~[^$safeoperatorchar.0-9eE]+~", $formula, $regs)) {
-            return get_string('illegalnumericalrecityntax', 'qtype_numericalrecit', $regs[0]);
+            return get_string('illegalformulasyntax', 'qtype_numericalrecit', $regs[0]);
         } else {
             // Formula just might be valid.
             return false;

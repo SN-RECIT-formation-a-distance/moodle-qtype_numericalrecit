@@ -69,7 +69,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
     public $randomsvarstext;
 
     public function make_behaviour(question_attempt $qa, $preferredbehaviour) {
-        if ($qa->get_question()->automark == 1){
+        if (!isset($qa->get_question()->automark) || $qa->get_question()->automark == 1){
             if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
                 return question_engine::make_behaviour('adaptivemultipart', $qa, $preferredbehaviour);
             }
@@ -545,7 +545,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
             }
 
         }
-            if (is_numeric($tmp["{$part->partindex}_0"])){
+            if (is_numeric($tmp["{$part->partindex}_0"]) && substr(current_language(), 0, 2) == "fr"){
                 $tmp["{$part->partindex}_0"] = number_format($tmp["{$part->partindex}_0"], 3, ',', ' ');
             }
         if ($part->part_has_combined_unit_field()) {

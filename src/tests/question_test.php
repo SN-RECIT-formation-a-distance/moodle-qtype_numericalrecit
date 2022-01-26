@@ -47,15 +47,17 @@ class qtype_numericalrecit_question_test extends basic_testcase {
 
     public function test_get_expected_data_test0() {
         $q = $this->get_test_numericalrecit_question('test0');
-        $this->assertEquals(array('0_0' => PARAM_RAW), $q->get_expected_data());
+        $this->assertEquals(array('0_0' => PARAM_RAW, 'stepn' => question_attempt::PARAM_RAW_FILES), $q->get_expected_data());
     }
 
     public function test_get_expected_data_test1() {
         $q = $this->get_test_numericalrecit_question('test1');
         $this->assertEquals(array('0_0' => PARAM_RAW,
                                   '1_0' => PARAM_RAW,
-                                  '2_0' => PARAM_RAW),
-                                  $q->get_expected_data());
+                                  '2_0' => PARAM_RAW,
+                                  'stepn' => question_attempt::PARAM_RAW_FILES
+                                ),
+                                $q->get_expected_data());
     }
 
     public function test_get_expected_data_test2() {
@@ -64,8 +66,10 @@ class qtype_numericalrecit_question_test extends basic_testcase {
                                   '1_0' => PARAM_RAW,
                                   '1_1' => PARAM_RAW,
                                   '2_0' => PARAM_RAW,
-                                  '3_0' => PARAM_RAW),
-                                  $q->get_expected_data());
+                                  '3_0' => PARAM_RAW,
+                                  'stepn' => question_attempt::PARAM_RAW_FILES
+                                ),
+                                $q->get_expected_data());
     }
 
     public function test_is_complete_response_test0() {

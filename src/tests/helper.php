@@ -59,7 +59,9 @@ class qtype_numericalrecit_test_helper extends question_test_helper {
         $q->qtype = question_bank::get_qtype('numericalrecit');
         $q->contextid = context_system::instance()->id;
         $q->varsrandom = '';
+        $q->stepfeedback = '';
         $q->varsglobal = '';
+        $q->stepmark = 0;
         $q->shownumcorrect = 0;
         $q->answernumbering = 'abc';
         $q->qv = new qtype_numericalrecit_variables();
@@ -81,6 +83,7 @@ class qtype_numericalrecit_test_helper extends question_test_helper {
         $p->id = 0;
         $p->placeholder = '';
         $p->answermark = 1;
+        $p->automark = 1;
         $p->answertype = 0;
         $p->numbox = 1;
         $p->vars1 = '';
