@@ -55,6 +55,10 @@ $string['addline'] = 'Line';
 $string['showexample'] = 'Create Example';
 $string['save'] = 'Save';
 
+$string['calculate'] = 'Calculate';
+$string['descriptionhere'] = 'Description here';
+
+
 // Texts that will be shown in the question editing interface.
 $string['addmorepartsblanks'] = 'Blanks for {no} more parts';
 $string['pluginname'] = 'Formula with steps RÉCIT';

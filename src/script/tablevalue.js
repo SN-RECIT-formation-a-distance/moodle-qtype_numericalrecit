@@ -120,11 +120,11 @@ function initOnCompleteLoad(){
         $("textarea[name=varsrandom]").val("k = {0,1};");
         $("textarea[name=varsglobal]").val("a = [1,3][k];b = [3,6][k];");
         $("input[name=\"answer[0]\"]").val("a + b");
-        $("#id_questiontext").val("Calculez {a} + {b}");
-        $("#id_questiontexteditable p").html("Calculez {a} + {b}");
-        $("#id_stepfeedback").val("Description de la démarche ici");
-        $("#id_stepfeedbackeditable p").html("Description de la démarche ici");
-        $("input[name=name]").val("Exemple de question avec démarche");
+        $("#id_questiontext").val(M.util.get_string('calculate', 'qtype_numericalrecit')+" {a} + {b}");
+        $("#id_questiontexteditable p").html(M.util.get_string('calculate', 'qtype_numericalrecit')+" {a} + {b}");
+        $("#id_stepfeedback").val(M.util.get_string('descriptionhere', 'qtype_numericalrecit'));
+        $("#id_stepfeedbackeditable p").html(M.util.get_string('descriptionhere', 'qtype_numericalrecit'));
+        $("input[name=name]").val("numericalrecit");
 
         $('.collapsible').removeClass('collapsed');
     });

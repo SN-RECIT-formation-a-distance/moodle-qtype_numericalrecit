@@ -338,6 +338,7 @@ class qtype_numericalrecit extends question_type {
             $form->defaultmark += $form->answermark[$key];
         }
         if (!isset($form->automark)) $form->automark = 0;
+        if (!isset($form->stepmark)) $form->stepmark = 0;
         $form->defaultmark += $form->stepmark;
         $question = parent::save_question($question, $form);
         return $question;
