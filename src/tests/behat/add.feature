@@ -19,7 +19,7 @@ Feature: Test creating a numericalrecit question
     And I navigate to "Question bank" in current page administration
 
   Scenario: Create a numericalrecit question
-    When I add a "numericalrecit" question filling the form with:
+    When I add a "Formula with steps RÉCIT" question filling the form with:
       | Question name        | numericalrecit-001                              |
       | Question text        | Minimal formula question                  |
       | General feedback     | The correct answer is 1                   |

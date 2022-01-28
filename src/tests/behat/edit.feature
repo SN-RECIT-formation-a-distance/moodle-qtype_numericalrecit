@@ -18,15 +18,15 @@ Feature: Test editing a numericalrecit question
       | contextlevel | reference | name           |
       | Course       | C1        | Test questions |
     And the following "questions" exist:
-      | questioncategory | qtype       | name                      | template   |
-      | Test questions   | numericalrecit     | numericalrecit-001 for editing | test1      |
+      | questioncategory | qtype              | name                           | template   |
+      | Test questions   | numericalrecit     | numericalrecit-001             | test1      |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" in current page administration
 
-  @javascript @_switch_window
+  @javascript
   Scenario: Edit a numericalrecit question
-    When I click on "Edit" "link" in the "numericalrecit-001 for editing" "table_row"
+    When I choose "Edit question" action for "numericalrecit-001" in the question bank
     And I set the following fields to these values:
       | Question name | |
     And I press "id_submitbutton"
