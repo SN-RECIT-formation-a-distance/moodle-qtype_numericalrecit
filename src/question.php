@@ -296,7 +296,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
         // TODO add tests to verify it works in all cases : combined and separate unit field, no unit field.
         $complete = true;
         if ($this->stepmark > 0){
-            if (empty(strip_tags($response['stepn'], 'img'))){
+            if (empty(strip_tags($response['stepn'])) && strpos($response['stepn'], 'img') == false){
                 $complete = false;
             }
         }
