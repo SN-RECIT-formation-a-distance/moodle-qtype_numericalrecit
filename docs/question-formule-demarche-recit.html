@@ -1,0 +1,395 @@
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Formules avec démarches RÉCIT</title>
+    <!--<link rel="stylesheet" href="style-gdocs.css">-->
+    <link rel="icon" type="image/png" href="images/image229.png">
+    <script type="text/javascript" src="js/script.js"></script>
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        figure {
+            margin: 2rem;
+        }
+
+        figure img {
+            width: 100%;
+        }
+
+        #main-doc img {
+            width: 100%;
+            border: 1px solid #afafaf;
+        }
+
+        #main-doc li {
+            text-align: justify;
+        }
+
+        #main-doc dd {
+            text-align: justify;
+        }
+    </style>
+
+</head>
+
+<body class="">
+    <div id="settings-container">
+        <div id="settings-wrapper" class="animated">
+            <div id="settings">
+                <button id="theme-btn" class="btn"><i class="fas fa-adjust"></i>
+                </button>
+
+                <button id="nav-side-btn" class="btn"><i class="fas fa-exchange-alt"></i>
+                </button>
+                <div id="zoom-container">
+                    <button id="zoom-in" class="btn zoom-btn"><i class="fas fa-search-plus"></i>
+                    </button>
+                    <button id="zoom-out" class="btn zoom-btn"><i class="fas fa-search-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reading-bar" class="reading-bar">
+        <div id="reading-progress" class="reading-progress"></div>
+    </div>
+
+    <nav id="navbar" class="navbar">
+        <button id="nav-close-btn" class="btn"><i class="fa fa-th-list"></i>
+        </button>
+
+        <header style='margin: auto;'>
+            <img src="images/image206.png" alt="SN FAD" style='width: 180px;' />
+        </header>
+        <ul id="toc">
+
+        </ul>
+    </nav>
+
+    <button id="scroll-btn" class="btn animated faster"><i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- END NAV -->
+    <div id="wrapper">
+        <main id="main-doc" class="animated fadeInUp nav-open nav-left">
+            <section class="main-section">
+                <article>
+                    <img src="images/image206.png" alt="SN FAD" style='width: 180px; border: none;' />
+                    <header>
+                        <h2>Formules avec démarches RÉCIT</h2>
+                    </header>
+                    <p>La question «&nbsp;formules avec démarche&nbsp;» permet à l'enseignant d'administrer une épreuve
+                        en format
+                        numérique qui contient des questions nécessitant l'évaluation des démarches. Ce type de question
+                        permet la prise de photo directe par le biais de n'importe quel type de dispositif courant
+                        (ordinateur portable, Chromebook, tablette, appareil mobile). L'élève a aussi la possibilité de
+                        joindre un fichier. Une table de valeurs génère des nombres aléatoires présentés aux élèves.
+                        Chaque élève reçoit donc une version unique de l'épreuve. La table de valeurs assure l'équité à
+                        travers le jeu de valeurs aléatoires. Une formule mathématique est appliquée
+                        afin de fournir à l'élève et à l'enseignant la bonne réponse attendue. Le problème peut contenir
+                        plusieurs étapes. La rétroaction automatisée regénère le jeu de valeurs afin de renseigner la
+                        démarche attendue. La correction de la question est manuelle et l'évaluateur peut fournir un
+                        commentaire en format texte ou audio.
+                        Nous espérons que ce type de question puisse contribuer à l'équité entre les élèves présents en
+                        classe et ceux qui sont à la maison lors d'une évaluation.</p>
+                    <p>La question formule avec démarche du RÉCIT est inspirée de la question formulas pour la création
+                        des champs mathématiques.</p>
+                    <p>Référence aux auteurs de la question formule : <a
+                            href="https://moodleformulas.org/course/view.php?id=33">
+                            https://moodleformulas.org/course/view.php?id=33</a>
+                    </p>
+                </article>
+            </section>
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h2>1.0 Création de la question</h2>
+                        <div class='alert alert-warning'>
+                            <strong>Premiers pas</strong>
+                            <p>Un bouton «&nbsp;Créer un exemple&nbsp;» a été placé en haut à droite. Cette action
+                                engendre la complétion de tous les champs requis dans le but de rendre la question
+                                fonctionnelle. Ces champs renseignés vous aideront à mieux comprendre le fonctionnement
+                                et les particularités de de type de question.
+                            </p>
+                        </div>
+                        <figure>
+                            <img src="images/question_formule/exemple.jpg" alt="Exemple de question">
+                            <figcaption>Figure 1.0. «&nbsp;Créer un exemple&nbsp;»
+                            </figcaption>
+                        </figure>
+                        <a class='btn btn-primary' role="button" target='_blank'
+                            href="https://ena.recitfad.com/course/view.php?id=455">Consulter le didacticiel
+                            «&nbsp;Premiers
+                            pas&nbsp;» </a>
+                        <h3>1.1 Texte de la question</h3>
+                    </header>
+                    <p>Ce champ présente la question à l’élève. Les valeurs numériques sont remplacées par
+                        des variables afin de rendre les nombres aléatoires. Les variables sont entourées par des
+                        accolades.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/texte_question.jpg"
+                            alt="Programmation du texte de la question">
+                        <figcaption>Figure 1.1.a Exemple de question composée à l'aide de variables {a} et {b}.
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/question_formule/qformule1.jpg" alt="Texte de la question">
+                        <figcaption>Figure 1.1.b Les variables {a} et {b} sont présentées avec un jeu de valeurs -2 et
+                            3.
+                        </figcaption>
+                    </figure>
+
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.2 Rétroaction générale</h3>
+                    </header>
+                    <p>
+                        Ce champ contient une rétroaction qui sera lue par tous les étudiants après l'envoi de la
+                        réponse. Il ne tient pas compte de la bonne réponse.
+                    </p>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.3 Note de la partie</h3>
+                    </header>
+                    <p>
+                        Ce champ définit les points attribués à chaque partie du problème. La correction de la question
+                        est manuelle. Le correcteur attribue le pointage correspondant à l'ensemble des
+                        parties de la question incluant la démarche.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/note_reponse.jpg"
+                            alt="Programmation du pointage de la question">
+                        <figcaption>Figure 1.3. Le total de 7 points cumule les deux parties du problème ainsi que la
+                            démarche.
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.4 Réponse</h3>
+                    </header>
+                    <p>
+                        Ce champ contient la formule qui va permettre le calcul de la bonne réponse. Il assure la
+                        fonction de «&nbsp;Clé de correction&nbsp;» pour l'enseignant afin de faciliter la correction de
+                        la démarche. Il affiche également la
+                        bonne réponse au participant après l'envoi de la tentative ou encore après la fin de l'épreuve.
+                        La
+                        formule est liée à une table des valeurs qui va générer les jeux de valeurs aléatoires. Les
+                        variables a et b sont souvent utiliées à l'intérieur de la formule. Par exemple : a + b . Nous
+                        vous invitons à
+                        <a target='_blank' href="https://ena.recitfad.com/course/view.php?id=455">consulter le
+                            didacticiel «&nbsp;Formules&nbsp;»</a> afin de connaître les particularités d'écriture des
+                        formules.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/reponse.jpg" alt="Programmation de la formule">
+                        <figcaption>Figure 1.4. La bonne réponse correspond à la somme des valeurs a et b attribuées au
+                            participant.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.5 Unité</h3>
+                    </header>
+                    <p>
+                        Ce champ ne contient aucun pointage. Il renseigne l'unité attendue.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/unite.jpg"
+                            alt="Exemple de bonne réponse qui contient une unité">
+                        <figcaption>Figure 1.5. Le champ retourne la bonne réponse attendue avec les unités.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.6 Variables au hasard</h3>
+                    </header>
+                    <p>
+                        Ce champ est automatiquement généré par la complétion de la table des valeurs. Par défaut, il
+                        contient l'index de la table des valeurs.
+                        Toutefois, des variations sont possibles. Un didicticiel de création du jeu de données est
+                        disponible à la
+                        section <a target='_blank' href="https://ena.recitfad.com/course/view.php?id=455">
+                            «&nbsp;Premiers pas&nbsp;»</a>.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/variables_hasard.jpg"
+                            alt="Champs générés par la table de valeurs">
+                        <figcaption>Figure 1.6. La question possède trois jeux de réponses possibles : le jeu de
+                            réponses 0, 1 ou 2. La figure 1.5 contient le jeu de valeurs en position 2 de la table
+                            (selon la table des variables globales).
+
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.7 Variables globales</h3>
+                    </header>
+                    <p>
+                        Ce champ est automatiquement généré par la complétion de la table de valeurs. Par défaut, il
+                        contient les jeux de la table de valeurs.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/table_valeurs.jpg"
+                            alt="Table de valeurs utilisée afin de faciliter la création des jeux aléatoires">
+                        <figcaption>Figure 1.7. La table contient trois jeux de valeurs. La colonne de droite affiche les réponses calculées.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.8 Description de la démarche</h3>
+                    </header>
+                    <p>
+                        Ce champ contient les informations de rétroaction relatives à la bonne réponse. Les variables
+                        peuvent être réutilisées. Ces informations constituent la «&nbsp;Clé de correction&nbsp;» de
+                        l'enseignant.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/description_demarche_creation.jpg"
+                            alt="Boîte de texte qui contient les informations de rétroaction">
+                        <figcaption>Figure 1.8.a. Texte de rétroaction avec des variables {a} et {b} insérées.
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/question_formule/description_demarche.jpg"
+                            alt="Exemple de rétroaction à l'élève">
+                        <figcaption>Figure 1.8.b. Affichage des valeurs à l'intérieur du champ «&nbsp;description de la démarche&nbsp;».
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.9 Test d'instanciation des variables</h3>
+                    </header>
+                    <p>
+                        Ce test est optionnel. Il peut s'avérer pratique lorsque les variables globales et variables au hasard ont été créés manuellement.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/test_variables.jpg"
+                            alt="Tableau qui contient une occurence de bonne réponse">
+                        <figcaption>Figure 1.9. Validation de la question à l'aide d'instances de la table des valeurs.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h2>2.0 Usage de la question par le participant</h2>
+                        <p>
+                            En plus de fournir la réponse numérique, le participant doit remettre sa démarche. L'éditeur
+                            de texte offre les fonctions habituelles d'écriture et d'insertion d'images.
+                        </p>
+                        <div class='alert alert-info'>
+                            <strong>Prendre une photo</strong>
+                            <p>Le bouton «&nbsp;Prendre une photo&nbsp;» permet d'ajouter une image directement. Cette
+                                action simplifie grandement la remise d'images à partir de la caméra ou de la webcam.
+                                L'image capturée est directement retournée au serveur.
+                            </p>
+                        </div>
+                        <figure>
+                            <img src="images/question_formule/qformule2.jpg"
+                                alt="Ressources types intégrées tout au long du processus de conception d’un cours en ligne, selon le modèle RÉCIT FAD">
+                            <figcaption>Figure 2.0. Le participant a déposé une photo prise à l'aide de son appareil mobile.</figcaption>
+                        </figure>
+                        <h3>2.1 Fonctionnalités de la capture d'image</h3>
+                    </header>
+                    <p>
+                        La capture d'image se réalise en trois étapes.
+                    </p>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg p-0">
+                                <figure>
+                                    <img src="images/question_formule/etape1.jpg"
+                                        alt="Ressources types intégrées tout au long du processus de conception d’un cours en ligne, selon le modèle RÉCIT FAD">
+                                    <figcaption>Figure 2.1.a. Saisie.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-lg p-0">
+                                <figure>
+                                    <img src="images/question_formule/etape2.jpg"
+                                        alt="Ressources types intégrées tout au long du processus de conception d’un cours en ligne, selon le modèle RÉCIT FAD">
+                                    <figcaption>Figure 2.1.b. Découpe.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-lg p-0">
+                                <figure>
+                                    <img src="images/question_formule/etape3.jpg"
+                                        alt="Ressources types intégrées tout au long du processus de conception d’un cours en ligne, selon le modèle RÉCIT FAD">
+                                    <figcaption>Figure 2.1.c. Enregistrement.</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h2>3.0 Correction de la question</h2>
+                        <p>
+                            Ce type de question nécessite une correction manuelle. Les champs de rétroaction (en jaune)
+                            guident le correcteur. Il doit juger l'ensemble des réponses fournies ainsi que la
+                            démarche pour ensuite inscrire le résultat ainsi que le commentaire. Le lien permettant la
+                            correction se situe à droite du titre de test (engrenage bleu).
+                        </p>
+                        <figure>
+                            <img src="images/question_formule/correction_manuelle.jpg"
+                                alt="Panneau de correction manuelle">
+                            <figcaption>Figure 3.0. Évaluation manuelle des questions - Lien pour accéder aux copies des
+                                participants.</figcaption>
+                        </figure>
+                        <h3>3.1 Note et rétroaction au participant</h3>
+                    </header>
+                    <p>
+                        L'eneignant peut fournir une rétroaction en format texte ou audio.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/qformule4.jpg" alt="Panneau de correction manuelle">
+                        <figcaption>Figure 3.1. Correction manuelle de la question avec rétroaction audio.</figcaption>
+                    </figure>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
