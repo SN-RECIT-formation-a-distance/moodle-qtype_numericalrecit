@@ -7,4 +7,4 @@ La question formule avec démarche du RÉCIT est inspirée de la question formul
 Référence aux auteurs de la question formule : https://moodleformulas.org/course/view.php?id=33
 
 # Plus d'informations
-<a href='https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/question-formule-demarche-recit.html'>Documentation utilisateur</a>
+<a href='https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html' target='_blank'>Documentation utilisateur</a>

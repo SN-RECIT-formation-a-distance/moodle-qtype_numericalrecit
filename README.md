@@ -7,4 +7,4 @@ The RECIT formulas question is based on the formulas question for the creation o
 Reference to the authors of the formulas question: <a href='https://moodleformulas.org/course/view.php?id=33'>https://moodleformulas.org/course/view.php?id=33</a>
 
 # Further information
-<a href='https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/question-formule-demarche-recit.html'>User documentation (in French)</a>
+<a href='https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html' target='_blank'>User documentation (in French)</a>
