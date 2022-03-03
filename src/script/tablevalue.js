@@ -189,9 +189,11 @@ function buildValueTable(){
         if (!letter || !letter.match(/[a-z]/i)) continue;
         if (!doesColumnExist(letter)) addColumnToValueTable(letter);
         var sp = vars[i].split('[')[1];
-        sp = sp.replace(']', '');
-        values[letter] = sp.split(',');
-        rowsnum = values[letter].length;
+        if (sp){
+            sp = sp.replace(']', '');
+            values[letter] = sp.split(',');
+            rowsnum = values[letter].length;
+        }
     }
 
     var rows = [];
