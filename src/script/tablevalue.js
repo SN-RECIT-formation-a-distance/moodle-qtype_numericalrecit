@@ -104,9 +104,9 @@ function initOnCompleteLoad(){
         $("#popup_valuetable").modal('hide');
         $("#popup_valuetable").remove();
     });
-
+ 
     //Add show example button
-    $('.collapsible-actions').append(' ­ <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html" target="_blank" class="btn btn-light"><i class="fa fa-info-circle"></i> '+M.util.get_string('docs', 'qtype_numericalrecit')+'</a>');
+    $('.collapsible-actions').append(` ${M.util.get_string('docs', 'qtype_numericalrecit')}`);
     $('.collapsible-actions').append(' ­ <a href="#" class="btn btn-warning" id="showexamplertr"><i class="fa fa-lightbulb"></i> '+M.util.get_string('showexample', 'qtype_numericalrecit')+'</a>');
     hideAutoGradingFields(true);
     //Check if auto grading is ticked

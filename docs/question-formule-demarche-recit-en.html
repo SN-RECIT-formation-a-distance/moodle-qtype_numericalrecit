@@ -1,0 +1,352 @@
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>RÉCIT Formulas with steps</title>
+    <!--<link rel="stylesheet" href="style-gdocs.css">-->
+    <link rel="icon" type="image/png" href="images/image229.png">
+    <script type="text/javascript" src="js/script.js"></script>
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        figure {
+            margin: 2rem;
+        }
+
+        figure img {
+            width: 100%;
+        }
+
+        #main-doc img {
+            width: 100%;
+            border: 1px solid #afafaf;
+        }
+
+        #main-doc li {
+            text-align: justify;
+        }
+
+        #main-doc dd {
+            text-align: justify;
+        }
+    </style>
+
+</head>
+
+<body class="">
+    <div id="settings-container">
+        <div id="settings-wrapper" class="animated">
+            <div id="settings">
+                <button id="theme-btn" class="btn"><i class="fas fa-adjust"></i>
+                </button>
+
+                <button id="nav-side-btn" class="btn"><i class="fas fa-exchange-alt"></i>
+                </button>
+                <div id="zoom-container">
+                    <button id="zoom-in" class="btn zoom-btn"><i class="fas fa-search-plus"></i>
+                    </button>
+                    <button id="zoom-out" class="btn zoom-btn"><i class="fas fa-search-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reading-bar" class="reading-bar">
+        <div id="reading-progress" class="reading-progress"></div>
+    </div>
+
+    <nav id="navbar" class="navbar">
+        <button id="nav-close-btn" class="btn"><i class="fa fa-th-list"></i>
+        </button>
+
+        <header style='margin: auto;'>
+            <img src="images/image206.png" alt="SN FAD" style='width: 180px;' />
+        </header>
+        <ul id="toc">
+
+        </ul>
+    </nav>
+
+    <button id="scroll-btn" class="btn animated faster"><i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- END NAV -->
+    <div id="wrapper">
+        <main id="main-doc" class="animated fadeInUp nav-open nav-left">
+            <section class="main-section">
+                <article>
+                    <img src="images/image206.png" alt="SN FAD" style='width: 180px; border: none;' />
+                    <header>
+                        <h2>RÉCIT Formulas with steps</h2>
+                    </header>
+                    <p>The question "Formulas with steps" allows the teacher to administer a test in a digital format that contains questions requiring assessment of steps. This type of question allows for direct photo taking through any type of current device (laptop, Chromebook, tablet, mobile device). The student also has the option to attach a file. A table of values generates random numbers presented to the students.
+                        Therefore, each student receives a unique version of the test. The table of values ensures fairness through the set of random values. A mathematical formula is applied to provide the student and the teacher with the correct answer. The problem can contain several steps. Automated feedback regenerates the value set to inform the expected approach. The correction of the question is manual and the evaluator can provide a comment in text or audio format.
+                        We hope that this type of question can contribute to equity between students present in class and those at home during an assessment.</p>
+                    <p>The question RÉCIT formula with steps is inspired by the question formulas for the creation of the mathematical fields.</p>
+                    <p>Reference to the authors of the formulas question: <a
+                            href="https://moodleformulas.org/course/view.php?id=33">
+                            https://moodleformulas.org/course/view.php?id=33</a>
+                    </p>
+                </article>
+            </section>
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h2>1.0 Creating the question</h2>
+                        <div class='alert alert-warning'>
+                            <strong>First steps</strong>
+                            <p>A button "Create an example" has been placed at the top right. This action
+                                causes all the required fields to be completed in order to make the question
+                                functional. These completed fields will help you to better understand the functioning
+                                and the particularities of this type of question.
+                            </p>
+                        </div>
+                        <figure>
+                            <img src="images/question_formule/exemple.jpg" alt="Creating an example">
+                            <figcaption>Figure 1.0. «&nbsp;Creating an example&nbsp;»
+                            </figcaption>
+                        </figure>
+                        <a class='btn btn-primary' role="button" target='_blank'
+                            href="https://ena.recitfad.com/course/view.php?id=455">See the tutorial "First steps"</a>
+                        <h3>1.1 Text of the question</h3>
+                    </header>
+                    <p>This field presents the question to the student. Numerical values are replaced by variables to
+                        variables to make the numbers random. The variables are surrounded by braces.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/texte_question.jpg"
+                            alt="Programming the text of the question">
+                        <figcaption>Figure 1.1.a Example of a compound question using variables {a} and {b}.
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/question_formule/qformule1.jpg" alt="Text of the question">
+                        <figcaption>Figure 1.1.b The variables {a} and {b} are presented with a set of values -2 and 3.
+                        </figcaption>
+                    </figure>
+
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.2 General feedback</h3>
+                    </header>
+                    <p>
+                        This field contains feedback that will be read by all students after the response is submitted. It does not take into account the correct answer.
+                    </p>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.3 Note of the part</h3>
+                    </header>
+                    <p>
+                        This field defines the points attributed to each part of the problem. The correction of the question is manual. The corrector assigns the corresponding score to all the parts of the question including the step.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/note_reponse.jpg"
+                            alt="Programming the scoring of the question">
+                        <figcaption>Figure 1.3. The total of 7 points accumulates the two parts of the problem as well as the step.
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.4 Answer</h3>
+                    </header>
+                    <p>
+                        This field contains the formula that will allow the calculation of the correct answer. It acts as an "Answer Key" for the teacher to facilitate the correction of the step. 
+                        It also displays the correct answer to the participant after the attempt has been sent or after the test has been completed.
+                        The formula is linked to a table of values that will generate the sets of random values. The variables a and b are often used inside the formula. 
+                        For example: a + b. We invite you to <a target='_blank' href="https://ena.recitfad.com/course/view.php?id=455">consult the tutorial "Formulas"</a> in order to know the particularities of writing formulas.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/reponse.jpg" alt="Programming of the formula">
+                        <figcaption>Figure 1.4. The correct answer is the sum of the values a and b assigned to the
+                            participant.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.5 Unit</h3>
+                    </header>
+                    <p>
+                        This field does not contain any scores. It indicates the expected unit.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/unite.jpg"
+                            alt="Example of a correct answer that contains a unit">
+                        <figcaption>Figure 1.5. The field returns the expected correct answer with the units.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.6 Random variables</h3>
+                    </header>
+                    <p>
+                        This field is automatically generated by the completion of the table of values. By default, it contains the index of the table of values.
+                        However, variations are possible. A tutorial for creating the dataset is available at the available in the section
+                         <a target='_blank' href="https://ena.recitfad.com/course/view.php?id=455">"First steps"</a>.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/variables_hasard.jpg"
+                            alt="Fields generated by the table of values">
+                        <figcaption>Figure 1.6. The question has three possible sets of answers: the set of 0, 1 or 2. Figure 1.5 contains the set of values in position 2 of the table (according to the table of global variables).
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.7 Global variables</h3>
+                    </header>
+                    <p>
+                        This field is automatically generated by the completion of the table of values. By default, it contains the sets of the table of values.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/table_valeurs.jpg"
+                            alt="Table of values used to facilitate the creation of random sets">
+                        <figcaption>Figure 1.7. The table contains three sets of values. The right column shows the calculated answers.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.8 Description of the step</h3>
+                    </header>
+                    <p>
+                        This field contains feedback information about the correct answer. The variables can be reused. This information is the teacher's "Answer Key".
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/description_demarche_creation.jpg"
+                            alt="Text box containing feedback information">
+                        <figcaption>Figure 1.8.a. Feedback text with {a} and {b} variables inserted.
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="images/question_formule/description_demarche.jpg"
+                            alt="Example of feedback to the student">
+                        <figcaption>Figure 1.8.b. Display of the values inside the field "description of the step".
+                        </figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h3>1.9 Variable instantiation test</h3>
+                    </header>
+                    <p>
+                        This test is optional. It can be useful when global variables and random variables have been created manually.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/test_variables.jpg"
+                            alt="Table that contains one instance of a correct answer">
+                        <figcaption>Figure 1.9. Validation of the question using instances of the table of values.</figcaption>
+                    </figure>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h2>2.0 Participant's use of the question</h2>
+                        <p>
+                            In addition to providing the numerical answer, the participant must submit their step. The text editor editor offers the usual writing and image insertion functions.
+                        </p>
+                        <div class='alert alert-info'>
+                            <strong>Take a picture</strong>
+                            <p>The button "Take a picture" allows you to add a picture directly. This action greatly simplifies the delivery of images from the camera or webcam. The captured image is directly returned to the server.
+                            </p>
+                        </div>
+                        <figure>
+                            <img src="images/question_formule/qformule2.jpg"
+                                alt="Sample resources integrated throughout the online course design process, based on the RECIT FAD model.">
+                            <figcaption>Figure 2.0. The participant has submitted a photo taken with his mobile device.</figcaption>
+                        </figure>
+                        <h3>2.1 Image Capture Features</h3>
+                    </header>
+                    <p>
+                        The image capture is done in three steps.
+                    </p>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg p-0">
+                                <figure>
+                                    <img src="images/question_formule/etape1.jpg"
+                                        alt="Sample resources integrated throughout the online course design process, based on the RECIT FAD model.">
+                                    <figcaption>Figure 2.1.a. Input.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-lg p-0">
+                                <figure>
+                                    <img src="images/question_formule/etape2.jpg"
+                                        alt="Sample resources integrated throughout the online course design process, based on the RECIT FAD model.">
+                                    <figcaption>Figure 2.1.b. Cutting.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-lg p-0">
+                                <figure>
+                                    <img src="images/question_formule/etape3.jpg"
+                                        alt="Sample resources integrated throughout the online course design process, based on the RECIT FAD model.">
+                                    <figcaption>Figure 2.1.c. Registration.</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="main-section">
+                <article>
+                    <header>
+                        <h2>3.0 Correction of the question</h2>
+                        <p>
+                            This type of question requires manual correction. The feedback fields (in yellow) guide the corrector. He/she must judge all the answers provided as well as the approach and then enter the result as well as the comment. The link for correction is located to the right of the test title (blue gear).
+                        </p>
+                        <figure>
+                            <img src="images/question_formule/correction_manuelle.jpg"
+                                alt="Manual correction panel">
+                            <figcaption>Figure 3.0. Manual evaluation of questions - Link to participants' copies participants.</figcaption>
+                        </figure>
+                        <h3>3.1 Note and feedback to the participant</h3>
+                    </header>
+                    <p>
+                        The teacher can provide feedback in text or audio format.
+                    </p>
+                    <figure>
+                        <img src="images/question_formule/qformule4.jpg" alt="Manual correction panel">
+                        <figcaption>Figure 3.1. Manual question correction with audio feedback.</figcaption>
+                    </figure>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
