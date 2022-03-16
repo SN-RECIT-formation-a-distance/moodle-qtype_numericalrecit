@@ -198,7 +198,7 @@ représente le \'produit\' de différentes \'unités de base\' and <tt> ^ </tt> 
 De plus <tt> / </tt> peut être utilisé pour les exposants négatifs. Toute permuntation des unités de base est considérée comme équivalente.
 
 Les étudiants doivent utiliser le même format d\'entrée. Par exemple,
-
+ 
 <pre class="prettyprint">1 m<br>0.1 m^2<br>20 m s^(-1)<br>400 kg m/s<br>100 kW</pre>';
 $string['privacy:metadata'] = 'Le plugin type de question Formules n\'enregistre aucune donnée personnelle.';
 $string['qtextpreview'] = 'Prévisualiser avec le jeu de données';
@@ -209,8 +209,7 @@ Les variables globales seront remplacées par leur valeur et les espaces réserv
     Un exemple simple avec des variables globales <tt> A, B, C </tt> et des espaces réservés <tt> #1, #2, #3 </tt> is:
 
 <pre class="prettyprint">Quel est le résultat de {A} + {B}?<br>{#1}<br>Quel est le résultat de {A} - {B}?<br>{#2}<br>Quel est le résultat de {C} / {B}?<br>{#3}</pre><br>
-<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#11_Texte_de_la_question" target="_blank">En savoir plus</a>';
-$string['questiontext_link'] = '#';
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#11_Text_of_the_question" target="_blank">En savoir plus</a>';
 $string['relerror'] = 'Erreur relative';
 $string['renew'] = 'Actualiser';
 $string['ruleid'] = 'Règles de conversion de base';
