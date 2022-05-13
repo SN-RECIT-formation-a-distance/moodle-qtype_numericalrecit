@@ -55,6 +55,8 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $PAGE->requires->string_for_js('unit', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('valuetable', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('docs', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('calculate', 'qtype_numericalrecit');
+        $PAGE->requires->string_for_js('descriptionhere', 'qtype_numericalrecit');
         $PAGE->requires->js('/question/type/numericalrecit/script/formatcheck.js');
         $PAGE->requires->css('/question/type/numericalrecit/styles.css');
         // Hide the unused form fields.
