@@ -45,7 +45,7 @@ $string['takephoto'] = 'Take Photo';
 $string['stepmark'] = 'Step Mark';
 $string['steppart'] = 'Step Part';
 $string['stepfeedback'] = 'Step Feedback';
-$string['stepfeedback_help'] = 'Step Feedback';
+$string['stepfeedback_help'] = 'Step Feedback.<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#18_Description_of_the_step" target="_blank">Learn more</a>';
 $string['valuetable'] = 'Value Table';
 $string['answermissing'] = 'Please input answer formula first';
 $string['notavailable'] = 'N/A';
@@ -64,27 +64,25 @@ $string['addmorepartsblanks'] = 'Blanks for {no} more parts';
 $string['pluginname'] = 'Formula with steps RÉCIT';
 $string['pluginnameadding'] = 'Adding a formulas with steps RÉCIT question';
 $string['pluginnameediting'] = 'Editing a formulas with steps RÉCIT question';
-$string['pluginname_help'] = 'To start using this question, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>.
+$string['pluginname_help'] = 'To start using this question, please go to <a href="https://ena.recitfad.com/course/view.php?id=455">tutorial</a>.
 
-For possible questions, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>.
+For possible questions, please go to <a href="https://ena.recitfad.com/course/view.php?id=455">examples</a>.
 
-For the options in the editing form below, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>
-
-For the full documentation, please go to <a href="https://moodleformulas.org/">moodleformulas.org</a>';
-
+For the full documentation, please go to <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html">documentation</a>.';
+ 
 $string['pluginnamesummary'] = 'Question type with random values and multiple answers
 The answer fields can be placed anywhere so that we can create questions involving various structures such as vectors, polynomials and matrix.
 Other features such as unit checking and multiple parts questions are also integrated tightly and easy to use.';
-$string['pluginname_link'] = 'question/type/formulas';
+$string['pluginname_link'] = 'https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html';
 $string['privacy:metadata'] = 'The Formulas question type plugin does not store any personal data.';
 $string['questiontext'] = 'Question text';
-$string['questiontext_link'] = '#';
 $string['questiontext_help'] = 'In addition to the normal question text, you can also use global variables and placeholders here.
 
 Global variables will be replaced by their values and placeholders will be replaced by parts.
     A simple example with variables <tt> A, B, C </tt> and placeholders <tt> #1, #2, #3 </tt> is:
 
-<pre class="prettyprint">What is the result of {A} + {B}?<br>{#1}<br>What is the result of {A} - {B}?<br>{#2}<br>What is the result of {C} / {B}?<br>{#3}</pre>';
+<pre class="prettyprint">What is the result of {A} + {B}?<br>{#1}<br>What is the result of {A} - {B}?<br>{#2}<br>What is the result of {C} / {B}?<br>{#3}</pre><br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#11_Text_of_the_question" target="_blank">Learn more</a>';
 
 // The language string for the global variables.
 $string['globalvarshdr'] = 'Variables';
@@ -95,13 +93,15 @@ be done by defining a set of elements to choose from:
 <pre class="prettyprint">A = {1,2,3};<br>C = {[1,-1], [2,-2], [3,-3]};<br>E = {10:100:10, 100, 1000};</pre>
 
 The elements can be numbers, strings or lists of them. At the start of a new attempt, one element will be drawn from the set and assigned to the variable
-on the left.  Also, for a set of number, you can use the range notation like 10:100:10 (see example E above.). </p>';
+on the left.  Also, for a set of number, you can use the range notation like 10:100:10 (see example E above.). <br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#16_Random_variables" target="_blank">Learn more</a>';
 $string['varsglobal'] = 'Global variables';
 $string['varsglobal_help'] = 'Formulas can be specified here to manipulate the instantiated random variables
 (all random variables are available here). The full list of mathematical
 functions and operators is given in the documentation.
 
-<pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre>';
+<pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre><br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#17_Global_variables" target="_blank">Learn more</a>';
 // The language string for the display and flow options and common question parts settings.
 $string['mainq'] = 'Main question';
 $string['subqoptions'] = 'Extra options';
@@ -121,7 +121,8 @@ $string['answermark_help'] = '**Required**.
 The mark for the answer of this part, which should be a number greater than 0.
  The default mark of the whole question is the sum of all its parts marks.
 
-Note: If this part\'s mark field is left blank, the part will be deleted when the question is saved.';
+Note: If this part\'s mark field is left blank, the part will be deleted when the question is saved.<br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#13_Note_of_the_part" target="_blank">Learn more</a>';
 $string['answertype'] = 'Answer type';
 $string['answertype_help'] = 'There are four answer types.
 
@@ -150,9 +151,10 @@ type chosen. When there is only one answer, a number or string can be
 entered directly. Please note that the number of elements in the list
 defines the number of answer fields for this part.
 
-<pre class="prettyprint">123<br>[1, 0, 0, 1]<br>a<br>[1, a, b]<br>"exp(-a t)"<br>["vx t","vy t - 0.5 a t^2"]</pre>';
+<pre class="prettyprint">123<br>[1, 0, 0, 1]<br>a<br>[1, a, b]<br>"exp(-a t)"<br>["vx t","vy t - 0.5 a t^2"]</pre><br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html-en.html#14_Answer" target="_blank">Learn more</a>';
 $string['vars2'] = 'Grading variables';
-$string['vars2_help'] = 'All local variables and the student\'s responses can be used here. See documentation for advanced usages.';
+$string['vars2_help'] = 'All local variables and the student\'s responses can be used here. See documentation for advanced usages.<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#16_Random_variables" target="_blank">Learn more</a>';
 $string['correctness'] = 'Grading criterion*';
 $string['correctness_help'] = '**Required**. You can choose either relative error or absolute error with error
 range. Relative error cannot be used for algebraic answer type.
@@ -164,15 +166,8 @@ $string['correctnesssimple'] = 'Simple';
 $string['relerror'] = 'Relative error';
 $string['abserror'] = 'Absolute error';
 $string['postunit'] = 'Unit';
-$string['postunit_help'] = 'You can specify the unit here. This question type is specially designed for SI unit, so an
-empty space represents the \'product\' of different \'base unit\' and <tt> ^ </tt> is used for exponents.
-Also, <tt> / </tt> can be used for inverse exponent. Any permutation of the base unit are treated the same.
-
-Students are required to use the same input format. For example,
-
-<pre class="prettyprint">1 m<br>0.1 m^2<br>20 m s^(-1)<br>400 kg m/s<br>100 kW</pre>';
+$string['postunit_help'] = '<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#15_Unit" target="_blank">Learn more</a>';
 $string['unitpenalty'] = 'Deduction for wrong unit (0-1)*';
-$string['unitpenalty_link'] = '#';
 $string['unitpenalty_help'] = 'This option specify the mark you want to penalize the student for a wrong unit.
 
 It takes value between 0 to 1. If it takes value 1, the unit and answer
@@ -199,10 +194,10 @@ $string['subqtext_help'] = 'Part text and answer fields places can be specified 
 
 The <tt> {_0}, {_1}, {_2} </tt> are the input fields for coordinates and <tt> {_u} </tt> is the input field for unit.
 
-All missing fields are automatically appended at the end of the part\'s text. A special case is that if <tt> {_0}, {_u} </tt> are specified consecutively, and there is only one coordinate and unit, i.e. <tt> {_0}{_u} </tt>, they will be combined into a single long input answer field for both answer and unit.';
+All missing fields are automatically appended at the end of the part\'s text. A special case is that if <tt> {_0}, {_u} </tt> are specified consecutively, and there is only one coordinate and unit, i.e. <tt> {_0}{_u} </tt>, they will be combined into a single long input answer field for both answer and unit.<br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#11_Text_of_the_question" target="_blank">Learn more</a>';
 $string['feedback'] = 'Part general feedback';
-$string['feedback_link'] = '#';
-$string['feedback_help'] = 'This part feedback will be show to all students. It can include global and locals variables that will be replaced by their values';
+$string['feedback_help'] = 'This part feedback will be show to all students. It can include global and locals variables that will be replaced by their values.<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#12_General_feedback" target="_blank">Learn more</a>';
 $string['incorrectfeedback'] = 'For any incorrect response';
 $string['partiallycorrectfeedback'] = 'For any partially correct response';
 $string['correctfeedback'] = 'For any correct response';
@@ -210,20 +205,18 @@ $string['incorrectfeedback_help'] = 'This feedback will be show to students that
 $string['partiallycorrectfeedback_help'] = 'This feedback will be show to students that don\'t get the maximum mark at this part. It can include global and locals variables that will be replaced by their values';
 $string['correctfeedback_help'] = 'This feedback will be show to students that get the maximum mark at this part. It can include global and locals variables that will be replaced by their values';
 $string['globaloptions'] = '[Global] - ';
-
+ 
 // The language string for the variables instantiation and preview.
 $string['checkvarshdr'] = 'Check variables instantiation';
-$string['checkvarshdr_link'] = '#';
 $string['instantiate'] = 'Instantiate';
-$string['numdataset_help'] = 'Nombre de jeux de données';
-$string['numdataset_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables';
+$string['numdataset_help'] = 'Nombre de jeux de données.<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html#19_Variable_instantiation_test" target="_blank">Learn more</a>';
 $string['numdataset'] = 'Number of dataset';
 $string['renew'] = 'Update';
 $string['qtextpreview'] = 'Preview using dataset';
 $string['varsstatistics'] = 'Statistics';
 $string['varsdata'] = 'Instantiated dataset';
 
-$string['docs'] = 'Documentation';
+$string['docs'] = '<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit-en.html" target="_blank" class="btn btn-light"><i class="fa fa-info-circle"></i> Documentation</a>';
 // Errors message used by editing form's validation.
 $string['error_no_answer'] = 'At least one answer is required.';
 $string['error_mark'] = 'The answer mark must take a value larger than 0.';

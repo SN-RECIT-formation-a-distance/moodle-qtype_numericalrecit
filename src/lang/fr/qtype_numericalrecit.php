@@ -34,14 +34,15 @@ Doit être une liste de nombres ou une liste de chaînes suivant le type de rép
 Lorsqu\'il n\'y a qu\'une réponse, un nombre ou une chaîne peut être entré directement sans les délimiteurs de liste.
 Notez que le nombre d\'éléments de la liste définit le nombre de champs réponses pour cette partie.
 
-<pre class="prettyprint">123<br>[1, 0, 0, 1]<br>a<br>[1, a, b]<br>"exp(-a t)"<br>["vx t","vy t - 0.5 a t^2"]</pre> <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#14_Reponse" target="_blank">En savoir plus</a>';
+<pre class="prettyprint">123<br>[1, 0, 0, 1]<br>a<br>[1, a, b]<br>"exp(-a t)"<br>["vx t","vy t - 0.5 a t^2"]</pre>
+<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#14_Reponse" target="_blank">En savoir plus</a>';
 
 
 $string['takephoto'] = 'Prendre une photo';
 $string['stepmark'] = 'Note de la démarche';
 $string['steppart'] = 'Démarche';
 $string['stepfeedback'] = 'Description de la démarche';
-$string['stepfeedback_help'] = 'Description de la démarche <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#18_Description_de_la_demarche" target="_blank">En savoir plus</a>';
+$string['stepfeedback_help'] = 'Description de la démarche.<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#18_Description_de_la_demarche" target="_blank">En savoir plus</a>';
 $string['valuetable'] = 'Table de valeurs';
 $string['answermissing'] = 'Veuillez renseigner la formule de la réponse';
 $string['notavailable'] = 'N/D';
@@ -64,7 +65,8 @@ $string['answermark_help'] = '**Requis**.
 La note attribuée à cette partie de la question, qui doit être un nombre supérieur à 0.
 La note totale de la question est la somme des notes de ses différentes parties.
 
-Note : si la note de la partie est laissée vide ou nulle, la partie sera supprimée lors de l\'enregistrement de la question. <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#13_Note_de_la_partie" target="_blank">En savoir plus</a>';
+Note : si la note de la partie est laissée vide ou nulle, la partie sera supprimée lors de l\'enregistrement de la question.<br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#13_Note_de_la_partie" target="_blank">En savoir plus</a>';
 $string['answermulti'] = 'Réponse pour la partie {$a->part}';
 $string['answerno'] = 'Partie {$a}';
 $string['answersingle'] = 'Réponse';
@@ -143,7 +145,7 @@ $string['error_vars_string'] = 'Erreur ! Chaîne sans délimiteur " de fin, ou 
 $string['error_vars_undefined'] = 'La variable « {$a} » n\'est pas définie.';
 $string['feedback'] = 'Feedback général de la partie';
 $string['feedback_help'] = 'Le feedback de cette partie sera affiché seulement aux étudiants qui n\'ont pas obtenu la note maximale à la partie.
-Il peut contenir des variables globales et locales qui seront remplacées par leur valeur <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#12_Retroaction_generale" target="_blank">En savoir plus</a>';
+Il peut contenir des variables globales et locales qui seront remplacées par leur valeur.<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#12_Retroaction_generale" target="_blank">En savoir plus</a>';
 $string['functiontakesatleasttwo'] = 'La fonction {$a} doit avoir au moins deux arguments';
 $string['functiontakesnoargs'] = 'La fonction {$a} ne prend aucun argument';
 $string['functiontakesonearg'] = 'La fonction {$a} doit avoir exactement un argument';
@@ -161,7 +163,7 @@ $string['none'] = 'Aucune';
 $string['number'] = 'Nombre';
 $string['number_unit'] = 'Nombre et unité';
 $string['numdataset'] = 'Nombre de jeux de données';
-$string['numdataset_help'] = 'Nombre de jeux de données <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables" target="_blank">En savoir plus</a>';
+$string['numdataset_help'] = 'Nombre de jeux de données.<br> <a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#19_Test_d\'instanciation_des_variables" target="_blank">En savoir plus</a>';
 $string['numeric'] = 'Numérique';
 $string['numeric_unit'] = 'Numérique et unité';
 $string['numerical_formula'] = 'Formule numérique';
@@ -182,8 +184,8 @@ $string['pluginname_help'] = 'Pour commencer à utiliser ce type de questions, v
 
 Pour des exemples de questions possibles, nous avons mis à votre disposition <a href="https://ena.recitfad.com/course/view.php?id=455">des exemples</a>.
 
-Pour la documentation complète, lisez <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html">la documentation</a>';
-$string['pluginname_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html';
+Pour la documentation complète, lisez <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html">la documentation</a>';
+$string['pluginname_link'] = 'https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html';
 $string['pluginnameadding'] = 'Ajout d\'une question formules avec démarche RÉCIT';
 $string['pluginnameediting'] = 'Modification d\'une question formules avec démarche RÉCIT';
 $string['pluginnamesummary'] = 'Type de questions avec des valeurs aléatoires et des champs de réponse multiples.
@@ -196,7 +198,7 @@ représente le \'produit\' de différentes \'unités de base\' and <tt> ^ </tt> 
 De plus <tt> / </tt> peut être utilisé pour les exposants négatifs. Toute permuntation des unités de base est considérée comme équivalente.
 
 Les étudiants doivent utiliser le même format d\'entrée. Par exemple,
-
+ 
 <pre class="prettyprint">1 m<br>0.1 m^2<br>20 m s^(-1)<br>400 kg m/s<br>100 kW</pre>';
 $string['privacy:metadata'] = 'Le plugin type de question Formules n\'enregistre aucune donnée personnelle.';
 $string['qtextpreview'] = 'Prévisualiser avec le jeu de données';
@@ -206,8 +208,8 @@ $string['questiontext_help'] = 'En plus du texte normal vous pouvez aussi utilis
 Les variables globales seront remplacées par leur valeur et les espaces réservés seront remplacés par la partie de question correspondante.
     Un exemple simple avec des variables globales <tt> A, B, C </tt> et des espaces réservés <tt> #1, #2, #3 </tt> is:
 
-<pre class="prettyprint">Quel est le résultat de {A} + {B}?<br>{#1}<br>Quel est le résultat de {A} - {B}?<br>{#2}<br>Quel est le résultat de {C} / {B}?<br>{#3}</pre>';
-$string['questiontext_link'] = 'https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#11_Texte_de_la_question';
+<pre class="prettyprint">Quel est le résultat de {A} + {B}?<br>{#1}<br>Quel est le résultat de {A} - {B}?<br>{#2}<br>Quel est le résultat de {C} / {B}?<br>{#3}</pre><br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#11_Text_of_the_question" target="_blank">En savoir plus</a>';
 $string['relerror'] = 'Erreur relative';
 $string['renew'] = 'Actualiser';
 $string['ruleid'] = 'Règles de conversion de base';
@@ -230,9 +232,10 @@ Les espaces réservés qui peuvent être utilisés pour marquer les emplacements
 Tous les champs manquants sont ajoutés automatiquement à la fin du texte de la partie.
 Un cas spécial est que si <tt> {_0} </tt> et <tt> {_u} </tt> sont spécifiés consécutivement,
 et que la réponse ne comporte qu\'une coordonnée et une unité, c\'est à dire. <tt> {_0}{_u} </tt>,
-ils seront combinés en un seul champ réponse long pour entrer à la fois la réponse et l\'unité. <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#11_Texte_de_la_question" target="_blank">En savoir plus</a>';
+ils seront combinés en un seul champ réponse long pour entrer à la fois la réponse et l\'unité.<br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#11_Texte_de_la_question" target="_blank">En savoir plus</a>';
 $string['unit'] = 'Unité';
-$string['postunit_help'] = '<a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#15_Unite" target="_blank">En savoir plus</a>';
+$string['postunit_help'] = '<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#15_Unite" target="_blank">En savoir plus</a>';
 $string['unitpenalty'] = 'Pénalité pour unité incorrecte (0-1)*';
 $string['unitpenalty_help'] = 'Cette option spécifie la pénalité pour une unité incorrecte.
 
@@ -245,18 +248,18 @@ Aussi il est recommandé d\'utiliser une pénalité de 1 dès que la question im
 $string['unsupportedformulafunction'] = 'La fonction {$a} n\'est pas supportée';
 $string['vars1'] = 'Variables locales';
 $string['vars1_help'] = 'Vous pouvez définir ici des variables locales à la partie de la même manière que les variables globales sont définies
-au niveau de la question. Les variables définies ici peuvent être utilisées dans la réponse ou le feedback de la partie.
+au niveau de la question. Les variables définies ici peuvent être utilisées dans la réponse ou le feedback de la partie. 
 Leur portée et leur visibilité sont limitées à la partie.';
 $string['vars2'] = 'Variables de notation';
 $string['vars2_help'] = 'Toutes les variables locales et les réponses de l\'étudiant peuvent être utilisées ici.
-Voir la documentation pour les utilisations avancées. <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
+Voir la documentation pour les utilisations avancées.<br> <a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
 $string['varsdata'] = 'Jeu de données instancié';
 $string['varsglobal'] = 'Variables globales';
 $string['varsglobal_help'] = 'Des formules définissant des variables globales en fonction des variables au hasard ou d\'autres variables globales peuvent être entrées ici.
 (toutes les variables au hasard sont disponibles ici). La liste complète des opérations et fonctions disponibles est donnée dans la documentation
 
-<pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre>
-<a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#17_Variables_globales" target="_blank">En savoir plus</a>';
+<pre class="prettyprint">a = 1.11111;<br>b = exp(3);<br>c = A + a + b;<br>d = sin(1.5*pi()) + c;<br>e = round(a, 0);<br>f = [0,1,2,3][A];<br>g = ["zero","one","two","three"][A];<br>distance = sqrt(a*a + b*b);</pre><br>
+<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#17_Variables_globales" target="_blank">En savoir plus</a>';
 $string['varsrandom'] = 'Variables au hasard';
 $string['varsrandom_help'] = 'Une nouvelle valeur pour chacune de ces variables est choisie aléatoirement au début de chaque tentative.
 Ce tirage peut se faire en définissant l\'ensemble des possibilités :
@@ -265,7 +268,7 @@ Ce tirage peut se faire en définissant l\'ensemble des possibilités :
 
 Les élément de l\'ensemble peuvent être des nombres, des chaînes ou des listes de nombres ou de chaînes.
 Au début d\'une tentative, un élément de l\'ensemble au second membre sera tiré au sort et assigné à la variable au premier membre.
-Pour un ensemble de nombres, vous pouvez utiliser la notation intervalle comme 10:100:10 (voir exemple E ci-dessus.). <a href="https://recitfad.ca/moodledocs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
+Pour un ensemble de nombres, vous pouvez utiliser la notation intervalle comme 10:100:10 (voir exemple E ci-dessus.).<br><a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#16_Variables_au_hasard" target="_blank">En savoir plus</a>';
 $string['varsstatistics'] = 'Statistiques';
 $string['yougotnright'] = 'Vous avez correctement répondu à {$a->num} parties de cette question.';
-$string['docs'] = 'Documentation';
+$string['docs'] = '<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html" target="_blank" class="btn btn-light"><i class="fa fa-info-circle"></i> Documentation</a>';
