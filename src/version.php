@@ -35,5 +35,5 @@ $plugin->dependencies = array(
     'qtype_multichoice' => 2015111600,
 	'atto_recittakepicture' => 2022020900
 );
-$plugin->release   = 'v1.15.1';
+$plugin->release   = 'v1.15.2';
 $plugin->maturity  = MATURITY_BETA;
