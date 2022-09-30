@@ -1,6 +1,6 @@
 echo off
 set zipName=qtype_numericalrecit
-set pluginName=qtype_numericalrecit
+set pluginName=numericalrecit
 
 rem remove the current 
 del %zipName%
