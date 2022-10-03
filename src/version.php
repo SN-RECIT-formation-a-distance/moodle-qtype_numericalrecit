@@ -35,4 +35,5 @@ $plugin->dependencies = array(
 	'atto_recittakepicture' => 2022100100
 );
 $plugin->release   = 'v1.15.2-stable';
+$plugin->supported = [39, 311];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.
 $plugin->maturity  = MATURITY_STABLE;
