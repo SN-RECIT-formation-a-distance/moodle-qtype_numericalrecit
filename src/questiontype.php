@@ -118,6 +118,40 @@ class qtype_numericalrecit extends question_type {
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
     }
 
+    protected function moodle3_get_question($question){
+        global $DB;
+        if (!$questionn = $DB->get_record_sql('
+        SELECT q.*, qc.contextid
+        FROM {question} q
+        INNER JOIN {question_versions} qv
+                ON qv.questionid = q.id
+        INNER JOIN {question_bank_entries} qbe
+                ON qbe.id = qv.questionbankentryid
+        INNER JOIN {question_categories} qc
+                ON qc.id = qbe.questioncategoryid
+        WHERE q.id = ?', [$question->id])) {
+            print_error('questiondoesnotexist', 'question');
+        }
+        return $questionn;
+    }
+
+    protected function moodle4_get_question($question){
+        global $DB;
+        if (!$questionn = $DB->get_record_sql('
+        SELECT q.*, qc.contextid
+        FROM {question} q
+        INNER JOIN {question_versions} qv
+                ON qv.questionid = q.id
+        INNER JOIN {question_bank_entries} qbe
+                ON qbe.id = qv.questionbankentryid
+        INNER JOIN {question_categories} qc
+                ON qc.id = qbe.questioncategoryid
+        WHERE q.id = ?', [$question->id])) {
+            print_error('questiondoesnotexist', 'question');
+        }
+        return $questionn;
+    }
+
     /**
      * Loads the question type specific options for the question.
      *
@@ -131,15 +165,15 @@ class qtype_numericalrecit extends question_type {
      *                         specific information (it is passed by reference).
      */
     public function get_question_options($question) {
-        global $DB, $PAGE, $COURSE;
+        global $DB, $PAGE, $CFG;
 
-        if (!$questionn = $DB->get_record_sql('
-        SELECT q.*, qc.contextid
-        FROM {question} q
-        JOIN {question_categories} qc ON qc.id = q.category
-        WHERE q.id = ?', [$question->id])) {
-            print_error('questiondoesnotexist', 'question');
+        $questionn = null;
+        if ($CFG->version >= 2022041900){//Moodle 4.0
+            $questionn = $this->moodle4_get_question($question);
+        }else{
+            $questionn = $this->moodle3_get_question($question);
         }
+
         if (!isset($PAGE->context) || !$questionusage = $DB->get_record_sql('
         SELECT *
         FROM {question_usages}
