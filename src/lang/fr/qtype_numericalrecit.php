@@ -237,6 +237,7 @@ ils seront combinés en un seul champ réponse long pour entrer à la fois la r�
 $string['unit'] = 'Unité';
 $string['postunit_help'] = '<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#15_Unite" target="_blank">En savoir plus</a>';
 $string['unitpenalty'] = 'Pénalité pour unité incorrecte (0-1)*';
+$string['unitpenalty_help2'] = 'Par exemple, si les km doivent être présents avec la bonne réponse et que l\'absence des unités engendre 1 point de pénalité sur une question de 4 points, la valeur à inscrire sera 0.25.';
 $string['unitpenalty_help'] = 'Cette option spécifie la pénalité pour une unité incorrecte.
 
 Sa valeur doit être entre 0 et 1. S\'il vaut 1, l\'unité et la réponse doivent être simultanément corrects

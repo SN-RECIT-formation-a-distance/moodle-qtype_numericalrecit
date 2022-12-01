@@ -192,7 +192,10 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_numericalrecit');
         $repeatedoptions['correctness']['type'] = PARAM_RAW;
         // Part's unit penalty.
+        $repeated[] = $mform->createElement('html', '<hr>');
         $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'), array('size' => 3));
+        $repeated[] = $mform->createElement('static', 'unitpenalty_help', '', get_string('unitpenalty_help2', 'qtype_numericalrecit'));
+        $repeated[] = $mform->createElement('html', '<hr>');
         $repeatedoptions['unitpenalty']['default'] = $config->defaultunitpenalty;
         $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
         $repeatedoptions['unitpenalty']['type'] = PARAM_FLOAT;
