@@ -55,7 +55,7 @@ $string['save'] = 'Enregistrer';
 $string['descriptionhere'] = 'Description de la démarche ici';
 $string['calculate'] = 'Calculez';
 
-$string['automark'] = 'Activer la correction automatique';
+$string['automark'] = 'Activer la correction automatique et ne pas attribuer de points à la démarche';
 $string['answercombinedunitmulti'] = 'Réponse et unité pour la partie {$a->part}';
 $string['answercombinedunitsingle'] = 'Réponse et unité';
 $string['answercoordinatemulti'] = 'Réponse pour la partie {$a->part} et les coordonnées {$a->numanswer}';

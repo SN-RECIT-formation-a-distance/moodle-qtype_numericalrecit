@@ -69,7 +69,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
 
         $mform->insertElementBefore($mform->createElement('header', 'mainq', get_string('mainq', 'qtype_numericalrecit'),
             ''), 'questiontext');
-        $mform->insertElementBefore($mform->createElement('checkbox', 'automark', get_string('automark', 'qtype_numericalrecit'), ''), 'idnumber');
+        $mform->insertElementBefore($mform->createElement('checkbox', 'automark', get_string('automark', 'qtype_numericalrecit'), ''), 'name');
         $numberingoptions = question_bank::get_qtype('multichoice')->get_numbering_styles();
         $mform->addElement('select', 'answernumbering',
                 get_string('answernumbering', 'qtype_multichoice'), $numberingoptions);
