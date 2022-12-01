@@ -73,7 +73,7 @@ class qtype_numericalrecit extends question_type {
      * @return mixed array as above, or null to tell the base class to do nothing.
      */
     public function extra_question_fields() {
-        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark', 'stepfeedback', 'automark');
+        return array('qtype_numericalrecit_options', 'varsrandom', 'varsglobal', 'answernumbering', 'stepmark', 'stepfeedback', 'intro', 'automark');
     }
 
     /**
@@ -89,6 +89,7 @@ class qtype_numericalrecit extends question_type {
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'question', 'stepfeedback', $questionid);
+        $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'question', 'intro', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partpartiallycorrectfb', $questionid);
         $fs->move_area_files_to_new_context($oldcontextid, $newcontextid, 'qtype_numericalrecit', 'partincorrectfb', $questionid);
@@ -111,6 +112,7 @@ class qtype_numericalrecit extends question_type {
         $fs->delete_area_files($contextid, 'question', 'partiallycorrectfeedback', $questionid);
         $fs->delete_area_files($contextid, 'question', 'incorrectfeedback', $questionid);
         $fs->delete_area_files($contextid, 'question', 'stepfeedback', $questionid);
+        $fs->delete_area_files($contextid, 'question', 'intro', $questionid);
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'answersubqtext', $questionid);
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'answerfeedback', $questionid);
         $fs->delete_area_files($contextid, 'qtype_numericalrecit', 'partcorrectfb', $questionid);
@@ -123,12 +125,7 @@ class qtype_numericalrecit extends question_type {
         if (!$questionn = $DB->get_record_sql('
         SELECT q.*, qc.contextid
         FROM {question} q
-        INNER JOIN {question_versions} qv
-                ON qv.questionid = q.id
-        INNER JOIN {question_bank_entries} qbe
-                ON qbe.id = qv.questionbankentryid
-        INNER JOIN {question_categories} qc
-                ON qc.id = qbe.questioncategoryid
+        JOIN {question_categories} qc ON qc.id = q.category
         WHERE q.id = ?', [$question->id])) {
             print_error('questiondoesnotexist', 'question');
         }
@@ -200,6 +197,7 @@ class qtype_numericalrecit extends question_type {
         if (count($question->options->answers)) {
             $answ = $question->options->answers[0];
             $question->options->stepfeedback = array('text' => file_rewrite_pluginfile_urls($question->options->stepfeedback, 'pluginfile.php', $questionn->contextid, 'question', 'stepfeedback', $questionusage->id.'/1/'.$answ->id), 'format' => FORMAT_HTML);
+            $question->options->intro = array('text' => file_rewrite_pluginfile_urls($question->options->intro, 'pluginfile.php', $questionn->contextid, 'question', 'intro', $questionusage->id.'/1/'.$answ->id), 'format' => FORMAT_HTML);
         }
         return true;
     }
@@ -228,6 +226,7 @@ class qtype_numericalrecit extends question_type {
         $options->answernumbering = 'none';
         $options->stepmark = 0;
         $options->stepfeedback = '';
+        $options->intro = '';
         $options->shownumcorrect = 0;
         $options->automark = 0;
 
@@ -332,6 +331,7 @@ class qtype_numericalrecit extends question_type {
         if (!$options) {
             $options = new stdClass();
             $options->questionid = $question->id;
+            $options->intro = '';
             $options->correctfeedback = '';
             $options->partiallycorrectfeedback = '';
             $options->incorrectfeedback = '';
@@ -352,6 +352,9 @@ class qtype_numericalrecit extends question_type {
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
         if (is_array($options->stepfeedback)){
             $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'question', 'stepfeedback', $newanswers[0]->id);
+        }
+        if (is_array($options->intro)){
+            $options->intro = $this->import_or_save_files($options->intro, $context, 'question', 'intro', $newanswers[0]->id);
         }
 
         $DB->update_record('qtype_numericalrecit_options', $options);
@@ -447,6 +450,7 @@ class qtype_numericalrecit extends question_type {
         $question->automark = $questiondata->options->automark;
         $question->stepmark = $questiondata->options->stepmark;
         $question->stepfeedback = $questiondata->options->stepfeedback;
+        $question->intro = $questiondata->options->intro;
         $question->qv = new qtype_numericalrecit_variables();
         $question->numpart = $questiondata->options->numpart;
         if ($question->numpart != 0) {
@@ -544,6 +548,7 @@ class qtype_numericalrecit extends question_type {
         $fromform->answernumbering = $format->getpath($xml, array('#', 'answernumbering', 0, '#', 'text', 0, '#'), 'none', true);
         $fromform->stepmark = $format->getpath($xml, array('#', 'stepmark', 0, '#', 'text', 0, '#'), 'none', true);
         $fromform->stepfeedback = $format->getpath($xml, array('#', 'stepfeedback', 0, '#', 'text', 0, '#'), 'none', true);
+        $fromform->intro = $format->getpath($xml, array('#', 'intro', 0, '#', 'text', 0, '#'), 'none', true);
 
         // Loop over each answer block found in the XML.
         $tags = $this->part_tags();
@@ -575,7 +580,10 @@ class qtype_numericalrecit extends question_type {
             $fromform->partincorrectfb[$anscount] = $format->import_text_with_files($feedbackxml,
                         array(), '', $format->get_format($fromform->questiontextformat));
             $feedbackxml = $format->getpath($answer, array('#', 'stepfeedback', 0), array());
-            $fromform->partincorrectfb[$anscount] = $format->import_text_with_files($feedbackxml,
+            $fromform->stepfeedback[$anscount] = $format->import_text_with_files($feedbackxml,
+                        array(), '', $format->get_format($fromform->questiontextformat));
+            $feedbackxml = $format->getpath($answer, array('#', 'intro', 0), array());
+            $fromform->intro[$anscount] = $format->import_text_with_files($feedbackxml,
                         array(), '', $format->get_format($fromform->questiontextformat));
             ++$anscount;
         }

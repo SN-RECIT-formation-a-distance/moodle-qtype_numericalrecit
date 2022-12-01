@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_numericalrecit';
-$plugin->version   = 2022100100;
+$plugin->version   = 2022100103;
 $plugin->requires  = 2020061500.00; // Moodle 3.9.0
 $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,

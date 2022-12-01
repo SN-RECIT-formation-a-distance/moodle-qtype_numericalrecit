@@ -62,7 +62,14 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
             $step = new question_attempt_step(array('answer'=>'', 'stepn' => ''));
         }
 
-        $result = "<div class='row'><div class='col-md-6'>";
+        $result = '';
+        $intro = $question->intro;
+        if (is_array($intro)) $intro = $question->intro['text'];
+        if (!empty($intro)){
+            $intro = $question->numericalrecit_format_text($globalvars, $intro, FORMAT_HTML, $qa, 'question', 'intro', $question->parts[0]->id, false);
+            $result .= html_writer::nonempty_tag('div', $intro, array('class' => 'row mb-2'));
+        }
+        $result .= "<div class='row'><div class='col-md-6'>";
         $questiontext = '';
         foreach ($question->parts as $part) {
             $questiontext .= $question->numericalrecit_format_text(

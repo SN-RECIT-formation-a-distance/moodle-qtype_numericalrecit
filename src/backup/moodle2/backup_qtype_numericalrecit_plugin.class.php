@@ -53,7 +53,7 @@ class backup_qtype_numericalrecit_plugin extends backup_qtype_plugin {
             'correctfeedback', 'correctfeedbackformat',
             'partiallycorrectfeedback', 'partiallycorrectfeedbackformat',
             'incorrectfeedback', 'incorrectfeedbackformat', 'shownumcorrect',
-            'answernumbering', 'stepmark', 'stepfeedback'));
+            'answernumbering', 'stepmark', 'stepfeedback', 'intro'));
 
         $numericalrecitanswers = new backup_nested_element('numericalrecit_answers');
         $numericalrecitanswer = new backup_nested_element('numericalrecit_answer', array('id'), array(

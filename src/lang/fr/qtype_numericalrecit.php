@@ -235,6 +235,8 @@ et que la réponse ne comporte qu\'une coordonnée et une unité, c\'est à dire
 ils seront combinés en un seul champ réponse long pour entrer à la fois la réponse et l\'unité.<br>
 <a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#11_Texte_de_la_question" target="_blank">En savoir plus</a>';
 $string['unit'] = 'Unité';
+$string['intro'] = 'Introduction';
+$string['intro_help'] = 'Ce texte s\'affichera en haut de la question.';
 $string['postunit_help'] = '<a href="https://htmlpreview.github.io/?https://github.com/SN-RECIT-formation-a-distance/moodle-qtype_numericalrecit/blob/master/docs/question-formule-demarche-recit.html#15_Unite" target="_blank">En savoir plus</a>';
 $string['unitpenalty'] = 'Pénalité pour unité incorrecte (0-1)*';
 $string['unitpenalty_help2'] = 'Par exemple, si les km doivent être présents avec la bonne réponse et que l\'absence des unités engendre 1 point de pénalité sur une question de 4 points, la valeur à inscrire sera 0.25.';

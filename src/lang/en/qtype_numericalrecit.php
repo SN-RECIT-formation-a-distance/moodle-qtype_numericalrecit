@@ -282,3 +282,5 @@ $string['defaultanswermark_desc'] = 'Default part\'s mark for new question\'s pa
 $string['defaultunitpenalty'] = 'Default unit penalty';
 $string['defaultunitpenalty_desc'] = 'Default penalty for wrong unit (0-1)';
 $string['unitpenalty_help2'] = 'For example, if the km must be present with the correct answer and the absence of the units generates 1 penalty point on a 4-point question, the value to be entered will be 0.25.';
+$string['intro'] = 'Introduction';
+$string['intro_help'] = 'This text will appear above the question.';
