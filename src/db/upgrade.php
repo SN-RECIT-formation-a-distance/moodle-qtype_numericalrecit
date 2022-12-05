@@ -31,12 +31,13 @@ function xmldb_qtype_numericalrecit_upgrade($oldversion=0) {
 
     $dbman = $DB->get_manager();
 
-
-    if ($oldversion < 2021062000){
+    $ver = 2022100105;
+    if ($oldversion < $ver){
         // Define field jsoncontent to be added
         $table = new xmldb_table('qtype_numericalrecit_options');
 
         $fields = array(
+            new xmldb_field('intro', XMLDB_TYPE_TEXT, null, null, null, false, null),
             new xmldb_field('automark', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, 0),
         );
 
@@ -48,25 +49,7 @@ function xmldb_qtype_numericalrecit_upgrade($oldversion=0) {
         }
 
         // numericalrecit savepoint reached.
-        upgrade_plugin_savepoint(true, 2021062000, 'qtype', 'numericalrecit');
-    }
-    if ($oldversion < 2022100100){
-        // Define field jsoncontent to be added
-        $table = new xmldb_table('qtype_numericalrecit_options');
-
-        $fields = array(
-            new xmldb_field('intro', XMLDB_TYPE_TEXT, null, null, null, false, null),
-        );
-
-        // Conditionally launch add field.
-        foreach ($fields as $field){
-            if (!$dbman->field_exists($table, $field)) {
-                $dbman->add_field($table, $field);
-            }
-        }
-
-        // numericalrecit savepoint reached.
-        upgrade_plugin_savepoint(true, 2022100102, 'qtype', 'numericalrecit');
+        upgrade_plugin_savepoint(true, $ver, 'qtype', 'numericalrecit');
     }
     return true;
 }

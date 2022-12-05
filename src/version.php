@@ -26,11 +26,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_numericalrecit';
-$plugin->version   = 2022100103;
+$plugin->version   = 2022100105;
 $plugin->requires  = 2020061500.00; // Moodle 3.9.0
 $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,
-    'qbehaviour_adaptivemultipart'     => 2014092500,
+    'qbehaviour_adaptivemultipart' => 2014092500,
     'qtype_multichoice' => 2015111600,
 	'atto_recittakepicture' => 2022100100
 );
