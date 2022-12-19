@@ -193,12 +193,9 @@ class qtype_numericalrecit extends question_type {
         $question->options->answers = $DB->get_records('qtype_numericalrecit_answers', array('questionid' => $question->id), 'partindex ASC');
         $question->options->numpart = count($question->options->answers);
         $question->options->answers = array_values($question->options->answers);
+        $question->options->stepfeedback = array('text' => file_rewrite_pluginfile_urls($question->options->stepfeedback, 'pluginfile.php', $questionn->contextid, 'qtype_numericalrecit', 'stepfeedback', $question->id), 'format' => FORMAT_HTML);
+        $question->options->intro = array('text' => file_rewrite_pluginfile_urls($question->options->intro, 'pluginfile.php', $questionn->contextid, 'qtype_numericalrecit', 'intro', $question->id), 'format' => FORMAT_HTML);
         
-        if (count($question->options->answers)) {
-            $answ = $question->options->answers[0];
-            $question->options->stepfeedback = array('text' => file_rewrite_pluginfile_urls($question->options->stepfeedback, 'pluginfile.php', $questionn->contextid, 'question', 'stepfeedback', $questionusage->id.'/1/'.$answ->id), 'format' => FORMAT_HTML);
-            $question->options->intro = array('text' => file_rewrite_pluginfile_urls($question->options->intro, 'pluginfile.php', $questionn->contextid, 'question', 'intro', $questionusage->id.'/1/'.$answ->id), 'format' => FORMAT_HTML);
-        }
         return true;
     }
 
@@ -351,10 +348,10 @@ class qtype_numericalrecit extends question_type {
 
         $options = $this->save_combined_feedback_helper($options, $question, $context, true);
         if (is_array($options->stepfeedback)){
-            $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'question', 'stepfeedback', $newanswers[0]->id);
+            $options->stepfeedback = $this->import_or_save_files($options->stepfeedback, $context, 'qtype_numericalrecit', 'stepfeedback', $question->id);
         }
         if (is_array($options->intro)){
-            $options->intro = $this->import_or_save_files($options->intro, $context, 'question', 'intro', $newanswers[0]->id);
+            $options->intro = $this->import_or_save_files($options->intro, $context, 'qtype_numericalrecit', 'intro', $question->id);
         }
 
         $DB->update_record('qtype_numericalrecit_options', $options);

@@ -28,5 +28,24 @@ defined('MOODLE_INTERNAL') || die();
 function qtype_numericalrecit_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
     global $CFG;
     require_once($CFG->libdir . '/questionlib.php');
-    question_pluginfile($course, $context, 'qtype_numericalrecit', $filearea, $args, $forcedownload, $options);
+    if (in_array($filearea, array('stepfeedback', 'intro'))) {
+        $relativepath = implode('/', $args);
+
+        $fullpath = "/$context->id/qtype_numericalrecit/{$filearea}$itemId/$relativepath";
+
+        $fs = get_file_storage();
+		$file = $fs->get_file_by_hash(sha1($fullpath));		
+        
+        if($file == false){
+            return false;
+        }
+        
+        if ($file->is_directory()){		
+            return false;
+        }
+
+        send_stored_file($file, null, 0, $options);
+    }else{
+        question_pluginfile($course, $context, 'qtype_numericalrecit', $filearea, $args, $forcedownload, $options);
+    }
 }

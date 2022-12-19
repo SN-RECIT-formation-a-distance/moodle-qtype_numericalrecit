@@ -70,7 +70,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $mform->insertElementBefore($mform->createElement('header', 'mainq', get_string('mainq', 'qtype_numericalrecit'),
             ''), 'questiontext');
         $mform->insertElementBefore($mform->createElement('checkbox', 'automark', get_string('automark', 'qtype_numericalrecit'), ''), 'name');
-        $mform->insertElementBefore($mform->createElement('editor', 'intro', get_string('intro', 'qtype_numericalrecit'), ''), 'name');
+        $mform->insertElementBefore($mform->createElement('editor', 'intro', get_string('intro', 'qtype_numericalrecit'), array('rows' => 10), $this->editoroptions), 'name');
         $mform->addHelpButton('intro', 'intro', 'qtype_numericalrecit');
         $numberingoptions = question_bank::get_qtype('multichoice')->get_numbering_styles();
         $mform->addElement('select', 'answernumbering',
@@ -194,10 +194,7 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
         $repeatedoptions['correctness']['helpbutton'] = array('correctness', 'qtype_numericalrecit');
         $repeatedoptions['correctness']['type'] = PARAM_RAW;
         // Part's unit penalty.
-        $repeated[] = $mform->createElement('html', '<hr>');
         $repeated[] = $mform->createElement('text', 'unitpenalty', get_string('unitpenalty', 'qtype_numericalrecit'), array('size' => 3));
-        $repeated[] = $mform->createElement('static', 'unitpenalty_help', '', get_string('unitpenalty_help2', 'qtype_numericalrecit'));
-        $repeated[] = $mform->createElement('html', '<hr>');
         $repeatedoptions['unitpenalty']['default'] = $config->defaultunitpenalty;
         $repeatedoptions['unitpenalty']['helpbutton'] = array('unitpenalty', 'qtype_numericalrecit');
         $repeatedoptions['unitpenalty']['type'] = PARAM_FLOAT;
