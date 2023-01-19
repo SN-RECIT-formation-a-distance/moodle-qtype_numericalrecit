@@ -169,7 +169,7 @@ var numericalrecitform = {
         var ctext = initial_checked ? ' checked="checked" ' : '';
         var s = '<input type="checkbox" onclick="numericalrecit_form_correctness(' + i + ',this.checked)" ' + ctext + ' id="' + showid + '" value="Expert">';
         var t = '<span onclick="var t=document.getElementById(\'' + showid + '\'); t.checked = !t.checked; numericalrecit_form_correctness(' + i + ',t.checked);">' + b.innerHTML + '</span>';
-        b.innerHTML = s + t;
+   //     b.innerHTML = s + t;
     },
 
     // Add the options to select the number of datasets.
