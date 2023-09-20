@@ -294,10 +294,13 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
      */
     public function is_complete_response(array $response) {
         // TODO add tests to verify it works in all cases : combined and separate unit field, no unit field.
+
         $complete = true;
         if ($this->stepmark > 0){
-            if (!isset($response['stepn']) || (empty(strip_tags($response['stepn'])) && strpos($response['stepn'], 'img') == false)){
-                $complete = false;
+            if (!isset($response['stepn'])){
+                if(is_string($response['stepn']) && (empty(strip_tags($response['stepn'])) && strpos($response['stepn'], 'img') == false)){
+                    $complete = false;
+                }
             }
         }
         foreach ($this->parts as $part) {
@@ -313,10 +316,11 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
                     if ($part->part_has_separate_unit_field()) {
                         $complete = $complete && array_key_exists($part->partindex . "_" . $part->numbox, $response)
                                 && $response[$part->partindex . "_" . $part->numbox] != '';
-                    }
+                    } 
                 }
             }
         }
+
         return $complete;
     }
 
@@ -452,6 +456,12 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
                 return true;
             }
         }
+
+        // Patch to consider as an answer when student only inserts an image (take picture plugin) and do not write anything in his answer
+        if(isset($response['stepn']) && is_string($response['stepn']) && strlen($response['stepn']) > 0){
+            return true;
+        }
+        
         return false;
     }
 

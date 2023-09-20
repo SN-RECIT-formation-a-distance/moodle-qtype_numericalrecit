@@ -325,6 +325,10 @@ class qtype_numericalrecit_variables {
 
     // Replace the strings in the $text.
     private function substitute_strings_by_placholders(&$vstack, $text) {
+        if($text == null){
+            $text = "";
+        }
+        
         $text = stripcslashes($text);
         $splitted = explode("\"", $text);
         if (qtype_numericalrecit_utils::mycount($splitted) % 2 == 0)  throw new Exception(get_string('error_vars_string', 'qtype_numericalrecit'));
