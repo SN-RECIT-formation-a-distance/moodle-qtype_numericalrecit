@@ -1,5 +1,5 @@
 $from = "moodle-qtype_numericalrecit/src/*"
-$to = "shared/recitfad/question/type/numericalrecit"
+$to = "shared/recitfad3/question/type/numericalrecit"
 
 try {
     . ("..\sync\watcher.ps1")

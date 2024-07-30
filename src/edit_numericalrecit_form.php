@@ -38,8 +38,9 @@ class qtype_numericalrecit_edit_form extends question_edit_form {
      */
     protected function definition_inner($mform) {
         global $PAGE;
+        
         $PAGE->requires->js('/question/type/numericalrecit/script/editing.js');
-        $PAGE->requires->js('/question/type/numericalrecit/script/tablevalue.js');
+
         $PAGE->requires->string_for_js('relerror', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('abserror', 'qtype_numericalrecit');
         $PAGE->requires->string_for_js('instantiate', 'qtype_numericalrecit');
