@@ -26,14 +26,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'qtype_numericalrecit';
-$plugin->version   = 2024072500;
-$plugin->requires  = 2020061500.00; // Moodle 3.9.0
+$plugin->version   = 2025013000;
+$plugin->requires  = 2024071200.00; // Moodle 4.5.0
 $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,
     'qbehaviour_adaptivemultipart' => 2014092500,
     'qtype_multichoice' => 2015111600,
 	'atto_recittakepicture' => 2023012300
 );
-$plugin->release   = 'v1.16.5-stable';
-$plugin->supported = [39, 405];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.
+$plugin->release   = 'v2.0.0-stable';
+$plugin->supported = [405, 405];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.
 $plugin->maturity  = MATURITY_STABLE;

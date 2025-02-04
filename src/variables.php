@@ -138,6 +138,16 @@ class qtype_numericalrecit_variables {
     private static $maxdataset = 2e9;      // It is the upper limit for the exhaustive enumeration.
     private static $listmaxsize = 1000;
 
+    protected $func_const = [];
+    protected $func_unary = [];
+    protected $func_binary = [];
+    protected $func_special = [];
+    protected $func_all = [];
+    protected $binary_op_map = [];
+    protected $func_algebraic = [];
+    protected $constlist = [];
+    protected $evalreplacelist = [];
+
     private function initialize_function_list() {
         $this->func_const = array_flip( array('pi'));
         $this->func_unary = array_flip( array('abs', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atanh', 'ceil'
