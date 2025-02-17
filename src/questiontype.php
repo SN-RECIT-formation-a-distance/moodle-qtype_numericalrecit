@@ -39,7 +39,6 @@ require_once($CFG->dirroot . '/question/type/numericalrecit/question.php');
 class qtype_numericalrecit extends question_type {
     private $qv;
 
-
     public function __construct() {
         $this->qv = new qtype_numericalrecit_variables();
     }
@@ -778,7 +777,7 @@ class qtype_numericalrecit extends question_type {
             $res->answers[$i]->partincorrectfb = $fb;
         }
         if (count($res->answers) == 0) {
-            $res->errors["answermark[0]"] = get_string('error_no_answer', 'qtype_numericalrecit');
+            $res->errors["answer[0]"] = get_string('error_no_answer', 'qtype_numericalrecit');
         }
 
         return $res;

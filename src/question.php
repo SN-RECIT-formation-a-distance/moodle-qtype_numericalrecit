@@ -77,6 +77,58 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
     public $stepmark;
     public $globalvars;
 
+    public $intro;
+    public $answernumbering;
+    public $noanswers;
+    public $answermark;
+    public $vars1;
+    public $answertype;
+    public $subqtext;
+    public $answer;
+    public $vars2;
+    public $correctness;
+    public $unitpenalty;
+    public $postunit;
+    public $ruleid;
+    public $otherrule;
+    public $placeholder;
+    public $feedback;
+    public $partcorrectfb;
+    public $partpartiallycorrectfb;
+    public $partincorrectfb;
+    public $globalunitpenalty;
+    public $globalruleid;
+    public $stepfeedback;
+    public $correctfeedback;
+    public $partiallycorrectfeedback;
+    public $incorrectfeedback;
+    public $numhints;
+    public $hint;
+    public $hintclearwrong;
+    public $hintshownumcorrect;
+    public $tags;
+    public $inpopup;
+    public $cmid;
+    public $courseid;
+    public $returnurl;
+    public $mdlscrollto;
+    public $appendqnumstring;
+    public $submitbutton;
+    public $sesskey;
+    public $_qf__qtype_numericalrecit_edit_form;
+    public $options;
+    public $automark;
+    public $partiallycorrectfeedbackformat;
+    public $questiontypebase;
+    public $correctfeedbackformat;
+    public $incorrectfeedbackformat;
+    public $numbox;
+    public $makecopy;
+    public $context;
+    public $oldparent;
+    public $updatebutton;
+    public $modulename;
+
     public function make_behaviour(question_attempt $qa, $preferredbehaviour) {
         if (!isset($qa->get_question()->automark) || $qa->get_question()->automark == 1){
             if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
@@ -926,7 +978,7 @@ class qtype_numericalrecit_part {
     public $partpartiallycorrectfbformat;
     public $partincorrectfb;
     public $partincorrectfbformat;
-
+    public $questionid;
 
     /**
      * Constructor.
