@@ -28,13 +28,11 @@ document.addEventListener('DOMContentLoaded', function(){
             e.preventDefault();
             
             let editorBtn = document.querySelector(btn.getAttribute('data-take-picture-btn-id'));
-            console.log(editorBtn, btn.getAttribute('data-take-picture-btn-id'))
             if(editorBtn){
                 editorBtn.click();
             }
         });
     }
-    
 
     let el = document.querySelector(".numericalrecit .editor_atto_content");
     let inputs = document.querySelectorAll('.numericalrecitpart.disabled input');

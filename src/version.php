@@ -31,8 +31,7 @@ $plugin->requires  = 2024071200.00; // Moodle 4.5.0
 $plugin->dependencies = array(
     'qbehaviour_adaptive' => 2015111600,
     'qbehaviour_adaptivemultipart' => 2014092500,
-    'qtype_multichoice' => 2015111600,
-	'atto_recittakepicture' => 2023012300
+    'qtype_multichoice' => 2015111600
 );
 $plugin->release   = 'v2.0.0-stable';
 $plugin->supported = [405, 405];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.

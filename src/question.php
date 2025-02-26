@@ -128,7 +128,8 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
     public $oldparent;
     public $updatebutton;
     public $modulename;
-
+    public $raw_grades;
+    
     public function make_behaviour(question_attempt $qa, $preferredbehaviour) {
         if (!isset($qa->get_question()->automark) || $qa->get_question()->automark == 1){
             if ($preferredbehaviour == 'adaptive' || $preferredbehaviour == 'adaptivenopenalty') {
