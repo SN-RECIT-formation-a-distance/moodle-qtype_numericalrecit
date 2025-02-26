@@ -103,7 +103,24 @@ class qtype_numericalrecit_renderer extends qtype_with_combined_feedback_rendere
         $result .= "</div><div class='col-md-6'>";
         $responseoutput = new qtype_numericalrecit_format_editorfilepicker_renderer();
         if (empty($options->readonly)) {
-            $result .= "<button class='btn btn-primary d-block m-auto' id='button_takephoto'><i class='fa fa-camera'></i> ". get_string('takephoto', 'qtype_numericalrecit')."</button>";
+            $takePictureExist = false;
+            $editorBtnId = '';
+
+            switch(get_class(editors_get_preferred_editor())){
+                case 'atto_texteditor';
+                    $editorBtnId = '.atto_recittakepicture_button_takephoto';
+                    $takePictureExist = is_dir($CFG->dirroot."/lib/editor/atto/plugins/recittakepicture");
+                    break;
+                case 'editor_tiny\editor':
+                    $editorBtnId = '[data-mce-name="tiny_recittakepicture"]';
+                    $takePictureExist = is_dir($CFG->dirroot."/lib/editor/tiny/plugins/recittakepicture");
+                    break;
+            }
+
+            if($takePictureExist){
+                $result .= "<button type='button' data-take-picture-btn-id='$editorBtnId' class='btn btn-primary d-block m-auto'><i class='fa fa-camera'></i> ". get_string('takephoto', 'qtype_numericalrecit')."</button>";
+            }
+            
             $result .= $responseoutput->response_area_input('stepn', $qa, $step, 12, $options->context, $question->stepmark);
         } else {
             $result .= $responseoutput->response_area_read_only('stepn', $qa, $step, 12, $options->context, $question->stepmark);
@@ -643,7 +660,6 @@ class qtype_numericalrecit_format_editorfilepicker_renderer {
 
         $inputname = $qa->get_qt_field_name($name);
         
-        $responseformat = 'editorfilepicker';
         $id = $inputname . '_id';
 
         $editor = editors_get_preferred_editor();
