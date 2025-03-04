@@ -22,10 +22,11 @@
  */
 require(['jquery'], function($) {
     document.onreadystatechange = function () {
-        var state = document.readyState;
-        if (state == 'complete') {
+        if (document.readyState === 'complete') {
             // only start this module if the user is editing a question
-            if(window.location.pathname.split("/").pop() === 'question.php'){
+            let el = window.document.querySelector('[data-qtype="numericalrecit"]');
+            
+            if(el !== null){
                 initOnCompleteLoad();
             }
         }
