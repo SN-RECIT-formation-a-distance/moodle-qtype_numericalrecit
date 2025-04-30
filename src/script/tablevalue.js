@@ -22,13 +22,9 @@
  */
 require(['jquery'], function($) {
     document.onreadystatechange = function () {
-        if (document.readyState === 'complete') {
-            // only start this module if the user is editing a question
-            let el = window.document.querySelector('[data-qtype="numericalrecit"]');
-            
-            if(el !== null){
-                initOnCompleteLoad();
-            }
+        var state = document.readyState;
+        if (state == 'complete') {
+            initOnCompleteLoad();
         }
     };
 
@@ -369,6 +365,7 @@ require(['jquery'], function($) {
                     var num = Math.round((parseFloat(vars['lists'][0]['answer0'][0]) + Number.EPSILON) * 1000) / 1000
                     $(td).text(num);
                 }catch(e){
+                    console.log(e);
                     alert(M.util.get_string('error_algebraic_var', 'qtype_numericalrecit'))
                 }
             }

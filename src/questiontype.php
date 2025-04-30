@@ -575,12 +575,12 @@ class qtype_numericalrecit extends question_type {
             $feedbackxml = $format->getpath($answer, array('#', 'incorrectfeedback', 0), array());
             $fromform->partincorrectfb[$anscount] = $format->import_text_with_files($feedbackxml,
                         array(), '', $format->get_format($fromform->questiontextformat));
-            $feedbackxml = $format->getpath($answer, array('#', 'stepfeedback', 0), array());
+           /* $feedbackxml = $format->getpath($answer, array('#', 'stepfeedback', 0), array());
             $fromform->stepfeedback[$anscount] = $format->import_text_with_files($feedbackxml,
                         array(), '', $format->get_format($fromform->questiontextformat));
             $feedbackxml = $format->getpath($answer, array('#', 'intro', 0), array());
             $fromform->intro[$anscount] = $format->import_text_with_files($feedbackxml,
-                        array(), '', $format->get_format($fromform->questiontextformat));
+                        array(), '', $format->get_format($fromform->questiontextformat));*/
             ++$anscount;
         }
         $fromform->defaultmark = array_sum($fromform->answermark); // Make the defaultmark consistent if not specified.

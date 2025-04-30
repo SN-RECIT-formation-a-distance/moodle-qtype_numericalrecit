@@ -169,8 +169,8 @@ function pick_variables_with_names($data, $names, $category, $idx) {
 try {
     $varsrandom = required_param('varsrandom', PARAM_RAW);
     $varsglobal = required_param('varsglobal', PARAM_RAW);
-    $varslocals = required_param('varslocals', PARAM_RAW);
-    $answers = required_param('answers', PARAM_RAW);
+    $varslocals = required_param_array('varslocals', PARAM_RAW);
+    $answers = required_param_array('answers', PARAM_RAW);
     $start = optional_param('start', 0, PARAM_INT);
     $nbdataset = required_param('N', PARAM_INT);
     $alwaysrandom = optional_param('random', 0, PARAM_INT);
@@ -179,6 +179,7 @@ try {
     header('Content-type: application/json; charset=utf-8');
     echo $res;
 } catch (Exception $e) {
+    var_dump($e);
     // Prevent the display of all errors.
 }
 
