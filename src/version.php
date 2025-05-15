@@ -33,6 +33,6 @@ $plugin->dependencies = array(
     'qbehaviour_adaptivemultipart' => 2014092500,
     'qtype_multichoice' => 2015111600
 );
-$plugin->release   = 'v2.0.3-stable';
+$plugin->release   = 'v2.0.4-stable';
 $plugin->supported = [405, 405];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.
 $plugin->maturity  = MATURITY_STABLE;

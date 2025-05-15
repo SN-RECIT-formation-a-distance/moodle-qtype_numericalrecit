@@ -36,6 +36,7 @@ require_once($CFG->dirroot . '/question/behaviour/adaptivemultipart/behaviour.ph
  * @copyright  2010-2011 Hon Wai, Lau
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+#[\AllowDynamicProperties]
 class qtype_numericalrecit_question extends question_graded_automatically_with_countback
         implements question_automatically_gradable_with_multiple_parts {
     /**
@@ -363,7 +364,7 @@ class qtype_numericalrecit_question extends question_graded_automatically_with_c
 
         $complete = true;
         if ($this->stepmark > 0){
-            if (!isset($response['stepn'])){
+            if (isset($response['stepn'])){
                 if(is_string($response['stepn']) && (empty(strip_tags($response['stepn'])) && strpos($response['stepn'], 'img') == false)){
                     $complete = false;
                 }
